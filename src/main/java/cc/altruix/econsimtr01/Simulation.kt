@@ -7,7 +7,14 @@ package cc.altruix.econsimtr01
  */
 class Simulation(val timing : ITiming = Timing()) : ISimulation {
     override fun run() {
-        throw UnsupportedOperationException()
+        val agents = listOf<IAgent>(
+                Farmer(),
+                Field(),
+                Nature()
+        )
+        while (timing.gotFuture()) {
+            val time = timing.tick()
+            agents.forEach { x -> x.act(time) }
+        }
     }
-
 }

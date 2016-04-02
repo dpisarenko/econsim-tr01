@@ -5,7 +5,5 @@ package cc.altruix.econsimtr01
  * @version $Id$
  * @since 1.0
  */
-interface ITiming {
-    fun gotFuture():Boolean
-    fun tick():Long
+class Field : IAgent {
 }
