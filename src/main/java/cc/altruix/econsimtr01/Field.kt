@@ -6,4 +6,7 @@ package cc.altruix.econsimtr01
  * @since 1.0
  */
 class Field : IAgent {
+    override fun act(time: Long) {
+        throw UnsupportedOperationException()
+    }
 }
