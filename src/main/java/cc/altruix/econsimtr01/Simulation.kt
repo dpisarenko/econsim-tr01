@@ -6,7 +6,8 @@ package cc.altruix.econsimtr01
  * @since 1.0
  */
 class Simulation(val timing : ITiming = Timing()) : ISimulation {
-    override fun run() {
+    override fun run():SimResults {
+        val results = SimResults()
         val agents = listOf<IAgent>(
                 Farmer(),
                 Field(),
@@ -16,5 +17,6 @@ class Simulation(val timing : ITiming = Timing()) : ISimulation {
             val time = timing.tick()
             agents.forEach { x -> x.act(time) }
         }
+        return results
     }
 }
