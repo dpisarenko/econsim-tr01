@@ -21,8 +21,9 @@ fun composeHourMinuteFiringFunction(hours:Int, minutes:Int): (Long) -> Boolean {
 
         if ((curHours > 0) && ((curHours % hours) == 0) && (curMinutes == minutes) && (curSeconds == 0)) {
             true
+        } else {
+            false
         }
-        false
     }
     return fire
 }

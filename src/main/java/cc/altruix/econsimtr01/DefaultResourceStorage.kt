@@ -9,8 +9,9 @@ import java.util.*
  * @since 1.0
  */
 class DefaultResourceStorage : IResourceStorage {
-    val amountsByResource = HashMap<IResource, AtomicDouble>()
-    override fun put(res: IResource, amt:Double) {
+    val amountsByResource = HashMap<Resource, AtomicDouble>()
+
+    override fun put(res: Resource, amt:Double) {
         var storedAmount = amountsByResource.get(res)
         if (storedAmount == null) {
             storedAmount = AtomicDouble(0.0)
@@ -18,12 +19,18 @@ class DefaultResourceStorage : IResourceStorage {
         }
         storedAmount.getAndAdd(amt)
     }
-
-    override fun amount(res: IResource): Double {
+    override fun amount(res: Resource): Double {
         val mapAmt = amountsByResource.get(res)
         if (mapAmt != null) {
             return mapAmt.get()
         }
         return 0.0
+    }
+
+    override fun remove(res: Resource, amt: Double) {
+        val mapAmt = amountsByResource.get(res)
+        if (mapAmt != null) {
+            mapAmt.getAndAdd(-amt)
+        }
     }
 }

@@ -2,6 +2,7 @@ package cc.altruix.econsimtr01
 
 import org.fest.assertions.Assertions
 import org.junit.Test
+import org.mockito.Mockito
 
 /**
  * @author Dmitri Pisarenko (dp@altruix.co)
@@ -11,7 +12,10 @@ import org.junit.Test
 class EatingActionTests {
     @Test
     fun timeToRunSunnyDay() {
-        val out = EatingAction()
+        val out = EatingAction(
+                Farmer(Mockito.mock(IResourceStorage::class.java)),
+                Mockito.mock(IResourceStorage::class.java)
+        )
         Assertions.assertThat(out.timeToRun(71999L)).isFalse()
         Assertions.assertThat(out.timeToRun(72000L)).isTrue()
         Assertions.assertThat(out.timeToRun(72001L)).isFalse()
