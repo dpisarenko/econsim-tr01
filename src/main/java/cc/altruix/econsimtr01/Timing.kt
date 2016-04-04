@@ -22,5 +22,5 @@ class Timing : ITiming {
         return ticks
     }
 
-    fun now():Duration = Duration(0, this.ticks*1000)
+    fun now():Duration = secondsToDuration(ticks)
 }

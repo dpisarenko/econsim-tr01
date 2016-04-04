@@ -6,7 +6,10 @@ package cc.altruix.econsimtr01
  * @since 1.0
  */
 class Farmer(foodStorage: IResourceStorage) : IAgent {
+    val actions = emptyList<IAction>()
     override fun act(time: Long) {
-        throw UnsupportedOperationException()
+        actions
+                .filter { x -> x.timeToRun(time) }
+                .forEach { x -> x.run() }
     }
 }

@@ -10,6 +10,7 @@ import org.junit.Test
 class SimulationTests {
     @Test
     fun test() {
-
+        val sim = Simulation()
+        sim.run()
     }
 }
