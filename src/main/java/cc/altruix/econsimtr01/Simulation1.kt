@@ -5,24 +5,22 @@ package cc.altruix.econsimtr01
  * @version $Id$
  * @since 1.0
  */
-class Simulation1(val timing : ITiming = Timing()) : ISimulation {
-    override fun run():SimResults {
-        val results = SimResults()
-        val foodStorage = DefaultResourceStorage()
+class Simulation1() : DefaultSimulation(Timing()) {
+    val foodStorage = DefaultResourceStorage()
+    val farmer = Farmer(foodStorage)
+
+    override fun createSensors(): List<ISensor> = listOf(Accountant(foodStorage, farmer))
+
+    override fun createAgents(): List<IAgent> {
         foodStorage.put(Resource.POTATO, 30*3.0)
-        val farmer = Farmer(foodStorage)
         val agents = listOf(
                 farmer,
                 Field(),
                 Nature()
         )
-        val sensors = listOf(Accountant(foodStorage, farmer))
-        while (timing.gotFuture() && farmer.alive) {
-            val time = timing.tick()
-            agents.forEach { x -> x.act(time) }
-            sensors.forEach { x -> x.measure(time) }
-        }
-        sensors.forEach { x -> x.finito() }
-        return results
+        return agents
     }
+
+    override fun continueCondition(): Boolean = farmer.alive
+
 }
