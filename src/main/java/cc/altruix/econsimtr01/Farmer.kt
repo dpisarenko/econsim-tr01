@@ -8,8 +8,8 @@ package cc.altruix.econsimtr01
 class Farmer(foodStorage: IResourceStorage) : IAgent, IHuman {
     val actions = listOf<IAction>(EatingAction(this, foodStorage))
     var daysWithoutFood : Int = 0
-    var alive : Boolean = true
-        get() = this.alive
+    var alive: Boolean = true
+        get
         private set
     companion object {
         const val MAX_DAYS_WITHOUT_FOOD : Int = 30

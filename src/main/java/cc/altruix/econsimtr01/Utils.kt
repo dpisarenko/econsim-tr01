@@ -27,3 +27,7 @@ fun composeHourMinuteFiringFunction(hours:Int, minutes:Int): (Long) -> Boolean {
     }
     return fire
 }
+
+fun StringBuilder.newLine() {
+    this.append(System.lineSeparator())
+}

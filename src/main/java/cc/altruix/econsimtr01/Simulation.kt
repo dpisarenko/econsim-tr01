@@ -9,15 +9,20 @@ class Simulation(val timing : ITiming = Timing()) : ISimulation {
     override fun run():SimResults {
         val results = SimResults()
         val foodStorage = DefaultResourceStorage()
-        val agents = listOf<IAgent>(
-                Farmer(foodStorage),
+        foodStorage.put(Resource.POTATO, 30*3.0)
+        val farmer = Farmer(foodStorage)
+        val agents = listOf(
+                farmer,
                 Field(),
                 Nature()
         )
-        while (timing.gotFuture()) {
+        val sensors = listOf(Accountant(foodStorage, farmer))
+        while (timing.gotFuture() && farmer.alive) {
             val time = timing.tick()
             agents.forEach { x -> x.act(time) }
+            sensors.forEach { x -> x.measure(time) }
         }
+        sensors.forEach { x -> x.finito() }
         return results
     }
 }
