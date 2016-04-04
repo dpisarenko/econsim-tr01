@@ -9,13 +9,13 @@ class EatingAction : IAction {
     override fun timeToRun(time: Long): Boolean {
         val hours = secondsToDuration(time).standardHours
 
-        if ((hours % 20) == 0L) {
+        if ((hours > 0) && (hours % 20) == 0L) {
             return true
         }
         return false
     }
 
     override fun run() {
-        throw UnsupportedOperationException()
+
     }
 }

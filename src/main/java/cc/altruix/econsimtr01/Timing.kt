@@ -1,6 +1,5 @@
 package cc.altruix.econsimtr01
 
-import org.joda.time.DateTime
 import org.joda.time.Duration
 
 /**
@@ -16,9 +15,6 @@ class Timing : ITiming {
 
     override fun tick():Long {
         ticks += 60 // We are going minute by minute
-
-        DateTime()
-
         return ticks
     }
 

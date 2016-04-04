@@ -7,6 +7,6 @@ package cc.altruix.econsimtr01
  */
 class Nature : IAgent {
     override fun act(time: Long) {
-        throw UnsupportedOperationException()
+
     }
 }
