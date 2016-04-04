@@ -19,9 +19,12 @@ fun composeHourMinuteFiringFunction(hours:Int, minutes:Int): (Long) -> Boolean {
         val curMinutes = period.minutes
         val curSeconds = period.seconds
 
-        if ((curHours > 0) && ((curHours % hours) == 0) && (curMinutes == minutes) && (curSeconds == 0)) {
+        if ((curHours > 0) && (hours > 0) && ((curHours % hours) == 0) && (curMinutes == minutes) && (curSeconds == 0)) {
             true
-        } else {
+        } else if ((curHours == 0) && (hours == 0) && (curMinutes == minutes) && (curSeconds == 0)) {
+            true
+        }
+        else {
             false
         }
     }

@@ -5,12 +5,15 @@ package cc.altruix.econsimtr01
  */
 class Accountant(val foodStorage: DefaultResourceStorage, val farmer: Farmer) : ISensor {
     val builder = StringBuilder()
+    val fire: (Long) -> Boolean = composeHourMinuteFiringFunction(0, 0)
 
     override fun measure(time: Long) {
-        builder.append("resourceAvailable($time, 'POTATO', ${foodStorage.amount(Resource.POTATO)}).")
-        builder.newLine()
-        builder.append("daysWithoutEating($time, ${farmer.daysWithoutFood})")
-        builder.newLine()
+        if ((time % (24 * 60 * 60)) == 0L) {
+            builder.append("resourceAvailable($time, 'POTATO', ${foodStorage.amount(Resource.POTATO)}).")
+            builder.newLine()
+            builder.append("daysWithoutEating($time, ${farmer.daysWithoutFood})")
+            builder.newLine()
+        }
     }
     override fun finito() {
         System.out.println(builder.toString())
