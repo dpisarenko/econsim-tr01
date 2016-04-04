@@ -8,8 +8,9 @@ package cc.altruix.econsimtr01
 class Simulation(val timing : ITiming = Timing()) : ISimulation {
     override fun run():SimResults {
         val results = SimResults()
+        val foodStorage = DefaultResourceStorage()
         val agents = listOf<IAgent>(
-                Farmer(),
+                Farmer(foodStorage),
                 Field(),
                 Nature()
         )

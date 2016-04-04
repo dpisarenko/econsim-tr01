@@ -5,7 +5,7 @@ package cc.altruix.econsimtr01
  * @version $Id$
  * @since 1.0
  */
-class Farmer : IAgent {
+class Farmer(foodStorage: IResourceStorage) : IAgent {
     override fun act(time: Long) {
         throw UnsupportedOperationException()
     }
