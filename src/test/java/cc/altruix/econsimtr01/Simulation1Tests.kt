@@ -3,6 +3,7 @@ package cc.altruix.econsimtr01
 import org.fest.assertions.Assertions
 import org.junit.Test
 import java.io.File
+import java.io.FileInputStream
 import java.util.*
 
 /**
@@ -15,7 +16,15 @@ class Simulation1Tests {
     fun test() {
         val flows = LinkedList<ResourceFlow>()
         val log = StringBuilder()
-        val sim = Simulation1(log, flows)
+        val sim = Simulation1(
+                log,
+                flows,
+                SimParametersProvider(
+                        FileInputStream(
+                                File("src/test/resources/Simulation1.params.pl")
+                        )
+                )
+        )
 
         // Run method under test
         sim.run()

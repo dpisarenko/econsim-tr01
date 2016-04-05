@@ -23,6 +23,20 @@ class SimParametersProvider(val stream: InputStream) {
         val theoryTxt = IOUtils.toString(stream)
         PlUtils.loadPrologTheoryAsText(prolog, theoryTxt)
 
-
+        this.maxDaysWithoutFood = PlUtils.extractSingleInt(
+                prolog,
+                "maxDaysWithoutFood(X).",
+                "X"
+        )
+        this.initialAmountOfPotatoes = PlUtils.extractSingleStringFromQuery(
+                prolog,
+                "initialAmountOfPotatoes(X).",
+                "X"
+        ).toDouble()
+        this.dailyPotatoConsumption = PlUtils.extractSingleStringFromQuery(
+                prolog,
+                "dailyPotatoConsumption(X).",
+                "X"
+        ).toDouble()
     }
 }
