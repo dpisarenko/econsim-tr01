@@ -5,9 +5,16 @@ package cc.altruix.econsimtr01
  * @version $Id$
  * @since 1.0
  */
-class Simulation1(val logTarget:StringBuilder, val flows:MutableList<ResourceFlow>) : DefaultSimulation(Timing()) {
+class Simulation1(val logTarget:StringBuilder,
+                  val flows:MutableList<ResourceFlow>,
+                  val simParametersProvider: SimParametersProvider) : DefaultSimulation(Timing()) {
     val foodStorage = DefaultResourceStorage("FoodStorage")
-    val farmer = Farmer(foodStorage, flows)
+    val farmer = Farmer(
+            foodStorage,
+            flows,
+            simParametersProvider.maxDaysWithoutFood,
+            simParametersProvider.dailyPotatoConsumption
+    )
 
     override fun createSensors(): List<ISensor> =
             listOf(
@@ -18,7 +25,10 @@ class Simulation1(val logTarget:StringBuilder, val flows:MutableList<ResourceFlo
             )
 
     override fun createAgents(): List<IAgent> {
-        foodStorage.put(Resource.POTATO, 30*3.0)
+        foodStorage.put(
+                Resource.POTATO,
+                simParametersProvider.initialAmountOfPotatoes
+        )
         val agents = listOf(
                 farmer,
                 Field(),

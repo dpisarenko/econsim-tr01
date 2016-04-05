@@ -5,25 +5,31 @@ package cc.altruix.econsimtr01
  * @version $Id$
  * @since 1.0
  */
-class Farmer(foodStorage: IResourceStorage, flows: MutableList<ResourceFlow>) : IAgent, IHuman {
+class Farmer(foodStorage: IResourceStorage,
+             flows: MutableList<ResourceFlow>,
+             val maxDaysWithoutFood: Int,
+             dailyPotatoConsumption: Double) : IAgent, IHuman {
     override fun id(): String = "Farmer"
 
-    val actions = listOf<IAction>(EatingAction(this, foodStorage, flows))
+    val actions = listOf<IAction>(
+            EatingAction(
+                this,
+                foodStorage,
+                flows,
+                dailyPotatoConsumption
+            )
+    )
     var daysWithoutFood : Int = 0
     var alive: Boolean = true
         get
         private set
-    companion object {
-        const val MAX_DAYS_WITHOUT_FOOD : Int = 30
-
-    }
     override fun eat() {
         this.daysWithoutFood = 0
     }
 
     override fun hungerOneDay() {
         this.daysWithoutFood++
-        if (this.daysWithoutFood > MAX_DAYS_WITHOUT_FOOD) {
+        if (this.daysWithoutFood > maxDaysWithoutFood) {
             die()
         }
     }
