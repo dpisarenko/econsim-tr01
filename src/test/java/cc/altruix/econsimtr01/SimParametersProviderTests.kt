@@ -12,11 +12,9 @@ import java.io.FileInputStream
 class SimParametersProviderTests {
     @Test
     fun sunnyDay() {
-        val fileInputStream =
-                FileInputStream(
-                        File("src/test/resources/Simulation1.params.pl")
-                )
-        val out = SimParametersProvider(fileInputStream)
+        val out = SimParametersProvider(
+                File("src/test/resources/Simulation1.params.pl").readText()
+        )
         Assertions.assertThat(out.maxDaysWithoutFood).isEqualTo(30)
         Assertions.assertThat(out.initialAmountOfPotatoes).isEqualTo(90.0)
         Assertions.assertThat(out.dailyPotatoConsumption).isEqualTo(1.0)

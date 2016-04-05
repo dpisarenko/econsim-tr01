@@ -7,7 +7,7 @@ import java.io.InputStream
 /**
  * Created by pisarenko on 05.04.2016.
  */
-class SimParametersProvider(val stream: InputStream) {
+class SimParametersProvider(val theoryTxt: String) {
     var maxDaysWithoutFood:Int = 0
         get
         private set
@@ -20,9 +20,7 @@ class SimParametersProvider(val stream: InputStream) {
 
     init {
         val prolog = PlUtils.createEngine()
-        val theoryTxt = IOUtils.toString(stream)
         PlUtils.loadPrologTheoryAsText(prolog, theoryTxt)
-
         this.maxDaysWithoutFood = PlUtils.extractSingleInt(
                 prolog,
                 "maxDaysWithoutFood(X).",
