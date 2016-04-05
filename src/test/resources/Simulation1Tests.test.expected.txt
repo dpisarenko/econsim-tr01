@@ -1,200 +1,300 @@
+measurementTime(86400, '0000-01-02 00:00').
 resourceAvailable(86400, 'POTATO', 89.0).
-daysWithoutEating(86400, 0)
+daysWithoutEating(86400, 0).
+measurementTime(172800, '0000-01-03 00:00').
 resourceAvailable(172800, 'POTATO', 88.0).
-daysWithoutEating(172800, 0)
+daysWithoutEating(172800, 0).
+measurementTime(259200, '0000-01-04 00:00').
 resourceAvailable(259200, 'POTATO', 87.0).
-daysWithoutEating(259200, 0)
+daysWithoutEating(259200, 0).
+measurementTime(345600, '0000-01-05 00:00').
 resourceAvailable(345600, 'POTATO', 86.0).
-daysWithoutEating(345600, 0)
+daysWithoutEating(345600, 0).
+measurementTime(432000, '0000-01-06 00:00').
 resourceAvailable(432000, 'POTATO', 84.0).
-daysWithoutEating(432000, 0)
+daysWithoutEating(432000, 0).
+measurementTime(518400, '0000-01-07 00:00').
 resourceAvailable(518400, 'POTATO', 83.0).
-daysWithoutEating(518400, 0)
+daysWithoutEating(518400, 0).
+measurementTime(604800, '0000-01-08 00:00').
 resourceAvailable(604800, 'POTATO', 82.0).
-daysWithoutEating(604800, 0)
+daysWithoutEating(604800, 0).
+measurementTime(691200, '0000-01-09 00:00').
 resourceAvailable(691200, 'POTATO', 81.0).
-daysWithoutEating(691200, 0)
+daysWithoutEating(691200, 0).
+measurementTime(777600, '0000-01-10 00:00').
 resourceAvailable(777600, 'POTATO', 80.0).
-daysWithoutEating(777600, 0)
+daysWithoutEating(777600, 0).
+measurementTime(864000, '0000-01-11 00:00').
 resourceAvailable(864000, 'POTATO', 78.0).
-daysWithoutEating(864000, 0)
+daysWithoutEating(864000, 0).
+measurementTime(950400, '0000-01-12 00:00').
 resourceAvailable(950400, 'POTATO', 77.0).
-daysWithoutEating(950400, 0)
+daysWithoutEating(950400, 0).
+measurementTime(1036800, '0000-01-13 00:00').
 resourceAvailable(1036800, 'POTATO', 76.0).
-daysWithoutEating(1036800, 0)
+daysWithoutEating(1036800, 0).
+measurementTime(1123200, '0000-01-14 00:00').
 resourceAvailable(1123200, 'POTATO', 75.0).
-daysWithoutEating(1123200, 0)
+daysWithoutEating(1123200, 0).
+measurementTime(1209600, '0000-01-15 00:00').
 resourceAvailable(1209600, 'POTATO', 74.0).
-daysWithoutEating(1209600, 0)
+daysWithoutEating(1209600, 0).
+measurementTime(1296000, '0000-01-16 00:00').
 resourceAvailable(1296000, 'POTATO', 72.0).
-daysWithoutEating(1296000, 0)
+daysWithoutEating(1296000, 0).
+measurementTime(1382400, '0000-01-17 00:00').
 resourceAvailable(1382400, 'POTATO', 71.0).
-daysWithoutEating(1382400, 0)
+daysWithoutEating(1382400, 0).
+measurementTime(1468800, '0000-01-18 00:00').
 resourceAvailable(1468800, 'POTATO', 70.0).
-daysWithoutEating(1468800, 0)
+daysWithoutEating(1468800, 0).
+measurementTime(1555200, '0000-01-19 00:00').
 resourceAvailable(1555200, 'POTATO', 69.0).
-daysWithoutEating(1555200, 0)
+daysWithoutEating(1555200, 0).
+measurementTime(1641600, '0000-01-20 00:00').
 resourceAvailable(1641600, 'POTATO', 68.0).
-daysWithoutEating(1641600, 0)
+daysWithoutEating(1641600, 0).
+measurementTime(1728000, '0000-01-21 00:00').
 resourceAvailable(1728000, 'POTATO', 66.0).
-daysWithoutEating(1728000, 0)
+daysWithoutEating(1728000, 0).
+measurementTime(1814400, '0000-01-22 00:00').
 resourceAvailable(1814400, 'POTATO', 65.0).
-daysWithoutEating(1814400, 0)
+daysWithoutEating(1814400, 0).
+measurementTime(1900800, '0000-01-23 00:00').
 resourceAvailable(1900800, 'POTATO', 64.0).
-daysWithoutEating(1900800, 0)
+daysWithoutEating(1900800, 0).
+measurementTime(1987200, '0000-01-24 00:00').
 resourceAvailable(1987200, 'POTATO', 63.0).
-daysWithoutEating(1987200, 0)
+daysWithoutEating(1987200, 0).
+measurementTime(2073600, '0000-01-25 00:00').
 resourceAvailable(2073600, 'POTATO', 62.0).
-daysWithoutEating(2073600, 0)
+daysWithoutEating(2073600, 0).
+measurementTime(2160000, '0000-01-26 00:00').
 resourceAvailable(2160000, 'POTATO', 60.0).
-daysWithoutEating(2160000, 0)
+daysWithoutEating(2160000, 0).
+measurementTime(2246400, '0000-01-27 00:00').
 resourceAvailable(2246400, 'POTATO', 59.0).
-daysWithoutEating(2246400, 0)
+daysWithoutEating(2246400, 0).
+measurementTime(2332800, '0000-01-28 00:00').
 resourceAvailable(2332800, 'POTATO', 58.0).
-daysWithoutEating(2332800, 0)
+daysWithoutEating(2332800, 0).
+measurementTime(2419200, '0000-01-29 00:00').
 resourceAvailable(2419200, 'POTATO', 57.0).
-daysWithoutEating(2419200, 0)
+daysWithoutEating(2419200, 0).
+measurementTime(2505600, '0000-01-30 00:00').
 resourceAvailable(2505600, 'POTATO', 56.0).
-daysWithoutEating(2505600, 0)
+daysWithoutEating(2505600, 0).
+measurementTime(2592000, '0000-01-31 00:00').
 resourceAvailable(2592000, 'POTATO', 54.0).
-daysWithoutEating(2592000, 0)
+daysWithoutEating(2592000, 0).
+measurementTime(2678400, '0000-02-01 00:00').
 resourceAvailable(2678400, 'POTATO', 53.0).
-daysWithoutEating(2678400, 0)
+daysWithoutEating(2678400, 0).
+measurementTime(2764800, '0000-02-02 00:00').
 resourceAvailable(2764800, 'POTATO', 52.0).
-daysWithoutEating(2764800, 0)
+daysWithoutEating(2764800, 0).
+measurementTime(2851200, '0000-02-03 00:00').
 resourceAvailable(2851200, 'POTATO', 51.0).
-daysWithoutEating(2851200, 0)
+daysWithoutEating(2851200, 0).
+measurementTime(2937600, '0000-02-04 00:00').
 resourceAvailable(2937600, 'POTATO', 50.0).
-daysWithoutEating(2937600, 0)
+daysWithoutEating(2937600, 0).
+measurementTime(3024000, '0000-02-05 00:00').
 resourceAvailable(3024000, 'POTATO', 48.0).
-daysWithoutEating(3024000, 0)
+daysWithoutEating(3024000, 0).
+measurementTime(3110400, '0000-02-06 00:00').
 resourceAvailable(3110400, 'POTATO', 47.0).
-daysWithoutEating(3110400, 0)
+daysWithoutEating(3110400, 0).
+measurementTime(3196800, '0000-02-07 00:00').
 resourceAvailable(3196800, 'POTATO', 46.0).
-daysWithoutEating(3196800, 0)
+daysWithoutEating(3196800, 0).
+measurementTime(3283200, '0000-02-08 00:00').
 resourceAvailable(3283200, 'POTATO', 45.0).
-daysWithoutEating(3283200, 0)
+daysWithoutEating(3283200, 0).
+measurementTime(3369600, '0000-02-09 00:00').
 resourceAvailable(3369600, 'POTATO', 44.0).
-daysWithoutEating(3369600, 0)
+daysWithoutEating(3369600, 0).
+measurementTime(3456000, '0000-02-10 00:00').
 resourceAvailable(3456000, 'POTATO', 42.0).
-daysWithoutEating(3456000, 0)
+daysWithoutEating(3456000, 0).
+measurementTime(3542400, '0000-02-11 00:00').
 resourceAvailable(3542400, 'POTATO', 41.0).
-daysWithoutEating(3542400, 0)
+daysWithoutEating(3542400, 0).
+measurementTime(3628800, '0000-02-12 00:00').
 resourceAvailable(3628800, 'POTATO', 40.0).
-daysWithoutEating(3628800, 0)
+daysWithoutEating(3628800, 0).
+measurementTime(3715200, '0000-02-13 00:00').
 resourceAvailable(3715200, 'POTATO', 39.0).
-daysWithoutEating(3715200, 0)
+daysWithoutEating(3715200, 0).
+measurementTime(3801600, '0000-02-14 00:00').
 resourceAvailable(3801600, 'POTATO', 38.0).
-daysWithoutEating(3801600, 0)
+daysWithoutEating(3801600, 0).
+measurementTime(3888000, '0000-02-15 00:00').
 resourceAvailable(3888000, 'POTATO', 36.0).
-daysWithoutEating(3888000, 0)
+daysWithoutEating(3888000, 0).
+measurementTime(3974400, '0000-02-16 00:00').
 resourceAvailable(3974400, 'POTATO', 35.0).
-daysWithoutEating(3974400, 0)
+daysWithoutEating(3974400, 0).
+measurementTime(4060800, '0000-02-17 00:00').
 resourceAvailable(4060800, 'POTATO', 34.0).
-daysWithoutEating(4060800, 0)
+daysWithoutEating(4060800, 0).
+measurementTime(4147200, '0000-02-18 00:00').
 resourceAvailable(4147200, 'POTATO', 33.0).
-daysWithoutEating(4147200, 0)
+daysWithoutEating(4147200, 0).
+measurementTime(4233600, '0000-02-19 00:00').
 resourceAvailable(4233600, 'POTATO', 32.0).
-daysWithoutEating(4233600, 0)
+daysWithoutEating(4233600, 0).
+measurementTime(4320000, '0000-02-20 00:00').
 resourceAvailable(4320000, 'POTATO', 30.0).
-daysWithoutEating(4320000, 0)
+daysWithoutEating(4320000, 0).
+measurementTime(4406400, '0000-02-21 00:00').
 resourceAvailable(4406400, 'POTATO', 29.0).
-daysWithoutEating(4406400, 0)
+daysWithoutEating(4406400, 0).
+measurementTime(4492800, '0000-02-22 00:00').
 resourceAvailable(4492800, 'POTATO', 28.0).
-daysWithoutEating(4492800, 0)
+daysWithoutEating(4492800, 0).
+measurementTime(4579200, '0000-02-23 00:00').
 resourceAvailable(4579200, 'POTATO', 27.0).
-daysWithoutEating(4579200, 0)
+daysWithoutEating(4579200, 0).
+measurementTime(4665600, '0000-02-24 00:00').
 resourceAvailable(4665600, 'POTATO', 26.0).
-daysWithoutEating(4665600, 0)
+daysWithoutEating(4665600, 0).
+measurementTime(4752000, '0000-02-25 00:00').
 resourceAvailable(4752000, 'POTATO', 24.0).
-daysWithoutEating(4752000, 0)
+daysWithoutEating(4752000, 0).
+measurementTime(4838400, '0000-02-26 00:00').
 resourceAvailable(4838400, 'POTATO', 23.0).
-daysWithoutEating(4838400, 0)
+daysWithoutEating(4838400, 0).
+measurementTime(4924800, '0000-02-27 00:00').
 resourceAvailable(4924800, 'POTATO', 22.0).
-daysWithoutEating(4924800, 0)
+daysWithoutEating(4924800, 0).
+measurementTime(5011200, '0000-02-28 00:00').
 resourceAvailable(5011200, 'POTATO', 21.0).
-daysWithoutEating(5011200, 0)
+daysWithoutEating(5011200, 0).
+measurementTime(5097600, '0000-02-29 00:00').
 resourceAvailable(5097600, 'POTATO', 20.0).
-daysWithoutEating(5097600, 0)
+daysWithoutEating(5097600, 0).
+measurementTime(5184000, '0000-03-01 00:00').
 resourceAvailable(5184000, 'POTATO', 18.0).
-daysWithoutEating(5184000, 0)
+daysWithoutEating(5184000, 0).
+measurementTime(5270400, '0000-03-02 00:00').
 resourceAvailable(5270400, 'POTATO', 17.0).
-daysWithoutEating(5270400, 0)
+daysWithoutEating(5270400, 0).
+measurementTime(5356800, '0000-03-03 00:00').
 resourceAvailable(5356800, 'POTATO', 16.0).
-daysWithoutEating(5356800, 0)
+daysWithoutEating(5356800, 0).
+measurementTime(5443200, '0000-03-04 00:00').
 resourceAvailable(5443200, 'POTATO', 15.0).
-daysWithoutEating(5443200, 0)
+daysWithoutEating(5443200, 0).
+measurementTime(5529600, '0000-03-05 00:00').
 resourceAvailable(5529600, 'POTATO', 14.0).
-daysWithoutEating(5529600, 0)
+daysWithoutEating(5529600, 0).
+measurementTime(5616000, '0000-03-06 00:00').
 resourceAvailable(5616000, 'POTATO', 12.0).
-daysWithoutEating(5616000, 0)
+daysWithoutEating(5616000, 0).
+measurementTime(5702400, '0000-03-07 00:00').
 resourceAvailable(5702400, 'POTATO', 11.0).
-daysWithoutEating(5702400, 0)
+daysWithoutEating(5702400, 0).
+measurementTime(5788800, '0000-03-08 00:00').
 resourceAvailable(5788800, 'POTATO', 10.0).
-daysWithoutEating(5788800, 0)
+daysWithoutEating(5788800, 0).
+measurementTime(5875200, '0000-03-09 00:00').
 resourceAvailable(5875200, 'POTATO', 9.0).
-daysWithoutEating(5875200, 0)
+daysWithoutEating(5875200, 0).
+measurementTime(5961600, '0000-03-10 00:00').
 resourceAvailable(5961600, 'POTATO', 8.0).
-daysWithoutEating(5961600, 0)
+daysWithoutEating(5961600, 0).
+measurementTime(6048000, '0000-03-11 00:00').
 resourceAvailable(6048000, 'POTATO', 6.0).
-daysWithoutEating(6048000, 0)
+daysWithoutEating(6048000, 0).
+measurementTime(6134400, '0000-03-12 00:00').
 resourceAvailable(6134400, 'POTATO', 5.0).
-daysWithoutEating(6134400, 0)
+daysWithoutEating(6134400, 0).
+measurementTime(6220800, '0000-03-13 00:00').
 resourceAvailable(6220800, 'POTATO', 4.0).
-daysWithoutEating(6220800, 0)
+daysWithoutEating(6220800, 0).
+measurementTime(6307200, '0000-03-14 00:00').
 resourceAvailable(6307200, 'POTATO', 3.0).
-daysWithoutEating(6307200, 0)
+daysWithoutEating(6307200, 0).
+measurementTime(6393600, '0000-03-15 00:00').
 resourceAvailable(6393600, 'POTATO', 2.0).
-daysWithoutEating(6393600, 0)
+daysWithoutEating(6393600, 0).
+measurementTime(6480000, '0000-03-16 00:00').
 resourceAvailable(6480000, 'POTATO', 0.0).
-daysWithoutEating(6480000, 0)
+daysWithoutEating(6480000, 0).
+measurementTime(6566400, '0000-03-17 00:00').
 resourceAvailable(6566400, 'POTATO', 0.0).
-daysWithoutEating(6566400, 1)
+daysWithoutEating(6566400, 1).
+measurementTime(6652800, '0000-03-18 00:00').
 resourceAvailable(6652800, 'POTATO', 0.0).
-daysWithoutEating(6652800, 2)
+daysWithoutEating(6652800, 2).
+measurementTime(6739200, '0000-03-19 00:00').
 resourceAvailable(6739200, 'POTATO', 0.0).
-daysWithoutEating(6739200, 3)
+daysWithoutEating(6739200, 3).
+measurementTime(6825600, '0000-03-20 00:00').
 resourceAvailable(6825600, 'POTATO', 0.0).
-daysWithoutEating(6825600, 4)
+daysWithoutEating(6825600, 4).
+measurementTime(6912000, '0000-03-21 00:00').
 resourceAvailable(6912000, 'POTATO', 0.0).
-daysWithoutEating(6912000, 6)
+daysWithoutEating(6912000, 6).
+measurementTime(6998400, '0000-03-22 00:00').
 resourceAvailable(6998400, 'POTATO', 0.0).
-daysWithoutEating(6998400, 7)
+daysWithoutEating(6998400, 7).
+measurementTime(7084800, '0000-03-23 00:00').
 resourceAvailable(7084800, 'POTATO', 0.0).
-daysWithoutEating(7084800, 8)
+daysWithoutEating(7084800, 8).
+measurementTime(7171200, '0000-03-24 00:00').
 resourceAvailable(7171200, 'POTATO', 0.0).
-daysWithoutEating(7171200, 9)
+daysWithoutEating(7171200, 9).
+measurementTime(7257600, '0000-03-25 00:00').
 resourceAvailable(7257600, 'POTATO', 0.0).
-daysWithoutEating(7257600, 10)
+daysWithoutEating(7257600, 10).
+measurementTime(7344000, '0000-03-26 00:00').
 resourceAvailable(7344000, 'POTATO', 0.0).
-daysWithoutEating(7344000, 12)
+daysWithoutEating(7344000, 12).
+measurementTime(7430400, '0000-03-27 00:00').
 resourceAvailable(7430400, 'POTATO', 0.0).
-daysWithoutEating(7430400, 13)
+daysWithoutEating(7430400, 13).
+measurementTime(7516800, '0000-03-28 00:00').
 resourceAvailable(7516800, 'POTATO', 0.0).
-daysWithoutEating(7516800, 14)
+daysWithoutEating(7516800, 14).
+measurementTime(7603200, '0000-03-29 00:00').
 resourceAvailable(7603200, 'POTATO', 0.0).
-daysWithoutEating(7603200, 15)
+daysWithoutEating(7603200, 15).
+measurementTime(7689600, '0000-03-30 00:00').
 resourceAvailable(7689600, 'POTATO', 0.0).
-daysWithoutEating(7689600, 16)
+daysWithoutEating(7689600, 16).
+measurementTime(7776000, '0000-03-31 00:00').
 resourceAvailable(7776000, 'POTATO', 0.0).
-daysWithoutEating(7776000, 18)
+daysWithoutEating(7776000, 18).
+measurementTime(7862400, '0000-04-01 00:00').
 resourceAvailable(7862400, 'POTATO', 0.0).
-daysWithoutEating(7862400, 19)
+daysWithoutEating(7862400, 19).
+measurementTime(7948800, '0000-04-02 00:00').
 resourceAvailable(7948800, 'POTATO', 0.0).
-daysWithoutEating(7948800, 20)
+daysWithoutEating(7948800, 20).
+measurementTime(8035200, '0000-04-03 00:00').
 resourceAvailable(8035200, 'POTATO', 0.0).
-daysWithoutEating(8035200, 21)
+daysWithoutEating(8035200, 21).
+measurementTime(8121600, '0000-04-04 00:00').
 resourceAvailable(8121600, 'POTATO', 0.0).
-daysWithoutEating(8121600, 22)
+daysWithoutEating(8121600, 22).
+measurementTime(8208000, '0000-04-05 00:00').
 resourceAvailable(8208000, 'POTATO', 0.0).
-daysWithoutEating(8208000, 24)
+daysWithoutEating(8208000, 24).
+measurementTime(8294400, '0000-04-06 00:00').
 resourceAvailable(8294400, 'POTATO', 0.0).
-daysWithoutEating(8294400, 25)
+daysWithoutEating(8294400, 25).
+measurementTime(8380800, '0000-04-07 00:00').
 resourceAvailable(8380800, 'POTATO', 0.0).
-daysWithoutEating(8380800, 26)
+daysWithoutEating(8380800, 26).
+measurementTime(8467200, '0000-04-08 00:00').
 resourceAvailable(8467200, 'POTATO', 0.0).
-daysWithoutEating(8467200, 27)
+daysWithoutEating(8467200, 27).
+measurementTime(8553600, '0000-04-09 00:00').
 resourceAvailable(8553600, 'POTATO', 0.0).
-daysWithoutEating(8553600, 28)
+daysWithoutEating(8553600, 28).
+measurementTime(8640000, '0000-04-10 00:00').
 resourceAvailable(8640000, 'POTATO', 0.0).
-daysWithoutEating(8640000, 30)
+daysWithoutEating(8640000, 30).

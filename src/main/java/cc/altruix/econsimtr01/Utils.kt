@@ -43,3 +43,5 @@ fun Long.toPeriod():Period {
 fun Int.toFixedLengthString(len:Int):String {
     return String.format("%0" + "$len" + "d", this)
 }
+
+fun dailyAtMidnight() = { time:Long -> ((time % (24 * 60 * 60)) == 0L) }
