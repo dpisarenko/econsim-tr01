@@ -7,5 +7,5 @@ package cc.altruix.econsimtr01
  */
 interface IAction {
     fun timeToRun(time:Long) : Boolean
-    fun run()
+    fun run(time:Long)
 }

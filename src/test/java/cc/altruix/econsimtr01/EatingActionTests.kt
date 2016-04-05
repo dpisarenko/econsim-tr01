@@ -13,8 +13,8 @@ class EatingActionTests {
     @Test
     fun timeToRunSunnyDay() {
         val out = EatingAction(
-                Farmer(Mockito.mock(IResourceStorage::class.java)),
-                Mockito.mock(IResourceStorage::class.java)
+                Farmer(Mockito.mock(IResourceStorage::class.java), emptyList()),
+                Mockito.mock(IResourceStorage::class.java), emptyList()
         )
         Assertions.assertThat(out.timeToRun(71999L)).isFalse()
         Assertions.assertThat(out.timeToRun(72000L)).isTrue()

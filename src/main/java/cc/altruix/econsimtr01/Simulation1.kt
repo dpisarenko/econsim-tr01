@@ -5,9 +5,9 @@ package cc.altruix.econsimtr01
  * @version $Id$
  * @since 1.0
  */
-class Simulation1(val logTarget:StringBuilder) : DefaultSimulation(Timing()) {
-    val foodStorage = DefaultResourceStorage()
-    val farmer = Farmer(foodStorage)
+class Simulation1(val logTarget:StringBuilder, val flows:MutableList<ResourceFlow>) : DefaultSimulation(Timing()) {
+    val foodStorage = DefaultResourceStorage("FoodStorage")
+    val farmer = Farmer(foodStorage, flows)
 
     override fun createSensors(): List<ISensor> =
             listOf(

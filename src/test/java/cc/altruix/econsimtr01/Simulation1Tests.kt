@@ -3,6 +3,7 @@ package cc.altruix.econsimtr01
 import org.fest.assertions.Assertions
 import org.junit.Test
 import java.io.File
+import java.util.*
 
 /**
  * @author Dmitri Pisarenko (dp@altruix.co)
@@ -12,8 +13,9 @@ import java.io.File
 class Simulation1Tests {
     @Test
     fun test() {
+        val flows = LinkedList<ResourceFlow>()
         val log = StringBuilder()
-        val sim = Simulation1(log)
+        val sim = Simulation1(log, flows)
 
         // Run method under test
         sim.run()

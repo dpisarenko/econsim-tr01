@@ -5,7 +5,8 @@ package cc.altruix.econsimtr01
  * @version $Id$
  * @since 1.0
  */
-interface IResourceStorage {
+interface IResourceStorage : ISometingIdentifiable {
+
     fun put(res: Resource, amt:Double)
     fun amount(res: Resource):Double
 

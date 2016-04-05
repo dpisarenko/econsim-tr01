@@ -5,6 +5,6 @@ package cc.altruix.econsimtr01
  * @version $Id$
  * @since 1.0
  */
-interface IAgent {
+interface IAgent : ISometingIdentifiable {
     fun act(time:Long)
 }

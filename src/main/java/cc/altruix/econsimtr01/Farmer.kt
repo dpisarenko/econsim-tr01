@@ -5,8 +5,10 @@ package cc.altruix.econsimtr01
  * @version $Id$
  * @since 1.0
  */
-class Farmer(foodStorage: IResourceStorage) : IAgent, IHuman {
-    val actions = listOf<IAction>(EatingAction(this, foodStorage))
+class Farmer(foodStorage: IResourceStorage, flows: MutableList<ResourceFlow>) : IAgent, IHuman {
+    override fun id(): String = "Farmer"
+
+    val actions = listOf<IAction>(EatingAction(this, foodStorage, flows))
     var daysWithoutFood : Int = 0
     var alive: Boolean = true
         get
@@ -32,6 +34,6 @@ class Farmer(foodStorage: IResourceStorage) : IAgent, IHuman {
     override fun act(time: Long) {
         actions
                 .filter { x -> x.timeToRun(time) }
-                .forEach { x -> x.run() }
+                .forEach { x -> x.run(time) }
     }
 }
