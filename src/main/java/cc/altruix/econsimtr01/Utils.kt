@@ -1,5 +1,6 @@
 package cc.altruix.econsimtr01
 
+import cc.altruix.javaprologinterop.PlUtils
 import org.joda.time.Duration
 import org.joda.time.Period
 
@@ -45,3 +46,7 @@ fun Int.toFixedLengthString(len:Int):String {
 }
 
 fun dailyAtMidnight() = { time:Long -> ((time % (24 * 60 * 60)) == 0L) }
+
+fun String.removeSingleQuotes():String {
+    return PlUtils.removeSingleQuotes(this)
+}
