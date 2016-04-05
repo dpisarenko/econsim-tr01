@@ -1,8 +1,10 @@
 package cc.altruix.econsimtr01
 
 import cc.altruix.javaprologinterop.PlUtils
+import net.sourceforge.plantuml.SourceStringReader
 import org.joda.time.Duration
 import org.joda.time.Period
+import java.io.File
 
 /**
  * @author Dmitri Pisarenko (dp@altruix.co)
@@ -49,4 +51,10 @@ fun dailyAtMidnight() = { time:Long -> ((time % (24 * 60 * 60)) == 0L) }
 
 fun String.removeSingleQuotes():String {
     return PlUtils.removeSingleQuotes(this)
+}
+
+fun String.toSequenceDiagramFile(file: File) {
+    val reader = SourceStringReader(this)
+    reader.generateImage(file)
+
 }

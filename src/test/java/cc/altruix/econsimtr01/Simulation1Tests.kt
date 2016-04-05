@@ -28,5 +28,8 @@ class Simulation1Tests {
         val actualConvertedSimResults = Simulation1TimeSeriesCreator().prologToCsv(expectedRawSimResultsFile)
         val expectedConvertedSimResults = File("src/test/resources/Simulation1Tests.test.csv.expected.txt").readText()
         Assertions.assertThat(actualConvertedSimResults).isEqualTo(expectedConvertedSimResults)
+
+        val seqDiagramTxt = FlowDiagramTextCreator().createFlowDiagramText(flows)
+        seqDiagramTxt.toSequenceDiagramFile(File("src/test/resources/Simulation1Tests.test.flows.actual.png"))
     }
 }
