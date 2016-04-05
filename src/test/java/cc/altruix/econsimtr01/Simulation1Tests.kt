@@ -19,7 +19,12 @@ class Simulation1Tests {
         sim.run()
 
         // Verify
-        val expectedResult = File("src/test/resources/Simulation1Tests.test.expected.txt").readText()
-        Assertions.assertThat(log.toString()).isEqualTo(expectedResult)
+        val expectedRawSimResultsFile = File("src/test/resources/Simulation1Tests.test.pl.expected.txt")
+        val expectedRawSimResults = expectedRawSimResultsFile.readText()
+        Assertions.assertThat(log.toString()).isEqualTo(expectedRawSimResults)
+
+        val actualConvertedSimResults = Simulation1TimeSeriesCreator().prologToCsv(expectedRawSimResultsFile)
+        val expectedConvertedSimResults = File("src/test/resources/Simulation1Tests.test.csv.expected.txt").readText()
+        Assertions.assertThat(actualConvertedSimResults).isEqualTo(expectedConvertedSimResults)
     }
 }
