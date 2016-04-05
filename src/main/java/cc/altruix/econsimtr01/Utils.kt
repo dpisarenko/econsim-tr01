@@ -41,5 +41,5 @@ fun Long.toPeriod():Period {
 }
 
 fun Int.toFixedLengthString(len:Int):String {
-    return String.format("%0{$len}d", this)
+    return String.format("%0" + "$len" + "d", this)
 }
