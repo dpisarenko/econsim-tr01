@@ -5,11 +5,17 @@ package cc.altruix.econsimtr01
  * @version $Id$
  * @since 1.0
  */
-class Simulation1() : DefaultSimulation(Timing()) {
+class Simulation1(val logTarget:StringBuilder) : DefaultSimulation(Timing()) {
     val foodStorage = DefaultResourceStorage()
     val farmer = Farmer(foodStorage)
 
-    override fun createSensors(): List<ISensor> = listOf(Accountant(foodStorage, farmer))
+    override fun createSensors(): List<ISensor> =
+            listOf(
+                    Accountant(
+                            foodStorage,
+                            farmer,
+                            logTarget)
+            )
 
     override fun createAgents(): List<IAgent> {
         foodStorage.put(Resource.POTATO, 30*3.0)
@@ -22,5 +28,4 @@ class Simulation1() : DefaultSimulation(Timing()) {
     }
 
     override fun continueCondition(): Boolean = farmer.alive
-
 }
