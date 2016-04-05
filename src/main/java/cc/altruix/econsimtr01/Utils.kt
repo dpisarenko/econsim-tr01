@@ -1,6 +1,7 @@
 package cc.altruix.econsimtr01
 
 import org.joda.time.Duration
+import org.joda.time.Period
 
 /**
  * @author Dmitri Pisarenko (dp@altruix.co)
@@ -33,4 +34,12 @@ fun composeHourMinuteFiringFunction(hours:Int, minutes:Int): (Long) -> Boolean {
 
 fun StringBuilder.newLine() {
     this.append(System.lineSeparator())
+}
+
+fun Long.toPeriod():Period {
+    return secondsToPeriod(this)
+}
+
+fun Int.toFixedLengthString(len:Int):String {
+    return String.format("%0{$len}d", this)
 }
