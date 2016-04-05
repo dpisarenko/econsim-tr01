@@ -9,6 +9,7 @@ class FlowDiagramTextCreator {
         builder.append("@startuml\n")
         flows.sortedBy { x -> x.time }.forEach { flow ->
             builder.append("${flow.src.id()} -> ${flow.target.id()}: ${flow.res.name} ${flow.amt} ${flow.res.unit}\n")
+            builder.append("note left: ${flow.time.toSimulationDateTimeString()}\n")
         }
         builder.append("@enduml\n")
         return builder.toString()

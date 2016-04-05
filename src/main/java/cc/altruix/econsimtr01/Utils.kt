@@ -2,6 +2,7 @@ package cc.altruix.econsimtr01
 
 import cc.altruix.javaprologinterop.PlUtils
 import net.sourceforge.plantuml.SourceStringReader
+import org.joda.time.DateTime
 import org.joda.time.Duration
 import org.joda.time.Period
 import java.io.File
@@ -57,4 +58,21 @@ fun String.toSequenceDiagramFile(file: File) {
     val reader = SourceStringReader(this)
     reader.generateImage(file)
 
+}
+
+fun Long.toSimulationDateTime(): DateTime {
+    val period = this.toPeriod()
+    val t0 = DateTime(0, 1, 1, 0, 0, 0, 0)
+    val t = t0.plus(period)
+    return t
+}
+
+fun Long.toSimulationDateTimeString():String {
+    val t = this.toSimulationDateTime()
+    val hours = t.hourOfDay.toFixedLengthString(2)
+    val minutes = t.minuteOfHour.toFixedLengthString(2)
+    val year = t.year.toFixedLengthString(4)
+    val months = t.monthOfYear.toFixedLengthString(2)
+    val days = t.dayOfMonth.toFixedLengthString(2)
+    return "$year-$months-$days $hours:$minutes"
 }
