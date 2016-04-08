@@ -22,6 +22,5 @@ class Sim1ParametersProviderTests {
                         "Source code modification",
                         "Hits of code")
         )
-
     }
 }
