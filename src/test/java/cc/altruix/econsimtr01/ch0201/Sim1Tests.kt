@@ -19,7 +19,7 @@ class Sim1Tests {
                 log,
                 flows,
                 SimParametersProvider(
-                        File("src/test/resources/Sim1Tests.params.pl").readText()
+                        File("src/test/resources/ch0201Sim1Tests.params.pl").readText()
                 )
         )
 

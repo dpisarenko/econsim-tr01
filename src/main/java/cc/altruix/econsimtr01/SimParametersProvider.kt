@@ -19,8 +19,7 @@ class SimParametersProvider(val theoryTxt: String) {
         private set
 
     init {
-        val prolog = PlUtils.createEngine()
-        PlUtils.loadPrologTheoryAsText(prolog, theoryTxt)
+        val prolog = theoryTxt.toPrologTheory()
         this.maxDaysWithoutFood = PlUtils.extractSingleInt(
                 prolog,
                 "maxDaysWithoutFood(X).",

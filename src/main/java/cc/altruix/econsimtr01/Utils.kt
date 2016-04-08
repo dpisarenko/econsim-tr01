@@ -1,5 +1,7 @@
 package cc.altruix.econsimtr01
 
+import alice.tuprolog.Prolog
+import alice.tuprolog.interfaces.IProlog
 import cc.altruix.javaprologinterop.PlUtils
 import net.sourceforge.plantuml.SourceStringReader
 import org.joda.time.DateTime
@@ -75,4 +77,10 @@ fun Long.toSimulationDateTimeString():String {
     val months = t.monthOfYear.toFixedLengthString(2)
     val days = t.dayOfMonth.toFixedLengthString(2)
     return "$year-$months-$days $hours:$minutes"
+}
+
+fun String.toPrologTheory(): Prolog {
+    val prolog = PlUtils.createEngine()
+    PlUtils.loadPrologTheoryAsText(prolog, this)
+    return prolog
 }
