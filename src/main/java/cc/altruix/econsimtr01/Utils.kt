@@ -84,3 +84,20 @@ fun String.toPrologTheory(): Prolog {
     PlUtils.loadPrologTheoryAsText(prolog, this)
     return prolog
 }
+
+fun Prolog.getResults(query:String, varName:String):List<String> {
+    return PlUtils.getResults(this, query, varName)
+}
+
+// List<Map<String, String>> getResults(Prolog engine, String query, String[] varNames)
+
+fun Prolog.getResults(query: String, vararg varNames:String):List<Map<String, String>> {
+    return PlUtils.getResults(this, query, varNames)
+}
+
+fun String?.emptyIfNull():String {
+    if (this == null) {
+        return ""
+    }
+    return this
+}
