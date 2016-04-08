@@ -1,10 +1,7 @@
 package cc.altruix.econsimtr01.ch0201
 
 import alice.tuprolog.Prolog
-import cc.altruix.econsimtr01.PlResource
-import cc.altruix.econsimtr01.emptyIfNull
-import cc.altruix.econsimtr01.getResults
-import cc.altruix.econsimtr01.toPrologTheory
+import cc.altruix.econsimtr01.*
 import cc.altruix.javaprologinterop.PlUtils
 import java.util.*
 
@@ -27,9 +24,9 @@ class Sim1ParametersProvider(val theoryTxt: String) {
         val resList = ArrayList<PlResource>(resData.size)
         resData.forEach { map ->
             val res = PlResource(
-                    map.get("Id").emptyIfNull(),
-                    map.get("Name").emptyIfNull(),
-                    map.get("Unit").emptyIfNull()
+                    map.get("Id").emptyIfNull().removeSingleQuotes(),
+                    map.get("Name").emptyIfNull().removeSingleQuotes(),
+                    map.get("Unit").emptyIfNull().removeSingleQuotes()
             )
             resList.add(res)
         }
