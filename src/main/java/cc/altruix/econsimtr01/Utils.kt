@@ -75,14 +75,17 @@ fun DateTime.isEqualTo(expected:DateTime) {
     Assertions.assertThat(this).isEqualTo(expected)
 }
 
-fun Long.toSimulationDateTimeString():String {
-    val t = this.toSimulationDateTime()
-    val hours = t.hourOfDay.toFixedLengthString(2)
-    val minutes = t.minuteOfHour.toFixedLengthString(2)
-    val year = t.year.toFixedLengthString(4)
-    val months = t.monthOfYear.toFixedLengthString(2)
-    val days = t.dayOfMonth.toFixedLengthString(2)
+fun Long.toSimulationDateTimeString():String =
+    this.toSimulationDateTime().toSimulationDateTimeString()
+
+fun DateTime.toSimulationDateTimeString():String {
+    val hours = this.hourOfDay.toFixedLengthString(2)
+    val minutes = this.minuteOfHour.toFixedLengthString(2)
+    val year = this.year.toFixedLengthString(4)
+    val months = this.monthOfYear.toFixedLengthString(2)
+    val days = this.dayOfMonth.toFixedLengthString(2)
     return "$year-$months-$days $hours:$minutes"
+
 }
 
 fun String.toPrologTheory(): Prolog {
