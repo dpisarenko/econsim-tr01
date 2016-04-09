@@ -81,7 +81,7 @@ class Sim1ParametersProvider(val theoryTxt: String) {
 
     fun businessDaysTriggerFunction(): (Long) -> Boolean {
         return { x: Long ->
-            val time = x.toSimulationDateTime()
+            val time = x.millisToSimulationDateTime()
             val dayOfWeek = time.dayOfWeek().get()
             if ((dayOfWeek == DateTimeConstants.SATURDAY) ||
                     (dayOfWeek == DateTimeConstants.SUNDAY) ) {

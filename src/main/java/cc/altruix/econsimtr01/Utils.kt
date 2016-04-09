@@ -59,12 +59,15 @@ fun String.toSequenceDiagramFile(file: File) {
 
 }
 
-fun Long.toSimulationDateTime(): DateTime {
+fun Long.millisToSimulationDateTime(): DateTime {
     val period = Duration(0, this).toPeriod()
     val t0 = t0()
     val t = t0.plus(period)
     return t
 }
+
+fun Long.secondsToSimulationDateTime(): DateTime = (this * 1000L).millisToSimulationDateTime()
+
 
 fun t0() = DateTime(0, 1, 1, 0, 0, 0, 0)
 
@@ -73,7 +76,7 @@ fun DateTime.isEqualTo(expected:DateTime) {
 }
 
 fun Long.toSimulationDateTimeString():String =
-    this.toSimulationDateTime().toSimulationDateTimeString()
+    this.millisToSimulationDateTime().toSimulationDateTimeString()
 
 fun DateTime.toSimulationDateTimeString():String {
     val hours = this.hourOfDay.toFixedLengthString(2)

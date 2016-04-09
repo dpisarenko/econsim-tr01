@@ -11,14 +11,14 @@ class UtilsTests {
     @Test
     fun toSimulationDateTimeSunnyDay() {
         Assertions
-            .assertThat(0L.toSimulationDateTime())
+            .assertThat(0L.millisToSimulationDateTime())
             .isEqualTo(DateTime(0, 1, 1, 0, 0, 0, 0))
-        val t0 = 0L.toSimulationDateTime()
+        val t0 = 0L.millisToSimulationDateTime()
         createDate(
                 t0,
                 0,
                 18,
                 0
-        ).millis.toSimulationDateTime().isEqualTo(DateTime(0, 1, 1, 0, 18, 0, 0))
+        ).millis.millisToSimulationDateTime().isEqualTo(DateTime(0, 1, 1, 0, 18, 0, 0))
     }
 }

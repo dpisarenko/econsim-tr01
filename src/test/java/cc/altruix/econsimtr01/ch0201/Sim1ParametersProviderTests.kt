@@ -2,7 +2,7 @@ package cc.altruix.econsimtr01.ch0201
 
 import cc.altruix.econsimtr01.PlResource
 import cc.altruix.econsimtr01.createDate
-import cc.altruix.econsimtr01.toSimulationDateTime
+import cc.altruix.econsimtr01.millisToSimulationDateTime
 import org.fest.assertions.Assertions
 import org.joda.time.DateTime
 import org.junit.Assert
@@ -33,7 +33,7 @@ class Sim1ParametersProviderTests {
         val out = Sim1ParametersProvider(
                 File("src/test/resources/ch0201Sim1Tests.params.pl").readText()
         )
-        val t0 = 0L.toSimulationDateTime()
+        val t0 = 0L.millisToSimulationDateTime()
         Assertions.assertThat(t0.hourOfDay).isEqualTo(0)
         Assertions.assertThat(t0.minuteOfHour).isEqualTo(0)
 
