@@ -27,37 +27,9 @@ class EatingActionTests {
         out.timeToRun(72001L.secondsToSimulationDateTime()).shouldBeFalse()
 
         for (i in 1..7) {
-            out.timeToRun(
-                    (DateTime(0, 1, 0+i, 20, 0, 0)
-                            .millis - 1L)
-                            .millisToSimulationDateTime()
-            ).shouldBeFalse()
-
-            out.timeToRun(
-                    DateTime(0, 1, 0+i, 20, 0, 0)
-                            .millis
-                            .millisToSimulationDateTime()
-            ).shouldBeTrue()
-
-            out.timeToRun(
-                    (DateTime(0, 1, 0+i, 20, 0, 0)
-                            .millis + 1L)
-                            .millisToSimulationDateTime()
-            ).shouldBeFalse()
-
+            out.timeToRun((DateTime(0, 1, 0+i, 20, 0, 0).plusSeconds(1))).shouldBeFalse()
+            out.timeToRun(DateTime(0, 1, 0+i, 20, 0, 0)).shouldBeTrue()
+            out.timeToRun((DateTime(0, 1, 0+i, 20, 0, 0).plusSeconds(1))).shouldBeFalse()
         }
-
-
-/*
-        out.timeToRun(216000L.secondsToSimulationDateTime()).shouldBeTrue()
-        out.timeToRun(288000L.secondsToSimulationDateTime()).shouldBeTrue()
-        out.timeToRun(360000L.secondsToSimulationDateTime()).shouldBeTrue()
-        out.timeToRun(432000L.secondsToSimulationDateTime()).shouldBeTrue()
-        out.timeToRun(504000L.secondsToSimulationDateTime()).shouldBeTrue()
-        out.timeToRun(576000L.secondsToSimulationDateTime()).shouldBeTrue()
-        out.timeToRun(647999L.secondsToSimulationDateTime()).shouldBeFalse()
-        out.timeToRun(648000L.secondsToSimulationDateTime()).shouldBeTrue()
-        out.timeToRun(648001L.secondsToSimulationDateTime()).shouldBeFalse()
-        */
     }
 }
