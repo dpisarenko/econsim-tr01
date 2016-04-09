@@ -47,7 +47,10 @@ fun Int.toFixedLengthString(len:Int):String {
     return String.format("%0" + "$len" + "d", this)
 }
 
-fun dailyAtMidnight() = { time:Long -> ((time % (24 * 60 * 60)) == 0L) }
+fun dailyAtMidnight() = {
+    time:DateTime ->
+    ((time.hourOfDay == 0) && (time.minuteOfDay == 0))
+}
 
 fun String.removeSingleQuotes():String {
     return PlUtils.removeSingleQuotes(this)
@@ -61,10 +64,12 @@ fun String.toSequenceDiagramFile(file: File) {
 
 fun Long.toSimulationDateTime(): DateTime {
     val period = Duration(0, this).toPeriod()
-    val t0 = DateTime(0, 1, 1, 0, 0, 0, 0)
+    val t0 = t0()
     val t = t0.plus(period)
     return t
 }
+
+fun t0() = DateTime(0, 1, 1, 0, 0, 0, 0)
 
 fun DateTime.isEqualTo(expected:DateTime) {
     Assertions.assertThat(this).isEqualTo(expected)

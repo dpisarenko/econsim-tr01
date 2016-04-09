@@ -8,9 +8,9 @@ import org.joda.time.DateTime
 class Accountant(val foodStorage: DefaultResourceStorage,
                  val farmer: Farmer,
                  val logTarget: StringBuilder) : ISensor {
-    val fire: (Long) -> Boolean = dailyAtMidnight()
+    val fire: (DateTime) -> Boolean = dailyAtMidnight()
 
-    override fun measure(time: Long) {
+    override fun measure(time: DateTime) {
         if (fire(time)) {
             logMeasurementTime(time)
             logPotatoes(time)
@@ -18,17 +18,17 @@ class Accountant(val foodStorage: DefaultResourceStorage,
         }
     }
 
-    private fun logDaysWithoutEating(time: Long) {
+    private fun logDaysWithoutEating(time: DateTime) {
         logTarget.append("daysWithoutEating($time, ${farmer.daysWithoutFood}).")
         logTarget.newLine()
     }
 
-    private fun logPotatoes(time: Long) {
+    private fun logPotatoes(time: DateTime) {
         logTarget.append("resourceAvailable($time, 'POTATO', ${foodStorage.amount(Resource.POTATO)}).")
         logTarget.newLine()
     }
 
-    private fun logMeasurementTime(time: Long) {
+    private fun logMeasurementTime(time: DateTime) {
         val dateTimeString = time.toSimulationDateTimeString()
         logTarget.append("measurementTime($time, '$dateTimeString').")
         logTarget.newLine()
