@@ -7,4 +7,4 @@ hasFlow(f1,
     employer,
     r1,
     _,
-    businessDays(9)).
+    businessDays).
