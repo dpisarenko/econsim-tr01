@@ -1,5 +1,7 @@
 package cc.altruix.econsimtr01
 
+import org.joda.time.DateTime
+
 /**
  * @author Dmitri Pisarenko (dp@altruix.co)
  * @version $Id$
@@ -37,7 +39,7 @@ class Farmer(foodStorage: IResourceStorage,
     override fun die() {
         alive = false
     }
-    override fun act(time: Long) {
+    override fun act(time: DateTime) {
         actions
                 .filter { x -> x.timeToRun(time) }
                 .forEach { x -> x.run(time) }
