@@ -1,6 +1,7 @@
 package cc.altruix.econsimtr01.ch0201
 
 import cc.altruix.econsimtr01.PlResource
+import cc.altruix.econsimtr01.createDate
 import cc.altruix.econsimtr01.toSimulationDateTime
 import org.fest.assertions.Assertions
 import org.joda.time.DateTime
@@ -64,11 +65,6 @@ class Sim1ParametersProviderTests {
         businessDaysTestLogic(out, DateTime(2016, 4, 15, 18, 0), true)
         */
     }
-    private fun createDate(t0:DateTime,
-                           days:Int,
-                           hours:Int,
-                           minutes:Int):DateTime =
-            t0.plusDays(days).plusHours(hours).plusMinutes(minutes)
 
     private fun businessDaysTestLogic(
             out: Sim1ParametersProvider,
