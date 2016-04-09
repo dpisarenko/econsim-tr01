@@ -7,16 +7,10 @@ import cc.altruix.econsimtr01.*
  */
 class Sim1(val logTarget:StringBuilder,
             val flows:MutableList<ResourceFlow>,
-            val simParametersProvider: SimParametersProvider) : DefaultSimulation(Timing()) {
-    override fun continueCondition(): Boolean {
-        throw UnsupportedOperationException()
-    }
+            val simParametersProvider: Sim1ParametersProvider) : DefaultSimulation(Timing()) {
+    override fun continueCondition(): Boolean = false
 
-    override fun createAgents(): List<IAgent> {
-        throw UnsupportedOperationException()
-    }
+    override fun createAgents(): List<IAgent> = emptyList()
 
-    override fun createSensors(): List<ISensor> {
-        throw UnsupportedOperationException()
-    }
+    override fun createSensors(): List<ISensor> = emptyList()
 }
