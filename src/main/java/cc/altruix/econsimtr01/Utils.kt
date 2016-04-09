@@ -4,6 +4,7 @@ import alice.tuprolog.Prolog
 import alice.tuprolog.interfaces.IProlog
 import cc.altruix.javaprologinterop.PlUtils
 import net.sourceforge.plantuml.SourceStringReader
+import org.fest.assertions.Assertions
 import org.joda.time.DateTime
 import org.joda.time.Duration
 import org.joda.time.Period
@@ -42,10 +43,6 @@ fun StringBuilder.newLine() {
     this.append(System.lineSeparator())
 }
 
-fun Long.toPeriod():Period {
-    return secondsToPeriod(this)
-}
-
 fun Int.toFixedLengthString(len:Int):String {
     return String.format("%0" + "$len" + "d", this)
 }
@@ -63,10 +60,14 @@ fun String.toSequenceDiagramFile(file: File) {
 }
 
 fun Long.toSimulationDateTime(): DateTime {
-    val period = this.toPeriod()
+    val period = Duration(0, this).toPeriod()
     val t0 = DateTime(0, 1, 1, 0, 0, 0, 0)
     val t = t0.plus(period)
     return t
+}
+
+fun DateTime.isEqualTo(expected:DateTime) {
+    Assertions.assertThat(this).isEqualTo(expected)
 }
 
 fun Long.toSimulationDateTimeString():String {

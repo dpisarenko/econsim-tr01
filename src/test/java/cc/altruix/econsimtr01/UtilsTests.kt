@@ -19,6 +19,6 @@ class UtilsTests {
                 0,
                 18,
                 0
-        ).millis.toSimulationDateTime()
+        ).millis.toSimulationDateTime().isEqualTo(DateTime(0, 1, 1, 0, 18, 0, 0))
     }
 }

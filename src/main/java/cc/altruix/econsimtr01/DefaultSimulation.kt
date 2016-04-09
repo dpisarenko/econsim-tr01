@@ -10,6 +10,7 @@ abstract class DefaultSimulation(val timing : ITiming) : ISimulation {
         val sensors = createSensors()
         while (timing.gotFuture() && continueCondition()) {
             val time = timing.tick()
+
             agents.forEach { x -> x.act(time) }
             sensors.forEach { x -> x.measure(time) }
         }
