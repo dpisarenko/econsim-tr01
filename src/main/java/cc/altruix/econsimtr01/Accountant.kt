@@ -19,18 +19,18 @@ class Accountant(val foodStorage: DefaultResourceStorage,
     }
 
     private fun logDaysWithoutEating(time: DateTime) {
-        logTarget.append("daysWithoutEating($time, ${farmer.daysWithoutFood}).")
+        logTarget.append("daysWithoutEating(${time.secondsSinceT0()}, ${farmer.daysWithoutFood}).")
         logTarget.newLine()
     }
 
     private fun logPotatoes(time: DateTime) {
-        logTarget.append("resourceAvailable($time, 'POTATO', ${foodStorage.amount(Resource.POTATO)}).")
+        logTarget.append("resourceAvailable(${time.secondsSinceT0()}, 'POTATO', ${foodStorage.amount(Resource.POTATO)}).")
         logTarget.newLine()
     }
 
     private fun logMeasurementTime(time: DateTime) {
         val dateTimeString = time.toSimulationDateTimeString()
-        logTarget.append("measurementTime($time, '$dateTimeString').")
+        logTarget.append("measurementTime(${time.secondsSinceT0()}, '$dateTimeString').")
         logTarget.newLine()
     }
 

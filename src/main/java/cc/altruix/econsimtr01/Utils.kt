@@ -107,3 +107,10 @@ fun String?.emptyIfNull():String {
     }
     return this
 }
+
+fun DateTime.millisSinceT0():Long {
+    return this.minus(t0().millis).millis
+}
+fun DateTime.secondsSinceT0():Long {
+    return this.millisSinceT0()/1000L
+}
