@@ -1,6 +1,7 @@
 package cc.altruix.econsimtr01
 
 import org.fest.assertions.Assertions
+import org.joda.time.DateTime
 import org.junit.Test
 import org.mockito.Mockito
 import java.util.*
@@ -24,7 +25,30 @@ class EatingActionTests {
         out.timeToRun(71999L.secondsToSimulationDateTime()).shouldBeFalse()
         out.timeToRun(72000L.secondsToSimulationDateTime()).shouldBeTrue()
         out.timeToRun(72001L.secondsToSimulationDateTime()).shouldBeFalse()
-        out.timeToRun(144000L.secondsToSimulationDateTime()).shouldBeTrue()
+
+        for (i in 1..7) {
+            out.timeToRun(
+                    (DateTime(0, 1, 0+i, 20, 0, 0)
+                            .millis - 1L)
+                            .millisToSimulationDateTime()
+            ).shouldBeFalse()
+
+            out.timeToRun(
+                    DateTime(0, 1, 0+i, 20, 0, 0)
+                            .millis
+                            .millisToSimulationDateTime()
+            ).shouldBeTrue()
+
+            out.timeToRun(
+                    (DateTime(0, 1, 0+i, 20, 0, 0)
+                            .millis + 1L)
+                            .millisToSimulationDateTime()
+            ).shouldBeFalse()
+
+        }
+
+
+/*
         out.timeToRun(216000L.secondsToSimulationDateTime()).shouldBeTrue()
         out.timeToRun(288000L.secondsToSimulationDateTime()).shouldBeTrue()
         out.timeToRun(360000L.secondsToSimulationDateTime()).shouldBeTrue()
@@ -34,5 +58,6 @@ class EatingActionTests {
         out.timeToRun(647999L.secondsToSimulationDateTime()).shouldBeFalse()
         out.timeToRun(648000L.secondsToSimulationDateTime()).shouldBeTrue()
         out.timeToRun(648001L.secondsToSimulationDateTime()).shouldBeFalse()
+        */
     }
 }
