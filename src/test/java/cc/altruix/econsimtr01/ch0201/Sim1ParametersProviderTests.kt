@@ -26,6 +26,10 @@ class Sim1ParametersProviderTests {
                         "Source code modification",
                         "Hits of code")
         )
+        Assertions.assertThat(out.flows).isNotNull
+        Assertions.assertThat(out.flows.size).isEqualTo(1)
+
+        // TBD/TODO: Continue here
     }
 
     @Test
@@ -51,19 +55,6 @@ class Sim1ParametersProviderTests {
                 ),
                 false
         )
-
-/*
-        businessDaysTestLogic(out, DateTime(2016, 4, 9, 17, 20), false)
-        businessDaysTestLogic(out, DateTime(2016, 4, 9, 18, 0), false)
-        businessDaysTestLogic(out, DateTime(2016, 4, 10, 17, 59), false)
-        businessDaysTestLogic(out, DateTime(2016, 4, 10, 18, 0), false)
-
-        businessDaysTestLogic(out, DateTime(2016, 4, 11, 18, 0), true)
-        businessDaysTestLogic(out, DateTime(2016, 4, 12, 18, 0), true)
-        businessDaysTestLogic(out, DateTime(2016, 4, 13, 18, 0), true)
-        businessDaysTestLogic(out, DateTime(2016, 4, 14, 18, 0), true)
-        businessDaysTestLogic(out, DateTime(2016, 4, 15, 18, 0), true)
-        */
     }
 
     private fun businessDaysTestLogic(

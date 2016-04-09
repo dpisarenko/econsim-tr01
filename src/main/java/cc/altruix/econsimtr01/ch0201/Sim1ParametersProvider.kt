@@ -1,9 +1,6 @@
 package cc.altruix.econsimtr01.ch0201
 
-import alice.tuprolog.MalformedGoalException
-import alice.tuprolog.NoMoreSolutionException
-import alice.tuprolog.Prolog
-import alice.tuprolog.Struct
+import alice.tuprolog.*
 import cc.altruix.econsimtr01.*
 import cc.altruix.javaprologinterop.PlUtils
 import cc.altruix.javaprologinterop.PlUtilsLogic
@@ -35,38 +32,10 @@ class Sim1ParametersProvider(val theoryTxt: String) {
         try {
             var res = prolog.solve("hasFlow(Id, Source, Target, Resource, Amount, Time).")
             if (res.isSuccess()) {
-                val id = res.getTerm("Id").toString()
-                val src = res.getTerm("Source").toString()
-                val target = res.getTerm("Target").toString()
-                val resource = res.getTerm("Resource").toString()
-                val amtRaw = res.getTerm("Amount")
-                val amt:Double?
-                if ("Amount".equals(amtRaw.toString())) {
-                    amt = null
-                } else {
-                    amt = amtRaw.toString().toDouble()
-                }
-
-                val timeFunctionPl = res.getTerm("Time")
-                var timeFunction = {x:Long -> false}
-                if (timeFunctionPl is Struct) {
-                    if ("businessDays".equals(timeFunctionPl.name)) {
-                        timeFunction = businessDaysTriggerFunction()
-                    }
-                }
-
-                val flow = PlFlow(
-                        id,
-                        src,
-                        target,
-                        resource,
-                        amt,
-                        timeFunction
-                )
-
+                flows.add(createFlow(res))
                 while (prolog.hasOpenAlternatives()) {
                     res = prolog.solveNext()
-                    LOGGER.debug("X")
+                    flows.add(createFlow(res))
                 }
             }
 
@@ -77,6 +46,38 @@ class Sim1ParametersProvider(val theoryTxt: String) {
         }
 
 
+    }
+
+    protected fun createFlow(res: SolveInfo): PlFlow {
+        val id = res.getTerm("Id").toString()
+        val src = res.getTerm("Source").toString()
+        val target = res.getTerm("Target").toString()
+        val resource = res.getTerm("Resource").toString()
+        val amtRaw = res.getTerm("Amount")
+        val amt: Double?
+        if ("Amount".equals(amtRaw.toString())) {
+            amt = null
+        } else {
+            amt = amtRaw.toString().toDouble()
+        }
+
+        val timeFunctionPl = res.getTerm("Time")
+        var timeFunction = { x: Long -> false }
+        if (timeFunctionPl is Struct) {
+            if ("businessDays".equals(timeFunctionPl.name)) {
+                timeFunction = businessDaysTriggerFunction()
+            }
+        }
+
+        val flow = PlFlow(
+                id,
+                src,
+                target,
+                resource,
+                amt,
+                timeFunction
+        )
+        return flow
     }
 
     fun businessDaysTriggerFunction(): (Long) -> Boolean {
