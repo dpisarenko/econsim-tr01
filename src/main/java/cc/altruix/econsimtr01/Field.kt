@@ -1,5 +1,7 @@
 package cc.altruix.econsimtr01
 
+import org.joda.time.DateTime
+
 /**
  * @author Dmitri Pisarenko (dp@altruix.co)
  * @version $Id$
@@ -7,7 +9,7 @@ package cc.altruix.econsimtr01
  */
 class Field : IAgent {
     override fun id(): String = "Field"
-    override fun act(time: Long) {
+    override fun act(time: DateTime) {
 
     }
 }
