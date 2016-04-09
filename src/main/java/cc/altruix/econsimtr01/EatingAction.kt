@@ -1,5 +1,7 @@
 package cc.altruix.econsimtr01
 
+import org.joda.time.DateTime
+
 /**
  * @author Dmitri Pisarenko (dp@altruix.co)
  * @version $Id$
@@ -10,13 +12,13 @@ class EatingAction(val recipient: Farmer,
                    val flows: MutableList<ResourceFlow>,
                    val dailyPotatoConsumption: Double) :
         DefaultAction(composeHourMinuteFiringFunction(20, 0)) {
-    override fun run(time:Long) {
+    override fun run(time: DateTime) {
         if (recipient.alive) {
             eatIfPossible(time, dailyPotatoConsumption)
         }
     }
 
-    private fun eatIfPossible(time: Long, amount: Double) {
+    private fun eatIfPossible(time: DateTime, amount: Double) {
         val potatoes = this.foodStorage.amount(Resource.POTATO)
         if (potatoes < amount) {
             recipient.hungerOneDay()
