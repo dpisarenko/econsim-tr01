@@ -1,11 +1,14 @@
 package cc.altruix.econsimtr01.ch0201
 
+import alice.tuprolog.SolveInfo
+import alice.tuprolog.Struct
 import cc.altruix.econsimtr01.*
 import org.fest.assertions.Assertions
 import org.joda.time.DateTime
 import org.joda.time.DateTimeConstants
 import org.junit.Assert
 import org.junit.Test
+import org.mockito.Mockito
 import java.io.File
 
 /**
@@ -180,6 +183,39 @@ class Sim1ParametersProviderTests {
         val t61 = t30.plusDays(31 + 29)
         check30(t61)
         oncePerMonthTriggerFunctionTestLogic(out, t61)
+    }
+
+    @Test
+    fun dailyTriggerFunctionSunnyDay() {
+        val timeFunctionPl = Mockito.mock(Struct::class.java)
+        Mockito.`when`(timeFunctionPl.name).thenReturn("daily")
+        Mockito.`when`(timeFunctionPl.getArg(0)).thenReturn(alice.tuprolog.Int(19))
+        Mockito.`when`(timeFunctionPl.getArg(1)).thenReturn(alice.tuprolog.Int(1))
+
+        val res = Mockito.mock(SolveInfo::class.java)
+        Mockito.`when`(res.getTerm("Time")).thenReturn(timeFunctionPl)
+
+        val out = Sim1ParametersProvider(
+                File("src/test/resources/ch0201Sim1Tests.params3.pl").readText()
+        )
+
+        val function = out.extractFiringFunction(res)
+
+        val t0 = 0L.millisToSimulationDateTime()
+        val t1 = t0.plusHours(19).plusMinutes(1)
+
+        t1.hourOfDay.shouldBe(19)
+        t1.minuteOfHour.shouldBe(1)
+
+        for (i in 0..10) {
+            val t = t1.plusDays(i)
+            t.hourOfDay.shouldBe(19)
+            t.minuteOfHour.shouldBe(1)
+
+            function.invoke(t).shouldBeTrue()
+            function.invoke(t.plusSeconds(1)).shouldBeFalse()
+            function.invoke(t.minusSeconds(1)).shouldBeFalse()
+        }
     }
 
     private fun oncePerMonthTriggerFunctionTestLogic(out: Sim1ParametersProvider,

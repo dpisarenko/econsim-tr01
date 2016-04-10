@@ -58,15 +58,21 @@ class Sim1ParametersProvider(val theoryTxt: String) {
         return flow
     }
 
-    protected fun extractFiringFunction(res: SolveInfo): (DateTime) -> Boolean {
+    fun extractFiringFunction(res: SolveInfo): (DateTime) -> Boolean {
         val timeFunctionPl = res.getTerm("Time")
         var timeFunction = { x: DateTime -> false }
         if (timeFunctionPl is Struct) {
-            if ("businessDays".equals(timeFunctionPl.name)) {
-                timeFunction = businessDaysTriggerFunction()
-            } else if ("oncePerMonth".equals(timeFunctionPl.name)) {
-                val day = (timeFunctionPl.getArg(0) as Int).intValue()
-                timeFunction = oncePerMonthTriggerFunction(day)
+            when (timeFunctionPl.name) {
+                "businessDays" -> timeFunction = businessDaysTriggerFunction()
+                "oncePerMonth" -> {
+                    val day = (timeFunctionPl.getArg(0) as Int).intValue()
+                    timeFunction = oncePerMonthTriggerFunction(day)
+                }
+                "daily" -> {
+                    val hour = (timeFunctionPl.getArg(0) as Int).intValue()
+                    val minute = (timeFunctionPl.getArg(1) as Int).intValue()
+                    timeFunction = daily(hour, minute)
+                }
             }
         }
         return timeFunction

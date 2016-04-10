@@ -42,10 +42,13 @@ fun Int.toFixedLengthString(len:Int):String {
     return String.format("%0" + "$len" + "d", this)
 }
 
-fun dailyAtMidnight() = {
+fun dailyAtMidnight() = daily(0, 0)
+
+fun daily(hour:Int, minute:Int) = {
     time:DateTime ->
-    ((time.hourOfDay == 0) && (time.minuteOfDay == 0))
+    ((time.hourOfDay == hour) && (time.minuteOfDay == minute) && (time.secondOfMinute == 0))
 }
+
 
 fun String.removeSingleQuotes():String {
     return PlUtils.removeSingleQuotes(this)
