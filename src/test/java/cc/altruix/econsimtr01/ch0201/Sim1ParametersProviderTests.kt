@@ -3,6 +3,7 @@ package cc.altruix.econsimtr01.ch0201
 import cc.altruix.econsimtr01.*
 import org.fest.assertions.Assertions
 import org.joda.time.DateTime
+import org.joda.time.DateTimeConstants
 import org.junit.Assert
 import org.junit.Test
 import java.io.File
@@ -76,6 +77,8 @@ class Sim1ParametersProviderTests {
         Assertions.assertThat(day01800.hourOfDay).isEqualTo(18)
         Assertions.assertThat(day01800.minuteOfHour).isEqualTo(0)
 
+        Assertions.assertThat(day01800.dayOfWeek).isEqualTo(DateTimeConstants.SATURDAY)
+
         businessDaysTestLogic(
                 out,
                 createDate(
@@ -86,13 +89,50 @@ class Sim1ParametersProviderTests {
                 ),
                 false
         )
+        businessDaysTestLogic(
+                out,
+                day01800,
+                false
+        )
+
+        val day11800 = day01800.plusHours(24)
+        Assertions.assertThat(day11800.hourOfDay).isEqualTo(18)
+        Assertions.assertThat(day11800.minuteOfHour).isEqualTo(0)
+        Assertions.assertThat(day11800.dayOfWeek).isEqualTo(DateTimeConstants.SUNDAY)
+
+        businessDaysTestLogic(
+                out,
+                day11800,
+                false
+        )
+
+        val day21800 = day11800.plusHours(24)
+        Assertions.assertThat(day21800.hourOfDay).isEqualTo(18)
+        Assertions.assertThat(day21800.minuteOfHour).isEqualTo(0)
+        Assertions.assertThat(day21800.dayOfWeek).isEqualTo(DateTimeConstants.MONDAY)
+
+        businessDaysTestLogic(
+                out,
+                day21800,
+                true
+        )
+
+        // TODO: Finish this test
+    }
+
+    @Test
+    fun oncePerMonthTriggerFunctionSunnyDay() {
+        val out = Sim1ParametersProvider(
+                File("src/test/resources/ch0201Sim1Tests.params.pl").readText()
+        )
+        // TODO: Finish this test
     }
 
     private fun businessDaysTestLogic(
             out: Sim1ParametersProvider,
             time: DateTime, expectedResult: Boolean) {
-        Assert.assertEquals(expectedResult, out.businessDaysTriggerFunction()
-                .invoke(time.millis))
-
+        Assert.assertEquals(expectedResult,
+                out.businessDaysTriggerFunction()
+                .invoke(time))
     }
 }

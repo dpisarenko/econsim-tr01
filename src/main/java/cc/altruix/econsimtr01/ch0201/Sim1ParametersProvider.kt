@@ -1,7 +1,9 @@
 package cc.altruix.econsimtr01.ch0201
 
 import alice.tuprolog.*
+import alice.tuprolog.Int
 import cc.altruix.econsimtr01.*
+import org.joda.time.DateTime
 import org.joda.time.DateTimeConstants
 import org.slf4j.LoggerFactory
 import java.util.*
@@ -36,8 +38,6 @@ class Sim1ParametersProvider(val theoryTxt: String) {
         } catch (exception: MalformedGoalException) {
             LOGGER.error("", exception)
         }
-
-
     }
 
     protected fun createFlow(res: SolveInfo): PlFlow {
@@ -45,22 +45,8 @@ class Sim1ParametersProvider(val theoryTxt: String) {
         val src = res.getTerm("Source").toString()
         val target = res.getTerm("Target").toString()
         val resource = res.getTerm("Resource").toString()
-        val amtRaw = res.getTerm("Amount")
-        val amt: Double?
-        if (amtRaw is alice.tuprolog.Double) {
-            amt = amtRaw.doubleValue()
-        } else {
-            amt = null
-        }
-
-        val timeFunctionPl = res.getTerm("Time")
-        var timeFunction = { x: Long -> false }
-        if (timeFunctionPl is Struct) {
-            if ("businessDays".equals(timeFunctionPl.name)) {
-                timeFunction = businessDaysTriggerFunction()
-            }
-        }
-
+        val amt: Double? = extractAmount(res)
+        var timeFunction = extractFiringFunction(res)
         val flow = PlFlow(
                 id,
                 src,
@@ -72,17 +58,46 @@ class Sim1ParametersProvider(val theoryTxt: String) {
         return flow
     }
 
-    fun businessDaysTriggerFunction(): (Long) -> Boolean {
-        return { x: Long ->
-            val time = x.millisToSimulationDateTime()
-            val dayOfWeek = time.dayOfWeek().get()
-            if ((dayOfWeek == DateTimeConstants.SATURDAY) ||
-                    (dayOfWeek == DateTimeConstants.SUNDAY) ) {
-                false
+    protected fun extractFiringFunction(res: SolveInfo): (DateTime) -> Boolean {
+        val timeFunctionPl = res.getTerm("Time")
+        var timeFunction = { x: DateTime -> false }
+        if (timeFunctionPl is Struct) {
+            if ("businessDays".equals(timeFunctionPl.name)) {
+                timeFunction = businessDaysTriggerFunction()
+            } else if ("oncePerMonth".equals(timeFunctionPl.name)) {
+                val day = (timeFunctionPl.getArg(0) as Int).intValue()
+                timeFunction = oncePerMonthTriggerFunction(day)
             }
-            if ((time.hourOfDay == 18) && (time.minuteOfHour == 0)) {
-                true
+        }
+        return timeFunction
+    }
+
+    fun oncePerMonthTriggerFunction(day: kotlin.Int): (DateTime) -> Boolean =
+            {
+                time:DateTime ->
+                val curDay = time.dayOfMonth
+                day == curDay
             }
+
+    protected fun extractAmount(res: SolveInfo): Double? {
+        val amtRaw = res.getTerm("Amount")
+        val amt: Double?
+        if (amtRaw is alice.tuprolog.Double) {
+            amt = amtRaw.doubleValue()
+        } else {
+            amt = null
+        }
+        return amt
+    }
+
+    fun businessDaysTriggerFunction(): (DateTime) -> Boolean = { time: DateTime ->
+        val dayOfWeek = time.dayOfWeek().get()
+        if ((dayOfWeek == DateTimeConstants.SATURDAY) ||
+                (dayOfWeek == DateTimeConstants.SUNDAY) ) {
+            false
+        } else if ((time.hourOfDay == 18) && (time.minuteOfHour == 0)) {
+            true
+        } else {
             false
         }
     }
