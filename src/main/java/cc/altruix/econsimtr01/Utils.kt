@@ -1,13 +1,11 @@
 package cc.altruix.econsimtr01
 
 import alice.tuprolog.Prolog
-import alice.tuprolog.interfaces.IProlog
 import cc.altruix.javaprologinterop.PlUtils
 import net.sourceforge.plantuml.SourceStringReader
 import org.fest.assertions.Assertions
 import org.joda.time.DateTime
 import org.joda.time.Duration
-import org.joda.time.Period
 import java.io.File
 
 /**
@@ -97,8 +95,6 @@ fun String.toPrologTheory(): Prolog {
 fun Prolog.getResults(query:String, varName:String):List<String> {
     return PlUtils.getResults(this, query, varName)
 }
-
-// List<Map<String, String>> getResults(Prolog engine, String query, String[] varNames)
 
 fun Prolog.getResults(query: String, vararg varNames:String):List<Map<String, String>> {
     return PlUtils.getResults(this, query, varNames)
