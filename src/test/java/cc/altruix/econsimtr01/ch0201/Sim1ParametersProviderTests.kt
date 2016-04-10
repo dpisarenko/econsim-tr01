@@ -18,15 +18,22 @@ class Sim1ParametersProviderTests {
                 File("src/test/resources/ch0201Sim1Tests.params.pl").readText()
         )
         Assertions.assertThat(out.resources).isNotNull
-        Assertions.assertThat(out.resources.size).isEqualTo(1)
+        Assertions.assertThat(out.resources.size).isEqualTo(2)
         Assertions.assertThat(out.resources.get(0)).isEqualTo(
                 PlResource(
                         "r1",
                         "Source code modification",
                         "Hits of code")
         )
+        Assertions.assertThat(out.resources.get(1)).isEqualTo(
+                PlResource(
+                        "r2",
+                        "Money",
+                        "2016 US dollars")
+        )
+
         Assertions.assertThat(out.flows).isNotNull
-        Assertions.assertThat(out.flows.size).isEqualTo(1)
+        Assertions.assertThat(out.flows.size).isEqualTo(2)
         Assertions.assertThat(out.flows.get(0)).isEqualTo(
                 PlFlow(
                         "f1",
@@ -37,6 +44,7 @@ class Sim1ParametersProviderTests {
                         out.businessDaysTriggerFunction()
                 )
         )
+        validateMonetaryFlow(out.flows.get(1))
     }
 
     @Test
@@ -48,6 +56,10 @@ class Sim1ParametersProviderTests {
         Assertions.assertThat(out.flows.size).isEqualTo(1)
         val flow = out.flows.get(0)
 
+        validateMonetaryFlow(flow)
+    }
+
+    private fun validateMonetaryFlow(flow: PlFlow) {
         flow.id.shouldBe("f2")
         flow.src.shouldBe("employer")
         flow.target.shouldBe("stacy")
