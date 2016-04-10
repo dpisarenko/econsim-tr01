@@ -47,10 +47,10 @@ class Sim1ParametersProvider(val theoryTxt: String) {
         val resource = res.getTerm("Resource").toString()
         val amtRaw = res.getTerm("Amount")
         val amt: Double?
-        if ("Amount".equals(amtRaw.toString())) {
-            amt = null
+        if (amtRaw is alice.tuprolog.Double) {
+            amt = amtRaw.doubleValue()
         } else {
-            amt = amtRaw.toString().toDouble()
+            amt = null
         }
 
         val timeFunctionPl = res.getTerm("Time")

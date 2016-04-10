@@ -1,9 +1,6 @@
 package cc.altruix.econsimtr01.ch0201
 
-import cc.altruix.econsimtr01.PlFlow
-import cc.altruix.econsimtr01.PlResource
-import cc.altruix.econsimtr01.createDate
-import cc.altruix.econsimtr01.millisToSimulationDateTime
+import cc.altruix.econsimtr01.*
 import org.fest.assertions.Assertions
 import org.joda.time.DateTime
 import org.junit.Assert
@@ -58,7 +55,12 @@ class Sim1ParametersProviderTests {
                         out.businessDaysTriggerFunction()
                 )
         )
-
+    }
+    @Test
+    fun prologEngineCanReadVariableValues() {
+        val prolog = "MonthlySalary = 3000.".toPrologTheory()
+        val res = prolog.solve("MonthlySalary.")
+        System.out.println("res: $res")
     }
 
     @Test
