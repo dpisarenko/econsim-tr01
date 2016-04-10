@@ -1,9 +1,6 @@
 package cc.altruix.econsimtr01.ch0201
 
-import cc.altruix.econsimtr01.PlFlow
-import cc.altruix.econsimtr01.PlResource
-import cc.altruix.econsimtr01.createDate
-import cc.altruix.econsimtr01.millisToSimulationDateTime
+import cc.altruix.econsimtr01.*
 import org.fest.assertions.Assertions
 import org.joda.time.DateTime
 import org.joda.time.DateTimeConstants
@@ -160,7 +157,30 @@ class Sim1ParametersProviderTests {
         val out = Sim1ParametersProvider(
                 File("src/test/resources/ch0201Sim1Tests.params.pl").readText()
         )
-        // TODO: Finish this test
+        val t0 = 0L.millisToSimulationDateTime()
+        out.oncePerMonthTriggerFunction(30).invoke(t0).shouldBeFalse()
+
+        val t30 = t0.plusDays(29)
+        check30(t30)
+        oncePerMonthTriggerFunctionTestLogic(out, t30)
+
+        val t61 = t30.plusDays(31 + 29)
+        check30(t61)
+        oncePerMonthTriggerFunctionTestLogic(out, t61)
+    }
+
+    private fun oncePerMonthTriggerFunctionTestLogic(out: Sim1ParametersProvider,
+                                                     dt: DateTime) {
+        out.oncePerMonthTriggerFunction(30).invoke(dt).shouldBeTrue()
+        out.oncePerMonthTriggerFunction(30).invoke(dt.minusSeconds(1)).shouldBeFalse()
+        out.oncePerMonthTriggerFunction(30).invoke(dt.plusSeconds(1)).shouldBeFalse()
+    }
+
+    private fun check30(dt: DateTime) {
+        Assertions.assertThat(dt.dayOfMonth).isEqualTo(30)
+        Assertions.assertThat(dt.hourOfDay).isEqualTo(0)
+        Assertions.assertThat(dt.minuteOfDay).isEqualTo(0)
+        Assertions.assertThat(dt.secondOfMinute).isEqualTo(0)
     }
 
     private fun businessDaysTestLogic(

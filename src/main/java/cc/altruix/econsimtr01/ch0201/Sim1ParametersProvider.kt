@@ -76,7 +76,10 @@ class Sim1ParametersProvider(val theoryTxt: String) {
             {
                 time:DateTime ->
                 val curDay = time.dayOfMonth
-                day == curDay
+                (day == curDay) &&
+                        (time.hourOfDay == 0) &&
+                        (time.minuteOfHour == 0) &&
+                        (time.secondOfMinute == 0)
             }
 
     protected fun extractAmount(res: SolveInfo): Double? {

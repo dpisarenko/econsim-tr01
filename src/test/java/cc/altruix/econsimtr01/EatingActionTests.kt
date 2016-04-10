@@ -1,6 +1,5 @@
 package cc.altruix.econsimtr01
 
-import org.fest.assertions.Assertions
 import org.joda.time.DateTime
 import org.junit.Test
 import org.mockito.Mockito
@@ -12,9 +11,6 @@ import java.util.*
  * @since 1.0
  */
 class EatingActionTests {
-    fun Boolean.shouldBe(expectedValue:Boolean) = Assertions.assertThat(this).isEqualTo(expectedValue)
-    fun Boolean.shouldBeTrue() = shouldBe(true)
-    fun Boolean.shouldBeFalse() = shouldBe(false)
 
     @Test
     fun timeToRunSunnyDay() {
