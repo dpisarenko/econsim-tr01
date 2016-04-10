@@ -46,15 +46,16 @@ class Sim1ParametersProviderTests {
         )
         Assertions.assertThat(out.flows).isNotNull
         Assertions.assertThat(out.flows.size).isEqualTo(1)
-        Assertions.assertThat(out.flows.get(0)).isEqualTo(
-                PlFlow(
-                        "f2",
-                        "employer",
-                        "stacy",
-                        "r2",
-                        3000.0,
-                        out.businessDaysTriggerFunction()
-                )
+        val flow = out.flows.get(0)
+
+        flow.id.shouldBe("f2")
+        flow.src.shouldBe("employer")
+        flow.target.shouldBe("stacy")
+        flow.resource.shouldBe("r2")
+        flow.amount.shouldBeNotNull()
+        flow.amount?.shouldBe(3000.0)
+        flow.timeTriggerFunction.javaClass.toString().shouldBe(
+                "class cc.altruix.econsimtr01.ch0201.Sim1ParametersProvider\$oncePerMonthTriggerFunction\$1"
         )
     }
 

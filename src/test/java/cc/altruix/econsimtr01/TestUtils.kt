@@ -17,3 +17,7 @@ fun createDate(t0: DateTime,
 fun Boolean.shouldBe(expectedValue:Boolean) = Assertions.assertThat(this).isEqualTo(expectedValue)
 fun Boolean.shouldBeTrue() = shouldBe(true)
 fun Boolean.shouldBeFalse() = shouldBe(false)
+
+fun String.shouldBe(expectedValue:String) = Assertions.assertThat(this).isEqualTo(expectedValue)
+fun Double.shouldBe(expectedValue:Double) = Assertions.assertThat(this).isEqualTo(expectedValue)
+fun Double?.shouldBeNotNull() = Assertions.assertThat(this).isNotNull
