@@ -1,6 +1,9 @@
 package cc.altruix.econsimtr01.ch0201
 
-import cc.altruix.econsimtr01.*
+import cc.altruix.econsimtr01.PlFlow
+import cc.altruix.econsimtr01.PlResource
+import cc.altruix.econsimtr01.createDate
+import cc.altruix.econsimtr01.millisToSimulationDateTime
 import org.fest.assertions.Assertions
 import org.joda.time.DateTime
 import org.joda.time.DateTimeConstants
@@ -57,12 +60,6 @@ class Sim1ParametersProviderTests {
                 )
         )
     }
-    @Test
-    fun prologEngineCanReadVariableValues() {
-        val prolog = "MonthlySalary = 3000.".toPrologTheory()
-        val res = prolog.solve("MonthlySalary.")
-        System.out.println("res: $res")
-    }
 
     @Test
     fun businessDaysTriggerFunctionReturnsTrueOnBusinessDaysAt1800() {
@@ -111,51 +108,50 @@ class Sim1ParametersProviderTests {
         Assertions.assertThat(day21800.minuteOfHour).isEqualTo(0)
         Assertions.assertThat(day21800.dayOfWeek).isEqualTo(DateTimeConstants.MONDAY)
 
-        businessDaysTestLogic(
-                out,
-                day21800,
-                true
-        )
+        validateBusinessDayFunction(day21800, out)
 
         val day31800 = day21800.plusHours(24)
         Assertions.assertThat(day31800.hourOfDay).isEqualTo(18)
         Assertions.assertThat(day31800.minuteOfHour).isEqualTo(0)
         Assertions.assertThat(day31800.dayOfWeek).isEqualTo(DateTimeConstants.TUESDAY)
 
-        businessDaysTestLogic(
-                out,
-                day31800,
-                true
-        )
+        validateBusinessDayFunction(day31800, out)
 
         val day41800 = day31800.plusHours(24)
         Assertions.assertThat(day41800.hourOfDay).isEqualTo(18)
         Assertions.assertThat(day41800.minuteOfHour).isEqualTo(0)
         Assertions.assertThat(day41800.dayOfWeek).isEqualTo(DateTimeConstants.WEDNESDAY)
-        businessDaysTestLogic(
-                out,
-                day41800,
-                true
-        )
+
+        validateBusinessDayFunction(day41800, out)
 
         val day51800 = day41800.plusHours(24)
         Assertions.assertThat(day51800.hourOfDay).isEqualTo(18)
         Assertions.assertThat(day51800.minuteOfHour).isEqualTo(0)
         Assertions.assertThat(day51800.dayOfWeek).isEqualTo(DateTimeConstants.THURSDAY)
-        businessDaysTestLogic(
-                out,
-                day51800,
-                true
-        )
+        validateBusinessDayFunction(day51800, out)
 
         val day61800 = day51800.plusHours(24)
         Assertions.assertThat(day61800.hourOfDay).isEqualTo(18)
         Assertions.assertThat(day61800.minuteOfHour).isEqualTo(0)
         Assertions.assertThat(day61800.dayOfWeek).isEqualTo(DateTimeConstants.FRIDAY)
+        validateBusinessDayFunction(day61800, out)
+    }
+
+    private fun validateBusinessDayFunction(day: DateTime, out: Sim1ParametersProvider) {
         businessDaysTestLogic(
                 out,
-                day61800,
+                day,
                 true
+        )
+        businessDaysTestLogic(
+                out,
+                day.plusSeconds(1),
+                false
+        )
+        businessDaysTestLogic(
+                out,
+                day.minusSeconds(1),
+                false
         )
     }
 

@@ -95,7 +95,7 @@ class Sim1ParametersProvider(val theoryTxt: String) {
         if ((dayOfWeek == DateTimeConstants.SATURDAY) ||
                 (dayOfWeek == DateTimeConstants.SUNDAY) ) {
             false
-        } else if ((time.hourOfDay == 18) && (time.minuteOfHour == 0)) {
+        } else if ((time.hourOfDay == 18) && (time.minuteOfHour == 0) && (time.secondOfMinute == 0)) {
             true
         } else {
             false
