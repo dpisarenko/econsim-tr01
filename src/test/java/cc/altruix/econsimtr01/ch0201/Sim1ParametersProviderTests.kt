@@ -21,7 +21,7 @@ class Sim1ParametersProviderTests {
                 File("src/test/resources/ch0201Sim1Tests.params.pl").readText()
         )
         Assertions.assertThat(out.resources).isNotNull
-        Assertions.assertThat(out.resources.size).isEqualTo(2)
+        Assertions.assertThat(out.resources.size).isEqualTo(4)
         Assertions.assertThat(out.resources.get(0)).isEqualTo(
                 PlResource(
                         "r1",
@@ -36,7 +36,7 @@ class Sim1ParametersProviderTests {
         )
 
         Assertions.assertThat(out.flows).isNotNull
-        Assertions.assertThat(out.flows.size).isEqualTo(2)
+        Assertions.assertThat(out.flows.size).isEqualTo(7)
         Assertions.assertThat(out.flows.get(0)).isEqualTo(
                 PlFlow(
                         "f1",
