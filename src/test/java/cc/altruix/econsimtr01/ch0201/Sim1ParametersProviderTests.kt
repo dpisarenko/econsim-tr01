@@ -206,11 +206,13 @@ class Sim1ParametersProviderTests {
 
         t1.hourOfDay.shouldBe(19)
         t1.minuteOfHour.shouldBe(1)
+        t1.secondOfMinute.shouldBe(0)
 
         for (i in 0..10) {
             val t = t1.plusDays(i)
             t.hourOfDay.shouldBe(19)
             t.minuteOfHour.shouldBe(1)
+            t.secondOfMinute.shouldBe(0)
 
             function.invoke(t).shouldBeTrue()
             function.invoke(t.plusSeconds(1)).shouldBeFalse()

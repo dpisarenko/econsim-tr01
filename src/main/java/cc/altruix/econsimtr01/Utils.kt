@@ -46,7 +46,7 @@ fun dailyAtMidnight() = daily(0, 0)
 
 fun daily(hour:Int, minute:Int) = {
     time:DateTime ->
-    ((time.hourOfDay == hour) && (time.minuteOfDay == minute) && (time.secondOfMinute == 0))
+    ((time.hourOfDay == hour) && (time.minuteOfHour == minute) && (time.secondOfMinute == 0))
 }
 
 
