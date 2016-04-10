@@ -1,5 +1,6 @@
 package cc.altruix.econsimtr01.ch0201
 
+import cc.altruix.econsimtr01.PlFlow
 import cc.altruix.econsimtr01.PlResource
 import cc.altruix.econsimtr01.createDate
 import cc.altruix.econsimtr01.millisToSimulationDateTime
@@ -28,8 +29,16 @@ class Sim1ParametersProviderTests {
         )
         Assertions.assertThat(out.flows).isNotNull
         Assertions.assertThat(out.flows.size).isEqualTo(1)
-
-        // TBD/TODO: Continue here
+        Assertions.assertThat(out.flows.get(0)).isEqualTo(
+                PlFlow(
+                        "f1",
+                        "stacy",
+                        "employer",
+                        "r1",
+                        null,
+                        out.businessDaysTriggerFunction()
+                )
+        )
     }
 
     @Test

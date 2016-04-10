@@ -2,9 +2,6 @@ package cc.altruix.econsimtr01.ch0201
 
 import alice.tuprolog.*
 import cc.altruix.econsimtr01.*
-import cc.altruix.javaprologinterop.PlUtils
-import cc.altruix.javaprologinterop.PlUtilsLogic
-import org.joda.time.DateTime
 import org.joda.time.DateTimeConstants
 import org.slf4j.LoggerFactory
 import java.util.*
@@ -17,25 +14,20 @@ class Sim1ParametersProvider(val theoryTxt: String) {
     var resources:List<PlResource>
         get
         private set
-    var flows:List<PlFlow>
+    val flows:MutableList<PlFlow> = LinkedList<PlFlow>()
         get
-        private set
 
     init {
         val prolog = theoryTxt.toPrologTheory()
         this.resources = extractResources(prolog)
 
-        this.flows = LinkedList<PlFlow>()
-
-        val flows = LinkedList<PlFlow>()
-
         try {
             var res = prolog.solve("hasFlow(Id, Source, Target, Resource, Amount, Time).")
             if (res.isSuccess()) {
-                flows.add(createFlow(res))
+                this.flows.add(createFlow(res))
                 while (prolog.hasOpenAlternatives()) {
                     res = prolog.solveNext()
-                    flows.add(createFlow(res))
+                    this.flows.add(createFlow(res))
                 }
             }
 
