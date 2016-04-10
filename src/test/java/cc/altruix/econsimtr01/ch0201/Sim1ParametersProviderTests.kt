@@ -117,7 +117,46 @@ class Sim1ParametersProviderTests {
                 true
         )
 
-        // TODO: Finish this test
+        val day31800 = day21800.plusHours(24)
+        Assertions.assertThat(day31800.hourOfDay).isEqualTo(18)
+        Assertions.assertThat(day31800.minuteOfHour).isEqualTo(0)
+        Assertions.assertThat(day31800.dayOfWeek).isEqualTo(DateTimeConstants.TUESDAY)
+
+        businessDaysTestLogic(
+                out,
+                day31800,
+                true
+        )
+
+        val day41800 = day31800.plusHours(24)
+        Assertions.assertThat(day41800.hourOfDay).isEqualTo(18)
+        Assertions.assertThat(day41800.minuteOfHour).isEqualTo(0)
+        Assertions.assertThat(day41800.dayOfWeek).isEqualTo(DateTimeConstants.WEDNESDAY)
+        businessDaysTestLogic(
+                out,
+                day41800,
+                true
+        )
+
+        val day51800 = day41800.plusHours(24)
+        Assertions.assertThat(day51800.hourOfDay).isEqualTo(18)
+        Assertions.assertThat(day51800.minuteOfHour).isEqualTo(0)
+        Assertions.assertThat(day51800.dayOfWeek).isEqualTo(DateTimeConstants.THURSDAY)
+        businessDaysTestLogic(
+                out,
+                day51800,
+                true
+        )
+
+        val day61800 = day51800.plusHours(24)
+        Assertions.assertThat(day61800.hourOfDay).isEqualTo(18)
+        Assertions.assertThat(day61800.minuteOfHour).isEqualTo(0)
+        Assertions.assertThat(day61800.dayOfWeek).isEqualTo(DateTimeConstants.FRIDAY)
+        businessDaysTestLogic(
+                out,
+                day61800,
+                true
+        )
     }
 
     @Test
