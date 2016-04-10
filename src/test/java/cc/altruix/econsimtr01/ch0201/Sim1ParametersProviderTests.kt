@@ -42,6 +42,26 @@ class Sim1ParametersProviderTests {
     }
 
     @Test
+    fun initReadsFlowsCanReadMonetaryFlow() {
+        val out = Sim1ParametersProvider(
+                File("src/test/resources/ch0201Sim1Tests.params2.pl").readText()
+        )
+        Assertions.assertThat(out.flows).isNotNull
+        Assertions.assertThat(out.flows.size).isEqualTo(1)
+        Assertions.assertThat(out.flows.get(0)).isEqualTo(
+                PlFlow(
+                        "f2",
+                        "employer",
+                        "stacy",
+                        "r2",
+                        3000.0,
+                        out.businessDaysTriggerFunction()
+                )
+        )
+
+    }
+
+    @Test
     fun businessDaysTriggerFunctionReturnsTrueOnBusinessDaysAt1800() {
         val out = Sim1ParametersProvider(
                 File("src/test/resources/ch0201Sim1Tests.params.pl").readText()
