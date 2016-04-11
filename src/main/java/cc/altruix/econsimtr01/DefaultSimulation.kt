@@ -8,8 +8,10 @@ abstract class DefaultSimulation(val timing : ITiming) : ISimulation {
         val results = SimResults()
         val agents = createAgents()
         val sensors = createSensors()
-        while (timing.gotFuture() && continueCondition()) {
-            val time = t0().plus(timing.tick()*1000L)
+        var lastTick = 0L
+        while (timing.gotFuture() && continueCondition(lastTick)) {
+            lastTick = timing.tick()
+            val time = t0().plus(lastTick*1000L)
             agents.forEach { x -> x.act(time) }
             sensors.forEach { x -> x.measure(time) }
         }
@@ -18,7 +20,7 @@ abstract class DefaultSimulation(val timing : ITiming) : ISimulation {
 
     }
 
-    protected abstract  fun continueCondition(): Boolean
+    protected abstract  fun continueCondition(tick:Long): Boolean
     protected abstract fun createAgents(): List<IAgent>
     protected abstract fun createSensors(): List<ISensor>
 }

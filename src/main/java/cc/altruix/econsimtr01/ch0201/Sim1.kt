@@ -8,9 +8,15 @@ import cc.altruix.econsimtr01.*
 class Sim1(val logTarget:StringBuilder,
             val flows:MutableList<ResourceFlow>,
             val simParametersProvider: Sim1ParametersProvider) : DefaultSimulation(Timing()) {
-    override fun continueCondition(): Boolean = false
+    override fun continueCondition(tick:Long): Boolean {
+        val t = tick.secondsToSimulationDateTime()
+        return (t.monthOfYear <= 3)
+    }
 
-    override fun createAgents(): List<IAgent> = emptyList()
+    override fun createAgents(): List<IAgent> {
+        // TODO: Continue here
+        return emptyList()
+    }
 
     override fun createSensors(): List<ISensor> = emptyList()
 }
