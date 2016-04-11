@@ -19,7 +19,7 @@ class EatingAction(val recipient: Farmer,
     }
 
     private fun eatIfPossible(time: DateTime, amount: Double) {
-        val potatoes = this.foodStorage.amount(Resource.POTATO)
+        val potatoes = this.foodStorage.amount(Resource.POTATO.name)
         if (potatoes < amount) {
             recipient.hungerOneDay()
         } else {

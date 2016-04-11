@@ -7,8 +7,8 @@ package cc.altruix.econsimtr01
  */
 interface IResourceStorage : ISometingIdentifiable {
 
-    fun put(res: Resource, amt:Double)
-    fun amount(res: Resource):Double
+    fun put(res: String, amt:Double)
+    fun amount(res: String):Double
 
-    fun remove(res: Resource, amt: Double)
+    fun remove(res: String, amt: Double)
 }
