@@ -7,6 +7,7 @@ import org.apache.commons.io.IOUtils;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -56,7 +57,7 @@ public final class App {
     }
 
     private void createFlowsDiagram(final File dir, List<ResourceFlow> flows) throws IOException {
-        final String flowString = new FlowDiagramTextCreator().createFlowDiagramText(flows);
+        final String flowString = new FlowDiagramTextCreator(Collections.emptyList()).createFlowDiagramText(flows);
         new SourceStringReader(flowString).generateImage(new File("%s/flows.png", dir.getAbsolutePath()));
     }
 

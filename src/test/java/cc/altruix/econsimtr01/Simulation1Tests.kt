@@ -38,7 +38,7 @@ class Simulation1Tests {
         val expectedConvertedSimResults = File("src/test/resources/Simulation1Tests.test.csv.expected.txt").readText()
         Assertions.assertThat(actualConvertedSimResults).isEqualTo(expectedConvertedSimResults)
 
-        val seqDiagramTxt = FlowDiagramTextCreator().createFlowDiagramText(flows)
+        val seqDiagramTxt = FlowDiagramTextCreator(Collections.emptyList()).createFlowDiagramText(flows)
         seqDiagramTxt.toSequenceDiagramFile(File("src/test/resources/Simulation1Tests.test.flows.actual.png"))
     }
 }
