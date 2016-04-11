@@ -14,8 +14,7 @@ class Sim1(val logTarget:StringBuilder,
     }
 
     override fun createAgents(): List<IAgent> {
-        // TODO: Continue here
-        return emptyList()
+        return simParametersProvider.agents
     }
 
     override fun createSensors(): List<ISensor> = emptyList()
