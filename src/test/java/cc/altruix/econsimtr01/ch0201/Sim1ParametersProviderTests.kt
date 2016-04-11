@@ -51,6 +51,20 @@ class Sim1ParametersProviderTests {
     }
 
     @Test
+    fun initReadsAgents() {
+        val out = Sim1ParametersProvider(
+                File("src/test/resources/ch0201Sim1Tests.params.pl").readText()
+        )
+        Assertions.assertThat(out.agents).isNotNull
+        out.agents.size.shouldBe(5)
+        out.agents.get(0).id().shouldBe("stacy")
+        out.agents.get(1).id().shouldBe("employer")
+        out.agents.get(2).id().shouldBe("landlord")
+        out.agents.get(3).id().shouldBe("groceryStore")
+        out.agents.get(4).id().shouldBe("savingsAccount")
+    }
+
+    @Test
     fun initReadsFlowsCanReadMonetaryFlow() {
         val out = Sim1ParametersProvider(
                 File("src/test/resources/ch0201Sim1Tests.params2.pl").readText()

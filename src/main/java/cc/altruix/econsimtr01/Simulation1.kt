@@ -37,5 +37,5 @@ class Simulation1(val logTarget:StringBuilder,
         return agents
     }
 
-    override fun continueCondition(): Boolean = farmer.alive
+    override fun continueCondition(tick:Long): Boolean = farmer.alive
 }

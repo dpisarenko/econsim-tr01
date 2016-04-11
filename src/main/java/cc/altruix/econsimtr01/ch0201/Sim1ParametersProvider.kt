@@ -18,11 +18,24 @@ class Sim1ParametersProvider(val theoryTxt: String) {
         private set
     val flows:MutableList<PlFlow> = LinkedList<PlFlow>()
         get
+    val agents:MutableList<IAgent> = LinkedList<IAgent>()
+        get
 
     init {
         val prolog = theoryTxt.toPrologTheory()
         this.resources = extractResources(prolog)
+        readFlows(prolog)
+        readAgents(prolog)
+    }
 
+    private fun readAgents(prolog: Prolog) {
+        val agentsPl = prolog.getResults("isAgent(X).", "X")
+        agentsPl.forEach { apl ->
+            this.agents.add(DefaultAgent(apl.removeSingleQuotes()))
+        }
+    }
+
+    private fun readFlows(prolog: Prolog) {
         try {
             var res = prolog.solve("hasFlow(Id, Source, Target, Resource, Amount, Time).")
             if (res.isSuccess()) {
