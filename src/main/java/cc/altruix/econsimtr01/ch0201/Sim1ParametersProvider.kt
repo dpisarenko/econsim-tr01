@@ -30,9 +30,11 @@ class Sim1ParametersProvider(val theoryTxt: String) {
 
     private fun readAgents(prolog: Prolog) {
         val agentsPl = prolog.getResults("isAgent(X).", "X")
-        agentsPl.forEach { apl ->
-            this.agents.add(DefaultAgent(apl.removeSingleQuotes()))
-        }
+        agentsPl
+                .map { x -> x.removeSingleQuotes() }
+                .forEach { apl ->
+                    this.agents.add(DefaultAgent(apl.removeSingleQuotes()))
+                }
     }
 
     private fun readFlows(prolog: Prolog) {

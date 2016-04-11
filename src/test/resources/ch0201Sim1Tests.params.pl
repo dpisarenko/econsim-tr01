@@ -1,8 +1,8 @@
-isAgent("stacy").
-agent("employer").
-agent("landlord").
-agent("groceryStore").
-agent("savingsAccount").
+isAgent(stacy).
+isAgent(employer).
+isAgent(landlord).
+isAgent(groceryStore).
+isAgent(savingsAccount).
 resource(r1, "Source code modification", "Hits of code").
 resource(r2, "Money", "2016 US dollars").
 resource(r3, "Accomodation", "Days the person is allowed to live in the flat").
