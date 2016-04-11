@@ -3,18 +3,27 @@ package cc.altruix.econsimtr01
 /**
  * Created by pisarenko on 05.04.2016.
  */
-class FlowDiagramTextCreator {
+class FlowDiagramTextCreator(val resources:List<PlResource>) {
     fun createFlowDiagramText(flows:List<ResourceFlow>):String {
         val builder = StringBuilder()
         builder.append("@startuml\n")
         appendTitle(builder)
         flows.sortedBy { x -> x.time }.forEach { flow ->
-            builder.append("${flow.src.id()} -> ${flow.target.id()}: ${flow.res.name} ${flow.amt} ${flow.res.unit}\n")
+            val unit = findUnit(flow.res)
+            builder.append("${flow.src.id()} -> ${flow.target.id()}: ${flow.res} ${flow.amt} $unit\n")
             builder.append("note left: ${flow.time.toSimulationDateTimeString()}\n")
         }
         appendLegend(builder)
         builder.append("@enduml\n")
         return builder.toString()
+    }
+
+    private fun findUnit(res: String): String {
+        val resource = resources.filter { x -> x.id.equals(res) }.first()
+        if (resource != null) {
+            return resource.unit
+        }
+        return "?"
     }
 
     private fun appendLegend(builder: StringBuilder) {
