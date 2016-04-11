@@ -24,7 +24,10 @@ class Sim1Accountant(val logTarget: StringBuilder,
     }
 
     private fun writeResourceData() {
-        // TODO: Continue here
+        resources.forEach { res ->
+            logTarget.append("resource(${res.id}, \"${res.name}\", \"${res.unit}\").")
+            logTarget.newLine()
+        }
     }
 
     private fun logStockLevels(time: Long) {

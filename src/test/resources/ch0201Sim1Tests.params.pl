@@ -55,7 +55,7 @@ hasFlow(f6,
     stacy,
     savingsAccount,
     r2,
-    1000.0,
+    500.0,
     oncePerMonth(1)
 ).
 
