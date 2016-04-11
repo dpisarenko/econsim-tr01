@@ -46,7 +46,8 @@ class Sim1(val logTarget:StringBuilder,
             listOf(
                     Sim1Accountant(
                             logTarget,
-                            simParametersProvider.agents
+                            simParametersProvider.agents,
+                            simParametersProvider.resources
                     )
             )
 }
