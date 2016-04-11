@@ -24,7 +24,7 @@ class Accountant(val foodStorage: DefaultResourceStorage,
     }
 
     private fun logPotatoes(time: DateTime) {
-        logTarget.append("resourceAvailable(${time.secondsSinceT0()}, 'POTATO', ${foodStorage.amount(Resource.POTATO)}).")
+        logTarget.append("resourceAvailable(${time.secondsSinceT0()}, 'POTATO', ${foodStorage.amount(Resource.POTATO.name)}).")
         logTarget.newLine()
     }
 

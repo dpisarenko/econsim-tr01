@@ -14,10 +14,10 @@ class DefaultAgent(val id:String) : IAgent, IResourceStorage {
 
     override fun id(): String = id
 
-    override fun put(res: Resource, amt: Double) = storage.put(res, amt)
+    override fun put(res: String, amt: Double) = storage.put(res, amt)
 
     override fun amount(res: String): Double = storage.amount(res)
 
-    override fun remove(res: Resource, amt: Double) = storage.remove(res, amt)
+    override fun remove(res: String, amt: Double) = storage.remove(res, amt)
 
 }
