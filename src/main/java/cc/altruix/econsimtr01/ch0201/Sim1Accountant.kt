@@ -6,7 +6,8 @@ import org.joda.time.DateTime
 /**
  * Created by pisarenko on 11.04.2016.
  */
-class Sim1Accountant(val logTarget: StringBuilder) : ISensor {
+class Sim1Accountant(val logTarget: StringBuilder,
+                     val agents: List<IAgent>) : ISensor {
     val fire: (DateTime) -> Boolean = dailyAtMidnight()
 
     override fun measure(time: DateTime) {
@@ -18,8 +19,5 @@ class Sim1Accountant(val logTarget: StringBuilder) : ISensor {
         val dateTimeString = time.toSimulationDateTimeString()
         logTarget.append("measurementTime(${time.secondsSinceT0()}, '$dateTimeString').")
         logTarget.newLine()
-    }
-
-    override fun finito() {
     }
 }

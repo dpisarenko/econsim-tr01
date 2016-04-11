@@ -33,8 +33,4 @@ class Accountant(val foodStorage: DefaultResourceStorage,
         logTarget.append("measurementTime(${time.secondsSinceT0()}, '$dateTimeString').")
         logTarget.newLine()
     }
-
-
-    override fun finito() {
-    }
 }

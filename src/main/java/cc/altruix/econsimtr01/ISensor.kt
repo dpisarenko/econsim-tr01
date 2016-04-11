@@ -7,5 +7,4 @@ import org.joda.time.DateTime
  */
 interface ISensor {
     fun measure(time: DateTime)
-    fun finito()
 }

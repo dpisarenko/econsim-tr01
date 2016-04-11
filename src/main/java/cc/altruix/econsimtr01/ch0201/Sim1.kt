@@ -17,14 +17,16 @@ class Sim1(val logTarget:StringBuilder,
     }
 
     override fun createAgents(): List<IAgent> {
-        val agents = LinkedList<IAgent>()
         simParametersProvider.flows.forEach { flow ->
-            attachFlowToAgent(agents, flow)
+            attachFlowToAgent(
+                    simParametersProvider.agents,
+                    flow
+            )
         }
         return simParametersProvider.agents
     }
 
-    private fun attachFlowToAgent(agents: LinkedList<IAgent>, flow: PlFlow) {
+    private fun attachFlowToAgent(agents: List<IAgent>, flow: PlFlow) {
         val agent = simParametersProvider.agents
                 .filter { x -> x.id().equals(flow.src) }
                 .first()
@@ -40,5 +42,11 @@ class Sim1(val logTarget:StringBuilder,
         }
     }
 
-    override fun createSensors(): List<ISensor> = listOf(Sim1Accountant(logTarget))
+    override fun createSensors(): List<ISensor> =
+            listOf(
+                    Sim1Accountant(
+                            logTarget,
+                            simParametersProvider.agents
+                    )
+            )
 }

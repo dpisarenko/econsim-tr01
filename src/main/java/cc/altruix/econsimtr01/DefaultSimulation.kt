@@ -15,12 +15,11 @@ abstract class DefaultSimulation(val timing : ITiming) : ISimulation {
             agents.forEach { x -> x.act(time) }
             sensors.forEach { x -> x.measure(time) }
         }
-        sensors.forEach { x -> x.finito() }
         return results
 
     }
 
-    protected abstract  fun continueCondition(tick:Long): Boolean
+    protected abstract fun continueCondition(tick:Long): Boolean
     protected abstract fun createAgents(): List<IAgent>
     protected abstract fun createSensors(): List<ISensor>
 }
