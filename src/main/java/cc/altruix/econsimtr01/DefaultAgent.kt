@@ -1,15 +1,20 @@
 package cc.altruix.econsimtr01
 
 import org.joda.time.DateTime
+import java.util.*
 
 /**
  * Created by pisarenko on 11.04.2016.
  */
 class DefaultAgent(val id:String) : IAgent, IResourceStorage {
     val storage:IResourceStorage = DefaultResourceStorage(id)
+    val actions = LinkedList<IAction>()
 
     override fun act(time: DateTime) {
-        throw UnsupportedOperationException()
+        actions
+                .filter { x -> x.timeToRun(time) }
+                .forEach { x -> x.run(time) }
+
     }
 
     override fun id(): String = id
@@ -19,5 +24,9 @@ class DefaultAgent(val id:String) : IAgent, IResourceStorage {
     override fun amount(res: String): Double = storage.amount(res)
 
     override fun remove(res: String, amt: Double) = storage.remove(res, amt)
+
+    fun addAction(action:PlFlow) {
+        actions.add(action)
+    }
 
 }

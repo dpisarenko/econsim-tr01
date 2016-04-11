@@ -2,6 +2,7 @@ package cc.altruix.econsimtr01.ch0201
 
 import cc.altruix.econsimtr01.*
 import org.slf4j.LoggerFactory
+import java.util.*
 
 /**
  * Created by pisarenko on 08.04.2016.
@@ -16,22 +17,31 @@ class Sim1(val logTarget:StringBuilder,
     }
 
     override fun createAgents(): List<IAgent> {
+        val agents = LinkedList<IAgent>()
         simParametersProvider.flows.forEach { flow ->
-            val agent = simParametersProvider.agents
-                    .filter {x -> x.id().equals(flow.src)}
-                    .first()
-            if (agent == null) {
-                LOGGER.error("Can't find process ${flow.src}")
-            } else {
-                // TODO: Continue here
-            }
-
+            attachFlowToAgent(agents, flow)
         }
         return simParametersProvider.agents
     }
 
-    override fun createSensors(): List<ISensor>{
+    private fun attachFlowToAgent(agents: LinkedList<IAgent>, flow: PlFlow) {
+        val agent = simParametersProvider.agents
+                .filter { x -> x.id().equals(flow.src) }
+                .first()
+        if (agent == null) {
+            LOGGER.error("Can't find process ${flow.src}")
+        } else {
+            flow.agents = agents
+            flow.flows = flows
 
+            if (agent is DefaultAgent) {
+                agent.addAction(flow)
+            }
+        }
+    }
+
+    override fun createSensors(): List<ISensor>{
+        // TODO: Continue here
         return emptyList()
     }
 }
