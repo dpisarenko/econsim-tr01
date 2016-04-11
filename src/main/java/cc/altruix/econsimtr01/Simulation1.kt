@@ -26,7 +26,7 @@ class Simulation1(val logTarget:StringBuilder,
 
     override fun createAgents(): List<IAgent> {
         foodStorage.put(
-                Resource.POTATO,
+                Resource.POTATO.name,
                 simParametersProvider.initialAmountOfPotatoes
         )
         val agents = listOf(

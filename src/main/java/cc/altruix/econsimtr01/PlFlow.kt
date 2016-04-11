@@ -1,6 +1,5 @@
 package cc.altruix.econsimtr01
 
-import cc.altruix.econsimtr01.ch0201.Sim1
 import org.joda.time.DateTime
 import org.slf4j.LoggerFactory
 
@@ -16,6 +15,8 @@ class PlFlow(val id:String,
     val LOGGER = LoggerFactory.getLogger(PlFlow::class.java)
 
     lateinit var agents:List<IAgent>
+    lateinit var flows:MutableList<ResourceFlow>
+
     override fun timeToRun(time: DateTime): Boolean = timeTriggerFunction(time)
 
     override fun run(time: DateTime) {
@@ -34,12 +35,24 @@ class PlFlow(val id:String,
         if ((targetAgent is IResourceStorage) && (srcAgent is IResourceStorage)) {
             if (amount != null) {
                 val availableAmount = srcAgent.amount(resource)
+                if (availableAmount < amount) {
+                    LOGGER.error("Quantity of $resource at $src ($availableAmount) is less than flow amount of $amount")
+                } else {
+                    srcAgent.remove(resource, amount)
+                    targetAgent.put(resource, amount)
+                    addFlow(srcAgent, targetAgent, time)
+                }
+            } else {
+                addFlow(srcAgent, targetAgent, time)
             }
         } else {
             LOGGER.error("Agent '$targetAgent' isn't a resource storage")
         }
     }
 
-    private fun findAgent(id: String) = agents.filter { x -> x.id().equals(id) }.first()
+    private fun addFlow(srcAgent: IAgent, targetAgent: IAgent, time: DateTime) {
+        flows.add(ResourceFlow(time, srcAgent, targetAgent, resource, amount))
+    }
 
+    private fun findAgent(id: String) = agents.filter { x -> x.id().equals(id) }.first()
 }

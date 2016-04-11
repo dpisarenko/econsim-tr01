@@ -9,5 +9,5 @@ data class ResourceFlow (
         val time: DateTime,
         val src:ISometingIdentifiable,
         val target:ISometingIdentifiable,
-        val res:Resource,
-        val amt:Double)
+        val res:String,
+        val amt:Double?)

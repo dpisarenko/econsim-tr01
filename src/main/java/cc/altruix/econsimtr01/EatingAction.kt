@@ -23,8 +23,8 @@ class EatingAction(val recipient: Farmer,
         if (potatoes < amount) {
             recipient.hungerOneDay()
         } else {
-            this.foodStorage.remove(Resource.POTATO, amount)
-            this.flows.add(ResourceFlow(time, foodStorage, recipient, Resource.POTATO, amount))
+            this.foodStorage.remove(Resource.POTATO.name, amount)
+            this.flows.add(ResourceFlow(time, foodStorage, recipient, Resource.POTATO.name, amount))
             recipient.eat()
         }
     }
