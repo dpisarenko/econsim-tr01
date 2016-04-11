@@ -40,8 +40,5 @@ class Sim1(val logTarget:StringBuilder,
         }
     }
 
-    override fun createSensors(): List<ISensor>{
-        // TODO: Continue here
-        return emptyList()
-    }
+    override fun createSensors(): List<ISensor> = listOf(Sim1Accountant(logTarget))
 }
