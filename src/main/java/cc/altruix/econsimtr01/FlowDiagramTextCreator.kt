@@ -6,15 +6,17 @@ package cc.altruix.econsimtr01
 class FlowDiagramTextCreator(val resources:List<PlResource>) {
     fun createFlowDiagramText(flows:List<ResourceFlow>):String {
         val builder = StringBuilder()
-        builder.append("@startuml\n")
-        appendTitle(builder)
-        flows.sortedBy { x -> x.time }.forEach { flow ->
-            val unit = findUnit(flow.res)
-            builder.append("${flow.src.id()} -> ${flow.target.id()}: ${flow.res} ${flow.amt} $unit\n")
-            builder.append("note left: ${flow.time.toSimulationDateTimeString()}\n")
+        if (flows.isNotEmpty() && resources.isNotEmpty()) {
+            builder.append("@startuml\n")
+            appendTitle(builder)
+            flows.sortedBy { x -> x.time }.forEach { flow ->
+                val unit = findUnit(flow.res)
+                builder.append("${flow.src.id()} -> ${flow.target.id()}: ${flow.res} ${flow.amt} $unit\n")
+                builder.append("note left: ${flow.time.toSimulationDateTimeString()}\n")
+            }
+            appendLegend(builder)
+            builder.append("@enduml\n")
         }
-        appendLegend(builder)
-        builder.append("@enduml\n")
         return builder.toString()
     }
 
