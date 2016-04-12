@@ -61,5 +61,6 @@ hasFlow(f6,
 
 % Initial resource levels
 initialResourceLevel(stacy, r2, 3000.0).
+infiniteResourceSupply(employer, r2).
 infiniteResourceSupply(groceryStore, r4).
 infiniteResourceSupply(landlord, r3).

@@ -24,17 +24,25 @@ class Sim1(val logTarget:StringBuilder,
             )
         }
         simParametersProvider.initialResourceLevels.forEach { initialResourceLevel ->
-            val agent = simParametersProvider.agents.filter { x -> x.id().equals(initialResourceLevel.agent) }.first()
+            val agent = findAgent(initialResourceLevel.agent)
             if ((agent != null) && (agent is DefaultAgent)) {
                 agent.put(initialResourceLevel.resource, initialResourceLevel.amt)
             } else {
                 LOGGER.error("Can't find agent '${initialResourceLevel.agent}'")
             }
         }
-
+        simParametersProvider.infiniteResourceSupplies.forEach { infiniteResourceSupply ->
+            val agent = findAgent(infiniteResourceSupply.agent)
+            if (agent is DefaultAgent) {
+                agent.setInfinite(infiniteResourceSupply.res)
+            }
+        }
 
         return simParametersProvider.agents
     }
+
+    private fun findAgent(agentId: String) =
+            simParametersProvider.agents.filter { x -> x.id().equals(agentId) }.first()
 
     private fun attachFlowToAgent(agents: List<IAgent>, flow: PlFlow) {
         val agent = simParametersProvider.agents

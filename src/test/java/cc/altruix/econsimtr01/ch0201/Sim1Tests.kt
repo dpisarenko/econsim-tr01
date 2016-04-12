@@ -17,12 +17,13 @@ class Sim1Tests {
         val flows = LinkedList<ResourceFlow>()
         val log = StringBuilder()
 
+        val simParametersProvider = Sim1ParametersProvider(
+                File("src/test/resources/ch0201Sim1Tests.params.pl").readText()
+        )
         val sim = Sim1(
                 log,
                 flows,
-                Sim1ParametersProvider(
-                        File("src/test/resources/ch0201Sim1Tests.params.pl").readText()
-                )
+                simParametersProvider
         )
 
         // Run method under test
@@ -37,7 +38,7 @@ class Sim1Tests {
         val expectedConvertedSimResults = File("src/test/resources/ch0201/Sim1Tests.test.csv.expected.txt").readText()
         Assertions.assertThat(actualConvertedSimResults).isEqualTo(expectedConvertedSimResults)
 
-        val seqDiagramTxt = FlowDiagramTextCreator(Collections.emptyList()).createFlowDiagramText(flows)
+        val seqDiagramTxt = FlowDiagramTextCreator(simParametersProvider.resources).createFlowDiagramText(flows)
         seqDiagramTxt.toSequenceDiagramFile(File("src/test/resources/ch0201/Sim1Tests.test.flows.actual.png"))
     }
 }

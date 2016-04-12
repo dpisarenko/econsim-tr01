@@ -9,7 +9,6 @@ import java.util.*
 class DefaultAgent(val id:String) : IAgent, IResourceStorage {
     val storage:IResourceStorage = DefaultResourceStorage(id)
     val actions = LinkedList<IAction>()
-
     override fun act(time: DateTime) {
         actions
                 .filter { x -> x.timeToRun(time) }
@@ -24,6 +23,10 @@ class DefaultAgent(val id:String) : IAgent, IResourceStorage {
     override fun amount(res: String): Double = storage.amount(res)
 
     override fun remove(res: String, amt: Double) = storage.remove(res, amt)
+
+    override fun setInfinite(res: String) = storage.setInfinite(res)
+
+    override fun isInfinite(res: String): Boolean = storage.isInfinite(res)
 
     fun addAction(action:PlFlow) {
         actions.add(action)
