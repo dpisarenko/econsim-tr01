@@ -1,6 +1,7 @@
 package cc.altruix.econsimtr01.ch0201
 
 import alice.tuprolog.Prolog
+import cc.altruix.econsimtr01.getResults
 import cc.altruix.econsimtr01.newLine
 import cc.altruix.econsimtr01.removeSingleQuotes
 import cc.altruix.javaprologinterop.PlUtils
@@ -34,9 +35,8 @@ class Sim1TimeSeriesCreator {
         times.forEach { t ->
             val timeShort = t.toString()
             val timeLong = extractTimeLongForm(prolog, t)
-            val moneyAtStacy = "" // TODO: Continue here
-            val moneyInSavingsAccount = "" // TODO: Continue here
-
+            val moneyAtStacy = extractMoneyAtStacy(prolog, t)
+            val moneyInSavingsAccount = extractMoneyInSavingsAccount(prolog, t)
             appendRow(builder,
                     timeShort,
                     timeLong,
@@ -46,6 +46,13 @@ class Sim1TimeSeriesCreator {
         // TODO: Continue here, integrate this class into simulation 1
         return builder.toString()
     }
+
+    private fun extractMoneyInSavingsAccount(prolog: Prolog, time: Long): String =
+            prolog.getResults("resourceLevel($time, savingsAccount, r2, Amount).", "Amount").first()
+
+    private fun extractMoneyAtStacy(prolog: Prolog, time: Long): String =
+            prolog.getResults("resourceLevel($time, stacy, r2, Amount).", "Amount").first()
+
     private fun extractTimeLongForm(prolog: Prolog, t: Long): String {
         return PlUtils
                 .extractSingleStringFromQuery(prolog, "measurementTime($t, X).", "X")
