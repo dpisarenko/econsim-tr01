@@ -37,16 +37,12 @@ class Sim1ParametersProviderTests {
 
         Assertions.assertThat(out.flows).isNotNull
         Assertions.assertThat(out.flows.size).isEqualTo(7)
-        Assertions.assertThat(out.flows.get(0)).isEqualTo(
-                PlFlow(
-                        "f1",
-                        "stacy",
-                        "employer",
-                        "r1",
-                        null,
-                        out.businessDaysTriggerFunction()
-                )
-        )
+        out.flows.get(0).id.shouldBe("f1")
+        out.flows.get(0).src.shouldBe("stacy")
+        out.flows.get(0).target.shouldBe("employer")
+        out.flows.get(0).resource.shouldBe("r1")
+        Assertions.assertThat(out.flows.get(0).amount).isNull()
+        out.flows.get(0).timeTriggerFunction.javaClass.name.shouldBe("cc.altruix.econsimtr01.ch0201.Sim1ParametersProvider\$businessDaysTriggerFunction$1")
         validateMonetaryFlow(out.flows.get(1))
     }
 
@@ -70,7 +66,7 @@ class Sim1ParametersProviderTests {
                 File("src/test/resources/ch0201Sim1Tests.params.pl").readText()
         )
         Assertions.assertThat(out.infiniteResourceSupplies).isNotNull
-        out.infiniteResourceSupplies.size.shouldBe(2)
+        out.infiniteResourceSupplies.size.shouldBe(3)
         Assertions.assertThat(out.infiniteResourceSupplies.get(0))
             .isEqualTo(InfiniteResourceSupply("groceryStore", "r4"))
         Assertions.assertThat(out.infiniteResourceSupplies.get(1))
