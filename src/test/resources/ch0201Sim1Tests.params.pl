@@ -44,8 +44,8 @@ hasFlow(f5,
     daily(19, 00)
 ).
 hasFlow(f5,
-    stacy,
     groceryStore,
+    stacy,
     r4,
     2534.0,
     daily(19, 01)
@@ -59,3 +59,7 @@ hasFlow(f6,
     oncePerMonth(1)
 ).
 
+% Initial resource levels
+initialResourceLevel(stacy, r2, 3000.0).
+infiniteResourceSupply(groceryStore, r4).
+infiniteResourceSupply(landlord, r3).

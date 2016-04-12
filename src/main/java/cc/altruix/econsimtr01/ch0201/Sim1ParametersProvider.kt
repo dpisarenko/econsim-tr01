@@ -20,12 +20,40 @@ class Sim1ParametersProvider(val theoryTxt: String) {
         get
     val agents:MutableList<IAgent> = LinkedList<IAgent>()
         get
+    val initialResourceLevels:MutableList<InitialResourceLevel> = LinkedList<InitialResourceLevel>()
+        get
+    val infiniteResourceSupplies:MutableList<InfiniteResourceSupply> = LinkedList<InfiniteResourceSupply>()
+        get
 
     init {
         val prolog = theoryTxt.toPrologTheory()
         this.resources = extractResources(prolog)
         readFlows(prolog)
         readAgents(prolog)
+        readInitialResourceLevels(prolog)
+        readInfiniteResourceSupplies(prolog)
+    }
+
+    private fun readInfiniteResourceSupplies(prolog: Prolog) {
+        prolog.getResults("infiniteResourceSupply(Agent, Resource).").forEach { map ->
+            infiniteResourceSupplies.add(
+                    InfiniteResourceSupply(
+                            map.get("Agent") ?: "",
+                            map.get("Resource") ?: ""
+                    )
+            )
+        }
+    }
+
+    private fun readInitialResourceLevels(prolog: Prolog) {
+        prolog.getResults("initialResourceLevel(Agent, Resource, Amount).", "Agent", "Resource", "Amount")
+                .forEach { map ->
+                    initialResourceLevels.add(InitialResourceLevel(
+                            map.get("Agent") ?: "",
+                            map.get("Resource") ?: "",
+                            map.get("Amount")?.toDouble() ?: 0.0
+                    ))
+                }
     }
 
     private fun readAgents(prolog: Prolog) {

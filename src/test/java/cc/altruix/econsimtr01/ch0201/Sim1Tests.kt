@@ -12,7 +12,7 @@ import java.util.*
  */
 class Sim1Tests {
     @Test
-    @Ignore
+    //@Ignore
     fun test() {
         val flows = LinkedList<ResourceFlow>()
         val log = StringBuilder()
@@ -29,16 +29,15 @@ class Sim1Tests {
         sim.run()
 
         // Verify
-        val expectedRawSimResultsFile = File("src/test/resources/Simulation1Tests.test.pl.expected.txt")
+        val expectedRawSimResultsFile = File("src/test/resources/ch0201/Sim1Tests.test.pl.expected.txt")
         val expectedRawSimResults = expectedRawSimResultsFile.readText()
         Assertions.assertThat(log.toString()).isEqualTo(expectedRawSimResults)
 
-        val actualConvertedSimResults = Simulation1TimeSeriesCreator().prologToCsv(expectedRawSimResultsFile)
-        val expectedConvertedSimResults = File("src/test/resources/Simulation1Tests.test.csv.expected.txt").readText()
+        val actualConvertedSimResults = Sim1TimeSeriesCreator().prologToCsv(expectedRawSimResultsFile)
+        val expectedConvertedSimResults = File("src/test/resources/ch0201/Sim1Tests.test.csv.expected.txt").readText()
         Assertions.assertThat(actualConvertedSimResults).isEqualTo(expectedConvertedSimResults)
 
         val seqDiagramTxt = FlowDiagramTextCreator(Collections.emptyList()).createFlowDiagramText(flows)
-        seqDiagramTxt.toSequenceDiagramFile(File("src/test/resources/Simulation1Tests.test.flows.actual.png"))
-
+        seqDiagramTxt.toSequenceDiagramFile(File("src/test/resources/ch0201/Sim1Tests.test.flows.actual.png"))
     }
 }
