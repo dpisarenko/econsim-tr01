@@ -84,8 +84,8 @@ class Sim1ParametersProviderTests {
         )
         Assertions.assertThat(out.initialResourceLevels).isNotNull
         out.initialResourceLevels.size.shouldBe(1)
-        Assertions.assertThat(out.initialResourceLevels.get(0)).isEqualTo(InitialResourceLevel("stacy", "r2", 3000.0))
-
+        Assertions.assertThat(out.initialResourceLevels.get(0))
+                .isEqualTo(InitialResourceLevel("stacy", "r2", 3000.0))
     }
 
     @Test

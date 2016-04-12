@@ -35,7 +35,7 @@ class PlFlow(val id:String,
         if ((targetAgent is IResourceStorage) && (srcAgent is IResourceStorage)) {
             if (amount != null) {
                 val availableAmount = srcAgent.amount(resource)
-                if (availableAmount < amount) {
+                if (!srcAgent.isInfinite(resource) && (availableAmount < amount)) {
                     LOGGER.error("Quantity of $resource at $src ($availableAmount) is less than flow amount of $amount")
                 } else {
                     srcAgent.remove(resource, amount)

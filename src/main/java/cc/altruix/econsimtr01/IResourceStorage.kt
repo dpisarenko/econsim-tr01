@@ -11,4 +11,6 @@ interface IResourceStorage : ISometingIdentifiable {
     fun amount(res: String):Double
 
     fun remove(res: String, amt: Double)
+    fun setInfinite(res:String)
+    fun isInfinite(res:String):Boolean
 }

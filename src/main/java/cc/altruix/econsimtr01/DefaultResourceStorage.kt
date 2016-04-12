@@ -10,6 +10,7 @@ import java.util.*
  */
 class DefaultResourceStorage(val id:String) : IResourceStorage {
     val amountsByResource = HashMap<String, AtomicDouble>()
+    val infiniteResources = HashSet<String>()
 
     override fun put(res: String, amt:Double) {
         var storedAmount = amountsByResource.get(res)
@@ -27,12 +28,19 @@ class DefaultResourceStorage(val id:String) : IResourceStorage {
         }
         return 0.0
     }
+
     override fun remove(res: String, amt: Double) {
         val mapAmt = amountsByResource.get(res)
         if (mapAmt != null) {
             mapAmt.getAndAdd(-amt)
         }
     }
+
+    override fun setInfinite(res: String) {
+        infiniteResources.add(res)
+    }
+
+    override fun isInfinite(res:String):Boolean = infiniteResources.contains(res)
 
     override fun id(): String = id
 }

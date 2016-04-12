@@ -23,6 +23,16 @@ class Sim1(val logTarget:StringBuilder,
                     flow
             )
         }
+        simParametersProvider.initialResourceLevels.forEach { initialResourceLevel ->
+            val agent = simParametersProvider.agents.filter { x -> x.id().equals(initialResourceLevel.agent) }.first()
+            if ((agent != null) && (agent is DefaultAgent)) {
+                agent.put(initialResourceLevel.resource, initialResourceLevel.amt)
+            } else {
+                LOGGER.error("Can't find agent '${initialResourceLevel.agent}'")
+            }
+        }
+
+
         return simParametersProvider.agents
     }
 
