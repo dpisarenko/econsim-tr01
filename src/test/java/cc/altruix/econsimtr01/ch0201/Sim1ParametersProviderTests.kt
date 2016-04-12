@@ -65,6 +65,30 @@ class Sim1ParametersProviderTests {
     }
 
     @Test
+    fun initReadsInfiniteResourceSupplies() {
+        val out = Sim1ParametersProvider(
+                File("src/test/resources/ch0201Sim1Tests.params.pl").readText()
+        )
+        Assertions.assertThat(out.infiniteResourceSupplies).isNotNull
+        out.infiniteResourceSupplies.size.shouldBe(2)
+        Assertions.assertThat(out.infiniteResourceSupplies.get(0))
+            .isEqualTo(InfiniteResourceSupply("groceryStore", "r4"))
+        Assertions.assertThat(out.infiniteResourceSupplies.get(1))
+                .isEqualTo(InfiniteResourceSupply("landlord", "r3"))
+    }
+
+    @Test
+    fun initReadsInitialResourceLevels() {
+        val out = Sim1ParametersProvider(
+                File("src/test/resources/ch0201Sim1Tests.params.pl").readText()
+        )
+        Assertions.assertThat(out.initialResourceLevels).isNotNull
+        out.initialResourceLevels.size.shouldBe(1)
+        Assertions.assertThat(out.initialResourceLevels.get(0)).isEqualTo(InitialResourceLevel("stacy", "r2", 3000.0))
+
+    }
+
+    @Test
     fun initReadsFlowsCanReadMonetaryFlow() {
         val out = Sim1ParametersProvider(
                 File("src/test/resources/ch0201Sim1Tests.params2.pl").readText()

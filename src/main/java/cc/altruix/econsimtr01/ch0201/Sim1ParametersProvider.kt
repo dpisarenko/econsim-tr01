@@ -35,7 +35,7 @@ class Sim1ParametersProvider(val theoryTxt: String) {
     }
 
     private fun readInfiniteResourceSupplies(prolog: Prolog) {
-        prolog.getResults("infiniteResourceSupply(Agent, Resource).").forEach { map ->
+        prolog.getResults("infiniteResourceSupply(Agent, Resource).", "Agent", "Resource").forEach { map ->
             infiniteResourceSupplies.add(
                     InfiniteResourceSupply(
                             map.get("Agent") ?: "",
