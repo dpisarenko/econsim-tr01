@@ -14,7 +14,6 @@ open class Sim2ParametersProvider(val theoryTxt2:String) :
         Sim1ParametersProvider(theoryTxt2){
 
     init {
-        // TODO: Test this
         initAfterFlows()
     }
 
