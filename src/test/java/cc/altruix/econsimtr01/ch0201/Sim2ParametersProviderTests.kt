@@ -14,10 +14,10 @@ class Sim2ParametersProviderTests {
     @Test
     fun extractFiringFunctionCreatesOncePerWeekFunction() {
         val monday = Struct("Monday")
-        val timeFunctionPl = Struct::class.mock()
+        val timeFunctionPl = mock<Struct>()
         Mockito.`when`(timeFunctionPl.name).thenReturn("oncePerWeek")
         Mockito.`when`(timeFunctionPl.getArg(0)).thenReturn(monday)
-        val res = SolveInfo::class.mock()
+        val res = mock<SolveInfo>()
         Mockito.`when`(res.getTerm("Time")).thenReturn(timeFunctionPl)
         // Run method under test
         val actualResult = Sim2ParametersProvider("").extractFiringFunction(res)
@@ -30,10 +30,11 @@ class Sim2ParametersProviderTests {
     @Test
     fun extractFiringFunctionCreatesAfterFunction() {
         val flowId = Struct("f1")
-        val timeFunctionPl = Struct::class.mock()
+
+        val timeFunctionPl = mock<Struct>()
         Mockito.`when`(timeFunctionPl.name).thenReturn("after")
         Mockito.`when`(timeFunctionPl.getArg(0)).thenReturn(flowId)
-        val res = SolveInfo::class.mock()
+        val res = mock<SolveInfo>()
         Mockito.`when`(res.getTerm("Time")).thenReturn(timeFunctionPl)
         // Run method under test
         val actualResult = Sim2ParametersProvider("").extractFiringFunction(res)
@@ -41,6 +42,5 @@ class Sim2ParametersProviderTests {
         Assertions.assertThat(actualResult).isNotNull
         Assertions.assertThat(actualResult is After).isTrue()
         Assertions.assertThat((actualResult as After).flowId).isEqualTo("f1")
-
     }
 }

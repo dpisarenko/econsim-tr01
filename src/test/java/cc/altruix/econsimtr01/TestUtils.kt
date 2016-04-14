@@ -28,3 +28,4 @@ fun Double?.shouldBeNotNull() = Assertions.assertThat(this).isNotNull
 
 fun <T> Class<T>.mock() = Mockito.mock(this)
 fun <T: Any> KClass<T>.mock() = Mockito.mock(this.java)
+inline fun<reified T : Any> mock() = Mockito.mock(T::class.java)

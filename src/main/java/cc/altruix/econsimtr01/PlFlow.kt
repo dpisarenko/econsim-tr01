@@ -53,9 +53,10 @@ class PlFlow(val id:String,
         }
     }
 
-    private fun addFlow(srcAgent: IAgent, targetAgent: IAgent, time: DateTime) {
+    fun addFlow(srcAgent: IAgent, targetAgent: IAgent, time: DateTime) {
         flows.add(ResourceFlow(time, srcAgent, targetAgent, resource, amount))
 
+        // TODO: Test this
         followingTriggers.forEach { it.updateNextFiringTime(time) }
     }
 

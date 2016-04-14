@@ -10,11 +10,15 @@ import org.joda.time.DateTime
 /**
  * Created by pisarenko on 14.04.2016.
  */
-class Sim2ParametersProvider(val theoryTxt2:String) :
+open class Sim2ParametersProvider(val theoryTxt2:String) :
         Sim1ParametersProvider(theoryTxt2){
 
     init {
         // TODO: Test this
+        initAfterFlows()
+    }
+
+    protected fun initAfterFlows() {
         flows.filter { it.timeTriggerFunction is After }
                 .map { it.timeTriggerFunction }
                 .forEach { (it as After).connectToInitiatingFunctionFlow(flows) }
