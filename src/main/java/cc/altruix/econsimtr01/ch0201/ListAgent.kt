@@ -34,7 +34,7 @@ open class ListAgent(id:String) : DefaultAgent(id) {
             LOGGER.error("Unknown subscriber type '$res'")
             return
         }
-        val number = Math.ceil(amt) as Int
+        val number = Math.ceil(amt).toInt()
         val interactions = subscriberTypes.get(res) as Int
         for (i in 1..number) {
             subscribers.add(Subscriber(UUID.randomUUID().toString(), interactions))
