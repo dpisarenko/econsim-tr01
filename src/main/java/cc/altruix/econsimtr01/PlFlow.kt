@@ -60,7 +60,7 @@ open class PlFlow(val id:String,
 
     private fun findAgent(id: String) = agents.filter { x -> x.id().equals(id) }.first()
 
-    fun addFollowUpFlow(nextTrigger: After) {
+    open fun addFollowUpFlow(nextTrigger: After) {
         followingTriggers.add(nextTrigger)
     }
 }
