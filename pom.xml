@@ -80,7 +80,6 @@
             <artifactId>plantuml</artifactId>
             <version>8038</version>
         </dependency>
-
     </dependencies>
     <build>
         <resources>
