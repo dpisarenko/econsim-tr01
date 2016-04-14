@@ -9,52 +9,44 @@ import java.util.*
  */
 class Sim1(val logTarget:StringBuilder,
             val flows:MutableList<ResourceFlow>,
-            val simParametersProvider: Sim1ParametersProvider) : DefaultSimulation(Timing()) {
+            simParametersProvider: Sim1ParametersProvider) :
+        DefaultSimulation(Timing(),
+                simParametersProvider) {
     override fun continueCondition(tick:Long): Boolean {
         val t = tick.secondsToSimulationDateTime()
         return (t.monthOfYear <= 3)
     }
 
     override fun createAgents(): List<IAgent> {
-        simParametersProvider.flows.forEach { flow ->
+        (simParametersProvider as Sim1ParametersProvider).flows.forEach { flow ->
             attachFlowToAgent(
                     simParametersProvider.agents,
-                    flow
+                    flow,
+                    flows
             )
         }
-        simParametersProvider.initialResourceLevels.forEach { initialResourceLevel ->
-            val agent = findAgent(initialResourceLevel.agent)
-            if ((agent != null) && (agent is DefaultAgent)) {
-                agent.put(initialResourceLevel.resource, initialResourceLevel.amt)
-            } else {
-                LOGGER.error("Can't find agent '${initialResourceLevel.agent}'")
-            }
-        }
+        setInitialResourceLevels()
+        setInfiniteResourceSupplies()
+
+        return simParametersProvider.agents
+    }
+
+    protected fun setInfiniteResourceSupplies() {
         simParametersProvider.infiniteResourceSupplies.forEach { infiniteResourceSupply ->
             val agent = findAgent(infiniteResourceSupply.agent)
             if (agent is DefaultAgent) {
                 agent.setInfinite(infiniteResourceSupply.res)
             }
         }
-
-        return simParametersProvider.agents
     }
 
-    fun findAgent(agentId: String) =
-            simParametersProvider.agents.filter { x -> x.id().equals(agentId) }.first()
-
-    private fun attachFlowToAgent(agents: List<IAgent>, flow: PlFlow) {
-        val agent = simParametersProvider.agents
-                .filter { x -> x.id().equals(flow.src) }
-                .first()
-        if (agent == null) {
-            LOGGER.error("Can't find process ${flow.src}")
-        } else {
-            flow.agents = agents
-            flow.flows = flows
-
-            if (agent is DefaultAgent) {
-                agent.addAction(flow)
+    protected fun setInitialResourceLevels() {
+        simParametersProvider.initialResourceLevels.forEach { initialResourceLevel ->
+            val agent = findAgent(initialResourceLevel.agent)
+            if ((agent != null) && (agent is DefaultAgent)) {
+                agent.put(initialResourceLevel.resource, initialResourceLevel.amt)
+            } else {
+                LOGGER.error("Can't find agent '${initialResourceLevel.agent}'")
             }
         }
     }
@@ -64,7 +56,7 @@ class Sim1(val logTarget:StringBuilder,
                     Sim1Accountant(
                             logTarget,
                             simParametersProvider.agents,
-                            simParametersProvider.resources
+                            (simParametersProvider as Sim1ParametersProvider).resources
                     )
             )
 }

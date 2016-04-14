@@ -11,18 +11,18 @@ import java.util.*
 /**
  * Created by pisarenko on 08.04.2016.
  */
-open class Sim1ParametersProvider(val theoryTxt: String) {
+open class Sim1ParametersProvider(val theoryTxt: String) : ISimParametersProvider {
     val LOGGER = LoggerFactory.getLogger(Sim1ParametersProvider::class.java)
     var resources:List<PlResource>
         get
         private set
-    val flows:MutableList<PlFlow> = LinkedList<PlFlow>()
+    override val flows:MutableList<PlFlow> = LinkedList<PlFlow>()
         get
-    val agents:MutableList<IAgent> = LinkedList<IAgent>()
+    override val agents:MutableList<IAgent> = LinkedList<IAgent>()
         get
-    val initialResourceLevels:MutableList<InitialResourceLevel> = LinkedList<InitialResourceLevel>()
+    override val initialResourceLevels:MutableList<InitialResourceLevel> = LinkedList<InitialResourceLevel>()
         get
-    val infiniteResourceSupplies:MutableList<InfiniteResourceSupply> = LinkedList<InfiniteResourceSupply>()
+    override val infiniteResourceSupplies:MutableList<InfiniteResourceSupply> = LinkedList<InfiniteResourceSupply>()
         get
 
     init {

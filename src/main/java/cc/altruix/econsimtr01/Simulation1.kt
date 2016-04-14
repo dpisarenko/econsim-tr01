@@ -7,7 +7,7 @@ package cc.altruix.econsimtr01
  */
 class Simulation1(val logTarget:StringBuilder,
                   val flows:MutableList<ResourceFlow>,
-                  val simParametersProvider: SimParametersProvider) : DefaultSimulation(Timing()) {
+                  simParametersProvider: SimParametersProvider) : DefaultSimulation(Timing(), simParametersProvider) {
     val foodStorage = DefaultResourceStorage("FoodStorage")
     val farmer = Farmer(
             foodStorage,
@@ -27,7 +27,7 @@ class Simulation1(val logTarget:StringBuilder,
     override fun createAgents(): List<IAgent> {
         foodStorage.put(
                 Resource.POTATO.name,
-                simParametersProvider.initialAmountOfPotatoes
+                (simParametersProvider as SimParametersProvider).initialAmountOfPotatoes
         )
         val agents = listOf(
                 farmer,

@@ -29,7 +29,11 @@ public final class App {
 
             final String theoryTxt = IOUtils.toString(stream);
             final SimParametersProvider simParametersProvider =
-                    new SimParametersProvider(theoryTxt);
+                    new SimParametersProvider(theoryTxt,
+                            Collections.emptyList(),
+                            Collections.emptyList(),
+                            Collections.emptyList(),
+                            Collections.emptyList());
             final List<ResourceFlow> flows = new LinkedList<>();
             final StringBuilder log = new StringBuilder();
 

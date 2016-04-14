@@ -7,7 +7,7 @@ import cc.altruix.econsimtr01.*
  */
 class Sim2(val logTarget:StringBuilder,
            val flows:MutableList<ResourceFlow>,
-           val simParametersProvider: Sim2ParametersProvider) : DefaultSimulation(Timing()) {
+           simParametersProvider: Sim2ParametersProvider) : DefaultSimulation(Timing(), simParametersProvider) {
     override fun continueCondition(tick: Long): Boolean {
         val t = tick.secondsToSimulationDateTime()
         return (t.monthOfYear <= 3)
