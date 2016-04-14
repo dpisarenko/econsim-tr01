@@ -2,6 +2,7 @@ package cc.altruix.econsimtr01.ch0201
 
 import alice.tuprolog.SolveInfo
 import alice.tuprolog.Struct
+import cc.altruix.econsimtr01.mock
 import org.fest.assertions.Assertions
 import org.junit.Test
 import org.mockito.Mockito
@@ -13,10 +14,10 @@ class Sim2ParametersProviderTests {
     @Test
     fun extractFiringFunctionCreatesOncePerWeekFunction() {
         val monday = Struct("Monday")
-        val timeFunctionPl = Mockito.mock(Struct::class.java)
+        val timeFunctionPl = Struct::class.mock()
         Mockito.`when`(timeFunctionPl.name).thenReturn("oncePerWeek")
         Mockito.`when`(timeFunctionPl.getArg(0)).thenReturn(monday)
-        val res = Mockito.mock(SolveInfo::class.java)
+        val res = SolveInfo::class.mock()
         Mockito.`when`(res.getTerm("Time")).thenReturn(timeFunctionPl)
         // Run method under test
         val actualResult = Sim2ParametersProvider("").extractFiringFunction(res)

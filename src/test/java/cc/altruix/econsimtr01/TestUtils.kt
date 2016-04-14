@@ -3,6 +3,7 @@ package cc.altruix.econsimtr01
 import org.fest.assertions.Assertions
 import org.joda.time.DateTime
 import org.mockito.Mockito
+import kotlin.reflect.KClass
 
 /**
  * Created by pisarenko on 09.04.2016.
@@ -24,3 +25,6 @@ fun Double.shouldBe(expectedValue:Double) = Assertions.assertThat(this).isEqualT
 fun Int.shouldBe(expectedValue:Int) = Assertions.assertThat(this).isEqualTo(expectedValue)
 
 fun Double?.shouldBeNotNull() = Assertions.assertThat(this).isNotNull
+
+fun <T> Class<T>.mock() = Mockito.mock(this)
+fun <T: Any> KClass<T>.mock() = Mockito.mock(this.java)
