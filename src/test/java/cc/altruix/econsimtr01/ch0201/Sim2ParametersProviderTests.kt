@@ -114,7 +114,44 @@ class Sim2ParametersProviderTests {
         after2.nextFireTime.shouldBe(monday.millis+1)
     }
 
+    @Test
+    fun readAgentsCreatesRightObjectForList() {
+        val out = Sim2ParametersProvider("""
+        isAgent(stacy).
+        isAgent(list).
+        isAgent(internets).
 
+        resource(r1, "Message to the list", "Pieces").
+        resource(r2, "Money", "2016 US dollars").
+        resource(r3, "Accomodation", "Days the person is allowed to live in the flat").
+        resource(r4, "Food", "Calories").
+        resource(r5, "Copy of WordPress plugin X", "Pieces").
+
+        hasFlow(f1,
+            stacy,
+            list,
+            r1,
+            1,
+            oncePerWeek("Monday")).
+
+        hasFlow(f2,
+            list,
+            stacy,
+            r2,
+            _,
+            after(f1)).
+        hasFlow(f3,
+            stacy,
+            list,
+            r5,
+            _,
+            after(f1)).
+
+        """)
+        val list = out.agents.filter { it.id() == "list" }.first()
+        Assertions.assertThat(list).isNotNull
+        Assertions.assertThat(list is List).isTrue()
+    }
 
     private fun doAfterTriggerChecks(f2: PlFlow) {
         Assertions.assertThat(f2).isNotNull
