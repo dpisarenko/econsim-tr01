@@ -10,7 +10,6 @@ import java.util.*
 class Sim1(val logTarget:StringBuilder,
             val flows:MutableList<ResourceFlow>,
             val simParametersProvider: Sim1ParametersProvider) : DefaultSimulation(Timing()) {
-    val LOGGER = LoggerFactory.getLogger(Sim1::class.java)
     override fun continueCondition(tick:Long): Boolean {
         val t = tick.secondsToSimulationDateTime()
         return (t.monthOfYear <= 3)
@@ -41,7 +40,7 @@ class Sim1(val logTarget:StringBuilder,
         return simParametersProvider.agents
     }
 
-    private fun findAgent(agentId: String) =
+    fun findAgent(agentId: String) =
             simParametersProvider.agents.filter { x -> x.id().equals(agentId) }.first()
 
     private fun attachFlowToAgent(agents: List<IAgent>, flow: PlFlow) {

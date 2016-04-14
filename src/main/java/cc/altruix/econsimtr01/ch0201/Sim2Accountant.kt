@@ -4,14 +4,11 @@ import cc.altruix.econsimtr01.*
 import org.joda.time.DateTime
 
 /**
- * Created by pisarenko on 11.04.2016.
+ * Created by pisarenko on 14.04.2016.
  */
-class Sim1Accountant(logTarget: StringBuilder,
+class Sim2Accountant(logTarget: StringBuilder,
                      agents: List<IAgent>,
-                     resources: List<PlResource>) : AbstractAccountant(
-        logTarget,
-        agents,
-        resources) {
+                     resources: List<PlResource>) : AbstractAccountant(logTarget, agents, resources) {
     val fire: (DateTime) -> Boolean = dailyAtMidnight()
     var firstTime:Boolean = true
 
@@ -24,5 +21,7 @@ class Sim1Accountant(logTarget: StringBuilder,
             logMeasurementTime(time)
             logStockLevels(time.secondsSinceT0())
         }
+
     }
+
 }

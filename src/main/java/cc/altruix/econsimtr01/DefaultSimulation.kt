@@ -1,9 +1,13 @@
 package cc.altruix.econsimtr01
 
+import cc.altruix.econsimtr01.ch0201.Sim1
+import org.slf4j.LoggerFactory
+
 /**
  * Created by pisarenko on 04.04.2016.
  */
 abstract class DefaultSimulation(val timing : ITiming) : ISimulation {
+    val LOGGER = LoggerFactory.getLogger(DefaultSimulation::class.java)
     override fun run():SimResults {
         val results = SimResults()
         val agents = createAgents()
