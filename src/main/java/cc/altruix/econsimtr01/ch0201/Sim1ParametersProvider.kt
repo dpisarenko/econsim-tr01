@@ -101,7 +101,7 @@ open class Sim1ParametersProvider(val theoryTxt: String) {
         return flow
     }
 
-    fun extractFiringFunction(res: SolveInfo): (DateTime) -> Boolean {
+    open fun extractFiringFunction(res: SolveInfo): (DateTime) -> Boolean {
         val timeFunctionPl = res.getTerm("Time")
         var timeFunction = { x: DateTime -> false }
         if (timeFunctionPl is Struct) {
