@@ -21,12 +21,13 @@ open class After(val flowId:String) : (DateTime) -> Boolean {
 
     override fun invoke(p1: DateTime): Boolean {
         if (isMidnight(p1)) {
+            // TODO: Test this
             reset()
         }
         return p1.millis == nextFireTime
     }
 
-    private fun isMidnight(t: DateTime): Boolean =
+    fun isMidnight(t: DateTime): Boolean =
             arrayOf(t.hourOfDay, t.minuteOfHour, t.secondOfMinute).all { it == 0 }
 
     fun connectToInitiatingFunctionFlow(flows:MutableList<PlFlow>) {
@@ -40,7 +41,6 @@ open class After(val flowId:String) : (DateTime) -> Boolean {
     }
 
     open fun updateNextFiringTime(time: DateTime) {
-        // TODO: Test this
         this.nextFireTime = time.millis + 1
     }
 }

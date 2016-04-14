@@ -1,9 +1,9 @@
 package cc.altruix.econsimtr01.ch0201
 
-import cc.altruix.econsimtr01.millisToSimulationDateTime
-import cc.altruix.econsimtr01.secondsToSimulationDateTime
-import cc.altruix.econsimtr01.shouldBe
+import cc.altruix.econsimtr01.*
+import org.junit.Ignore
 import org.junit.Test
+import org.mockito.Mockito
 
 /**
  * Created by pisarenko on 14.04.2016.
@@ -21,5 +21,23 @@ class AfterTests {
         val t = 0L.millisToSimulationDateTime()
         out.updateNextFiringTime(t)
         out.nextFireTime.shouldBe(t.millis + 1L)
+    }
+
+    @Test
+    fun isMidnightSunnyDay() {
+        val out = After("f1")
+        val t0 = 0L.millisToSimulationDateTime()
+        out.isMidnight(t0).shouldBeTrue()
+        out.isMidnight(t0.plusSeconds(1)).shouldBeFalse()
+    }
+
+    @Test
+    @Ignore
+    fun invokeResetsNextFireTimeAtMidnight() {
+        val out = Mockito.spy(After("f1"))
+        out.nextFireTime = 1
+
+
+
     }
 }

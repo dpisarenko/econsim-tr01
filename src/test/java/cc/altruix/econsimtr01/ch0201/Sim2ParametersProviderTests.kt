@@ -40,7 +40,7 @@ class Sim2ParametersProviderTests {
         val actualResult = Sim2ParametersProvider("").extractFiringFunction(res)
         // Verify
         Assertions.assertThat(actualResult).isNotNull
-        Assertions.assertThat(actualResult is AfterTests).isTrue()
-        Assertions.assertThat((actualResult as AfterTests).flowId).isEqualTo("f1")
+        Assertions.assertThat(actualResult is After).isTrue()
+        Assertions.assertThat((actualResult as After).flowId).isEqualTo("f1")
     }
 }
