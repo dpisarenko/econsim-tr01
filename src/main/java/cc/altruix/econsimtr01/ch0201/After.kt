@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory
 /**
  * Created by pisarenko on 14.04.2016.
  */
-class After(val flowId:String) : (DateTime) -> Boolean {
+open class After(val flowId:String) : (DateTime) -> Boolean {
     val LOGGER = LoggerFactory.getLogger(After::class.java)
     var nextFireTime:Long = -1
 
@@ -39,7 +39,7 @@ class After(val flowId:String) : (DateTime) -> Boolean {
         }
     }
 
-    fun updateNextFiringTime(time: DateTime) {
+    open fun updateNextFiringTime(time: DateTime) {
         // TODO: Test this
         this.nextFireTime = time.millis + 1
     }

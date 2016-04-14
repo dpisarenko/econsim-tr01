@@ -55,15 +55,12 @@ class PlFlow(val id:String,
 
     fun addFlow(srcAgent: IAgent, targetAgent: IAgent, time: DateTime) {
         flows.add(ResourceFlow(time, srcAgent, targetAgent, resource, amount))
-
-        // TODO: Test this
         followingTriggers.forEach { it.updateNextFiringTime(time) }
     }
 
     private fun findAgent(id: String) = agents.filter { x -> x.id().equals(id) }.first()
 
     fun addFollowUpFlow(nextTrigger: After) {
-        // TODO: Test this
         followingTriggers.add(nextTrigger)
     }
 }

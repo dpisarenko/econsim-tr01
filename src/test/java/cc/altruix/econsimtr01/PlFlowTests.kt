@@ -4,6 +4,7 @@ import cc.altruix.econsimtr01.ch0201.After
 import org.joda.time.DateTime
 import org.junit.Test
 import org.mockito.Mockito
+import java.util.*
 
 /**
  * Created by pisarenko on 14.04.2016.
@@ -19,7 +20,9 @@ class PlFlowTests {
         out.addFollowUpFlow(after1)
         out.addFollowUpFlow(after2)
 
-        val time = mock<DateTime>()
+        val time = DateTime(2016, 4, 14, 13, 29, 0)
+
+        out.flows = LinkedList<ResourceFlow>()
 
         // Run method under test
         out.addFlow(mock<IAgent>(), mock<IAgent>(), time)
