@@ -39,7 +39,6 @@ class Sim2ParametersProvider(val theoryTxt2:String) :
                     val dayOfWeek = (timeFunctionPl.getArg(0) as Struct).name
                     timeFunction = OncePerWeek(dayOfWeek)
                 }
-                // TODO: Test the "After" creation
                 "after" -> {
                     val triggeringFlowId = (timeFunctionPl.getArg(0) as Struct).name
                     timeFunction = After(triggeringFlowId)
