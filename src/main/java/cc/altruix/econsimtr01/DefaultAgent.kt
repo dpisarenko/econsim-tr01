@@ -6,7 +6,7 @@ import java.util.*
 /**
  * Created by pisarenko on 11.04.2016.
  */
-class DefaultAgent(val id:String) : IAgent, IResourceStorage {
+open class DefaultAgent(val id:String) : IAgent, IResourceStorage {
     val storage:IResourceStorage = DefaultResourceStorage(id)
     val actions = LinkedList<IAction>()
     override fun act(time: DateTime) {

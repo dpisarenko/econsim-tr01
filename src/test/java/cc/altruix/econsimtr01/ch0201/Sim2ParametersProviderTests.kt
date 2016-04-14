@@ -114,6 +114,8 @@ class Sim2ParametersProviderTests {
         after2.nextFireTime.shouldBe(monday.millis+1)
     }
 
+
+
     private fun doAfterTriggerChecks(f2: PlFlow) {
         Assertions.assertThat(f2).isNotNull
         Assertions.assertThat(f2.timeTriggerFunction is After).isTrue()

@@ -56,7 +56,7 @@ open class Sim1ParametersProvider(val theoryTxt: String) : ISimParametersProvide
                 }
     }
 
-    private fun readAgents(prolog: Prolog) {
+    open protected fun readAgents(prolog: Prolog) {
         val agentsPl = prolog.getResults("isAgent(X).", "X")
         agentsPl
                 .map { x -> x.removeSingleQuotes() }

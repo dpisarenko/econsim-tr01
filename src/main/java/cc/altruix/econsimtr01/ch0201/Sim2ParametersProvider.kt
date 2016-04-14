@@ -1,10 +1,10 @@
 package cc.altruix.econsimtr01.ch0201
 
 import alice.tuprolog.Int
+import alice.tuprolog.Prolog
 import alice.tuprolog.SolveInfo
 import alice.tuprolog.Struct
-import cc.altruix.econsimtr01.PlFlow
-import cc.altruix.econsimtr01.daily
+import cc.altruix.econsimtr01.*
 import org.joda.time.DateTime
 
 /**
@@ -50,6 +50,16 @@ open class Sim2ParametersProvider(val theoryTxt2:String) :
         }
         return timeFunction
     }
-
+    override fun readAgents(prolog: Prolog) {
+        // TODO: Test this
+        val agentsPl = prolog.getResults("isAgent(X).", "X")
+        agentsPl
+                .map { x -> x.removeSingleQuotes() }
+                .map { when (it) {
+                    "list" -> List(it)
+                    else -> DefaultAgent(it)
+                }}
+                .forEach { this.agents.add(it) }
+    }
 
 }
