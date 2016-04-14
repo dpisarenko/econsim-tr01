@@ -1,7 +1,9 @@
 package cc.altruix.econsimtr01
 
+import cc.altruix.econsimtr01.ch0201.After
 import org.joda.time.DateTime
 import org.slf4j.LoggerFactory
+import java.util.*
 
 /**
  * Created by pisarenko on 09.04.2016.
@@ -13,6 +15,7 @@ class PlFlow(val id:String,
                   val amount:Double?,
                   val timeTriggerFunction: (DateTime) -> Boolean) : IAction {
     val LOGGER = LoggerFactory.getLogger(PlFlow::class.java)
+    val followingTriggers : MutableList<After> = LinkedList()
 
     lateinit var agents:List<IAgent>
     lateinit var flows:MutableList<ResourceFlow>
@@ -52,7 +55,14 @@ class PlFlow(val id:String,
 
     private fun addFlow(srcAgent: IAgent, targetAgent: IAgent, time: DateTime) {
         flows.add(ResourceFlow(time, srcAgent, targetAgent, resource, amount))
+
+        followingTriggers.forEach { it.updateNextFiringTime(time) }
     }
 
     private fun findAgent(id: String) = agents.filter { x -> x.id().equals(id) }.first()
+
+    fun addFollowUpFlow(nextTrigger: After) {
+        // TODO: Test this
+        followingTriggers.add(nextTrigger)
+    }
 }

@@ -43,7 +43,6 @@ class Sim1TimeSeriesCreator {
                     moneyAtStacy,
                     moneyInSavingsAccount)
         }
-        // TODO: Continue here, integrate this class into simulation 1
         return builder.toString()
     }
 

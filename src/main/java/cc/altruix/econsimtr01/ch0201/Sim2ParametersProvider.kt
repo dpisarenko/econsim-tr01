@@ -3,6 +3,7 @@ package cc.altruix.econsimtr01.ch0201
 import alice.tuprolog.Int
 import alice.tuprolog.SolveInfo
 import alice.tuprolog.Struct
+import cc.altruix.econsimtr01.PlFlow
 import cc.altruix.econsimtr01.daily
 import org.joda.time.DateTime
 
@@ -11,6 +12,14 @@ import org.joda.time.DateTime
  */
 class Sim2ParametersProvider(val theoryTxt2:String) :
         Sim1ParametersProvider(theoryTxt2){
+
+    init {
+        // TODO: Test this
+        flows.filter { it.timeTriggerFunction is After }
+                .map { it.timeTriggerFunction }
+                .forEach { (it as After).connectToInitiatingFunctionFlow(flows) }
+    }
+
     override fun extractFiringFunction(res: SolveInfo): (DateTime) -> Boolean {
         val timeFunctionPl = res.getTerm("Time")
         var timeFunction = { x: DateTime -> false }
@@ -30,9 +39,15 @@ class Sim2ParametersProvider(val theoryTxt2:String) :
                     val dayOfWeek = (timeFunctionPl.getArg(0) as Struct).name
                     timeFunction = OncePerWeek(dayOfWeek)
                 }
+                // TODO: Test the "After" creation
+                "after" -> {
+                    val triggeringFlowId = (timeFunctionPl.getArg(0) as Struct).name
+                    timeFunction = After(triggeringFlowId)
+                }
             }
         }
         return timeFunction
     }
+
 
 }

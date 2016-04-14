@@ -65,7 +65,7 @@ open class Sim1ParametersProvider(val theoryTxt: String) : ISimParametersProvide
                 }
     }
 
-    private fun readFlows(prolog: Prolog) {
+    protected fun readFlows(prolog: Prolog) {
         try {
             var res = prolog.solve("hasFlow(Id, Source, Target, Resource, Amount, Time).")
             if (res.isSuccess()) {
