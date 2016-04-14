@@ -32,12 +32,11 @@ class AfterTests {
     }
 
     @Test
-    @Ignore
     fun invokeResetsNextFireTimeAtMidnight() {
         val out = Mockito.spy(After("f1"))
         out.nextFireTime = 1
-
-
-
+        val t0 = 0L.millisToSimulationDateTime()
+        out.invoke(t0)
+        out.nextFireTime.shouldBe(-1)
     }
 }
