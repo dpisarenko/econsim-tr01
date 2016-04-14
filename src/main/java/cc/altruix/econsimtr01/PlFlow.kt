@@ -8,7 +8,7 @@ import java.util.*
 /**
  * Created by pisarenko on 09.04.2016.
  */
-class PlFlow(val id:String,
+open class PlFlow(val id:String,
                   val src: String,
                   val target:String,
                   val resource:String,
