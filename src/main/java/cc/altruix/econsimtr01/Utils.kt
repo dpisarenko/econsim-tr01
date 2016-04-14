@@ -5,6 +5,7 @@ import cc.altruix.javaprologinterop.PlUtils
 import net.sourceforge.plantuml.SourceStringReader
 import org.fest.assertions.Assertions
 import org.joda.time.DateTime
+import org.joda.time.DateTimeConstants
 import org.joda.time.Duration
 import java.io.File
 
@@ -115,4 +116,17 @@ fun DateTime.millisSinceT0():Long {
 }
 fun DateTime.secondsSinceT0():Long {
     return this.millisSinceT0()/1000L
+}
+
+fun DateTime.toDayOfWeekName():String {
+    when (this.dayOfWeek) {
+        DateTimeConstants.MONDAY -> return "Monday"
+        DateTimeConstants.TUESDAY -> return "Tuesday"
+        DateTimeConstants.WEDNESDAY -> return "Wednesday"
+        DateTimeConstants.THURSDAY -> return "Thursday"
+        DateTimeConstants.FRIDAY -> return "Friday"
+        DateTimeConstants.SATURDAY -> return "Saturday"
+        DateTimeConstants.SUNDAY -> return "Sunday"
+    }
+    return ""
 }
