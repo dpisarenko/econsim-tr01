@@ -5,5 +5,5 @@ import cc.altruix.econsimtr01.DefaultAgent
 /**
  * Created by pisarenko on 14.04.2016.
  */
-class List(id:String) : DefaultAgent(id) {
+class ListAgent(id:String) : DefaultAgent(id) {
 }

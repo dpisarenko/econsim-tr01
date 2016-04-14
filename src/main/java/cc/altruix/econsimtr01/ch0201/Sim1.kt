@@ -17,7 +17,7 @@ class Sim1(val logTarget:StringBuilder,
         return (t.monthOfYear <= 3)
     }
 
-    override fun createAgents(): List<IAgent> {
+    override fun createAgents(): MutableList<IAgent> {
         (simParametersProvider as Sim1ParametersProvider).flows.forEach { flow ->
             attachFlowToAgent(
                     simParametersProvider.agents,

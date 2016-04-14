@@ -56,7 +56,7 @@ open class Sim2ParametersProvider(val theoryTxt2:String) :
         agentsPl
                 .map { x -> x.removeSingleQuotes() }
                 .map { when (it) {
-                    "list" -> List(it)
+                    "list" -> ListAgent(it)
                     else -> DefaultAgent(it)
                 }}
                 .forEach { this.agents.add(it) }
