@@ -23,6 +23,7 @@ fun Boolean.shouldBeFalse() = shouldBe(false)
 fun String.shouldBe(expectedValue:String) = Assertions.assertThat(this).isEqualTo(expectedValue)
 fun Double.shouldBe(expectedValue:Double) = Assertions.assertThat(this).isEqualTo(expectedValue)
 fun Int.shouldBe(expectedValue:Int) = Assertions.assertThat(this).isEqualTo(expectedValue)
+fun Long.shouldBe(expectedValue:Long) = Assertions.assertThat(this).isEqualTo(expectedValue)
 
 fun Double?.shouldBeNotNull() = Assertions.assertThat(this).isNotNull
 

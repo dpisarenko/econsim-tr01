@@ -1,6 +1,6 @@
 package cc.altruix.econsimtr01
 
-import cc.altruix.econsimtr01.ch0201.After
+import cc.altruix.econsimtr01.ch0201.AfterTests
 import org.joda.time.DateTime
 import org.junit.Test
 import org.mockito.Mockito
@@ -12,10 +12,16 @@ import java.util.*
 class PlFlowTests {
     @Test
     fun addFlowFiresUpFollowingTriggers() {
-        val out = PlFlow("id","src", "target", "resource", null,
-                { x -> true })
-        val after1 = Mockito.spy(After("f1"))
-        val after2 = Mockito.spy(After("f2"))
+        val out = PlFlow(
+                "id",
+                "src",
+                "target",
+                "resource",
+                null,
+                { x -> true }
+        )
+        val after1 = Mockito.spy(AfterTests("f1"))
+        val after2 = Mockito.spy(AfterTests("f2"))
 
         out.addFollowUpFlow(after1)
         out.addFollowUpFlow(after2)
