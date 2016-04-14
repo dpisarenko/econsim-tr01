@@ -51,7 +51,6 @@ open class Sim2ParametersProvider(val theoryTxt2:String) :
         return timeFunction
     }
     override fun readAgents(prolog: Prolog) {
-        // TODO: Test this
         val agentsPl = prolog.getResults("isAgent(X).", "X")
         agentsPl
                 .map { x -> x.removeSingleQuotes() }

@@ -151,6 +151,9 @@ class Sim2ParametersProviderTests {
         val list = out.agents.filter { it.id() == "list" }.first()
         Assertions.assertThat(list).isNotNull
         Assertions.assertThat(list is ListAgent).isTrue()
+
+        out.agents.size.shouldBe(3)
+        out.agents.filter { it.id() != "list" }.forEach { (it is DefaultAgent).shouldBeTrue() }
     }
 
     private fun doAfterTriggerChecks(f2: PlFlow) {
