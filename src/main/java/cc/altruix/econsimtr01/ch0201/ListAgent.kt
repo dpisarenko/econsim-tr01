@@ -39,6 +39,5 @@ open class ListAgent(id:String) : DefaultAgent(id) {
         for (i in 1..number) {
             subscribers.add(Subscriber(UUID.randomUUID().toString(), interactions))
         }
-        // TODO: Test this
     }
 }
