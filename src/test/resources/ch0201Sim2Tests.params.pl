@@ -15,4 +15,18 @@ hasFlow(f1,
     list,
     r1,
     1,
-    oncePerWeek()).
+    oncePerWeek("Monday")).
+
+resource(r2, "Money", "2016 US dollars").
+hasFlow(f2,
+    list,
+    stacy,
+    r2,
+    priceOfSoftwareSoldToNewlyActivatedAudience(),
+    after(f1)).
+hasFlow(f3,
+    stacy,
+    list,
+    r5,
+    numberOfCopiesOfSoftwareSoldToNewlyActivatedAudience(),
+    after(f1)).

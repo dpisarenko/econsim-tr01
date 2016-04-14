@@ -11,7 +11,7 @@ import java.util.*
 /**
  * Created by pisarenko on 08.04.2016.
  */
-class Sim1ParametersProvider(val theoryTxt: String) {
+open class Sim1ParametersProvider(val theoryTxt: String) {
     val LOGGER = LoggerFactory.getLogger(Sim1ParametersProvider::class.java)
     var resources:List<PlResource>
         get
