@@ -5,7 +5,7 @@ import cc.altruix.econsimtr01.DefaultAgent
 /**
  * Created by pisarenko on 14.04.2016.
  */
-class ListAgent(id:String) : DefaultAgent(id) {
+open class ListAgent(id:String) : DefaultAgent(id) {
     companion object {
         val subscriberTypes = arrayOf(
                 "r06-pc1",
@@ -19,14 +19,13 @@ class ListAgent(id:String) : DefaultAgent(id) {
     }
     override fun put(res: String, amt: Double) {
         if (subscriberTypes.contains(res)) {
-            // TODO: Test this
             addSubscribers(res, amt)
         } else {
             super.put(res, amt)
         }
     }
 
-    fun addSubscribers(res: String, amt: Double) {
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+    open fun addSubscribers(res: String, amt: Double) {
+        // TODO: Test this
     }
 }
