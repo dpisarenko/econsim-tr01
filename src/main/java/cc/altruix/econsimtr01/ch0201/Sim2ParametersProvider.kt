@@ -27,7 +27,7 @@ class Sim2ParametersProvider(val theoryTxt2:String) :
                     timeFunction = daily(hour, minute)
                 }
                 "oncePerWeek" -> {
-                    val dayOfWeek = timeFunctionPl.getArg(0) as String
+                    val dayOfWeek = (timeFunctionPl.getArg(0) as Struct).name
                     timeFunction = OncePerWeek(dayOfWeek)
                 }
             }
