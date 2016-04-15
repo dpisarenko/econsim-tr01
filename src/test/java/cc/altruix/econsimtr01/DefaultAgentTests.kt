@@ -9,14 +9,14 @@ import org.mockito.Mockito
 class DefaultAgentTests {
     @Test
     fun actNotifiesSubscribers() {
+        val t = 0L.millisToSimulationDateTime()
         val action1 = mock<IAction>()
-        Mockito.`when`(action1.timeToRun(Mockito.any())).thenReturn(true)
+        Mockito.`when`(action1.timeToRun(t)).thenReturn(true)
         val action2 = mock<IAction>()
-        Mockito.`when`(action1.timeToRun(Mockito.any())).thenReturn(false)
+        Mockito.`when`(action2.timeToRun(t)).thenReturn(false)
         val out = DefaultAgent("agent1")
         out.actions.add(action1)
         out.actions.add(action2)
-        val t = 0L.millisToSimulationDateTime()
         // Run method under test
         out.act(t)
         // Verify

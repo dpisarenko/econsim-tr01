@@ -12,7 +12,6 @@ open class DefaultAgent(val id:String) : IAgent, IResourceStorage {
     override fun act(time: DateTime) {
         val actionsToRun = actions.filter { x -> x.timeToRun(time) }
         actionsToRun.forEach { it.run(time) }
-        // TODO: Test this
         actionsToRun.forEach { it.notifySubscribers(time) }
     }
 
