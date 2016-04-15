@@ -177,7 +177,25 @@ class Sim2ParametersProviderTests {
 
     @Test
     fun createFlowCallsCreateF2() {
-        Assert.fail()
+        val fdata = Sim1ParametersProvider.ExtractFlowDataResult("f2",
+                "src",
+                "target",
+                "resource",
+                null,
+                {true})
+        val out = Mockito.spy(Sim2ParametersProvider(""))
+        val res = mock<SolveInfo>()
+        Mockito.doReturn(fdata).`when`(out).extractFiringFunction(res)
+        val flow = mock<PlFlow>()
+        Mockito.doReturn(flow).`when`(out).createF2(fdata)
+        // Run method under test
+        val act = out.createFlow(res)
+        // Verify
+        Assertions.assertThat(act).isSameAs(flow)
+        Mockito.verify(out).createF2(fdata)
+        Mockito.verify(out, Mockito.never()).createF3(
+                Mockito.any(Sim1ParametersProvider.ExtractFlowDataResult::class.java)
+        )
     }
     @Test
     fun createFlowCallsCreateF3() {

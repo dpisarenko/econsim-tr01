@@ -73,7 +73,7 @@ open class Sim2ParametersProvider(val theoryTxt2:String) :
         when (fdata.id) {
             "f2" -> return createF2(fdata)
             "f3" -> return createF3(fdata)
-            else -> return createFlow(fdata)
+            else -> return super.createFlow(fdata)
         }
     }
 
