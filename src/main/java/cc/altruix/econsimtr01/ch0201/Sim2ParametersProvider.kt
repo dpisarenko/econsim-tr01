@@ -68,6 +68,20 @@ open class Sim2ParametersProvider(val theoryTxt2:String) :
     }
 
     override fun createFlow(res: SolveInfo): PlFlow {
-        return super.createFlow(res)
+        // TODO: Test this
+        val fdata = extractFlowData(res)
+        when (fdata.id) {
+            "f2" -> return createF2(fdata)
+            "f3" -> return createF3(fdata)
+            else -> return createFlow(fdata)
+        }
+    }
+
+    private fun createF3(fdata: ExtractFlowDataResult): PlFlow {
+        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    private fun createF2(fdata: ExtractFlowDataResult): PlFlow {
+        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
