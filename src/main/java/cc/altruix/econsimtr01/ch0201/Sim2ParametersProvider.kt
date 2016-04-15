@@ -78,10 +78,10 @@ open class Sim2ParametersProvider(val theoryTxt2:String) :
     }
 
     open fun createF3(fdata: ExtractFlowDataResult): PlFlow {
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return super.createFlow(fdata)
     }
 
     open fun createF2(fdata: ExtractFlowDataResult): PlFlow {
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return super.createFlow(fdata)
     }
 }

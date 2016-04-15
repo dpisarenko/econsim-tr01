@@ -106,7 +106,7 @@ open class Sim1ParametersProvider(val theoryTxt: String) : ISimParametersProvide
                                      val resource:String,
                                      val amt:Double?,
                                      val timeFunction:(DateTime) -> Boolean)
-    open protected fun extractFlowData(res:SolveInfo):ExtractFlowDataResult =
+    open fun extractFlowData(res:SolveInfo):ExtractFlowDataResult =
             ExtractFlowDataResult(extractId(res),
                     extractSource(res),
                     extractTarget(res),
