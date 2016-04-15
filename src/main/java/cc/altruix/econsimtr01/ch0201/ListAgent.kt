@@ -11,7 +11,10 @@ import java.util.*
 /**
  * Created by pisarenko on 14.04.2016.
  */
-open class ListAgent(id:String) : DefaultAgent(id), IActionSubscriber {
+open class ListAgent(id:String,
+                     val percentageOfReaders:Double = 0.5,
+                     val interactionsBeforePurchase:Int = 7,
+                     val percentageOfBuyers:Double = 0.1) : DefaultAgent(id), IActionSubscriber {
     val LOGGER = LoggerFactory.getLogger(ListAgent::class.java)
     companion object {
         val subscriberTypes = hashMapOf(
@@ -55,22 +58,21 @@ open class ListAgent(id:String) : DefaultAgent(id), IActionSubscriber {
     }
     open override fun actionOccurred(sender: IAction, time: DateTime) {
         updateInteractionsCount()
-
-        // TODO: Calculate number of people, who bought the software
-        // TODO: Test this
         buyersCount = subscribersBuy()
-        // TODO: Test this
     }
 
     open fun subscribersBuy(): Int {
-        val potentialBuyers = this.subscribers.filter { (it.interactionsWithStacy >= 7) && !it.boughtSomething }
-        val indices = getIndicesOfSubscribersToUpdate(potentialBuyers, 0.1)
+        val potentialBuyers = this.subscribers.filter {
+            (it.interactionsWithStacy >= interactionsBeforePurchase) &&
+                    !it.boughtSomething
+        }
+        val indices = getIndicesOfSubscribersToUpdate(potentialBuyers, percentageOfBuyers)
         indices.forEach { this.subscribers.get(it).boughtSomething = true }
         return indices.size
     }
 
     open fun updateInteractionsCount() {
-        val processedIndices = getIndicesOfSubscribersToUpdate(subscribers, 0.5)
+        val processedIndices = getIndicesOfSubscribersToUpdate(subscribers, percentageOfReaders)
         processedIndices.forEach { this.subscribers.get(it).interactionsWithStacy++ }
     }
 

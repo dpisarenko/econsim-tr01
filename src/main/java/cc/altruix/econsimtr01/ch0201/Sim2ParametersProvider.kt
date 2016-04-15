@@ -52,6 +52,7 @@ open class Sim2ParametersProvider(val theoryTxt2:String) :
     }
     override fun readAgents(prolog: Prolog) {
         val agentsPl = prolog.getResults("isAgent(X).", "X")
+        // TODO: Test the passing of parameters to ListAgent ctor
         agentsPl
                 .map { x -> x.removeSingleQuotes() }
                 .map { when (it) {
