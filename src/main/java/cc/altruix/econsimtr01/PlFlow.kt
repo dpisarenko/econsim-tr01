@@ -20,6 +20,7 @@ open class PlFlow(val id:String,
 
     lateinit var agents:List<IAgent>
     lateinit var flows:MutableList<ResourceFlow>
+    val subscribers : MutableList<IActionSubscriber> = LinkedList<IActionSubscriber>()
 
     override fun timeToRun(time: DateTime): Boolean = timeTriggerFunction(time)
     override fun run(time: DateTime) {
@@ -65,11 +66,10 @@ open class PlFlow(val id:String,
     }
 
     override fun notifySubscribers(time: DateTime) {
-        // TODO: Implement this
-        // TODO: Test this
+        this.subscribers.forEach { it.run(time) }
     }
 
     override fun subscribe(subscriber: IActionSubscriber) {
-
+        this.subscribers.add(subscriber)
     }
 }

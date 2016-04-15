@@ -12,6 +12,7 @@ class EatingAction(val recipient: Farmer,
                    val flows: MutableList<ResourceFlow>,
                    val dailyPotatoConsumption: Double) :
         DefaultAction(composeHourMinuteFiringFunction(20, 0)) {
+
     override fun run(time: DateTime) {
         if (recipient.alive) {
             eatIfPossible(time, dailyPotatoConsumption)
@@ -30,5 +31,7 @@ class EatingAction(val recipient: Farmer,
     }
 
     override fun notifySubscribers(time: DateTime) {
+    }
+    override fun subscribe(subscriber: IActionSubscriber) {
     }
 }
