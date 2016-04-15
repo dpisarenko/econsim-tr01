@@ -24,6 +24,7 @@ open class ListAgent(id:String) : DefaultAgent(id), IActionSubscriber {
                 Pair("r12-pc2", 7)
         )
     }
+    val random = Random()
     val subscribers : MutableList<Subscriber> = LinkedList<Subscriber>()
     override fun put(res: String, amt: Double) {
         if (subscriberTypes.containsKey(res)) {
@@ -52,13 +53,29 @@ open class ListAgent(id:String) : DefaultAgent(id), IActionSubscriber {
         }
     }
     open override fun actionOccurred(sender: IAction, time: DateTime) {
-        // TODO: Increase number of interactions with Stacy
         updateInteractionsCount()
+
         // TODO: Calculate number of people, who bought the software
+        // TODO: Test this
+        val buyersCount = calculateBuyersCount()
         // TODO: Test this
     }
 
+    private fun calculateBuyersCount(): Int {
+        return 0
+    }
+
     open fun updateInteractionsCount() {
-        // TODO: Test this
+        val readersCount = this.subscribers.size / 2
+        val processedIndices = ArrayList<Int>(readersCount)
+
+        for (i in 1..readersCount) {
+            var readerIndex = random.nextInt(this.subscribers.size)
+            while (processedIndices.contains(readerIndex)) {
+                readerIndex = random.nextInt(this.subscribers.size)
+            }
+            processedIndices.add(readerIndex)
+            this.subscribers.get(readerIndex).interactionsWithStacy++
+        }
     }
 }

@@ -47,18 +47,21 @@ class DefaultAgentTests {
 
     @Test
     fun updateInteractionsCountSunnyDay() {
+        updateInteractionsCountTestLogic(3, 1)
+        updateInteractionsCountTestLogic(4, 2)
+    }
+
+    private fun updateInteractionsCountTestLogic(subscriberCount: Int, expectedNumberOfUpdatedSubscribers: Int) {
         val out = ListAgent("list")
-        val s1 = Subscriber("0", 0)
-        val s2 = Subscriber("1", 1)
-        val s3 = Subscriber("2", 2)
-        out.subscribers.add(s1)
-        out.subscribers.add(s2)
-        out.subscribers.add(s3)
+        for (i in 1..subscriberCount) {
+            out.subscribers.add(Subscriber("$i", 0))
+        }
         // Run method under test
         out.updateInteractionsCount()
         // Verify
-        s1.interactionsWithStacy.shouldBe(1)
-        s2.interactionsWithStacy.shouldBe(2)
-        s3.interactionsWithStacy.shouldBe(3)
+        var numberOfUpdatedSubscribers = out.subscribers
+                .filter { it.interactionsWithStacy > 0 }
+                .count()
+        numberOfUpdatedSubscribers.shouldBe(expectedNumberOfUpdatedSubscribers)
     }
 }
