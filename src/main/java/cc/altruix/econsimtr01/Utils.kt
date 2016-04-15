@@ -1,12 +1,14 @@
 package cc.altruix.econsimtr01
 
 import alice.tuprolog.Prolog
+import cc.altruix.econsimtr01.ch0201.ListAgent
 import cc.altruix.javaprologinterop.PlUtils
 import net.sourceforge.plantuml.SourceStringReader
 import org.fest.assertions.Assertions
 import org.joda.time.DateTime
 import org.joda.time.DateTimeConstants
 import org.joda.time.Duration
+import org.slf4j.LoggerFactory
 import java.io.File
 
 /**
@@ -129,4 +131,22 @@ fun DateTime.toDayOfWeekName():String {
         DateTimeConstants.SUNDAY -> return "Sunday"
     }
     return ""
+}
+
+fun Prolog.extractSingleDouble(query: String, varName:String):Double {
+    val result = PlUtils.getResults(this, query, varName)?.first()
+    if (result != null) {
+        return result.toDouble()
+    }
+    LoggerFactory.getLogger(Prolog::class.java).error("Can't find double value. Query: '$query', variable: '$varName")
+    return -1.0
+}
+
+fun Prolog.extractSingleInt(query: String, varName:String):Int {
+    val result = PlUtils.getResults(this, query, varName)?.first()
+    if (result != null) {
+        return result.toInt()
+    }
+    LoggerFactory.getLogger(Prolog::class.java).error("Can't find int value. Query: '$query', variable: '$varName")
+    return -1
 }

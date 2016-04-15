@@ -52,11 +52,18 @@ open class Sim2ParametersProvider(val theoryTxt2:String) :
     }
     override fun readAgents(prolog: Prolog) {
         val agentsPl = prolog.getResults("isAgent(X).", "X")
+        val percentageOfReaders = prolog.extractSingleDouble("percentageOfReaders(X).", "X")
+        val interactionsBeforePurchase= prolog.extractSingleInt("interactionsBeforePurchase(X).", "X")
+        val percentageOfBuyers = prolog.extractSingleDouble("percentageOfBuyers(X).", "X")
+
         // TODO: Test the passing of parameters to ListAgent ctor
         agentsPl
                 .map { x -> x.removeSingleQuotes() }
                 .map { when (it) {
-                    "list" -> ListAgent(it)
+                    "list" -> ListAgent(it,
+                            percentageOfReaders,
+                            interactionsBeforePurchase,
+                            percentageOfBuyers)
                     else -> DefaultAgent(it)
                 }}
                 .forEach { this.agents.add(it) }
