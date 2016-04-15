@@ -4,6 +4,7 @@ import alice.tuprolog.SolveInfo
 import alice.tuprolog.Struct
 import cc.altruix.econsimtr01.*
 import org.fest.assertions.Assertions
+import org.junit.Assert
 import org.junit.Test
 import org.mockito.Mockito
 import java.util.*
@@ -174,11 +175,25 @@ class Sim2ParametersProviderTests {
         list.percentageOfBuyers.shouldBe(0.2)
     }
 
+    @Test
+    fun createFlowCallsCreateF2() {
+        Assert.fail()
+    }
+    @Test
+    fun createFlowCallsCreateF3() {
+        Assert.fail()
+    }
+    @Test
+    fun createFlowCallsCreateFlow() {
+        Assert.fail()
+    }
+
     private fun doAfterTriggerChecks(f2: PlFlow) {
         Assertions.assertThat(f2).isNotNull
         Assertions.assertThat(f2.timeTriggerFunction is After).isTrue()
         Assertions.assertThat((f2.timeTriggerFunction as After).flowId).isEqualTo("f1")
     }
 
-    private fun findFlow(out: Sim2ParametersProvider, id: String) = out.flows.filter { it.id == id }.first()
+    private fun findFlow(out: Sim2ParametersProvider, id: String) =
+            out.flows.filter { it.id == id }.first()
 }

@@ -89,7 +89,7 @@ open class Sim1ParametersProvider(val theoryTxt: String) : ISimParametersProvide
         return flow
     }
 
-    protected fun createFlow(fdata: ExtractFlowDataResult): PlFlow {
+    open protected fun createFlow(fdata: ExtractFlowDataResult): PlFlow {
         return PlFlow(
                 fdata.id,
                 fdata.src,
