@@ -28,3 +28,4 @@ fun Long.shouldBe(expectedValue:Long) = Assertions.assertThat(this).isEqualTo(ex
 fun Double?.shouldBeNotNull() = Assertions.assertThat(this).isNotNull
 
 inline fun<reified T : Any> mock() = Mockito.mock(T::class.java)
+

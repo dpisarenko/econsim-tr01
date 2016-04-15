@@ -84,4 +84,20 @@ class DefaultAgentTests {
         result.shouldBe(10)
         out.subscribers.filter { it.boughtSomething }.count().shouldBe(10)
     }
+
+    @Test
+    fun actionOccurredSunnyDay() {
+        val out = Mockito.spy(ListAgent("list"))
+        Mockito.doNothing().`when`(out).updateInteractionsCount()
+        Mockito.doReturn(123).`when`(out).subscribersBuy()
+        out.buyersCount.shouldBe(0)
+        // Run method under test
+        out.actionOccurred(
+                mock<IAction>(),
+                0L.millisToSimulationDateTime()
+        )
+        // Verify
+        Mockito.verify(out).subscribersBuy()
+        out.buyersCount.shouldBe(123)
+    }
 }

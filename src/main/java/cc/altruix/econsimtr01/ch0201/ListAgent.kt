@@ -26,6 +26,7 @@ open class ListAgent(id:String) : DefaultAgent(id), IActionSubscriber {
     }
     val random = Random()
     val subscribers : MutableList<Subscriber> = LinkedList<Subscriber>()
+    var buyersCount : Int = 0
     override fun put(res: String, amt: Double) {
         if (subscriberTypes.containsKey(res)) {
             addSubscribers(res, amt)
@@ -57,7 +58,7 @@ open class ListAgent(id:String) : DefaultAgent(id), IActionSubscriber {
 
         // TODO: Calculate number of people, who bought the software
         // TODO: Test this
-        val buyersCount = subscribersBuy()
+        buyersCount = subscribersBuy()
         // TODO: Test this
     }
 
