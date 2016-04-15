@@ -23,4 +23,15 @@ class DefaultAgentTests {
         Mockito.verify(action1).notifySubscribers(t)
         Mockito.verify(action2, Mockito.never()).notifySubscribers(t)
     }
+    @Test
+    fun subscriptionWorks() {
+        val subscriber = mock<IActionSubscriber>()
+        val out = PlFlow("f1", "src", "target", "res", null, { true })
+        val t = 0L.millisToSimulationDateTime()
+        // Run method under test
+        out.subscribe(subscriber)
+        out.notifySubscribers(t)
+        // Verify
+        Mockito.verify(subscriber).run()
+    }
 }

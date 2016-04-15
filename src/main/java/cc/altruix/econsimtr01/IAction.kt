@@ -11,4 +11,5 @@ interface IAction {
     fun timeToRun(time: DateTime) : Boolean
     fun run(time:DateTime)
     fun notifySubscribers(time:DateTime)
+    fun subscribe(subscriber:IActionSubscriber)
 }

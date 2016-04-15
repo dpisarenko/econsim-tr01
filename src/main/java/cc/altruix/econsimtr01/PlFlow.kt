@@ -17,11 +17,11 @@ open class PlFlow(val id:String,
     val LOGGER = LoggerFactory.getLogger(PlFlow::class.java)
 
     val followingTriggers : MutableList<After> = LinkedList()
+
     lateinit var agents:List<IAgent>
-
     lateinit var flows:MutableList<ResourceFlow>
-    override fun timeToRun(time: DateTime): Boolean = timeTriggerFunction(time)
 
+    override fun timeToRun(time: DateTime): Boolean = timeTriggerFunction(time)
     override fun run(time: DateTime) {
         val targetAgent = findAgent(target)
         val srcAgent = findAgent(src)
@@ -67,5 +67,9 @@ open class PlFlow(val id:String,
     override fun notifySubscribers(time: DateTime) {
         // TODO: Implement this
         // TODO: Test this
+    }
+
+    override fun subscribe(subscriber: IActionSubscriber) {
+
     }
 }
