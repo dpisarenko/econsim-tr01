@@ -53,12 +53,12 @@ open class ListAgent(id:String) : DefaultAgent(id), IActionSubscriber {
     }
     open override fun actionOccurred(sender: IAction, time: DateTime) {
         // TODO: Increase number of interactions with Stacy
-        // updateInteractionsCount()
+        updateInteractionsCount()
         // TODO: Calculate number of people, who bought the software
         // TODO: Test this
     }
 
     open fun updateInteractionsCount() {
-
+        // TODO: Test this
     }
 }

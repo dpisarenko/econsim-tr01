@@ -1,6 +1,7 @@
 package cc.altruix.econsimtr01
 
 import cc.altruix.econsimtr01.ch0201.ListAgent
+import cc.altruix.econsimtr01.ch0201.Subscriber
 import org.junit.Test
 import org.mockito.Mockito
 
@@ -41,6 +42,23 @@ class DefaultAgentTests {
         // Run method under test
         out.actionOccurred(mock<IAction>(), 0L.millisToSimulationDateTime())
         // Verify
-        // TODO: Continue here
+        Mockito.verify(out).updateInteractionsCount()
+    }
+
+    @Test
+    fun updateInteractionsCountSunnyDay() {
+        val out = ListAgent("list")
+        val s1 = Subscriber("0", 0)
+        val s2 = Subscriber("1", 1)
+        val s3 = Subscriber("2", 2)
+        out.subscribers.add(s1)
+        out.subscribers.add(s2)
+        out.subscribers.add(s3)
+        // Run method under test
+        out.updateInteractionsCount()
+        // Verify
+        s1.interactionsWithStacy.shouldBe(1)
+        s2.interactionsWithStacy.shouldBe(2)
+        s3.interactionsWithStacy.shouldBe(3)
     }
 }
