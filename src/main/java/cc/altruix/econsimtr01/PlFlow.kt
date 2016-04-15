@@ -66,7 +66,7 @@ open class PlFlow(val id:String,
     }
 
     override fun notifySubscribers(time: DateTime) {
-        this.subscribers.forEach { it.actionOccurred(time) }
+        this.subscribers.forEach { it.actionOccurred(this, time) }
     }
 
     override fun subscribe(subscriber: IActionSubscriber) {

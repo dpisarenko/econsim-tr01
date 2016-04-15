@@ -1,6 +1,7 @@
 package cc.altruix.econsimtr01.ch0201
 
 import cc.altruix.econsimtr01.DefaultAgent
+import cc.altruix.econsimtr01.IAction
 import cc.altruix.econsimtr01.IActionSubscriber
 import cc.altruix.econsimtr01.PlFlow
 import org.joda.time.DateTime
@@ -50,7 +51,14 @@ open class ListAgent(id:String) : DefaultAgent(id), IActionSubscriber {
             action.subscribe(this)
         }
     }
-    override fun actionOccurred(time: DateTime) {
+    open override fun actionOccurred(sender: IAction, time: DateTime) {
+        // TODO: Increase number of interactions with Stacy
+        // updateInteractionsCount()
+        // TODO: Calculate number of people, who bought the software
         // TODO: Test this
+    }
+
+    open fun updateInteractionsCount() {
+
     }
 }

@@ -1,5 +1,6 @@
 package cc.altruix.econsimtr01
 
+import cc.altruix.econsimtr01.ch0201.ListAgent
 import org.junit.Test
 import org.mockito.Mockito
 
@@ -32,6 +33,14 @@ class DefaultAgentTests {
         out.subscribe(subscriber)
         out.notifySubscribers(t)
         // Verify
-        Mockito.verify(subscriber).actionOccurred(t)
+        Mockito.verify(subscriber).actionOccurred(out, t)
+    }
+    @Test
+    fun actionOccurredCallsUpdateInteractionsCount() {
+        val out = Mockito.spy(ListAgent("list"))
+        // Run method under test
+        out.actionOccurred(mock<IAction>(), 0L.millisToSimulationDateTime())
+        // Verify
+        // TODO: Continue here
     }
 }
