@@ -156,6 +156,24 @@ class Sim2ParametersProviderTests {
         out.agents.filter { it.id() != "list" }.forEach { (it is DefaultAgent).shouldBeTrue() }
     }
 
+    @Test
+    fun readAgentsReadsListAgentParameters() {
+        // Run method under test
+        val out = Sim2ParametersProvider("""
+        isAgent(list).
+        percentageOfReaders(0.6).
+        interactionsBeforePurchase(8).
+        percentageOfBuyers(0.2).
+        """)
+        // Verify
+        val listAgents = out.agents.filter { it.id() == "list" }
+        listAgents.size.shouldBe(1)
+        val list = listAgents.first() as ListAgent
+        list.percentageOfReaders.shouldBe(0.6)
+        list.interactionsBeforePurchase.shouldBe(8)
+        list.percentageOfBuyers.shouldBe(0.2)
+    }
+
     private fun doAfterTriggerChecks(f2: PlFlow) {
         Assertions.assertThat(f2).isNotNull
         Assertions.assertThat(f2.timeTriggerFunction is After).isTrue()

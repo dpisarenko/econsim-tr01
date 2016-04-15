@@ -1,6 +1,9 @@
 isAgent(stacy).
 isAgent(list).
 isAgent(internets).
+percentageOfReaders(0.5).
+interactionsBeforePurchase(7).
+percentageOfBuyers(0.1).
 
 resource(r1, "Message to the list", "Pieces").
 resource(r2, "Money", "2016 US dollars").
