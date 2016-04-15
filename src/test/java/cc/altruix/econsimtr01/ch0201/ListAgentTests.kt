@@ -58,9 +58,6 @@ class ListAgentTests {
         Mockito.verify(f2, Mockito.never()).subscribe(out)
     }
 
-    private fun mockFlow(id: String): PlFlow {
-        val flow = mock<PlFlow>()
-        Mockito.`when`(flow.id).thenReturn(id)
-        return flow
-    }
+    private fun mockFlow(id: String): PlFlow =
+            Mockito.spy(PlFlow(id, "src", "target", "resource", null, {true}))
 }

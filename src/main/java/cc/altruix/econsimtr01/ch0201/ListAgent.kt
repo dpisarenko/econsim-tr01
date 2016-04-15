@@ -44,10 +44,13 @@ open class ListAgent(id:String) : DefaultAgent(id), IActionSubscriber {
         }
     }
 
-    override fun addAction(action: PlFlow) {
+    open override fun addAction(action: PlFlow) {
         super.addAction(action)
+        if (action.id == "f1") {
+            action.subscribe(this)
+        }
     }
     override fun actionOccurred(time: DateTime) {
-        throw UnsupportedOperationException()
+        // TODO: Test this
     }
 }
