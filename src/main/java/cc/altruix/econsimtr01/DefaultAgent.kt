@@ -10,10 +10,10 @@ open class DefaultAgent(val id:String) : IAgent, IResourceStorage {
     val storage:IResourceStorage = DefaultResourceStorage(id)
     val actions = LinkedList<IAction>()
     override fun act(time: DateTime) {
-        actions
-                .filter { x -> x.timeToRun(time) }
-                .forEach { x -> x.run(time) }
-
+        val actionsToRun = actions.filter { x -> x.timeToRun(time) }
+        actionsToRun.forEach { it.run(time) }
+        // TODO: Test this
+        actionsToRun.forEach { it.notifySubscribers(time) }
     }
 
     override fun id(): String = id

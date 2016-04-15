@@ -28,4 +28,7 @@ class EatingAction(val recipient: Farmer,
             recipient.eat()
         }
     }
+
+    override fun notifySubscribers(time: DateTime) {
+    }
 }

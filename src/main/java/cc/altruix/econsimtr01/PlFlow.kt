@@ -15,11 +15,11 @@ open class PlFlow(val id:String,
                   val amount:Double?,
                   val timeTriggerFunction: (DateTime) -> Boolean) : IAction {
     val LOGGER = LoggerFactory.getLogger(PlFlow::class.java)
+
     val followingTriggers : MutableList<After> = LinkedList()
-
     lateinit var agents:List<IAgent>
-    lateinit var flows:MutableList<ResourceFlow>
 
+    lateinit var flows:MutableList<ResourceFlow>
     override fun timeToRun(time: DateTime): Boolean = timeTriggerFunction(time)
 
     override fun run(time: DateTime) {
@@ -62,5 +62,10 @@ open class PlFlow(val id:String,
 
     open fun addFollowUpFlow(nextTrigger: After) {
         followingTriggers.add(nextTrigger)
+    }
+
+    override fun notifySubscribers(time: DateTime) {
+        // TODO: Implement this
+        // TODO: Test this
     }
 }
