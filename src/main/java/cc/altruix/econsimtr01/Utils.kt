@@ -134,7 +134,7 @@ fun DateTime.toDayOfWeekName():String {
 }
 
 fun Prolog.extractSingleDouble(query: String, varName:String):Double {
-    val result = PlUtils.getResults(this, query, varName)?.first()
+    val result = PlUtils.getResults(this, query, varName)?.firstOrNull()
     if (result != null) {
         return result.toDouble()
     }
@@ -143,7 +143,7 @@ fun Prolog.extractSingleDouble(query: String, varName:String):Double {
 }
 
 fun Prolog.extractSingleInt(query: String, varName:String):Int {
-    val result = PlUtils.getResults(this, query, varName)?.first()
+    val result = PlUtils.getResults(this, query, varName)?.firstOrNull()
     if (result != null) {
         return result.toInt()
     }
