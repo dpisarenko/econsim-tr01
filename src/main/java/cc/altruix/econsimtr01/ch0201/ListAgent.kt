@@ -1,13 +1,16 @@
 package cc.altruix.econsimtr01.ch0201
 
 import cc.altruix.econsimtr01.DefaultAgent
+import cc.altruix.econsimtr01.IActionSubscriber
+import cc.altruix.econsimtr01.PlFlow
+import org.joda.time.DateTime
 import org.slf4j.LoggerFactory
 import java.util.*
 
 /**
  * Created by pisarenko on 14.04.2016.
  */
-open class ListAgent(id:String) : DefaultAgent(id) {
+open class ListAgent(id:String) : DefaultAgent(id), IActionSubscriber {
     val LOGGER = LoggerFactory.getLogger(ListAgent::class.java)
     companion object {
         val subscriberTypes = hashMapOf(
@@ -39,5 +42,12 @@ open class ListAgent(id:String) : DefaultAgent(id) {
         for (i in 1..number) {
             subscribers.add(Subscriber(UUID.randomUUID().toString(), interactions))
         }
+    }
+
+    override fun addAction(action: PlFlow) {
+        super.addAction(action)
+    }
+    override fun actionOccurred(time: DateTime) {
+        throw UnsupportedOperationException()
     }
 }

@@ -27,7 +27,7 @@ open class DefaultAgent(val id:String) : IAgent, IResourceStorage {
 
     override fun isInfinite(res: String): Boolean = storage.isInfinite(res)
 
-    fun addAction(action:PlFlow) {
+    open fun addAction(action:PlFlow) {
         actions.add(action)
     }
 

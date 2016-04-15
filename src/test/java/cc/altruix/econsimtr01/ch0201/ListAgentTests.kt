@@ -1,5 +1,7 @@
 package cc.altruix.econsimtr01.ch0201
 
+import cc.altruix.econsimtr01.PlFlow
+import cc.altruix.econsimtr01.mock
 import cc.altruix.econsimtr01.shouldBe
 import org.fest.assertions.Assertions
 import org.junit.Test
@@ -42,5 +44,23 @@ class ListAgentTests {
                 x.interactionsWithStacy.shouldBe(it.value)
             }
         }
+    }
+    @Test
+    fun addActionSubscribesListToF1Flow() {
+        val f1 = mockFlow("f1")
+        val f2 = mockFlow("f2")
+        val out = ListAgent("list")
+        // Run method under test
+        out.addAction(f1)
+        out.addAction(f2)
+        // Verify
+        Mockito.verify(f1).subscribe(out)
+        Mockito.verify(f2, Mockito.never()).subscribe(out)
+    }
+
+    private fun mockFlow(id: String): PlFlow {
+        val flow = mock<PlFlow>()
+        Mockito.`when`(flow.id).thenReturn(id)
+        return flow
     }
 }

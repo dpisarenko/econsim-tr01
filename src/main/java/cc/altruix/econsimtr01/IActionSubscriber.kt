@@ -6,5 +6,5 @@ import org.joda.time.DateTime
  * Created by pisarenko on 15.04.2016.
  */
 interface IActionSubscriber {
-    fun run(time: DateTime)
+    fun actionOccurred(time: DateTime)
 }

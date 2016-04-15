@@ -32,6 +32,6 @@ class DefaultAgentTests {
         out.subscribe(subscriber)
         out.notifySubscribers(t)
         // Verify
-        Mockito.verify(subscriber).run(t)
+        Mockito.verify(subscriber).actionOccurred(t)
     }
 }
