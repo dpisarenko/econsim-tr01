@@ -4,6 +4,7 @@ import cc.altruix.econsimtr01.ch0201.ListAgent
 import cc.altruix.econsimtr01.ch0201.Subscriber
 import org.junit.Test
 import org.mockito.Mockito
+import java.util.*
 
 /**
  * Created by pisarenko on 15.04.2016.
@@ -63,5 +64,24 @@ class DefaultAgentTests {
                 .filter { it.interactionsWithStacy > 0 }
                 .count()
         numberOfUpdatedSubscribers.shouldBe(expectedNumberOfUpdatedSubscribers)
+    }
+
+    @Test
+    fun subscribersBuySunnyDay() {
+        val out = ListAgent("list")
+        for (i in 1..90) {
+            out.subscribers.add(Subscriber(i.toString(), 7))
+        }
+        for (i in 1..10) {
+            out.subscribers.add(Subscriber(i.toString(), 8))
+        }
+        for (i in 1..10) {
+            out.subscribers.add(Subscriber(i.toString(), 6))
+        }
+        // Run method under test
+        val result = out.subscribersBuy()
+        // Verify
+        result.shouldBe(10)
+        out.subscribers.filter { it.boughtSomething }.count().shouldBe(10)
     }
 }

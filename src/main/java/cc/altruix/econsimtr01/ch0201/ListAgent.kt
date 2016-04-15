@@ -57,25 +57,34 @@ open class ListAgent(id:String) : DefaultAgent(id), IActionSubscriber {
 
         // TODO: Calculate number of people, who bought the software
         // TODO: Test this
-        val buyersCount = calculateBuyersCount()
+        val buyersCount = subscribersBuy()
         // TODO: Test this
     }
 
-    private fun calculateBuyersCount(): Int {
-        return 0
+    open fun subscribersBuy(): Int {
+        val potentialBuyers = this.subscribers.filter { (it.interactionsWithStacy >= 7) && !it.boughtSomething }
+        val indices = getIndicesOfSubscribersToUpdate(potentialBuyers, 0.1)
+        indices.forEach { this.subscribers.get(it).boughtSomething = true }
+        return indices.size
     }
 
     open fun updateInteractionsCount() {
-        val readersCount = this.subscribers.size / 2
+        val processedIndices = getIndicesOfSubscribersToUpdate(subscribers, 0.5)
+        processedIndices.forEach { this.subscribers.get(it).interactionsWithStacy++ }
+    }
+
+    private fun getIndicesOfSubscribersToUpdate(parameter: Collection<Subscriber>,
+                                                percentage: Double): ArrayList<Int> {
+        val readersCount = (parameter.size * percentage).toInt()
         val processedIndices = ArrayList<Int>(readersCount)
 
         for (i in 1..readersCount) {
-            var readerIndex = random.nextInt(this.subscribers.size)
+            var readerIndex = random.nextInt(parameter.size)
             while (processedIndices.contains(readerIndex)) {
-                readerIndex = random.nextInt(this.subscribers.size)
+                readerIndex = random.nextInt(parameter.size)
             }
             processedIndices.add(readerIndex)
-            this.subscribers.get(readerIndex).interactionsWithStacy++
         }
+        return processedIndices
     }
 }
