@@ -83,23 +83,40 @@ open class Sim1ParametersProvider(val theoryTxt: String) : ISimParametersProvide
         }
     }
 
-    protected fun createFlow(res: SolveInfo): PlFlow {
-        val id = res.getTerm("Id").toString()
-        val src = res.getTerm("Source").toString()
-        val target = res.getTerm("Target").toString()
-        val resource = res.getTerm("Resource").toString()
-        val amt: Double? = extractAmount(res)
-        var timeFunction = extractFiringFunction(res)
+    open protected fun createFlow(res: SolveInfo): PlFlow {
+        val fdata = extractFlowData(res)
         val flow = PlFlow(
-                id,
-                src,
-                target,
-                resource,
-                amt,
-                timeFunction
+                fdata.id,
+                fdata.src,
+                fdata.target,
+                fdata.resource,
+                fdata.amt,
+                fdata.timeFunction
         )
         return flow
     }
+
+    data class ExtractFlowDataResult(val id:String,
+                                     val src:String,
+                                     val target:String,
+                                     val resource:String,
+                                     val amt:Double?,
+                                     val timeFunction:(DateTime) -> Boolean)
+    protected fun extractFlowData(res:SolveInfo):ExtractFlowDataResult =
+            ExtractFlowDataResult(extractId(res),
+                    extractSource(res),
+                    extractTarget(res),
+                    extractResource(res),
+                    extractAmount(res),
+                    extractFiringFunction(res))
+
+    protected fun extractResource(res: SolveInfo) = res.getTerm("Resource").toString()
+
+    protected fun extractTarget(res: SolveInfo) = res.getTerm("Target").toString()
+
+    protected fun extractSource(res: SolveInfo) = res.getTerm("Source").toString()
+
+    protected fun extractId(res: SolveInfo) = res.getTerm("Id").toString()
 
     open fun extractFiringFunction(res: SolveInfo): (DateTime) -> Boolean {
         val timeFunctionPl = res.getTerm("Time")

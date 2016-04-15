@@ -55,8 +55,6 @@ open class Sim2ParametersProvider(val theoryTxt2:String) :
         val percentageOfReaders = prolog.extractSingleDouble("percentageOfReaders(X).", "X")
         val interactionsBeforePurchase= prolog.extractSingleInt("interactionsBeforePurchase(X).", "X")
         val percentageOfBuyers = prolog.extractSingleDouble("percentageOfBuyers(X).", "X")
-
-        // TODO: Test the passing of parameters to ListAgent ctor
         agentsPl
                 .map { x -> x.removeSingleQuotes() }
                 .map { when (it) {
@@ -69,4 +67,7 @@ open class Sim2ParametersProvider(val theoryTxt2:String) :
                 .forEach { this.agents.add(it) }
     }
 
+    override fun createFlow(res: SolveInfo): PlFlow {
+        return super.createFlow(res)
+    }
 }

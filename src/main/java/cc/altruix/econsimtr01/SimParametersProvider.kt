@@ -9,7 +9,11 @@ import java.io.InputStream
 /**
  * Created by pisarenko on 05.04.2016.
  */
-class SimParametersProvider(val theoryTxt: String, override val agents: MutableList<IAgent>, override val flows: MutableList<PlFlow>, override val initialResourceLevels: MutableList<InitialResourceLevel>, override val infiniteResourceSupplies: MutableList<InfiniteResourceSupply>) : ISimParametersProvider {
+class SimParametersProvider(val theoryTxt: String,
+                            override val agents: MutableList<IAgent>,
+                            override val flows: MutableList<PlFlow>,
+                            override val initialResourceLevels: MutableList<InitialResourceLevel>,
+                            override val infiniteResourceSupplies: MutableList<InfiniteResourceSupply>) : ISimParametersProvider {
     var maxDaysWithoutFood:Int = 0
         get
         private set

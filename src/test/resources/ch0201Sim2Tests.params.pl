@@ -34,13 +34,13 @@ hasFlow(f2,
     list,
     stacy,
     r2,
-    priceOfSoftwareSoldToNewlyActivatedAudience(),
+    _, % priceOfSoftwareSoldToNewlyActivatedAudience()
     after(f1)).
 hasFlow(f3,
     stacy,
     list,
     r5,
-    numberOfCopiesOfSoftwareSoldToNewlyActivatedAudience(),
+    _, % numberOfCopiesOfSoftwareSoldToNewlyActivatedAudience()
     after(f1)).
 
 initialResourceLevel(list, r06-pc1, 143).
