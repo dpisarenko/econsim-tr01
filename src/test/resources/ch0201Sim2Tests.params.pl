@@ -7,7 +7,6 @@ percentageOfBuyers(0.1).
 
 resource(r1, "Message to the list", "Pieces").
 resource(r2, "Money", "2016 US dollars").
-
 resource(r3, "Accomodation", "Days the person is allowed to live in the flat").
 resource(r4, "Food", "Calories").
 
@@ -29,7 +28,6 @@ hasFlow(f1,
     1,
     oncePerWeek("Monday")).
 
-resource(r2, "Money", "2016 US dollars").
 hasFlow(f2,
     list,
     stacy,

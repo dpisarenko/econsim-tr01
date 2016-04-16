@@ -302,6 +302,41 @@ class Sim2ParametersProviderTests {
     }
 
     @Test
+    fun initCallsInitListRelatedFlows() {
+        // Run method under test
+        val out = Sim2ParametersProvider("""
+            isAgent(stacy).
+            isAgent(list).
+            hasFlow(f2,
+                list,
+                stacy,
+                r2,
+                _, % priceOfSoftwareSoldToNewlyActivatedAudience()
+                after(f1)).
+            hasFlow(f3,
+                stacy,
+                list,
+                r5,
+                _, % numberOfCopiesOfSoftwareSoldToNewlyActivatedAudience()
+                after(f1)).
+        """)
+        // Verify
+        val f2 = findFlow(out, "f2")
+        val f3 = findFlow(out, "f3")
+
+        Assertions.assertThat(f2).isNotNull
+        Assertions.assertThat(f2 is ListRelatedFlow).isTrue()
+        Assertions.assertThat(f3).isNotNull
+        Assertions.assertThat(f3 is ListRelatedFlow).isTrue()
+
+        val list = out.agents.filter { it is ListAgent }.firstOrNull()
+        Assertions.assertThat(list).isNotNull
+
+        Assertions.assertThat((f2 as ListRelatedFlow).list).isSameAs(list)
+        Assertions.assertThat((f3 as ListRelatedFlow).list).isSameAs(list)
+    }
+
+    @Test
     fun findListAgentSunnyDay() {
         val out = Sim2ParametersProvider("")
         val agent = DefaultAgent("a1")
