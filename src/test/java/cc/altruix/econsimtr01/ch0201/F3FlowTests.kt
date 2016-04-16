@@ -20,6 +20,8 @@ class F3FlowTests {
                 {false}))
         val list = ListAgent("list")
         list.buyersCount = 123
+        out.list = list
+        out.agents = emptyList()
         val t = 0L.millisToSimulationDateTime()
         // Run method under test
         out.run(t)

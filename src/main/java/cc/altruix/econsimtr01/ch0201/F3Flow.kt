@@ -16,7 +16,6 @@ open class F3Flow(id:String,
         ListRelatedFlow(id, src, target, resource, amount, timeTriggerFunction)
 {
     override fun run(time: DateTime) {
-        // TODO: Test this
         this.run(this.list.buyersCount.toDouble(), time)
     }
 }
