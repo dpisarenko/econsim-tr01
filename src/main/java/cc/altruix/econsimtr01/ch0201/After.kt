@@ -30,7 +30,7 @@ open class After(val flowId:String) : (DateTime) -> Boolean {
             arrayOf(t.hourOfDay, t.minuteOfHour, t.secondOfMinute).all { it == 0 }
 
     fun connectToInitiatingFunctionFlow(flows:MutableList<PlFlow>) {
-        val initiatingFlow = flows.filter { flowId.equals(it.id) }.first()
+        val initiatingFlow = flows.filter { flowId.equals(it.id) }.firstOrNull()
         if (initiatingFlow != null) {
             initiatingFlow.addFollowUpFlow(this)
         } else {
