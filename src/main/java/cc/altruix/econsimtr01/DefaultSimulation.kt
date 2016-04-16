@@ -1,6 +1,5 @@
 package cc.altruix.econsimtr01
 
-import cc.altruix.econsimtr01.ch0201.Sim1
 import org.slf4j.LoggerFactory
 
 /**
@@ -42,6 +41,38 @@ abstract class DefaultSimulation(val timing : ITiming,
 
             if (agent is DefaultAgent) {
                 agent.addAction(flow)
+            }
+        }
+    }
+
+    protected fun attachFlowsToAgents(plFlows: MutableList<PlFlow>,
+                                      agents: MutableList<IAgent>,
+                                      flows: MutableList<ResourceFlow>) {
+        plFlows.forEach { flow ->
+            attachFlowToAgent(
+                    agents,
+                    flow,
+                    flows
+            )
+        }
+    }
+
+    protected fun setInfiniteResourceSupplies() {
+        simParametersProvider.infiniteResourceSupplies.forEach { infiniteResourceSupply ->
+            val agent = findAgent(infiniteResourceSupply.agent)
+            if (agent is DefaultAgent) {
+                agent.setInfinite(infiniteResourceSupply.res)
+            }
+        }
+    }
+
+    protected fun setInitialResourceLevels() {
+        simParametersProvider.initialResourceLevels.forEach { initialResourceLevel ->
+            val agent = findAgent(initialResourceLevel.agent)
+            if ((agent != null) && (agent is DefaultAgent)) {
+                agent.put(initialResourceLevel.resource, initialResourceLevel.amt)
+            } else {
+                LOGGER.error("Can't find agent '${initialResourceLevel.agent}'")
             }
         }
     }

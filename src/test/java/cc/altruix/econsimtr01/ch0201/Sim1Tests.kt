@@ -32,5 +32,4 @@ class Sim1Tests {
                 "src/test/resources/ch0201/Sim1Tests.test.flows.actual.png"
         )
     }
-
 }
