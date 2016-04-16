@@ -14,13 +14,13 @@ resource(r4, "Food", "Calories").
 resource(r5, "Copy of WordPress plugin X", "Pieces").
 
 % c in pc means "cohort"
-resource(r06-pc1, "People, who were exposed to Stacy''s writings once", "People").
-resource(r07-pc2, "People, who were exposed to Stacy''s writings twice", "People").
-resource(r08-pc2, "People, who were exposed to Stacy''s writings 3 times", "People").
-resource(r09-pc2, "People, who were exposed to Stacy''s writings 4 times", "People").
-resource(r10-pc2, "People, who were exposed to Stacy''s writings 5 times", "People").
-resource(r11-pc2, "People, who were exposed to Stacy''s writings 6 times", "People").
-resource(r12-pc2, "People, who were exposed to Stacy''s writings 7 or more times", "People").
+resource("r06-pc1", "People, who were exposed to Stacy''s writings once", "People").
+resource("r07-pc2", "People, who were exposed to Stacy''s writings twice", "People").
+resource("r08-pc2", "People, who were exposed to Stacy''s writings 3 times", "People").
+resource("r09-pc2", "People, who were exposed to Stacy''s writings 4 times", "People").
+resource("r10-pc2", "People, who were exposed to Stacy''s writings 5 times", "People").
+resource("r11-pc2", "People, who were exposed to Stacy''s writings 6 times", "People").
+resource("r12-pc2", "People, who were exposed to Stacy''s writings 7 or more times", "People").
 
 hasFlow(f1,
     stacy,
@@ -42,12 +42,12 @@ hasFlow(f3,
     _, % numberOfCopiesOfSoftwareSoldToNewlyActivatedAudience()
     after(f1)).
 
-initialResourceLevel(list, r06-pc1, 143).
-initialResourceLevel(list, r07-pc2, 143).
-initialResourceLevel(list, r08-pc2, 143).
-initialResourceLevel(list, r09-pc2, 143).
-initialResourceLevel(list, r10-pc2, 143).
-initialResourceLevel(list, r11-pc2, 143).
-initialResourceLevel(list, r12-pc2, 142).
+initialResourceLevel(list, "r06-pc1", 143).
+initialResourceLevel(list, "r07-pc2", 143).
+initialResourceLevel(list, "r08-pc2", 143).
+initialResourceLevel(list, "r09-pc2", 143).
+initialResourceLevel(list, "r10-pc2", 143).
+initialResourceLevel(list, "r11-pc2", 143).
+initialResourceLevel(list, "r12-pc2", 142).
 
 initialResourceLevel(stacy, r2, 3000.0).
