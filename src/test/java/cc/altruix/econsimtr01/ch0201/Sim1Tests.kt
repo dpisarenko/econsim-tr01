@@ -1,8 +1,9 @@
 package cc.altruix.econsimtr01.ch0201
 
-import cc.altruix.econsimtr01.*
+import cc.altruix.econsimtr01.FlowDiagramTextCreator
+import cc.altruix.econsimtr01.ResourceFlow
+import cc.altruix.econsimtr01.toSequenceDiagramFile
 import org.fest.assertions.Assertions
-import org.junit.Ignore
 import org.junit.Test
 import java.io.File
 import java.util.*
