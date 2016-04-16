@@ -30,11 +30,10 @@ open class Sim2ParametersProvider(val theoryTxt2:String) :
         }
     }
 
-    open fun findListAgent(agents: List<IAgent>): ListAgent? {
-        // TODO: Implement this
-        // TODO: Test this
-        return null
-    }
+    open fun findListAgent(agents: List<IAgent>): ListAgent? =
+            agents.filter { it is ListAgent }
+                    .map { it as ListAgent}
+                    .firstOrNull()
 
     protected fun initAfterFlows() {
         flows.filter { it.timeTriggerFunction is After }
