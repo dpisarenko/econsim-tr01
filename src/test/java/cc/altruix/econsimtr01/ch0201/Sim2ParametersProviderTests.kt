@@ -363,6 +363,16 @@ class Sim2ParametersProviderTests {
         Assertions.assertThat(act).isSameAs(list)
     }
 
+    @Test
+    fun readPriceOfOneCopyOfSoftwareSunnyDay() {
+        val prolog = "priceOfOneCopyOfSoftware(123.45).".toPrologTheory()
+        val out = Sim2ParametersProvider("")
+        // Run method under test
+        val act = out.readPriceOfOneCopyOfSoftware(prolog)
+        // Verify
+        act.shouldBe(123.45)
+    }
+
     private fun doAfterTriggerChecks(f2: PlFlow?) {
         Assertions.assertThat(f2).isNotNull
         if (f2 == null) {
