@@ -68,7 +68,6 @@ open class Sim2ParametersProvider(val theoryTxt2:String) :
     }
 
     override fun createFlow(res: SolveInfo): PlFlow {
-        // TODO: Test this
         val fdata = extractFlowData(res)
         when (fdata.id) {
             "f2" -> return createF2(fdata)
@@ -78,10 +77,14 @@ open class Sim2ParametersProvider(val theoryTxt2:String) :
     }
 
     open fun createF3(fdata: ExtractFlowDataResult): PlFlow {
+        // TODO: Implement this
+        // TODO: Test this
         return super.createFlow(fdata)
     }
 
     open fun createF2(fdata: ExtractFlowDataResult): PlFlow {
+        // TODO: Implement this
+        // TODO: Test this
         return super.createFlow(fdata)
     }
 }
