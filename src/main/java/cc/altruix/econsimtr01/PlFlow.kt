@@ -24,6 +24,10 @@ open class PlFlow(val id:String,
 
     override fun timeToRun(time: DateTime): Boolean = timeTriggerFunction(time)
     override fun run(time: DateTime) {
+        run(amount, time)
+    }
+
+    open fun run(amount: Double?, time: DateTime) {
         val targetAgent = findAgent(target)
         val srcAgent = findAgent(src)
 
