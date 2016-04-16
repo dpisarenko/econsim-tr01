@@ -15,6 +15,26 @@ open class Sim2ParametersProvider(val theoryTxt2:String) :
 
     init {
         initAfterFlows()
+        // TODO: Test this
+        initListRelatedFlows()
+    }
+
+    open fun initListRelatedFlows() {
+        // TODO: Test this
+        val listAgent = findListAgent(this.agents)
+        if (listAgent != null) {
+            flows.filter { it is ListRelatedFlow }
+                    .map { it as ListRelatedFlow }
+                    .forEach { it.list = listAgent }
+        } else {
+            LOGGER.error("Can't find list agent")
+        }
+    }
+
+    fun findListAgent(agents: List<IAgent>): ListAgent? {
+        // TODO: Implement this
+        // TODO: Test this
+        return null
     }
 
     protected fun initAfterFlows() {
