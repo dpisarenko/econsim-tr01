@@ -15,7 +15,6 @@ open class Sim2ParametersProvider(val theoryTxt2:String) :
 
     init {
         initAfterFlows()
-        // TODO: Test this
         initListRelatedFlows(agents, flows)
     }
 
