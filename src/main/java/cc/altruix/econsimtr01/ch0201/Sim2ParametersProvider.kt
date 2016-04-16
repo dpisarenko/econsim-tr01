@@ -16,14 +16,14 @@ open class Sim2ParametersProvider(val theoryTxt2:String) :
     init {
         initAfterFlows()
         // TODO: Test this
-        initListRelatedFlows()
+        initListRelatedFlows(agents, flows)
     }
 
-    open fun initListRelatedFlows() {
+    open fun initListRelatedFlows(agents: List<IAgent>, flws: List<PlFlow>) {
         // TODO: Test this
-        val listAgent = findListAgent(this.agents)
+        val listAgent = findListAgent(agents)
         if (listAgent != null) {
-            flows.filter { it is ListRelatedFlow }
+            flws.filter { it is ListRelatedFlow }
                     .map { it as ListRelatedFlow }
                     .forEach { it.list = listAgent }
         } else {

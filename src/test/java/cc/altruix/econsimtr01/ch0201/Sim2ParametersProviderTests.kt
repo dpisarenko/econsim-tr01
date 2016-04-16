@@ -284,6 +284,23 @@ class Sim2ParametersProviderTests {
         Assertions.assertThat(f3.timeTriggerFunction).isSameAs(fdata.timeFunction)
     }
 
+    @Test
+    fun initListRelatedFlowsSunnyDay() {
+        val out = Mockito.spy(Sim2ParametersProvider(""))
+        val listAgent = ListAgent("list")
+        val agents = emptyList<IAgent>()
+        val f2 = F2Flow("f2", "src", "target", "resource", 123.45, {true})
+        val f3 = F2Flow("f3", "src", "target", "resource", 123.45, {true})
+        val otherFlow = PlFlow("f1", "src", "target", "resource", 123.45, {true})
+        Mockito.doReturn(listAgent).`when`(out).findListAgent(agents)
+        val flows = LinkedList<PlFlow>()
+        // Run method under test
+        out.initListRelatedFlows(agents, listOf(f2, f3, otherFlow))
+        // Verify
+        Assertions.assertThat(f2.list).isSameAs(listAgent)
+        Assertions.assertThat(f3.list).isSameAs(listAgent)
+    }
+
     private fun doAfterTriggerChecks(f2: PlFlow) {
         Assertions.assertThat(f2).isNotNull
         Assertions.assertThat(f2.timeTriggerFunction is After).isTrue()
