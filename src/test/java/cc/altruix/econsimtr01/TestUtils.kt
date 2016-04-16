@@ -1,8 +1,11 @@
 package cc.altruix.econsimtr01
 
+import cc.altruix.econsimtr01.ch0201.Sim1TimeSeriesCreator
 import org.fest.assertions.Assertions
 import org.joda.time.DateTime
 import org.mockito.Mockito
+import java.io.File
+import java.util.*
 import kotlin.reflect.KClass
 
 /**
@@ -29,3 +32,24 @@ fun Double?.shouldBeNotNull() = Assertions.assertThat(this).isNotNull
 
 inline fun<reified T : Any> mock() = Mockito.mock(T::class.java)
 
+fun simulationRunLogic(sim: ISimulation,
+                       log: StringBuilder,
+                       resources: List<PlResource>,
+                       flows: LinkedList<ResourceFlow>,
+                       expectedRawSimResultsFileName: String,
+                       actualConvertedSimResultsFileName: String, flowDiagramFileName: String) {
+    // Run method under test
+    sim.run()
+
+    // Verify
+    val expectedRawSimResultsFile = File(expectedRawSimResultsFileName)
+    val expectedRawSimResults = expectedRawSimResultsFile.readText()
+    Assertions.assertThat(log.toString()).isEqualTo(expectedRawSimResults)
+
+    val actualConvertedSimResults = Sim1TimeSeriesCreator().prologToCsv(expectedRawSimResultsFile)
+    val expectedConvertedSimResults = File(actualConvertedSimResultsFileName).readText()
+    Assertions.assertThat(actualConvertedSimResults).isEqualTo(expectedConvertedSimResults)
+
+    val seqDiagramTxt = FlowDiagramTextCreator(resources).createFlowDiagramText(flows)
+    seqDiagramTxt.toSequenceDiagramFile(File(flowDiagramFileName))
+}
