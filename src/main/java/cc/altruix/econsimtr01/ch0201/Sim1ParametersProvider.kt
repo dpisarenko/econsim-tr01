@@ -67,20 +67,29 @@ open class Sim1ParametersProvider(val theoryTxt: String) : ISimParametersProvide
 
     protected fun readFlows(prolog: Prolog) {
         try {
-            var res = prolog.solve("hasFlow(Id, Source, Target, Resource, Amount, Time).")
-            if (res.isSuccess()) {
-                this.flows.add(createFlow(res, prolog))
-                while (prolog.hasOpenAlternatives()) {
-                    res = prolog.solveNext()
-                    this.flows.add(createFlow(res, prolog))
-                }
-            }
-
+            val reses = composeReses(
+                    prolog,
+                    "hasFlow(Id, Source, Target, Resource, Amount, Time)."
+            )
+            reses.forEach { this.flows.add(createFlow(it, prolog)) }
         } catch (exception: NoMoreSolutionException) {
             LOGGER.error("", exception)
         } catch (exception: MalformedGoalException) {
             LOGGER.error("", exception)
         }
+    }
+
+    private fun composeReses(prolog: Prolog, query: String): LinkedList<SolveInfo> {
+        val reses = LinkedList<SolveInfo>()
+        var res = prolog.solve(query)
+        if (res.isSuccess()) {
+            reses.add(res)
+            while (prolog.hasOpenAlternatives()) {
+                res = prolog.solveNext()
+                reses.add(res)
+            }
+        }
+        return reses
     }
 
     open fun createFlow(res: SolveInfo, prolog: Prolog): PlFlow {
