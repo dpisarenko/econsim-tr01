@@ -116,7 +116,6 @@ open class Sim2ParametersProvider(val theoryTxt2:String) :
     }
 
     open fun readPriceOfOneCopyOfSoftware(prolog: Prolog): Double {
-        // TODO: Test
         return prolog.extractSingleDouble(
                 "priceOfOneCopyOfSoftware(X).",
                 "X"
