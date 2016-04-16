@@ -18,7 +18,7 @@ resource("r06-pc1", "People, who were exposed to Stacy''s writings once", "Peopl
 resource("r07-pc2", "People, who were exposed to Stacy''s writings twice", "People").
 resource("r08-pc2", "People, who were exposed to Stacy''s writings 3 times", "People").
 resource("r09-pc2", "People, who were exposed to Stacy''s writings 4 times", "People").
-% resource("r10-pc2", 'People, who were exposed to Stacy''s writings 5 times', "People").
+resource("r10-pc2", "People, who were exposed to Stacy''s writings 5 times", "People").
 % resource("r11-pc2", 'People, who were exposed to Stacy''s writings 6 times', "People").
 % resource("r12-pc2", 'People, who were exposed to Stacy''s writings 7 or more times', "People").
 
