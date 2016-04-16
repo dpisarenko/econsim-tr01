@@ -1,6 +1,7 @@
 package cc.altruix.econsimtr01.ch0201
 
 import cc.altruix.econsimtr01.ResourceFlow
+import cc.altruix.econsimtr01.simulationRunLogic
 import org.junit.Ignore
 import org.junit.Test
 import java.io.File
@@ -15,17 +16,14 @@ class Sim2Tests {
     fun test() {
         val flows = LinkedList<ResourceFlow>()
         val log = StringBuilder()
-        val simParametersProvider = Sim1ParametersProvider(
-                File("src/test/resources/ch0201Sim1Tests.params.pl").readText()
+        val simParametersProvider = Sim2ParametersProvider(
+                File("src/test/resources/ch0201Sim2Tests.params.pl").readText()
         )
-        /*
         val sim = Sim2(
                 log,
                 flows,
                 simParametersProvider
         )
-        */
-        /*
         simulationRunLogic(sim,
                 log,
                 simParametersProvider.resources,
@@ -34,6 +32,5 @@ class Sim2Tests {
                 "src/test/resources/ch0201/sim02/Sim2Tests.test.csv.expected.txt",
                 "src/test/resources/ch0201/sim02/Sim2Tests.test.flows.actual.png"
         )
-        */
     }
 }

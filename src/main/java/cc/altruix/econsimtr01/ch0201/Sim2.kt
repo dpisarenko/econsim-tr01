@@ -23,7 +23,12 @@ class Sim2(val logTarget:StringBuilder,
         return simParametersProvider.agents
     }
 
-    override fun createSensors(): List<ISensor> {
-        throw UnsupportedOperationException()
-    }
+    override fun createSensors(): List<ISensor> =
+            listOf(
+                    Sim2Accountant(
+                            logTarget,
+                            simParametersProvider.agents,
+                            (simParametersProvider as Sim2ParametersProvider).resources
+                    )
+            )
 }
