@@ -301,6 +301,18 @@ class Sim2ParametersProviderTests {
         Assertions.assertThat(f3.list).isSameAs(listAgent)
     }
 
+    @Test
+    fun findListAgentSunnyDay() {
+        val out = Sim2ParametersProvider("")
+        val agent = DefaultAgent("a1")
+        val list = ListAgent("list")
+        // Run method under test
+        val act = out.findListAgent(listOf(agent, list))
+        // Verify
+        Assertions.assertThat(act).isNotNull
+        Assertions.assertThat(act).isSameAs(list)
+    }
+
     private fun doAfterTriggerChecks(f2: PlFlow) {
         Assertions.assertThat(f2).isNotNull
         Assertions.assertThat(f2.timeTriggerFunction is After).isTrue()

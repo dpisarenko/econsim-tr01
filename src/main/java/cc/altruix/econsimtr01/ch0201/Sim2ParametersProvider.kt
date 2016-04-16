@@ -20,7 +20,6 @@ open class Sim2ParametersProvider(val theoryTxt2:String) :
     }
 
     open fun initListRelatedFlows(agents: List<IAgent>, flws: List<PlFlow>) {
-        // TODO: Test this
         val listAgent = findListAgent(agents)
         if (listAgent != null) {
             flws.filter { it is ListRelatedFlow }
@@ -31,7 +30,7 @@ open class Sim2ParametersProvider(val theoryTxt2:String) :
         }
     }
 
-    fun findListAgent(agents: List<IAgent>): ListAgent? {
+    open fun findListAgent(agents: List<IAgent>): ListAgent? {
         // TODO: Implement this
         // TODO: Test this
         return null
