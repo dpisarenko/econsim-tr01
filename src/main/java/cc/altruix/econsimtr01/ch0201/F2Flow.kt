@@ -12,7 +12,8 @@ open class F2Flow(id:String,
              target:String,
              resource:String,
              amount:Double?,
-             timeTriggerFunction: (DateTime) -> Boolean) :
+             timeTriggerFunction: (DateTime) -> Boolean,
+             val priceOfOneCopyOfSoftware:Double) :
         ListRelatedFlow(id, src, target, resource, amount, timeTriggerFunction) {
     override fun run(time: DateTime) {
         // TODO: Test this
