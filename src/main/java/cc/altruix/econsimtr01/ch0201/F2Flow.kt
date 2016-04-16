@@ -1,6 +1,5 @@
 package cc.altruix.econsimtr01.ch0201
 
-import cc.altruix.econsimtr01.PlFlow
 import org.joda.time.DateTime
 
 /**
@@ -14,6 +13,11 @@ class F2Flow(id:String,
              resource:String,
              amount:Double?,
              timeTriggerFunction: (DateTime) -> Boolean) :
-        PlFlow(id, src, target, resource, amount, timeTriggerFunction) {
-    lateinit var list:ListAgent
+        ListRelatedFlow(id, src, target, resource, amount, timeTriggerFunction) {
+    override fun run(time: DateTime) {
+        // TODO: Implement this
+        // TODO: Test this
+        super.run(time)
+    }
+
 }
