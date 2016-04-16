@@ -14,6 +14,8 @@ class F2FlowTests {
     @Test
     fun runSunnyDay() {
         val out = createObjectUnderTest()
+        out.list = ListAgent("list")
+        out.agents = emptyList()
         val t = 0L.millisToSimulationDateTime()
         val priceOfSoftwareSoldToNewlyActivatedAudience = 10.35
         Mockito.doReturn(priceOfSoftwareSoldToNewlyActivatedAudience)
@@ -34,7 +36,6 @@ class F2FlowTests {
         val act = out.calculatePriceOfSoftwareSold()
         // Verify
         Assertions.assertThat(act).isEqualTo(321 * 23.45)
-        Mockito.verify(list).buyersCount
     }
 
     private fun createObjectUnderTest(): F2Flow {

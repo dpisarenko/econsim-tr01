@@ -84,16 +84,16 @@ open class Sim2ParametersProvider(val theoryTxt2:String) :
                 .forEach { this.agents.add(it) }
     }
 
-    override fun createFlow(res: SolveInfo): PlFlow {
+    override fun createFlow(res: SolveInfo, prolog: Prolog): PlFlow {
         val fdata = extractFlowData(res)
         when (fdata.id) {
-            "f2" -> return createF2(fdata)
-            "f3" -> return createF3(fdata)
+            "f2" -> return createF2(fdata, prolog)
+            "f3" -> return createF3(fdata, prolog)
             else -> return super.createFlow(fdata)
         }
     }
 
-    open fun createF3(fdata: ExtractFlowDataResult): PlFlow =
+    open fun createF3(fdata: ExtractFlowDataResult, prolog: Prolog): PlFlow =
             F3Flow(fdata.id,
                     fdata.src,
                     fdata.target,
@@ -101,11 +101,25 @@ open class Sim2ParametersProvider(val theoryTxt2:String) :
                     fdata.amt,
                     fdata.timeFunction)
 
-    open fun createF2(fdata: ExtractFlowDataResult): PlFlow =
-            F2Flow(fdata.id,
-                    fdata.src,
-                    fdata.target,
-                    fdata.resource,
-                    fdata.amt,
-                    fdata.timeFunction)
+    open fun createF2(fdata: ExtractFlowDataResult, prolog: Prolog): PlFlow {
+        // TODO: Test this (start)
+        val priceOfOneCopyOfSoftware = readPriceOfOneCopyOfSoftware(prolog)
+        // TODO: Test this (end)
+        val flow = F2Flow(fdata.id,
+                fdata.src,
+                fdata.target,
+                fdata.resource,
+                fdata.amt,
+                fdata.timeFunction,
+                priceOfOneCopyOfSoftware)
+        return flow
+    }
+
+    open fun readPriceOfOneCopyOfSoftware(prolog: Prolog): Double {
+        // TODO: Test
+        return prolog.extractSingleDouble(
+                "priceOfOneCopyOfSoftware(X).",
+                "X"
+        )
+    }
 }

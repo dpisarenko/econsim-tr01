@@ -69,10 +69,10 @@ open class Sim1ParametersProvider(val theoryTxt: String) : ISimParametersProvide
         try {
             var res = prolog.solve("hasFlow(Id, Source, Target, Resource, Amount, Time).")
             if (res.isSuccess()) {
-                this.flows.add(createFlow(res))
+                this.flows.add(createFlow(res, prolog))
                 while (prolog.hasOpenAlternatives()) {
                     res = prolog.solveNext()
-                    this.flows.add(createFlow(res))
+                    this.flows.add(createFlow(res, prolog))
                 }
             }
 
@@ -83,7 +83,7 @@ open class Sim1ParametersProvider(val theoryTxt: String) : ISimParametersProvide
         }
     }
 
-    open fun createFlow(res: SolveInfo): PlFlow {
+    open fun createFlow(res: SolveInfo, prolog: Prolog): PlFlow {
         val fdata = extractFlowData(res)
         val flow = createFlow(fdata)
         return flow

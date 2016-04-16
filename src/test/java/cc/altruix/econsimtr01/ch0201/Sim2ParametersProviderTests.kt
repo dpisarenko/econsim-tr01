@@ -1,5 +1,6 @@
 package cc.altruix.econsimtr01.ch0201
 
+import alice.tuprolog.Prolog
 import alice.tuprolog.SolveInfo
 import alice.tuprolog.Struct
 import cc.altruix.econsimtr01.*
@@ -88,6 +89,13 @@ class Sim2ParametersProviderTests {
         doAfterTriggerChecks(f3)
 
         val f1 = findFlow(out, "f1")
+
+        if ((f1 == null) || (f2 == null) || (f3 == null)) {
+            Assertions.assertThat(f1).isNotNull
+            Assertions.assertThat(f2).isNotNull
+            Assertions.assertThat(f3).isNotNull
+            return
+        }
 
         val after1 = f2.timeTriggerFunction
         val after2 = f3.timeTriggerFunction
@@ -182,17 +190,18 @@ class Sim2ParametersProviderTests {
                 "resource",
                 null,
                 {true})
+        val prolog = mock<Prolog>()
         val out = Mockito.spy(Sim2ParametersProvider(""))
         val res = mock<SolveInfo>()
         Mockito.doReturn(fdata).`when`(out).extractFlowData(res)
         val flow = mock<PlFlow>()
-        Mockito.doReturn(flow).`when`(out).createF2(fdata)
+        Mockito.doReturn(flow).`when`(out).createF2(fdata, prolog)
         // Run method under test
-        val act = out.createFlow(res)
+        val act = out.createFlow(res, prolog)
         // Verify
         Assertions.assertThat(act).isSameAs(flow)
-        Mockito.verify(out).createF2(fdata)
-        Mockito.verify(out, Mockito.never()).createF3(fdata)
+        Mockito.verify(out).createF2(fdata, prolog)
+        Mockito.verify(out, Mockito.never()).createF3(fdata, prolog)
     }
     @Test
     fun createFlowCallsCreateF3() {
@@ -202,17 +211,18 @@ class Sim2ParametersProviderTests {
                 "resource",
                 null,
                 {true})
+        val prolog = mock<Prolog>()
         val out = Mockito.spy(Sim2ParametersProvider(""))
         val res = mock<SolveInfo>()
         Mockito.doReturn(fdata).`when`(out).extractFlowData(res)
         val flow = mock<PlFlow>()
-        Mockito.doReturn(flow).`when`(out).createF3(fdata)
+        Mockito.doReturn(flow).`when`(out).createF3(fdata, prolog)
         // Run method under test
-        val act = out.createFlow(res)
+        val act = out.createFlow(res, prolog)
         // Verify
         Assertions.assertThat(act).isSameAs(flow)
-        Mockito.verify(out, Mockito.never()).createF2(fdata)
-        Mockito.verify(out).createF3(fdata)
+        Mockito.verify(out, Mockito.never()).createF2(fdata, prolog)
+        Mockito.verify(out).createF3(fdata, prolog)
     }
     @Test
     fun createFlowCallsDoesntCallF2F3Methods() {
@@ -222,21 +232,22 @@ class Sim2ParametersProviderTests {
                 "resource",
                 null,
                 {true})
+        val prolog = mock<Prolog>()
         val out = Mockito.spy(Sim2ParametersProvider(""))
         val res = mock<SolveInfo>()
         Mockito.doReturn(fdata).`when`(out).extractFlowData(res)
         val flow = mock<PlFlow>()
-        Mockito.doReturn(flow).`when`(out).createF2(fdata)
+        Mockito.doReturn(flow).`when`(out).createF2(fdata, prolog)
         // Run method under test
-        val act = out.createFlow(res)
+        val act = out.createFlow(res, prolog)
         // Verify
-        Mockito.verify(out, Mockito.never()).createF2(fdata)
-        Mockito.verify(out, Mockito.never()).createF3(fdata)
+        Mockito.verify(out, Mockito.never()).createF2(fdata, prolog)
+        Mockito.verify(out, Mockito.never()).createF3(fdata, prolog)
     }
 
     @Test
     fun createF2SunnyDay() {
-        val out = Sim2ParametersProvider("")
+        val out = Mockito.spy(Sim2ParametersProvider(""))
         val fdata = Sim1ParametersProvider.ExtractFlowDataResult(
                 "id",
                 "src",
@@ -245,8 +256,10 @@ class Sim2ParametersProviderTests {
                 123.45,
                 {true}
         )
+        val prolog = mock<Prolog>()
+        Mockito.doReturn(40.0).`when`(out).readPriceOfOneCopyOfSoftware(prolog)
         // Run method under test
-        val act = out.createF2(fdata)
+        val act = out.createF2(fdata, prolog)
         // Verify
         Assertions.assertThat(act is F2Flow).isTrue()
         val f2 = act as F2Flow
@@ -270,8 +283,9 @@ class Sim2ParametersProviderTests {
                 123.45,
                 {true}
         )
+        val prolog = mock<Prolog>()
         // Run method under test
-        val act = out.createF3(fdata)
+        val act = out.createF3(fdata, prolog)
         // Verify
         Assertions.assertThat(act is F3Flow).isTrue()
         val f3 = act as F3Flow
@@ -289,8 +303,9 @@ class Sim2ParametersProviderTests {
         val out = Mockito.spy(Sim2ParametersProvider(""))
         val listAgent = ListAgent("list")
         val agents = emptyList<IAgent>()
-        val f2 = F2Flow("f2", "src", "target", "resource", 123.45, {true})
-        val f3 = F2Flow("f3", "src", "target", "resource", 123.45, {true})
+        val prolog = mock<Prolog>()
+        val f2 = F2Flow("f2", "src", "target", "resource", 123.45, {true}, 122.3)
+        val f3 = F2Flow("f3", "src", "target", "resource", 123.45, {true}, 123.3)
         val otherFlow = PlFlow("f1", "src", "target", "resource", 123.45, {true})
         Mockito.doReturn(listAgent).`when`(out).findListAgent(agents)
         val flows = LinkedList<PlFlow>()
@@ -348,12 +363,15 @@ class Sim2ParametersProviderTests {
         Assertions.assertThat(act).isSameAs(list)
     }
 
-    private fun doAfterTriggerChecks(f2: PlFlow) {
+    private fun doAfterTriggerChecks(f2: PlFlow?) {
         Assertions.assertThat(f2).isNotNull
+        if (f2 == null) {
+            return
+        }
         Assertions.assertThat(f2.timeTriggerFunction is After).isTrue()
         Assertions.assertThat((f2.timeTriggerFunction as After).flowId).isEqualTo("f1")
     }
 
     private fun findFlow(out: Sim2ParametersProvider, id: String) =
-            out.flows.filter { it.id == id }.first()
+            out.flows.filter { it.id == id }.firstOrNull()
 }
