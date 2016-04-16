@@ -259,6 +259,31 @@ class Sim2ParametersProviderTests {
         Assertions.assertThat(f2.timeTriggerFunction).isSameAs(fdata.timeFunction)
     }
 
+    @Test
+    fun createF3SunnyDay() {
+        val out = Sim2ParametersProvider("")
+        val fdata = Sim1ParametersProvider.ExtractFlowDataResult(
+                "id",
+                "src",
+                "target",
+                "resource",
+                123.45,
+                {true}
+        )
+        // Run method under test
+        val act = out.createF3(fdata)
+        // Verify
+        Assertions.assertThat(act is F3Flow).isTrue()
+        val f3 = act as F3Flow
+        f3.id.shouldBe("id")
+        f3.src.shouldBe("src")
+        f3.target.shouldBe("target")
+        f3.resource.shouldBe("resource")
+        Assertions.assertThat(f3.amount).isNotNull
+        f3.amount?.shouldBe(123.45)
+        Assertions.assertThat(f3.timeTriggerFunction).isSameAs(fdata.timeFunction)
+    }
+
     private fun doAfterTriggerChecks(f2: PlFlow) {
         Assertions.assertThat(f2).isNotNull
         Assertions.assertThat(f2.timeTriggerFunction is After).isTrue()
