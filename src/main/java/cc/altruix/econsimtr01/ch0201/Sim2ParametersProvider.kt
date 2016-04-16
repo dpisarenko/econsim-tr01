@@ -76,15 +76,19 @@ open class Sim2ParametersProvider(val theoryTxt2:String) :
         }
     }
 
-    open fun createF3(fdata: ExtractFlowDataResult): PlFlow {
-        // TODO: Implement this
-        // TODO: Test this
-        return super.createFlow(fdata)
-    }
+    open fun createF3(fdata: ExtractFlowDataResult): PlFlow =
+            F3Flow(fdata.id,
+                    fdata.src,
+                    fdata.target,
+                    fdata.resource,
+                    fdata.amt,
+                    fdata.timeFunction)
 
-    open fun createF2(fdata: ExtractFlowDataResult): PlFlow {
-        // TODO: Implement this
-        // TODO: Test this
-        return super.createFlow(fdata)
-    }
+    open fun createF2(fdata: ExtractFlowDataResult): PlFlow =
+            F2Flow(fdata.id,
+                    fdata.src,
+                    fdata.target,
+                    fdata.resource,
+                    fdata.amt,
+                    fdata.timeFunction)
 }

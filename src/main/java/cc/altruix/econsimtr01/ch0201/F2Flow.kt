@@ -13,7 +13,7 @@ class F2Flow(id:String,
              target:String,
              resource:String,
              amount:Double?,
-             timeTriggerFunction: (DateTime) -> Boolean,
-             val list:ListAgent) :
+             timeTriggerFunction: (DateTime) -> Boolean) :
         PlFlow(id, src, target, resource, amount, timeTriggerFunction) {
+    lateinit var list:ListAgent
 }
