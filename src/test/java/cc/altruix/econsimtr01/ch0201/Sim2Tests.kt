@@ -2,7 +2,6 @@ package cc.altruix.econsimtr01.ch0201
 
 import cc.altruix.econsimtr01.ResourceFlow
 import cc.altruix.econsimtr01.simulationRunLogic
-import org.junit.Ignore
 import org.junit.Test
 import java.io.File
 import java.util.*
@@ -12,7 +11,6 @@ import java.util.*
  */
 class Sim2Tests {
     @Test
-    @Ignore
     fun test() {
         val flows = LinkedList<ResourceFlow>()
         val log = StringBuilder()
