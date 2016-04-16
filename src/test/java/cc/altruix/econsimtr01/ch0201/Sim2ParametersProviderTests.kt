@@ -234,6 +234,31 @@ class Sim2ParametersProviderTests {
         Mockito.verify(out, Mockito.never()).createF3(fdata)
     }
 
+    @Test
+    fun createF2SunnyDay() {
+        val out = Sim2ParametersProvider("")
+        val fdata = Sim1ParametersProvider.ExtractFlowDataResult(
+                "id",
+                "src",
+                "target",
+                "resource",
+                123.45,
+                {true}
+        )
+        // Run method under test
+        val act = out.createF2(fdata)
+        // Verify
+        Assertions.assertThat(act is F2Flow).isTrue()
+        val f2 = act as F2Flow
+        f2.id.shouldBe("id")
+        f2.src.shouldBe("src")
+        f2.target.shouldBe("target")
+        f2.resource.shouldBe("resource")
+        Assertions.assertThat(f2.amount).isNotNull
+        f2.amount?.shouldBe(123.45)
+        Assertions.assertThat(f2.timeTriggerFunction).isSameAs(fdata.timeFunction)
+    }
+
     private fun doAfterTriggerChecks(f2: PlFlow) {
         Assertions.assertThat(f2).isNotNull
         Assertions.assertThat(f2.timeTriggerFunction is After).isTrue()
