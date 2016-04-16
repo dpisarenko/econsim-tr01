@@ -10,11 +10,17 @@ class Sim2(val logTarget:StringBuilder,
            simParametersProvider: Sim2ParametersProvider) : DefaultSimulation(Timing(), simParametersProvider) {
     override fun continueCondition(tick: Long): Boolean {
         val t = tick.secondsToSimulationDateTime()
-        return (t.monthOfYear <= 3)
+        return (t.monthOfYear <= 12)
     }
 
     override fun createAgents(): List<IAgent> {
-        throw UnsupportedOperationException()
+        attachFlowsToAgents(
+                (simParametersProvider as Sim1ParametersProvider).flows,
+                simParametersProvider.agents,
+                this.flows)
+        setInitialResourceLevels()
+        setInfiniteResourceSupplies()
+        return simParametersProvider.agents
     }
 
     override fun createSensors(): List<ISensor> {
