@@ -4,6 +4,7 @@ import alice.tuprolog.Prolog
 import alice.tuprolog.SolveInfo
 import alice.tuprolog.Struct
 import cc.altruix.econsimtr01.*
+import cc.altruix.javaprologinterop.PlUtils
 import org.fest.assertions.Assertions
 import org.junit.Test
 import org.mockito.Mockito
@@ -371,6 +372,27 @@ class Sim2ParametersProviderTests {
         val act = out.readPriceOfOneCopyOfSoftware(prolog)
         // Verify
         act.shouldBe(123.45)
+    }
+
+    @Test
+    fun createF2CallsReadPriceOfOneCopyOfSoftware() {
+        val priceOfOneCopyOfSoftware = 123.45
+        val out = Mockito.spy(Sim2ParametersProvider(""))
+        val fdata = Sim1ParametersProvider.ExtractFlowDataResult(
+            "id",
+            "src",
+            "target",
+            "resource",
+            null,
+            {false}
+        )
+        val prolog = PlUtils.createEngine()
+        Mockito.doReturn(priceOfOneCopyOfSoftware).`when`(out).
+                readPriceOfOneCopyOfSoftware(prolog)
+        // Run method under test
+        val act = out.createF2(fdata, prolog)
+        // Verify
+        Mockito.verify(out).readPriceOfOneCopyOfSoftware(prolog)
     }
 
     private fun doAfterTriggerChecks(f2: PlFlow?) {

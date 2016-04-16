@@ -102,9 +102,7 @@ open class Sim2ParametersProvider(val theoryTxt2:String) :
                     fdata.timeFunction)
 
     open fun createF2(fdata: ExtractFlowDataResult, prolog: Prolog): PlFlow {
-        // TODO: Test this (start)
         val priceOfOneCopyOfSoftware = readPriceOfOneCopyOfSoftware(prolog)
-        // TODO: Test this (end)
         val flow = F2Flow(fdata.id,
                 fdata.src,
                 fdata.target,
