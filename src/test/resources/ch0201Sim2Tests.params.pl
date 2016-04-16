@@ -14,7 +14,7 @@ resource(r4, "Food", "Calories").
 resource(r5, "Copy of WordPress plugin X", "Pieces").
 
 % c in pc means "cohort"
-resource("r06-pc1", 'People, who were exposed to Stacy''s writings once', "People").
+resource("r06-pc1", "People, who were exposed to Stacy''s writings once", "People").
 % resource("r07-pc2", 'People, who were exposed to Stacy''s writings twice', "People").
 % resource("r08-pc2", 'People, who were exposed to Stacy''s writings 3 times', "People").
 % resource("r09-pc2", 'People, who were exposed to Stacy''s writings 4 times', "People").
