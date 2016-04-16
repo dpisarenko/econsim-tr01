@@ -7,7 +7,7 @@ import org.joda.time.DateTime
  * @version $Id$
  * @since 1.0
  */
-class F3Flow(id:String,
+open class F3Flow(id:String,
              src: String,
              target:String,
              resource:String,
@@ -16,8 +16,7 @@ class F3Flow(id:String,
         ListRelatedFlow(id, src, target, resource, amount, timeTriggerFunction)
 {
     override fun run(time: DateTime) {
-        // TODO: Implement this
         // TODO: Test this
-        super.run(time)
+        this.run(this.list.buyersCount.toDouble(), time)
     }
 }
