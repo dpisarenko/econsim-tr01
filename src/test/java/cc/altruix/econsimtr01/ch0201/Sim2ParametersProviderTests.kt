@@ -4,7 +4,6 @@ import alice.tuprolog.SolveInfo
 import alice.tuprolog.Struct
 import cc.altruix.econsimtr01.*
 import org.fest.assertions.Assertions
-import org.junit.Assert
 import org.junit.Test
 import org.mockito.Mockito
 import java.util.*
@@ -197,11 +196,42 @@ class Sim2ParametersProviderTests {
     }
     @Test
     fun createFlowCallsCreateF3() {
-        Assert.fail()
+        val fdata = Sim1ParametersProvider.ExtractFlowDataResult("f3",
+                "src",
+                "target",
+                "resource",
+                null,
+                {true})
+        val out = Mockito.spy(Sim2ParametersProvider(""))
+        val res = mock<SolveInfo>()
+        Mockito.doReturn(fdata).`when`(out).extractFlowData(res)
+        val flow = mock<PlFlow>()
+        Mockito.doReturn(flow).`when`(out).createF3(fdata)
+        // Run method under test
+        val act = out.createFlow(res)
+        // Verify
+        Assertions.assertThat(act).isSameAs(flow)
+        Mockito.verify(out, Mockito.never()).createF2(fdata)
+        Mockito.verify(out).createF3(fdata)
     }
     @Test
-    fun createFlowCallsCreateFlow() {
-        Assert.fail()
+    fun createFlowCallsDoesntCallF2F3Methods() {
+        val fdata = Sim1ParametersProvider.ExtractFlowDataResult("f4",
+                "src",
+                "target",
+                "resource",
+                null,
+                {true})
+        val out = Mockito.spy(Sim2ParametersProvider(""))
+        val res = mock<SolveInfo>()
+        Mockito.doReturn(fdata).`when`(out).extractFlowData(res)
+        val flow = mock<PlFlow>()
+        Mockito.doReturn(flow).`when`(out).createF2(fdata)
+        // Run method under test
+        val act = out.createFlow(res)
+        // Verify
+        Mockito.verify(out, Mockito.never()).createF2(fdata)
+        Mockito.verify(out, Mockito.never()).createF3(fdata)
     }
 
     private fun doAfterTriggerChecks(f2: PlFlow) {
