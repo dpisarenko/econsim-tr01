@@ -50,7 +50,7 @@ open class Sim1ParametersProvider(val theoryTxt: String) : ISimParametersProvide
                 .forEach { map ->
                     initialResourceLevels.add(InitialResourceLevel(
                             map.get("Agent") ?: "",
-                            map.get("Resource") ?: "",
+                            map.get("Resource")?.removeSingleQuotes() ?: "",
                             map.get("Amount")?.toDouble() ?: 0.0
                     ))
                 }
