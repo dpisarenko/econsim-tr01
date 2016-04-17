@@ -131,7 +131,43 @@ resourceLevel(1, 'list', 'r12-pc7', 70).
         (act.get(6) as AtomicInteger).get().shouldBe(15)
         (act.get(7) as AtomicInteger).get().shouldBe(16+17+18)
     }
-
+    @Test
+    fun findItemToIncrement() {
+        val out = createSim2Accountant()
+        val subscribersCountByNumberOfInteractions =
+                hashMapOf(
+                        Pair(1, AtomicInteger(10)),
+                        Pair(2, AtomicInteger(20)),
+                        Pair(3, AtomicInteger(30)),
+                        Pair(4, AtomicInteger(40)),
+                        Pair(5, AtomicInteger(50)),
+                        Pair(6, AtomicInteger(60)),
+                        Pair(7, AtomicInteger(70))
+                )
+        for (i in 1..7) {
+            Assertions.assertThat(
+                    out.findItemToIncrement(subscribersCountByNumberOfInteractions, 1)
+            ).isNotNull
+        }
+        out.findItemToIncrement(subscribersCountByNumberOfInteractions,
+                1)?.get()?.shouldBe(10)
+        out.findItemToIncrement(subscribersCountByNumberOfInteractions,
+                2)?.get()?.shouldBe(20)
+        out.findItemToIncrement(subscribersCountByNumberOfInteractions,
+                3)?.get()?.shouldBe(30)
+        out.findItemToIncrement(subscribersCountByNumberOfInteractions,
+                4)?.get()?.shouldBe(40)
+        out.findItemToIncrement(subscribersCountByNumberOfInteractions,
+                5)?.get()?.shouldBe(50)
+        out.findItemToIncrement(subscribersCountByNumberOfInteractions,
+                6)?.get()?.shouldBe(60)
+        out.findItemToIncrement(subscribersCountByNumberOfInteractions,
+                7)?.get()?.shouldBe(70)
+        out.findItemToIncrement(subscribersCountByNumberOfInteractions,
+                8)?.get()?.shouldBe(70)
+        out.findItemToIncrement(subscribersCountByNumberOfInteractions,
+                9)?.get()?.shouldBe(70)
+    }
     private fun addSubscribers(id: AtomicInteger,
                                list: ListAgent,
                                numberOfSubscribers: Int,
