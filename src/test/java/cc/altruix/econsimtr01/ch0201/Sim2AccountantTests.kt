@@ -136,7 +136,7 @@ resourceLevel(1, 'list', 'r12-pc7', 70).
                                list: ListAgent,
                                numberOfSubscribers: Int,
                                numberOfInteractions: Int) {
-        for (i in numberOfInteractions..numberOfSubscribers) {
+        for (i in 1..numberOfSubscribers) {
             list.subscribers.add(
                     Subscriber(id.incrementAndGet().toString(),
                             numberOfInteractions)

@@ -67,11 +67,11 @@ open class Sim2Accountant(logTarget: StringBuilder,
     open internal fun findList() = this.agents.filter { it is ListAgent }.firstOrNull() as ListAgent
 
     open internal fun calculateSubscribersCountByNumberOfInteractions(list: ListAgent): HashMap<Int, AtomicInteger> {
-        // TODO: Test this
         val subscribersCountByNumberOfInteractions =
                 createSubscribersCountByNumberOfInteractions()
         list.subscribers.forEach {
-            var itemToIncrement: AtomicInteger? = findItemToIncrement(subscribersCountByNumberOfInteractions, it.interactionsWithStacy)
+            var itemToIncrement: AtomicInteger? = findItemToIncrement(subscribersCountByNumberOfInteractions,
+                    it.interactionsWithStacy)
             if (itemToIncrement == null) {
                 LOGGER.error("Couldn't find cohort for a subscriber with ${it.interactionsWithStacy} interactions")
             } else {
