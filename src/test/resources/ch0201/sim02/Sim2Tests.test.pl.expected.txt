@@ -9,7 +9,7 @@ resource(r08-pc2, "People, who were exposed to Stacy's writings 3 times", "Peopl
 resource(r09-pc2, "People, who were exposed to Stacy's writings 4 times", "People").
 resource(r10-pc2, "People, who were exposed to Stacy's writings 5 times", "People").
 resource(r11-pc2, "People, who were exposed to Stacy's writings 6 times", "People").
-resource(r12-pc2, "People, who were exposed to Stacy's writings 7 times", "People").
+resource(r12-pc2, "People, who were exposed to Stacy's writings seven times", "People").
 measurementTime(86400, '0000-01-02 00:00').
 resourceLevel(86400, 'stacy', 'r1', 0.0).
 resourceLevel(86400, 'stacy', 'r2', 3000.0).
