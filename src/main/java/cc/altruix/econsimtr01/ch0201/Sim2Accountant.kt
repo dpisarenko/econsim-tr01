@@ -65,9 +65,9 @@ open class Sim2Accountant(logTarget: StringBuilder,
         }
     }
 
-    internal fun findList() = this.agents.filter { it is ListAgent }.firstOrNull() as ListAgent
+    open internal fun findList() = this.agents.filter { it is ListAgent }.firstOrNull() as ListAgent
 
-    internal fun calculateSubscribersCountByNumberOfInteractions(list: ListAgent): HashMap<Int, AtomicInteger> {
+    open internal fun calculateSubscribersCountByNumberOfInteractions(list: ListAgent): HashMap<Int, AtomicInteger> {
         // TODO: Test this
         val subscribersCountByNumberOfInteractions =
                 createSubscribersCountByNumberOfInteractions()
