@@ -32,27 +32,30 @@ class Sim2TimeSeriesCreator : DefaultTimeSeriesCreator() {
     override fun prologToCsv(input: File): String {
         // TODO: Test this
         val builder = createStringBuilder()
-        appendHeader(builder)
+        appendHeader(builder, columns)
         val prolog = createPrologEngine()
         val times = extractTimes(input, prolog)
-        appendRows(builder, prolog, times)
+        appendRows(builder, prolog, times, columns)
         return builder.toString()
     }
 
-    protected fun createStringBuilder() = StringBuilder()
+    internal fun createStringBuilder() = StringBuilder()
 
-    protected fun appendRows(builder: StringBuilder, prolog: Prolog, times: List<Long>) {
+    internal fun appendRows(builder: StringBuilder,
+                             prolog: Prolog,
+                             times: List<Long>,
+                             columns: Array<ColumnDescriptor>) {
         times.forEach { t ->
             val data = calculateData(prolog, t, columns)
             appendRow(builder, data)
         }
     }
 
-    protected fun createPrologEngine() = PlUtils.createEngine()
+    internal fun createPrologEngine() = PlUtils.createEngine()
 
-    protected fun appendHeader(builder: StringBuilder) {
+    internal fun appendHeader(builder: StringBuilder, cols: Array<ColumnDescriptor>) {
         // TODO: Test this
-        appendRow(builder, columns.map { it.title }.toTypedArray())
+        appendRow(builder, cols.map { it.title }.toTypedArray())
     }
 
     private fun calculateData(prolog: Prolog, t: Long, columns: Array<ColumnDescriptor>): Array<String> {
