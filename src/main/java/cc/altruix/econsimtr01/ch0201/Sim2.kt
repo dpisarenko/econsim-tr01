@@ -53,10 +53,9 @@ class Sim2(val logTarget:StringBuilder,
         for (i in 1..initialResourceLevel.amt.toInt()) {
             list.subscribers.add(Subscriber(UUID.randomUUID().toString(), interactions))
         }
-        // TODO: Test this
     }
 
-    private fun setInitialResourceLevel(agent: DefaultAgent, initialResourceLevel: InitialResourceLevel) {
+    internal fun setInitialResourceLevel(agent: DefaultAgent, initialResourceLevel: InitialResourceLevel) {
         // TODO: Test this
         agent.put(initialResourceLevel.resource, initialResourceLevel.amt)
     }
