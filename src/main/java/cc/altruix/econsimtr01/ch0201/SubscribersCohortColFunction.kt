@@ -10,10 +10,8 @@ import cc.altruix.econsimtr01.extractSingleDouble
  */
 class SubscribersCohortColFunction(val interactions:Int) : ITimeSeriesFieldFillerFunction {
     override fun invoke(prolog: Prolog, time: Long): String {
-        // TODO: Test this
-        // TODO: Implement this
-
-        return prolog.extractSingleDouble("resourceLevel($time, 'list', 'r0${5+interactions}-pc$interactions', Val).", "Val").toString()
+        val resId = String.format("r%02d-pc%d", (5+interactions), interactions)
+        return prolog.extractSingleDouble("resourceLevel($time, 'list', '$resId', Val).", "Val").toString()
     }
 
 }
