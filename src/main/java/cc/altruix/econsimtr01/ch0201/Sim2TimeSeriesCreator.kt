@@ -24,16 +24,17 @@ class Sim2TimeSeriesCreator : DefaultTimeSeriesCreator() {
                 ColumnDescriptor("Subscribers (4 interactions)", SubscribersCohortColFunction(4)),
                 ColumnDescriptor("Subscribers (5 interactions)", SubscribersCohortColFunction(5)),
                 ColumnDescriptor("Subscribers (6 interactions)", SubscribersCohortColFunction(6)),
-                ColumnDescriptor("Subscribers (7 or more interactions)", SubscribersCohortColFunction(7))
-            )
+                ColumnDescriptor("Subscribers (7 or more interactions)", SubscribersCohortColFunction(7)
+                )
         )
     }
 
 
 
     override fun prologToCsv(input: File): String {
+        // TODO: Test this
         val builder = StringBuilder()
-        appendRow(builder, columns)
+        appendRow(builder, columns.map { it.title }.toTypedArray())
 
         val prolog = PlUtils.createEngine()
         val times = extractTimes(input, prolog)
@@ -46,7 +47,7 @@ class Sim2TimeSeriesCreator : DefaultTimeSeriesCreator() {
         return builder.toString()
     }
 
-    private fun calculateData(prolog: Prolog, t: Long, columns: Array<String>): Array<String> {
+    private fun calculateData(prolog: Prolog, t: Long, columns: Array<ColumnDescriptor>): Array<String> {
         // TODO: Test this
         throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
