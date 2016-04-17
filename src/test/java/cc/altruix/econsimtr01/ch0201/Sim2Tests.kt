@@ -22,7 +22,6 @@ class Sim2Tests {
                 flows,
                 simParametersProvider
         )
-        // TODO: Continue here
         simulationRunLogic(sim,
                 log,
                 simParametersProvider.resources,

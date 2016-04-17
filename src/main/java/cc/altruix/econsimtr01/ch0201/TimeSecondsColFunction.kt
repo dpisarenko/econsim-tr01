@@ -9,8 +9,6 @@ import alice.tuprolog.Prolog
  */
 class TimeSecondsColFunction : ITimeSeriesFieldFillerFunction {
     override fun invoke(prolog: Prolog, time: Long): String {
-        // TODO: Test this
-        // TODO: Implement this
-        return ""
+        return time.toString()
     }
 }
