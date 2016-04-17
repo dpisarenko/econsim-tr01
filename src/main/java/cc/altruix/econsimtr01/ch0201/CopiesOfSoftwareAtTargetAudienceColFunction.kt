@@ -11,10 +11,10 @@ import cc.altruix.econsimtr01.getResults
 class CopiesOfSoftwareAtTargetAudienceColFunction : ITimeSeriesFieldFillerFunction {
     // TODO: Test this
     // TODO: Implement this
-
+// resourceLevel(60307200, 'list', 'r5', 0.0).
     override fun invoke(prolog: Prolog, time: Long): String =
             prolog.getResults(
-                    "resourceLevel($time, stacy, r2, Amount).",
+                    "resourceLevel($time, list, r5, Amount).",
                     "Amount"
             ).first()
 }
