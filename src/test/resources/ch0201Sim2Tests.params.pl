@@ -16,11 +16,11 @@ resource(r5, "Copy of WordPress plugin X", "Pieces").
 % c in pc means "cohort"
 resource("r06-pc1", "People, who were exposed to Stacy''s writings once", "People").
 resource("r07-pc2", "People, who were exposed to Stacy''s writings twice", "People").
-resource("r08-pc2", "People, who were exposed to Stacy''s writings 3 times", "People").
-resource("r09-pc2", "People, who were exposed to Stacy''s writings 4 times", "People").
-resource("r10-pc2", "People, who were exposed to Stacy''s writings 5 times", "People").
-resource("r11-pc2", "People, who were exposed to Stacy''s writings 6 times", "People").
-resource("r12-pc2", "People, who were exposed to Stacy''s writings seven times", "People").
+resource("r08-pc3", "People, who were exposed to Stacy''s writings 3 times", "People").
+resource("r09-pc4", "People, who were exposed to Stacy''s writings 4 times", "People").
+resource("r10-pc5", "People, who were exposed to Stacy''s writings 5 times", "People").
+resource("r11-pc6", "People, who were exposed to Stacy''s writings 6 times", "People").
+resource("r12-pc7", "People, who were exposed to Stacy''s writings seven times", "People").
 
 hasFlow(f1,
     stacy,
