@@ -1,6 +1,7 @@
 package cc.altruix.econsimtr01.ch0201
 
 import alice.tuprolog.Prolog
+import cc.altruix.econsimtr01.ITimeSeriesCreator
 import cc.altruix.econsimtr01.getResults
 import cc.altruix.econsimtr01.newLine
 import cc.altruix.econsimtr01.removeSingleQuotes
@@ -13,8 +14,8 @@ import java.util.*
  * @version $Id$
  * @since 1.0
  */
-class Sim1TimeSeriesCreator {
-    fun prologToCsv(input: File): String {
+class Sim1TimeSeriesCreator : ITimeSeriesCreator {
+    override fun prologToCsv(input: File): String {
         val builder = StringBuilder()
         appendRow(builder,
                 "t [sec]",

@@ -1,12 +1,10 @@
 package cc.altruix.econsimtr01
 
-import cc.altruix.econsimtr01.ch0201.Sim1TimeSeriesCreator
 import org.fest.assertions.Assertions
 import org.joda.time.DateTime
 import org.mockito.Mockito
 import java.io.File
 import java.util.*
-import kotlin.reflect.KClass
 
 /**
  * Created by pisarenko on 09.04.2016.
@@ -37,7 +35,10 @@ fun simulationRunLogic(sim: ISimulation,
                        resources: List<PlResource>,
                        flows: LinkedList<ResourceFlow>,
                        expectedRawSimResultsFileName: String,
-                       actualConvertedSimResultsFileName: String, flowDiagramFileName: String) {
+                       actualConvertedSimResultsFileName: String,
+                       flowDiagramFileName:
+                       String,
+                       timeSeriesCreator: ITimeSeriesCreator) {
     // Run method under test
     sim.run()
 
@@ -46,7 +47,7 @@ fun simulationRunLogic(sim: ISimulation,
     val expectedRawSimResults = expectedRawSimResultsFile.readText()
     Assertions.assertThat(log.toString()).isEqualTo(expectedRawSimResults)
 
-    val actualConvertedSimResults = Sim1TimeSeriesCreator().prologToCsv(expectedRawSimResultsFile)
+    val actualConvertedSimResults = timeSeriesCreator.prologToCsv(expectedRawSimResultsFile)
     val expectedConvertedSimResults = File(actualConvertedSimResultsFileName).readText()
     Assertions.assertThat(actualConvertedSimResults).isEqualTo(expectedConvertedSimResults)
 

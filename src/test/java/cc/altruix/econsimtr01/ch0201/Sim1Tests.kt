@@ -29,7 +29,8 @@ class Sim1Tests {
                 flows,
                 "src/test/resources/ch0201/Sim1Tests.test.pl.expected.txt",
                 "src/test/resources/ch0201/Sim1Tests.test.csv.expected.txt",
-                "src/test/resources/ch0201/Sim1Tests.test.flows.actual.png"
+                "src/test/resources/ch0201/Sim1Tests.test.flows.actual.png",
+                Sim1TimeSeriesCreator()
         )
     }
 }
