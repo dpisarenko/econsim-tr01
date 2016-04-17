@@ -10,7 +10,7 @@ import java.io.File
  * @version $Id$
  * @since 1.0
  */
-class Sim2TimeSeriesCreator : DefaultTimeSeriesCreator() {
+open class Sim2TimeSeriesCreator : DefaultTimeSeriesCreator() {
     companion object {
         val columns = arrayOf(
                 ColumnDescriptor("t [sec]", TimeSecondsColFunction()),
@@ -45,6 +45,7 @@ class Sim2TimeSeriesCreator : DefaultTimeSeriesCreator() {
                              prolog: Prolog,
                              times: List<Long>,
                              columns: Array<ColumnDescriptor>) {
+        // TODO: Test this
         times.forEach { t ->
             val data = calculateData(prolog, t, columns)
             appendRow(builder, data)
