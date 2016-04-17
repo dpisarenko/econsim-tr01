@@ -63,7 +63,7 @@ class Sim2AccountantTests {
         val time = 1L
         Mockito.doNothing().`when`(out).logSubscribersCountByNumberOfInteractions(list,
                 subscribersCountByNumberOfInteractions,
-                time)
+                time, Mockito.doNothing().`when`(out).logTarget)
         // Run method under test
         out.logCohortData(time)
         // Verify
@@ -71,7 +71,30 @@ class Sim2AccountantTests {
         Mockito.verify(out).calculateSubscribersCountByNumberOfInteractions(list)
         Mockito.verify(out).logSubscribersCountByNumberOfInteractions(list,
                 subscribersCountByNumberOfInteractions,
-                time)
+                time, Mockito.verify(out).logTarget)
 
+    }
+    @Test
+    fun logSubscribersCountByNumberOfInteractions() {
+        val out = createSim2Accountant()
+        val subscribersCountByNumberOfInteractions =
+                hashMapOf(
+                        Pair(1, AtomicInteger(10)),
+                        Pair(2, AtomicInteger(20)),
+                        Pair(3, AtomicInteger(30)),
+                        Pair(4, AtomicInteger(40)),
+                        Pair(5, AtomicInteger(50)),
+                        Pair(6, AtomicInteger(60)),
+                        Pair(7, AtomicInteger(70))
+                )
+        val log = StringBuilder()
+        val list = ListAgent("list")
+        // Run method under test
+        out.logSubscribersCountByNumberOfInteractions(list,
+                subscribersCountByNumberOfInteractions,
+                1L,
+                log)
+        // Verify
+        log.toString().shouldBe("")
     }
 }

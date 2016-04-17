@@ -48,17 +48,20 @@ open class Sim2Accountant(logTarget: StringBuilder,
         val subscribersCountByNumberOfInteractions =
                 calculateSubscribersCountByNumberOfInteractions(list)
 
-        logSubscribersCountByNumberOfInteractions(list, subscribersCountByNumberOfInteractions, time)
+        logSubscribersCountByNumberOfInteractions(list, subscribersCountByNumberOfInteractions, time, logTarget)
     }
 
-    open internal fun logSubscribersCountByNumberOfInteractions(list: ListAgent,
-                                                           subscribersCountByNumberOfInteractions: HashMap<Int, AtomicInteger>, time: Long) {
+    open internal fun logSubscribersCountByNumberOfInteractions(
+            list: ListAgent,
+            subscribersCountByNumberOfInteractions: HashMap<Int, AtomicInteger>,
+            time: Long,
+            log: StringBuilder) {
         // TODO: Test this
         subscribersCountByNumberOfInteractions.map {
             Pair(cohortResources.get(it.key), it.value.get().toString())
         }.forEach {
-            logTarget.append("resourceLevel($time, '${list.id()}', '${it.first}', ${it.second}).")
-            logTarget.newLine()
+            log.append("resourceLevel($time, '${list.id()}', '${it.first}', ${it.second}).")
+            log.newLine()
         }
     }
 
