@@ -9,9 +9,6 @@ import cc.altruix.econsimtr01.getResults
  * @since 1.0
  */
 class MoneyAtStacyColFunction : ITimeSeriesFieldFillerFunction {
-    // TODO: Test this
-    // TODO: Implement this
-
     override fun invoke(prolog: Prolog, time: Long): String =
             prolog.getResults(
                     "resourceLevel($time, stacy, r2, Amount).",
