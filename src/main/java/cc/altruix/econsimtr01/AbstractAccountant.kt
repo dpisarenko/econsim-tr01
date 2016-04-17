@@ -16,10 +16,8 @@ abstract class AbstractAccountant (val logTarget: StringBuilder,
         }
     }
 
-    open fun convertToPrologString(name: String): String {
-        // TODO: Test this
-        return ""
-    }
+    open fun convertToPrologString(name: String): String
+            = name.replace("'", "''")
 
     protected fun logStockLevels(time: Long) {
         agents.forEach { agent ->
