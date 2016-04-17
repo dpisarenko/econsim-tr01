@@ -1,9 +1,6 @@
 package cc.altruix.econsimtr01.ch0201
 
-import cc.altruix.econsimtr01.DefaultAgent
-import cc.altruix.econsimtr01.ResourceFlow
-import cc.altruix.econsimtr01.shouldBe
-import cc.altruix.econsimtr01.simulationRunLogic
+import cc.altruix.econsimtr01.*
 import org.fest.assertions.Assertions
 import org.junit.Test
 import org.mockito.Mockito
@@ -100,6 +97,26 @@ class Sim2Tests {
         // Verify
         Mockito.verify(sim).setInitialResourceLevel2(agent, irl)
         agent.storage.amount("r2").shouldBe(123.45)
+    }
+
+    @Test
+    fun continueConditionReturnsFalseWhenItsTooLate() {
+        val flows = LinkedList<ResourceFlow>()
+        val log = StringBuilder()
+        val simParametersProvider = Sim2ParametersProvider(
+                File("src/test/resources/ch0201Sim2Tests.params.pl").readText()
+        )
+        val sim = Mockito.spy(
+                Sim2(
+                        log,
+                        flows,
+                        simParametersProvider
+                )
+        )
+        // Run method under test
+        sim.continueCondition(28857600).shouldBeTrue()
+        sim.continueCondition(28944000).shouldBeFalse()
+        sim.continueCondition(29030400).shouldBeFalse()
     }
 
     private fun verifySubscriberCreation(list: ListAgent,

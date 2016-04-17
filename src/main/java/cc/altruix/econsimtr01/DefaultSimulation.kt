@@ -1,6 +1,5 @@
 package cc.altruix.econsimtr01
 
-import cc.altruix.econsimtr01.ch0201.Sim2Accountant
 import org.slf4j.LoggerFactory
 
 /**
@@ -24,7 +23,7 @@ abstract class DefaultSimulation(val timing : ITiming,
 
     }
 
-    protected abstract fun continueCondition(tick:Long): Boolean
+    internal abstract fun continueCondition(tick:Long): Boolean
     protected abstract fun createAgents(): List<IAgent>
     protected abstract fun createSensors(): List<ISensor>
     fun findAgent(agentId: String) =
