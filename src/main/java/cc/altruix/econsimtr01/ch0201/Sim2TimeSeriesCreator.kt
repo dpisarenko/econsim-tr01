@@ -13,20 +13,24 @@ import java.io.File
 class Sim2TimeSeriesCreator : DefaultTimeSeriesCreator() {
     companion object {
         val columns = arrayOf(
-                "t [sec]",
-                "Time",
-                "Money @ Stacy",
-                "Copies of software @ Target audience",
-                "Total number of subscribers in the list",
-                "Subscribers (1 interaction)",
-                "Subscribers (2 interactions)",
-                "Subscribers (3 interactions)",
-                "Subscribers (4 interactions)",
-                "Subscribers (5 interactions)",
-                "Subscribers (6 interactions)",
-                "Subscribers (7 or more interactions)"
+                ColumnDescriptor("t [sec]", TimeSecondsColFunction()),
+                ColumnDescriptor("Time", TimeLongFormColFunction()),
+                ColumnDescriptor("Money @ Stacy", (x:Prolog, t:Long) -> { ""}),
+                ColumnDescriptor("Copies of software @ Target audience", (x:Prolog, t:Long) -> { ""}),
+                ColumnDescriptor("Total number of subscribers in the list", (x:Prolog, t:Long) -> { ""}),
+                ColumnDescriptor("Subscribers (1 interaction)", (x:Prolog, t:Long) -> { ""}),
+                ColumnDescriptor("Subscribers (2 interactions)", (x:Prolog, t:Long) -> { ""}),
+                ColumnDescriptor("Subscribers (3 interactions)", (x:Prolog, t:Long) -> { ""}),
+                ColumnDescriptor("Subscribers (4 interactions)", (x:Prolog, t:Long) -> { ""}),
+                ColumnDescriptor("Subscribers (5 interactions)", (x:Prolog, t:Long) -> { ""}),
+                ColumnDescriptor("Subscribers (6 interactions)", (x:Prolog, t:Long) -> { ""}),
+                ColumnDescriptor("Subscribers (7 or more interactions)" (x:Prolog, t:Long) -> { ""})
+            )
         )
     }
+
+
+
     override fun prologToCsv(input: File): String {
         val builder = StringBuilder()
         appendRow(builder, columns)
@@ -35,14 +39,15 @@ class Sim2TimeSeriesCreator : DefaultTimeSeriesCreator() {
         val times = extractTimes(input, prolog)
 
         times.forEach { t ->
-            val data = calculateData(prolog, t)
+            val data = calculateData(prolog, t, columns)
             appendRow(builder, data)
         }
 
         return builder.toString()
     }
 
-    private fun calculateData(prolog: Prolog, t: Long): Array<String> {
+    private fun calculateData(prolog: Prolog, t: Long, columns: Array<String>): Array<String> {
+        // TODO: Test this
         throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
