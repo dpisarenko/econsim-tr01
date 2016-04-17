@@ -3,7 +3,9 @@ package cc.altruix.econsimtr01.ch0201
 import cc.altruix.econsimtr01.AbstractAccountant
 import cc.altruix.econsimtr01.IAgent
 import cc.altruix.econsimtr01.PlResource
+import cc.altruix.econsimtr01.newLine
 import org.slf4j.LoggerFactory
+import sun.management.resources.agent
 import java.util.*
 import java.util.concurrent.atomic.AtomicInteger
 
@@ -39,11 +41,27 @@ open class Sim2Accountant(logTarget: StringBuilder,
     }
 
     open internal fun logCohortData(time: Long) {
+        // TODO: Implement this
+        // TODO: Test this
         val list = this.agents.filter { it is ListAgent }.firstOrNull() as ListAgent
         if (list == null) {
             LOGGER.error("Can't find list agent.")
             return
         }
+        val subscribersCountByNumberOfInteractions =
+                calculateSubscribersCountByNumberOfInteractions(list)
+
+        subscribersCountByNumberOfInteractions.map {
+                Pair(cohortResources.get(it.key), it.value.get().toString())
+        }.forEach {
+            logTarget.append("resourceLevel($time, '${list.id()}', '${it.first}', ${it.second}).")
+            logTarget.newLine()
+
+        }
+    }
+
+    internal fun calculateSubscribersCountByNumberOfInteractions(list: ListAgent): HashMap<Int, AtomicInteger> {
+        // TODO: Test this
         val subscribersCountByNumberOfInteractions =
                 createSubscribersCountByNumberOfInteractions()
         list.subscribers.forEach {
@@ -54,9 +72,7 @@ open class Sim2Accountant(logTarget: StringBuilder,
                 itemToIncrement.incrementAndGet()
             }
         }
-        // TODO: Implement this
-        // TODO: Test this
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return subscribersCountByNumberOfInteractions
     }
 
     internal fun findItemToIncrement(subscribersCountByNumberOfInteractions: HashMap<Int, AtomicInteger>, interactionsWithStacy: Int): AtomicInteger? {
