@@ -56,7 +56,6 @@ open class Sim2Accountant(logTarget: StringBuilder,
             subscribersCountByNumberOfInteractions: HashMap<Int, AtomicInteger>,
             time: Long,
             log: StringBuilder) {
-        // TODO: Test this
         subscribersCountByNumberOfInteractions.map {
             Pair(cohortResources.get(it.key), it.value.get().toString())
         }.forEach {
