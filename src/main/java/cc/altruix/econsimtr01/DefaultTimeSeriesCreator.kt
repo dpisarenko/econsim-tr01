@@ -11,7 +11,7 @@ import java.util.*
  * @since 1.0
  */
 abstract class DefaultTimeSeriesCreator : ITimeSeriesCreator {
-    internal fun extractTimes(input: File, prolog: Prolog?): List<Long> {
+    open internal fun extractTimes(input: File, prolog: Prolog?): List<Long> {
         PlUtils.loadPrologFiles(
                 prolog,
                 arrayOf(input.absolutePath)

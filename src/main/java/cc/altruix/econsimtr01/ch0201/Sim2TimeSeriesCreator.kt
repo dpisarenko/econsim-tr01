@@ -30,7 +30,6 @@ open class Sim2TimeSeriesCreator : DefaultTimeSeriesCreator() {
     }
 
     override fun prologToCsv(input: File): String {
-        // TODO: Test this
         val builder = createStringBuilder()
         appendHeader(builder, columns)
         val prolog = createPrologEngine()
