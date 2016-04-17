@@ -69,7 +69,6 @@ abstract class DefaultSimulation(val timing : ITiming,
 
     open protected fun setInitialResourceLevels() {
         simParametersProvider.initialResourceLevels
-                .filter { !Sim2Accountant.cohortResources.values.contains(it.resource) }
                 .forEach { initialResourceLevel ->
             val agent = findAgent(initialResourceLevel.agent)
             if ((agent != null) && (agent is DefaultAgent)) {

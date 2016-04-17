@@ -1,6 +1,7 @@
 package cc.altruix.econsimtr01.ch0201
 
 import cc.altruix.econsimtr01.*
+import java.util.*
 
 /**
  * Created by pisarenko on 13.04.2016.
@@ -24,16 +25,40 @@ class Sim2(val logTarget:StringBuilder,
     }
 
     override fun setInitialResourceLevels() {
-        simParametersProvider.initialResourceLevels.forEach { initialResourceLevel ->
+        simParametersProvider.initialResourceLevels
+                .forEach { initialResourceLevel ->
             val agent = findAgent(initialResourceLevel.agent)
-            if ((agent != null) && (agent is DefaultAgent)) {
-                agent.put(initialResourceLevel.resource, initialResourceLevel.amt)
+            if ((agent != null) &&
+                    (agent is DefaultAgent) &&
+                    !Sim2Accountant.cohortResources.values.contains(initialResourceLevel.resource)) {
+                // TODO: Test this
+                setInitialResourceLevel(agent, initialResourceLevel)
+            } else if ((agent != null) && (agent is ListAgent) &&
+                    Sim2Accountant.cohortResources.values.contains(initialResourceLevel.resource)) {
+                // TODO: Test this
+                addSubscribers(agent, initialResourceLevel)
             } else {
                 LOGGER.error("Can't find agent '${initialResourceLevel.agent}'")
             }
         }
     }
 
+    private fun addSubscribers(list: ListAgent, initialResourceLevel: InitialResourceLevel) {
+        val interactions = Sim2Accountant.inverseCohortResources.get(initialResourceLevel.resource)
+        if (interactions == null) {
+            LOGGER.error("Can't determine interactions for resource '${initialResourceLevel.resource}'")
+            return
+        }
+        for (i in 1..initialResourceLevel.amt.toInt()) {
+            list.subscribers.add(Subscriber(UUID.randomUUID().toString(), interactions))
+        }
+        // TODO: Test this
+    }
+
+    private fun setInitialResourceLevel(agent: DefaultAgent, initialResourceLevel: InitialResourceLevel) {
+        // TODO: Test this
+        agent.put(initialResourceLevel.resource, initialResourceLevel.amt)
+    }
 
     override fun createSensors(): List<ISensor> =
             listOf(

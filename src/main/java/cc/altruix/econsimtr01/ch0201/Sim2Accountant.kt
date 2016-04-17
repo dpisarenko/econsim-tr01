@@ -24,6 +24,17 @@ open class Sim2Accountant(logTarget: StringBuilder,
                 Pair(6, "r11-pc6"),
                 Pair(7, "r12-pc7")
         )
+        val inverseCohortResources =
+                createInverseCohortResources(cohortResources)
+
+        private fun createInverseCohortResources(cohortResources: HashMap<Int, String>): Map<String,Int> {
+            val map = HashMap<String,Int>()
+            cohortResources.forEach { interactions, id ->
+                map.put(id, interactions)
+            }
+            return map
+        }
+
     }
     val LOGGER = LoggerFactory.getLogger(Sim2Accountant::class.java)
     override fun logStockLevels(time: Long) {
