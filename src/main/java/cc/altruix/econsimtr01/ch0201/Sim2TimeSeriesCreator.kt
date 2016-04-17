@@ -39,7 +39,7 @@ open class Sim2TimeSeriesCreator : DefaultTimeSeriesCreator() {
         return builder.toString()
     }
 
-    internal fun createStringBuilder() = StringBuilder()
+    open internal fun createStringBuilder() = StringBuilder()
 
     internal fun appendRows(builder: StringBuilder,
                              prolog: Prolog,
