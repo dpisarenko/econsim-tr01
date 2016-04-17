@@ -3,13 +3,13 @@ resource(r2, "Money", "2016 US dollars").
 resource(r3, "Accomodation", "Days the person is allowed to live in the flat").
 resource(r4, "Food", "Calories").
 resource(r5, "Copy of WordPress plugin X", "Pieces").
-resource(r06-pc1, "People, who were exposed to Stacy's writings once", "People").
-resource(r07-pc2, "People, who were exposed to Stacy's writings twice", "People").
-resource(r08-pc2, "People, who were exposed to Stacy's writings 3 times", "People").
-resource(r09-pc2, "People, who were exposed to Stacy's writings 4 times", "People").
-resource(r10-pc2, "People, who were exposed to Stacy's writings 5 times", "People").
-resource(r11-pc2, "People, who were exposed to Stacy's writings 6 times", "People").
-resource(r12-pc2, "People, who were exposed to Stacy's writings seven times", "People").
+resource(r06-pc1, "People, who were exposed to Stacy''s writings once", "People").
+resource(r07-pc2, "People, who were exposed to Stacy''s writings twice", "People").
+resource(r08-pc2, "People, who were exposed to Stacy''s writings 3 times", "People").
+resource(r09-pc2, "People, who were exposed to Stacy''s writings 4 times", "People").
+resource(r10-pc2, "People, who were exposed to Stacy''s writings 5 times", "People").
+resource(r11-pc2, "People, who were exposed to Stacy''s writings 6 times", "People").
+resource(r12-pc2, "People, who were exposed to Stacy''s writings seven times", "People").
 measurementTime(86400, '0000-01-02 00:00').
 resourceLevel(86400, 'stacy', 'r1', 0.0).
 resourceLevel(86400, 'stacy', 'r2', 3000.0).
