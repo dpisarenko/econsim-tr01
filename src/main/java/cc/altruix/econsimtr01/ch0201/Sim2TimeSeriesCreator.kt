@@ -29,26 +29,34 @@ class Sim2TimeSeriesCreator : DefaultTimeSeriesCreator() {
         )
     }
 
-
-
     override fun prologToCsv(input: File): String {
         // TODO: Test this
-        val builder = StringBuilder()
-        appendRow(builder, columns.map { it.title }.toTypedArray())
-
-        val prolog = PlUtils.createEngine()
+        val builder = createStringBuilder()
+        appendHeader(builder)
+        val prolog = createPrologEngine()
         val times = extractTimes(input, prolog)
+        appendRows(builder, prolog, times)
+        return builder.toString()
+    }
 
+    protected fun createStringBuilder() = StringBuilder()
+
+    protected fun appendRows(builder: StringBuilder, prolog: Prolog, times: List<Long>) {
         times.forEach { t ->
             val data = calculateData(prolog, t, columns)
             appendRow(builder, data)
         }
+    }
 
-        return builder.toString()
+    protected fun createPrologEngine() = PlUtils.createEngine()
+
+    protected fun appendHeader(builder: StringBuilder) {
+        // TODO: Test this
+        appendRow(builder, columns.map { it.title }.toTypedArray())
     }
 
     private fun calculateData(prolog: Prolog, t: Long, columns: Array<ColumnDescriptor>): Array<String> {
         // TODO: Test this
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return columns.map { it.func(prolog, t) }.toTypedArray()
     }
 }
