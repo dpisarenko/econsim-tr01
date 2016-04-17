@@ -11,7 +11,7 @@ open class Sim2(val logTarget:StringBuilder,
            simParametersProvider: Sim2ParametersProvider) : DefaultSimulation(Timing(), simParametersProvider) {
     override fun continueCondition(tick: Long): Boolean {
         val t = tick.secondsToSimulationDateTime()
-        return (t.monthOfYear <= 12)
+        return (t.year == 0)
     }
 
     override fun createAgents(): List<IAgent> {
