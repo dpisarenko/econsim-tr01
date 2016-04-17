@@ -105,4 +105,42 @@ resourceLevel(1, 'list', 'r11-pc6', 60).
 resourceLevel(1, 'list', 'r12-pc7', 70).
 """.replace("\n", nl))
     }
+    @Test
+    fun calculateSubscribersCountByNumberOfInteractions() {
+        val out = createSim2Accountant()
+        val list = ListAgent("list")
+        val id = AtomicInteger(1)
+        addSubscribers(id, list, 10, 1)
+        addSubscribers(id, list, 11, 2)
+        addSubscribers(id, list, 12, 3)
+        addSubscribers(id, list, 13, 4)
+        addSubscribers(id, list, 14, 5)
+        addSubscribers(id, list, 15, 6)
+        addSubscribers(id, list, 16, 7)
+        addSubscribers(id, list, 17, 8)
+        addSubscribers(id, list, 18, 9)
+        // Run method under test
+        val act = out.calculateSubscribersCountByNumberOfInteractions(list)
+        // Verify
+        act.size.shouldBe(7)
+        (act.get(1) as AtomicInteger).get().shouldBe(10)
+        (act.get(2) as AtomicInteger).get().shouldBe(11)
+        (act.get(3) as AtomicInteger).get().shouldBe(12)
+        (act.get(4) as AtomicInteger).get().shouldBe(13)
+        (act.get(5) as AtomicInteger).get().shouldBe(14)
+        (act.get(6) as AtomicInteger).get().shouldBe(15)
+        (act.get(7) as AtomicInteger).get().shouldBe(16+17+18)
+    }
+
+    private fun addSubscribers(id: AtomicInteger,
+                               list: ListAgent,
+                               numberOfSubscribers: Int,
+                               numberOfInteractions: Int) {
+        for (i in numberOfInteractions..numberOfSubscribers) {
+            list.subscribers.add(
+                    Subscriber(id.incrementAndGet().toString(),
+                            numberOfInteractions)
+            )
+        }
+    }
 }

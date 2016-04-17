@@ -82,6 +82,7 @@ open class Sim2Accountant(logTarget: StringBuilder,
     }
 
     internal fun findItemToIncrement(subscribersCountByNumberOfInteractions: HashMap<Int, AtomicInteger>, interactionsWithStacy: Int): AtomicInteger? {
+        // TODO: Test this
         var itemToIncrement: AtomicInteger? = null
         when (interactionsWithStacy) {
             in 1..7 -> {
