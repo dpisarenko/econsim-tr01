@@ -18,13 +18,13 @@ class Sim2TimeSeriesCreator : DefaultTimeSeriesCreator() {
                 ColumnDescriptor("Money @ Stacy", MoneyAtStacyColFunction()),
                 ColumnDescriptor("Copies of software @ Target audience", CopiesOfSoftwareAtTargetAudienceColFunction()),
                 ColumnDescriptor("Total number of subscribers in the list", TotalNumberOfSubscribersInListColFunction()),
-                ColumnDescriptor("Subscribers (1 interaction)", (x:Prolog, t:Long) -> { ""}),
-                ColumnDescriptor("Subscribers (2 interactions)", (x:Prolog, t:Long) -> { ""}),
-                ColumnDescriptor("Subscribers (3 interactions)", (x:Prolog, t:Long) -> { ""}),
-                ColumnDescriptor("Subscribers (4 interactions)", (x:Prolog, t:Long) -> { ""}),
-                ColumnDescriptor("Subscribers (5 interactions)", (x:Prolog, t:Long) -> { ""}),
-                ColumnDescriptor("Subscribers (6 interactions)", (x:Prolog, t:Long) -> { ""}),
-                ColumnDescriptor("Subscribers (7 or more interactions)" (x:Prolog, t:Long) -> { ""})
+                ColumnDescriptor("Subscribers (1 interaction)", SubscribersCohortColFunction(1)),
+                ColumnDescriptor("Subscribers (2 interactions)", SubscribersCohortColFunction(2)),
+                ColumnDescriptor("Subscribers (3 interactions)", SubscribersCohortColFunction(3)),
+                ColumnDescriptor("Subscribers (4 interactions)", SubscribersCohortColFunction(4)),
+                ColumnDescriptor("Subscribers (5 interactions)", SubscribersCohortColFunction(5)),
+                ColumnDescriptor("Subscribers (6 interactions)", SubscribersCohortColFunction(6)),
+                ColumnDescriptor("Subscribers (7 or more interactions)", SubscribersCohortColFunction(7))
             )
         )
     }
