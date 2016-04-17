@@ -56,7 +56,6 @@ class Sim2(val logTarget:StringBuilder,
     }
 
     internal fun setInitialResourceLevel(agent: DefaultAgent, initialResourceLevel: InitialResourceLevel) {
-        // TODO: Test this
         agent.put(initialResourceLevel.resource, initialResourceLevel.amt)
     }
 
