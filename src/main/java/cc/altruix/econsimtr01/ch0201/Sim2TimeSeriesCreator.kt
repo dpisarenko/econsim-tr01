@@ -1,7 +1,7 @@
 package cc.altruix.econsimtr01.ch0201
 
+import alice.tuprolog.Prolog
 import cc.altruix.econsimtr01.DefaultTimeSeriesCreator
-import cc.altruix.econsimtr01.newLine
 import cc.altruix.javaprologinterop.PlUtils
 import java.io.File
 
@@ -34,15 +34,15 @@ class Sim2TimeSeriesCreator : DefaultTimeSeriesCreator() {
         val prolog = PlUtils.createEngine()
         val times = extractTimes(input, prolog)
 
+        times.forEach { t ->
+            val data = calculateData(prolog, t)
+            appendRow(builder, data)
+        }
 
         return builder.toString()
     }
 
-    private fun appendRow(builder: StringBuilder,
-                          columns: Array<String>) {
-        columns.forEach {
-            builder.append("\"$it\";")
-        }
-        builder.newLine()
+    private fun calculateData(prolog: Prolog, t: Long): Array<String> {
+        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
