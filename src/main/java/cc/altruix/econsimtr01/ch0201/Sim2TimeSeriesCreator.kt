@@ -53,7 +53,6 @@ open class Sim2TimeSeriesCreator : DefaultTimeSeriesCreator() {
     open internal fun createPrologEngine() = PlUtils.createEngine()
 
     open internal fun appendHeader(builder: StringBuilder, cols: Array<ColumnDescriptor>) {
-        // TODO: Test this
         appendRow(builder, cols.map { it.title }.toTypedArray())
     }
 

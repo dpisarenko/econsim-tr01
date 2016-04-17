@@ -62,6 +62,6 @@ class Sim2TimeSeriesCreatorTests {
         // Run method under test
         out.appendHeader(builder, Sim2TimeSeriesCreator.columns)
         // Verify
-        builder.toString().shouldBe("")
+        builder.toString().shouldBe("\"t [sec]\";\"Time\";\"Money @ Stacy\";\"Copies of software @ Target audience\";\"Total number of subscribers in the list\";\"Subscribers (1 interaction)\";\"Subscribers (2 interactions)\";\"Subscribers (3 interactions)\";\"Subscribers (4 interactions)\";\"Subscribers (5 interactions)\";\"Subscribers (6 interactions)\";\"Subscribers (7 or more interactions)\";${System.lineSeparator()}")
     }
 }
