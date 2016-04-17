@@ -60,7 +60,7 @@ open class Sim2(val logTarget:StringBuilder,
         }
     }
 
-    internal fun setInitialResourceLevel2(agent: DefaultAgent, initialResourceLevel: InitialResourceLevel) {
+    open internal fun setInitialResourceLevel2(agent: DefaultAgent, initialResourceLevel: InitialResourceLevel) {
         agent.put(initialResourceLevel.resource, initialResourceLevel.amt)
     }
 
