@@ -24,7 +24,7 @@ class TotalNumberOfSubscribersInListColFunctionTests {
 
         val out = TotalNumberOfSubscribersInListColFunction()
         out.invoke(prolog, 86400L).shouldBe((
-                143 +
+                143.0 +
                         144 +
                         145 +
                         146 +

@@ -1,7 +1,6 @@
 package cc.altruix.econsimtr01
 
 import alice.tuprolog.Prolog
-import cc.altruix.econsimtr01.ch0201.ListAgent
 import cc.altruix.javaprologinterop.PlUtils
 import net.sourceforge.plantuml.SourceStringReader
 import org.fest.assertions.Assertions
@@ -149,4 +148,10 @@ fun Prolog.extractSingleInt(query: String, varName:String):Int {
     }
     LoggerFactory.getLogger(Prolog::class.java).error("Can't find int value. Query: '$query', variable: '$varName")
     return -1
+}
+
+fun getSubscriberCount(prolog: Prolog, time: Long, interactions: Int): Double {
+    val resId = String.format("r%02d-pc%d", (5 + interactions), interactions)
+    val subscriberResourceLevel = prolog.extractSingleDouble("resourceLevel($time, 'list', '$resId', Val).", "Val")
+    return subscriberResourceLevel
 }
