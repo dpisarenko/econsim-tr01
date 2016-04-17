@@ -8,11 +8,18 @@ import org.joda.time.DateTime
 abstract class AbstractAccountant (val logTarget: StringBuilder,
                           val agents: List<IAgent>,
                           val resources: List<PlResource>) : ISensor{
-    protected fun writeResourceData() {
+    fun writeResourceData() {
         resources.forEach { res ->
+            // TODO: Test this
+            val plresname = convertToPrologString(res.name)
             logTarget.append("resource(${res.id}, \"${res.name}\", \"${res.unit}\").")
             logTarget.newLine()
         }
+    }
+
+    open fun convertToPrologString(name: String): String {
+        // TODO: Test this
+        return ""
     }
 
     protected fun logStockLevels(time: Long) {
