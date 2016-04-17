@@ -52,5 +52,5 @@ fun simulationRunLogic(sim: ISimulation,
     Assertions.assertThat(actualConvertedSimResults).isEqualTo(expectedConvertedSimResults)
 
     val seqDiagramTxt = FlowDiagramTextCreator(resources).createFlowDiagramText(flows)
-    seqDiagramTxt.toSequenceDiagramFile(File(flowDiagramFileName))
+    // seqDiagramTxt.toSequenceDiagramFile(File(flowDiagramFileName))
 }
