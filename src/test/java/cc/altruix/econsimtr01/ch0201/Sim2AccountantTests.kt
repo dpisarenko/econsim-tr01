@@ -63,7 +63,7 @@ class Sim2AccountantTests {
         val time = 1L
         Mockito.doNothing().`when`(out).logSubscribersCountByNumberOfInteractions(list,
                 subscribersCountByNumberOfInteractions,
-                time, Mockito.doNothing().`when`(out).logTarget)
+                time, out.logTarget)
         // Run method under test
         out.logCohortData(time)
         // Verify
@@ -71,7 +71,7 @@ class Sim2AccountantTests {
         Mockito.verify(out).calculateSubscribersCountByNumberOfInteractions(list)
         Mockito.verify(out).logSubscribersCountByNumberOfInteractions(list,
                 subscribersCountByNumberOfInteractions,
-                time, Mockito.verify(out).logTarget)
+                time, out.logTarget)
 
     }
     @Test
