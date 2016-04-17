@@ -106,17 +106,15 @@ class Sim2Tests {
         val simParametersProvider = Sim2ParametersProvider(
                 File("src/test/resources/ch0201Sim2Tests.params.pl").readText()
         )
-        val sim = Mockito.spy(
-                Sim2(
-                        log,
-                        flows,
-                        simParametersProvider
-                )
+        val sim = Sim2(
+                log,
+                flows,
+                simParametersProvider
         )
         // Run method under test
-        sim.continueCondition(28857600).shouldBeTrue()
-        sim.continueCondition(28944000).shouldBeFalse()
-        sim.continueCondition(29030400).shouldBeFalse()
+        sim.continueCondition(31536000).shouldBeTrue()
+        sim.continueCondition(31622400).shouldBeFalse()
+        sim.continueCondition(31708800).shouldBeFalse()
     }
 
     private fun verifySubscriberCreation(list: ListAgent,
