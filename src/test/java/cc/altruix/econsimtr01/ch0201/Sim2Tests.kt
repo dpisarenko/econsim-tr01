@@ -101,7 +101,6 @@ class Sim2Tests {
         sim.setInitialResourceLevel(agent, irl)
         // Verify
         Mockito.verify(sim).setInitialResourceLevel2(agent, irl)
-        agent.storage.amount("r2").shouldBe(123.45)
     }
 
     private fun verifySubscriberCreation(list: ListAgent,
