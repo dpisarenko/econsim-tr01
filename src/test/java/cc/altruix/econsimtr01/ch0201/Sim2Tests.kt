@@ -1,5 +1,6 @@
 package cc.altruix.econsimtr01.ch0201
 
+import cc.altruix.econsimtr01.DefaultAgent
 import cc.altruix.econsimtr01.ResourceFlow
 import cc.altruix.econsimtr01.shouldBe
 import cc.altruix.econsimtr01.simulationRunLogic
@@ -54,6 +55,27 @@ class Sim2Tests {
         verifySubscriberCreation(list, sim, "r10-pc5", 5)
         verifySubscriberCreation(list, sim, "r11-pc6", 6)
         verifySubscriberCreation(list, sim, "r12-pc7", 7)
+    }
+
+    @Test
+    fun setInitialResourceLevel() {
+        val flows = LinkedList<ResourceFlow>()
+        val log = StringBuilder()
+        val simParametersProvider = Sim2ParametersProvider(
+                File("src/test/resources/ch0201Sim2Tests.params.pl").readText()
+        )
+        val sim = Sim2(
+                log,
+                flows,
+                simParametersProvider
+        )
+        val agent = DefaultAgent("id1")
+        val irl = InitialResourceLevel("id1", "r2", 12.34)
+        agent.storage.amount("r2").shouldBe(0.0)
+        // Run method under test
+        sim.setInitialResourceLevel(agent, irl)
+        // Verify
+        agent.storage.amount("r2").shouldBe(12.34)
     }
 
     private fun verifySubscriberCreation(list: ListAgent,
