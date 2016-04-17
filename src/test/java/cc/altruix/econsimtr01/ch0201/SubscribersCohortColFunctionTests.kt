@@ -1,5 +1,6 @@
 package cc.altruix.econsimtr01.ch0201
 
+import org.junit.Assert
 import org.junit.Test
 
 /**
@@ -10,6 +11,7 @@ import org.junit.Test
 class SubscribersCohortColFunctionTests {
     @Test
     fun invoke() {
-
+        // TODO: Implement this test
+        Assert.fail("Not implemented")
     }
 }
