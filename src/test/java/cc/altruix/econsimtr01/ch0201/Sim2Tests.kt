@@ -6,6 +6,7 @@ import cc.altruix.econsimtr01.shouldBe
 import cc.altruix.econsimtr01.simulationRunLogic
 import org.fest.assertions.Assertions
 import org.junit.Test
+import org.mockito.Mockito
 import java.io.File
 import java.util.*
 
@@ -76,6 +77,30 @@ class Sim2Tests {
         sim.setInitialResourceLevel(agent, irl)
         // Verify
         agent.storage.amount("r2").shouldBe(12.34)
+    }
+
+    @Test
+    fun setInitialResourceLevelSetsInitialResourceLevelForNormalResources() {
+        val flows = LinkedList<ResourceFlow>()
+        val log = StringBuilder()
+        val simParametersProvider = Sim2ParametersProvider(
+                File("src/test/resources/ch0201Sim2Tests.params.pl").readText()
+        )
+        val sim = Mockito.spy(
+                Sim2(
+                        log,
+                        flows,
+                        simParametersProvider
+                )
+        )
+        val agent = DefaultAgent("id1")
+        val irl = InitialResourceLevel("id1", "r2", 123.45)
+        agent.storage.amount("r2").shouldBe(0.0)
+        // Run method under test
+        sim.setInitialResourceLevel(agent, irl)
+        // Verify
+        Mockito.verify(sim).setInitialResourceLevel(agent, irl)
+        agent.storage.amount("r2").shouldBe(123.45)
     }
 
     private fun verifySubscriberCreation(list: ListAgent,
