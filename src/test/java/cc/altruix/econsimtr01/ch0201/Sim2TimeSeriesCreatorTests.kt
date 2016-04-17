@@ -45,9 +45,15 @@ class Sim2TimeSeriesCreatorTests {
         val data2 = emptyArray<String>()
         Mockito.doReturn(data1).`when`(out).calculateData(prolog, 0L, Sim2TimeSeriesCreator.columns)
         Mockito.doReturn(data2).`when`(out).calculateData(prolog, 1L, Sim2TimeSeriesCreator.columns)
+        Mockito.doNothing().`when`(out).appendRow(builder, data1)
+        Mockito.doNothing().`when`(out).appendRow(builder, data2)
         // Run method under test
         out.appendRows(builder, prolog, times, Sim2TimeSeriesCreator.columns)
         // Verify
+        Mockito.verify(out).calculateData(prolog, 0L, Sim2TimeSeriesCreator.columns)
+        Mockito.verify(out).calculateData(prolog, 1L, Sim2TimeSeriesCreator.columns)
+        Mockito.verify(out).appendRow(builder, data1)
+        Mockito.verify(out).appendRow(builder, data2)
 
     }
 }

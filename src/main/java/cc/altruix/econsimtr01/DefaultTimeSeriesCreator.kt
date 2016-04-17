@@ -27,7 +27,7 @@ abstract class DefaultTimeSeriesCreator : ITimeSeriesCreator {
             PlUtils.extractSingleStringFromQuery(prolog, "measurementTime($t, X).", "X")
                     .removeSingleQuotes()
 
-    protected fun appendRow(builder: StringBuilder,
+    open internal fun appendRow(builder: StringBuilder,
                             columns: Array<String>) {
         columns.forEach {
             builder.append("\"$it\";")
