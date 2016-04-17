@@ -15,8 +15,8 @@ class Sim2TimeSeriesCreator : DefaultTimeSeriesCreator() {
         val columns = arrayOf(
                 ColumnDescriptor("t [sec]", TimeSecondsColFunction()),
                 ColumnDescriptor("Time", TimeLongFormColFunction()),
-                ColumnDescriptor("Money @ Stacy", (x:Prolog, t:Long) -> { ""}),
-                ColumnDescriptor("Copies of software @ Target audience", (x:Prolog, t:Long) -> { ""}),
+                ColumnDescriptor("Money @ Stacy", MoneyAtStacyColFunction()),
+                ColumnDescriptor("Copies of software @ Target audience", CopiesOfSoftwareAtTargetAudienceColFunction(),
                 ColumnDescriptor("Total number of subscribers in the list", (x:Prolog, t:Long) -> { ""}),
                 ColumnDescriptor("Subscribers (1 interaction)", (x:Prolog, t:Long) -> { ""}),
                 ColumnDescriptor("Subscribers (2 interactions)", (x:Prolog, t:Long) -> { ""}),
