@@ -41,7 +41,7 @@ open class Sim2TimeSeriesCreator : DefaultTimeSeriesCreator() {
 
     open internal fun createStringBuilder() = StringBuilder()
 
-    internal fun appendRows(builder: StringBuilder,
+    open internal fun appendRows(builder: StringBuilder,
                              prolog: Prolog,
                              times: List<Long>,
                              columns: Array<ColumnDescriptor>) {
@@ -52,9 +52,9 @@ open class Sim2TimeSeriesCreator : DefaultTimeSeriesCreator() {
         }
     }
 
-    internal fun createPrologEngine() = PlUtils.createEngine()
+    open internal fun createPrologEngine() = PlUtils.createEngine()
 
-    internal fun appendHeader(builder: StringBuilder, cols: Array<ColumnDescriptor>) {
+    open internal fun appendHeader(builder: StringBuilder, cols: Array<ColumnDescriptor>) {
         // TODO: Test this
         appendRow(builder, cols.map { it.title }.toTypedArray())
     }
