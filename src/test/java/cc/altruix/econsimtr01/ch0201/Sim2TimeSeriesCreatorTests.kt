@@ -54,6 +54,14 @@ class Sim2TimeSeriesCreatorTests {
         Mockito.verify(out).calculateData(prolog, 1L, Sim2TimeSeriesCreator.columns)
         Mockito.verify(out).appendRow(builder, data1)
         Mockito.verify(out).appendRow(builder, data2)
-
+    }
+    @Test
+    fun appendHeader() {
+        val out = Mockito.spy(Sim2TimeSeriesCreator())
+        val builder = StringBuilder()
+        // Run method under test
+        out.appendHeader(builder, Sim2TimeSeriesCreator.columns)
+        // Verify
+        builder.toString().shouldBe("")
     }
 }
