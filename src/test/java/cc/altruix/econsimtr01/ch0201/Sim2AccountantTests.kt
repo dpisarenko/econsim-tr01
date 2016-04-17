@@ -22,7 +22,9 @@ class Sim2AccountantTests {
         Mockito.doNothing().`when`(out).logNormalStockLevels(1L)
         Mockito.doNothing().`when`(out).logCohortData(1L)
         // Run method under test
-        out.log
+        out.logStockLevels(1L)
         // Verify
+        Mockito.verify(out).logNormalStockLevels(1L)
+        Mockito.verify(out).logCohortData(1L)
     }
 }
