@@ -97,7 +97,6 @@ open class Sim2Accountant(logTarget: StringBuilder,
         return itemToIncrement
     }
 
-    // TODO: Test this
     internal fun createSubscribersCountByNumberOfInteractions(): HashMap<Int, AtomicInteger> {
         return hashMapOf(
                 Pair(1, AtomicInteger(0)),
