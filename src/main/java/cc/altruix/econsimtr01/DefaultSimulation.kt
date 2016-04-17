@@ -1,5 +1,6 @@
 package cc.altruix.econsimtr01
 
+import cc.altruix.econsimtr01.ch0201.Sim2Accountant
 import org.slf4j.LoggerFactory
 
 /**
@@ -66,8 +67,10 @@ abstract class DefaultSimulation(val timing : ITiming,
         }
     }
 
-    protected fun setInitialResourceLevels() {
-        simParametersProvider.initialResourceLevels.forEach { initialResourceLevel ->
+    open protected fun setInitialResourceLevels() {
+        simParametersProvider.initialResourceLevels
+                .filter { !Sim2Accountant.cohortResources.values.contains(it.resource) }
+                .forEach { initialResourceLevel ->
             val agent = findAgent(initialResourceLevel.agent)
             if ((agent != null) && (agent is DefaultAgent)) {
                 agent.put(initialResourceLevel.resource, initialResourceLevel.amt)

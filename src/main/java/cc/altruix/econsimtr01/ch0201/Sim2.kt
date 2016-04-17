@@ -23,6 +23,18 @@ class Sim2(val logTarget:StringBuilder,
         return simParametersProvider.agents
     }
 
+    override fun setInitialResourceLevels() {
+        simParametersProvider.initialResourceLevels.forEach { initialResourceLevel ->
+            val agent = findAgent(initialResourceLevel.agent)
+            if ((agent != null) && (agent is DefaultAgent)) {
+                agent.put(initialResourceLevel.resource, initialResourceLevel.amt)
+            } else {
+                LOGGER.error("Can't find agent '${initialResourceLevel.agent}'")
+            }
+        }
+    }
+
+
     override fun createSensors(): List<ISensor> =
             listOf(
                     Sim2Accountant(
