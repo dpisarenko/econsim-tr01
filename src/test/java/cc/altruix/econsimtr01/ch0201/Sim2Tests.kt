@@ -1,7 +1,9 @@
 package cc.altruix.econsimtr01.ch0201
 
 import cc.altruix.econsimtr01.ResourceFlow
+import cc.altruix.econsimtr01.shouldBe
 import cc.altruix.econsimtr01.simulationRunLogic
+import org.fest.assertions.Assertions
 import org.junit.Test
 import java.io.File
 import java.util.*
@@ -31,5 +33,39 @@ class Sim2Tests {
                 "src/test/resources/ch0201/sim02/Sim2Tests.test.flows.actual.png",
                 Sim1TimeSeriesCreator()
         )
+    }
+    @Test
+    fun addSubscribers() {
+        val flows = LinkedList<ResourceFlow>()
+        val log = StringBuilder()
+        val simParametersProvider = Sim2ParametersProvider(
+                File("src/test/resources/ch0201Sim2Tests.params.pl").readText()
+        )
+        val sim = Sim2(
+                log,
+                flows,
+                simParametersProvider
+        )
+        val list = sim.findAgent("list") as ListAgent
+        verifySubscriberCreation(list, sim, "r06-pc1", 1)
+        verifySubscriberCreation(list, sim, "r07-pc2", 2)
+        verifySubscriberCreation(list, sim, "r08-pc3", 3)
+        verifySubscriberCreation(list, sim, "r09-pc4", 4)
+        verifySubscriberCreation(list, sim, "r10-pc5", 5)
+        verifySubscriberCreation(list, sim, "r11-pc6", 6)
+        verifySubscriberCreation(list, sim, "r12-pc7", 7)
+    }
+
+    private fun verifySubscriberCreation(list: ListAgent,
+                                         sim: Sim2,
+                                         resId: String,
+                                         interactions: Int) {
+        list.subscribers.clear()
+        val irl = InitialResourceLevel("list", resId, 10.0)
+        sim.addSubscribers(list, irl)
+        list.subscribers.size.shouldBe(10)
+        list.subscribers.forEach {
+            Assertions.assertThat(it.interactionsWithStacy).isEqualTo(interactions)
+        }
     }
 }

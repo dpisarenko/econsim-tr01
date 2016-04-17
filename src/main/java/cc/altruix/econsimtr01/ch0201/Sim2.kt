@@ -43,7 +43,8 @@ class Sim2(val logTarget:StringBuilder,
         }
     }
 
-    private fun addSubscribers(list: ListAgent, initialResourceLevel: InitialResourceLevel) {
+    internal open fun addSubscribers(list: ListAgent,
+                                     initialResourceLevel: InitialResourceLevel) {
         val interactions = Sim2Accountant.inverseCohortResources.get(initialResourceLevel.resource)
         if (interactions == null) {
             LOGGER.error("Can't determine interactions for resource '${initialResourceLevel.resource}'")

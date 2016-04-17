@@ -44,10 +44,10 @@ hasFlow(f3,
 
 initialResourceLevel(list, "r06-pc1", 143).
 initialResourceLevel(list, "r07-pc2", 143).
-initialResourceLevel(list, "r08-pc2", 143).
-initialResourceLevel(list, "r09-pc2", 143).
-initialResourceLevel(list, "r10-pc2", 143).
-initialResourceLevel(list, "r11-pc2", 143).
-initialResourceLevel(list, "r12-pc2", 142).
+initialResourceLevel(list, "r08-pc3", 143).
+initialResourceLevel(list, "r09-pc4", 143).
+initialResourceLevel(list, "r10-pc5", 143).
+initialResourceLevel(list, "r11-pc6", 143).
+initialResourceLevel(list, "r12-pc7", 142).
 
 initialResourceLevel(stacy, r2, 3000.0).
