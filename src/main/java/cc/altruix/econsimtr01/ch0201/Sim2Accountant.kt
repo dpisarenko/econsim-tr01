@@ -40,8 +40,6 @@ open class Sim2Accountant(logTarget: StringBuilder,
     }
 
     open internal fun logCohortData(time: Long) {
-        // TODO: Implement this
-        // TODO: Test this
         val list = findList()
         if (list == null) {
             LOGGER.error("Can't find list agent.")
@@ -53,9 +51,8 @@ open class Sim2Accountant(logTarget: StringBuilder,
         logSubscribersCountByNumberOfInteractions(list, subscribersCountByNumberOfInteractions, time)
     }
 
-    internal fun logSubscribersCountByNumberOfInteractions(list: ListAgent,
-                                                           subscribersCountByNumberOfInteractions: HashMap<Int, AtomicInteger>,
-                                                           time: Long) {
+    open internal fun logSubscribersCountByNumberOfInteractions(list: ListAgent,
+                                                           subscribersCountByNumberOfInteractions: HashMap<Int, AtomicInteger>, time: Long) {
         // TODO: Test this
         subscribersCountByNumberOfInteractions.map {
             Pair(cohortResources.get(it.key), it.value.get().toString())

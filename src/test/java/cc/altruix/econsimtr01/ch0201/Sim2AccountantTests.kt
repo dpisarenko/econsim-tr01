@@ -65,6 +65,7 @@ class Sim2AccountantTests {
                 subscribersCountByNumberOfInteractions,
                 time)
         // Run method under test
+        out.logCohortData(time)
         // Verify
         Mockito.verify(out).findList()
         Mockito.verify(out).calculateSubscribersCountByNumberOfInteractions(list)
