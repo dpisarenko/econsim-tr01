@@ -33,7 +33,7 @@ class Sim2Tests {
                 "src/test/resources/ch0201/sim02/Sim2Tests.test.pl.expected.txt",
                 "src/test/resources/ch0201/sim02/Sim2Tests.test.csv.expected.txt",
                 "src/test/resources/ch0201/sim02/Sim2Tests.test.flows.actual.png",
-                Sim1TimeSeriesCreator()
+                Sim2TimeSeriesCreator()
         )
     }
     @Test
