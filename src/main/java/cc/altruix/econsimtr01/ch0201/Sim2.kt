@@ -6,7 +6,7 @@ import java.util.*
 /**
  * Created by pisarenko on 13.04.2016.
  */
-class Sim2(val logTarget:StringBuilder,
+open class Sim2(val logTarget:StringBuilder,
            val flows:MutableList<ResourceFlow>,
            simParametersProvider: Sim2ParametersProvider) : DefaultSimulation(Timing(), simParametersProvider) {
     override fun continueCondition(tick: Long): Boolean {
@@ -38,7 +38,7 @@ class Sim2(val logTarget:StringBuilder,
                 (agent is DefaultAgent) &&
                 !Sim2Accountant.cohortResources.values.contains(initialResourceLevel.resource)) {
             // TODO: Test this
-            setInitialResourceLevel(agent, initialResourceLevel)
+            setInitialResourceLevel2(agent, initialResourceLevel)
         } else if ((agent != null) && (agent is ListAgent) &&
                 Sim2Accountant.cohortResources.values.contains(initialResourceLevel.resource)) {
             // TODO: Test this
@@ -60,7 +60,7 @@ class Sim2(val logTarget:StringBuilder,
         }
     }
 
-    internal fun setInitialResourceLevel(agent: DefaultAgent, initialResourceLevel: InitialResourceLevel) {
+    internal fun setInitialResourceLevel2(agent: DefaultAgent, initialResourceLevel: InitialResourceLevel) {
         agent.put(initialResourceLevel.resource, initialResourceLevel.amt)
     }
 

@@ -74,7 +74,7 @@ class Sim2Tests {
         val irl = InitialResourceLevel("id1", "r2", 12.34)
         agent.storage.amount("r2").shouldBe(0.0)
         // Run method under test
-        sim.setInitialResourceLevel(agent, irl)
+        sim.setInitialResourceLevel2(agent, irl)
         // Verify
         agent.storage.amount("r2").shouldBe(12.34)
     }
@@ -96,10 +96,11 @@ class Sim2Tests {
         val agent = DefaultAgent("id1")
         val irl = InitialResourceLevel("id1", "r2", 123.45)
         agent.storage.amount("r2").shouldBe(0.0)
+
         // Run method under test
         sim.setInitialResourceLevel(agent, irl)
         // Verify
-        Mockito.verify(sim).setInitialResourceLevel(agent, irl)
+        Mockito.verify(sim).setInitialResourceLevel2(agent, irl)
         agent.storage.amount("r2").shouldBe(123.45)
     }
 
