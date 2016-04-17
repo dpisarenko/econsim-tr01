@@ -28,18 +28,22 @@ class Sim2(val logTarget:StringBuilder,
         simParametersProvider.initialResourceLevels
                 .forEach { initialResourceLevel ->
             val agent = findAgent(initialResourceLevel.agent)
-            if ((agent != null) &&
-                    (agent is DefaultAgent) &&
-                    !Sim2Accountant.cohortResources.values.contains(initialResourceLevel.resource)) {
-                // TODO: Test this
-                setInitialResourceLevel(agent, initialResourceLevel)
-            } else if ((agent != null) && (agent is ListAgent) &&
-                    Sim2Accountant.cohortResources.values.contains(initialResourceLevel.resource)) {
-                // TODO: Test this
-                addSubscribers(agent, initialResourceLevel)
-            } else {
-                LOGGER.error("Can't find agent '${initialResourceLevel.agent}'")
-            }
+            setInitialResourceLevel(agent, initialResourceLevel)
+        }
+    }
+
+    internal fun setInitialResourceLevel(agent: IAgent, initialResourceLevel: InitialResourceLevel) {
+        if ((agent != null) &&
+                (agent is DefaultAgent) &&
+                !Sim2Accountant.cohortResources.values.contains(initialResourceLevel.resource)) {
+            // TODO: Test this
+            setInitialResourceLevel(agent, initialResourceLevel)
+        } else if ((agent != null) && (agent is ListAgent) &&
+                Sim2Accountant.cohortResources.values.contains(initialResourceLevel.resource)) {
+            // TODO: Test this
+            addSubscribers(agent, initialResourceLevel)
+        } else {
+            LOGGER.error("Can't find agent '${initialResourceLevel.agent}'")
         }
     }
 
