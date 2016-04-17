@@ -10,7 +10,6 @@ import cc.altruix.javaprologinterop.PlUtils
  * @since 1.0
  */
 class TimeLongFormColFunction : ITimeSeriesFieldFillerFunction {
-    // TODO: Test this
     override fun invoke(prolog: Prolog, t: Long): String =
             PlUtils.extractSingleStringFromQuery(
                     prolog,
