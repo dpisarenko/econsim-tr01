@@ -1,6 +1,7 @@
 package cc.altruix.econsimtr01.ch0201
 
 import alice.tuprolog.Prolog
+import cc.altruix.econsimtr01.extractSingleDouble
 
 /**
  * @author Dmitri Pisarenko (dp@altruix.co)
@@ -11,7 +12,8 @@ class SubscribersCohortColFunction(val interactions:Int) : ITimeSeriesFieldFille
     override fun invoke(prolog: Prolog, time: Long): String {
         // TODO: Test this
         // TODO: Implement this
-        return ""
+
+        return prolog.extractSingleDouble("resourceLevel($time, 'list', 'r0${5+interactions}-pc$interactions', Val).", "Val").toString()
     }
 
 }
