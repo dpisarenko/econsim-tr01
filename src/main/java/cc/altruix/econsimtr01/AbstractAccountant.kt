@@ -10,9 +10,8 @@ abstract class AbstractAccountant (val logTarget: StringBuilder,
                           val resources: List<PlResource>) : ISensor{
     fun writeResourceData() {
         resources.forEach { res ->
-            // TODO: Test this
             val plresname = convertToPrologString(res.name)
-            logTarget.append("resource(${res.id}, \"${res.name}\", \"${res.unit}\").")
+            logTarget.append("resource(${res.id}, \"$plresname\", \"${res.unit}\").")
             logTarget.newLine()
         }
     }

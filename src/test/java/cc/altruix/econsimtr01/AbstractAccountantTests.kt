@@ -3,7 +3,6 @@ package cc.altruix.econsimtr01
 import org.joda.time.DateTime
 import org.junit.Test
 import org.mockito.Mockito
-import java.util.*
 
 /**
  * @author Dmitri Pisarenko (dp@altruix.co)
@@ -23,8 +22,6 @@ class AbstractAccountantTests {
     fun writeResourceDataEscapesApostrophes() {
         val logTarget = StringBuilder()
         val agents = emptyList<IAgent>()
-        val resources = ArrayList<PlResource>()
-        // resource("r11-pc2", "People, who were exposed to Stacy''s writings 6 times", "People").
         val txt =
                 "People, who were exposed to Stacy's writings 6 times"
         val resource = PlResource(
@@ -35,7 +32,7 @@ class AbstractAccountantTests {
                         TestAccountant(
                                 logTarget,
                                 agents,
-                                resources
+                                listOf(resource)
                         )
                 )
         Mockito.doReturn("foo").`when`(out).convertToPrologString(txt)
@@ -43,6 +40,6 @@ class AbstractAccountantTests {
         out.writeResourceData()
         // Verify
         Mockito.verify(out).convertToPrologString(txt)
-        logTarget.toString().shouldBe("foo${System.lineSeparator()}")
+        logTarget.toString().shouldBe("resource(r11-pc2, \"foo\", \"People\").${System.lineSeparator()}")
     }
 }
