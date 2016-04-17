@@ -58,7 +58,7 @@ open class Sim2TimeSeriesCreator : DefaultTimeSeriesCreator() {
         appendRow(builder, cols.map { it.title }.toTypedArray())
     }
 
-    private fun calculateData(prolog: Prolog, t: Long, columns: Array<ColumnDescriptor>): Array<String> {
+    open internal fun calculateData(prolog: Prolog, t: Long, columns: Array<ColumnDescriptor>): Array<String> {
         // TODO: Test this
         return columns.map { it.func(prolog, t) }.toTypedArray()
     }

@@ -2,6 +2,7 @@ package cc.altruix.econsimtr01.ch0201
 
 import alice.tuprolog.Prolog
 import cc.altruix.econsimtr01.shouldBe
+import cc.altruix.javaprologinterop.PlUtils
 import org.junit.Test
 import org.mockito.Mockito
 import java.io.File
@@ -33,5 +34,20 @@ class Sim2TimeSeriesCreatorTests {
         Mockito.verify(out).createPrologEngine()
         Mockito.verify(out).extractTimes(input, prolog)
         Mockito.verify(out).appendRows(builder, prolog, times, Sim2TimeSeriesCreator.columns)
+    }
+    @Test
+    fun appendRows() {
+        val out = Mockito.spy(Sim2TimeSeriesCreator())
+        val builder = StringBuilder()
+        val prolog = PlUtils.createEngine()
+        val times = listOf(0L, 1L)
+        val data1 = emptyArray<String>()
+        val data2 = emptyArray<String>()
+        Mockito.doReturn(data1).`when`(out).calculateData(prolog, 0L, Sim2TimeSeriesCreator.columns)
+        Mockito.doReturn(data2).`when`(out).calculateData(prolog, 1L, Sim2TimeSeriesCreator.columns)
+        // Run method under test
+        out.appendRows(builder, prolog, times, Sim2TimeSeriesCreator.columns)
+        // Verify
+
     }
 }
