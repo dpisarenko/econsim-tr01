@@ -8,6 +8,20 @@ import org.joda.time.DateTime
 abstract class AbstractAccountant (val logTarget: StringBuilder,
                           val agents: List<IAgent>,
                           val resources: List<PlResource>) : ISensor{
+    val fire: (DateTime) -> Boolean = dailyAtMidnight()
+    var firstTime:Boolean = true
+
+    override fun measure(time: DateTime) {
+        if (fire(time)) {
+            if (firstTime) {
+                writeResourceData()
+                firstTime = false
+            }
+            logMeasurementTime(time)
+            logStockLevels(time.secondsSinceT0())
+        }
+    }
+
     fun writeResourceData() {
         resources.forEach { res ->
             val plresname = convertToPrologString(res.name)
@@ -19,7 +33,7 @@ abstract class AbstractAccountant (val logTarget: StringBuilder,
     open fun convertToPrologString(name: String): String
             = name.replace("'", "''")
 
-    protected fun logStockLevels(time: Long) {
+    open protected fun logStockLevels(time: Long) {
         agents.forEach { agent ->
             resources.forEach { resource ->
                 appendResourceAmount(time, agent, resource)
