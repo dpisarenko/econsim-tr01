@@ -19,7 +19,7 @@ class AbstractAccountantTests {
     }
 
     @Test
-    fun writeResourceDataEscapesApostrophes() {
+    fun writeResourceDataCallsConvertToPrologString() {
         val logTarget = StringBuilder()
         val agents = emptyList<IAgent>()
         val txt =
@@ -41,5 +41,19 @@ class AbstractAccountantTests {
         // Verify
         Mockito.verify(out).convertToPrologString(txt)
         logTarget.toString().shouldBe("resource(r11-pc2, \"foo\", \"People\").${System.lineSeparator()}")
+    }
+    @Test
+    fun convertToPrologStringEscapesApostrophes() {
+        val txt =
+                "People, who were exposed to Stacy's writings 6 times"
+        val out = TestAccountant(
+                StringBuilder(),
+                emptyList<IAgent>(),
+                emptyList<PlResource>()
+        )
+        // Run method under test
+        val act = out.convertToPrologString(txt)
+        // Verify
+        act.shouldBe("People, who were exposed to Stacy''s writings 6 times")
     }
 }
