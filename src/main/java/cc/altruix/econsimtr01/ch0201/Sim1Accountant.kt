@@ -1,7 +1,8 @@
 package cc.altruix.econsimtr01.ch0201
 
-import cc.altruix.econsimtr01.*
-import org.joda.time.DateTime
+import cc.altruix.econsimtr01.AbstractAccountant
+import cc.altruix.econsimtr01.IAgent
+import cc.altruix.econsimtr01.PlResource
 
 /**
  * Created by pisarenko on 11.04.2016.
@@ -12,17 +13,4 @@ class Sim1Accountant(logTarget: StringBuilder,
         logTarget,
         agents,
         resources) {
-    val fire: (DateTime) -> Boolean = dailyAtMidnight()
-    var firstTime:Boolean = true
-
-    override fun measure(time: DateTime) {
-        if (fire(time)) {
-            if (firstTime) {
-                writeResourceData()
-                firstTime = false
-            }
-            logMeasurementTime(time)
-            logStockLevels(time.secondsSinceT0())
-        }
-    }
 }
