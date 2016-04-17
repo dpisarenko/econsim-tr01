@@ -5,7 +5,6 @@ import cc.altruix.econsimtr01.IAgent
 import cc.altruix.econsimtr01.PlResource
 import cc.altruix.econsimtr01.newLine
 import org.slf4j.LoggerFactory
-import sun.management.resources.agent
 import java.util.*
 import java.util.concurrent.atomic.AtomicInteger
 
@@ -43,7 +42,7 @@ open class Sim2Accountant(logTarget: StringBuilder,
     open internal fun logCohortData(time: Long) {
         // TODO: Implement this
         // TODO: Test this
-        val list = this.agents.filter { it is ListAgent }.firstOrNull() as ListAgent
+        val list = findList()
         if (list == null) {
             LOGGER.error("Can't find list agent.")
             return
@@ -51,14 +50,22 @@ open class Sim2Accountant(logTarget: StringBuilder,
         val subscribersCountByNumberOfInteractions =
                 calculateSubscribersCountByNumberOfInteractions(list)
 
+        logSubscribersCountByNumberOfInteractions(list, subscribersCountByNumberOfInteractions, time)
+    }
+
+    internal fun logSubscribersCountByNumberOfInteractions(list: ListAgent,
+                                                           subscribersCountByNumberOfInteractions: HashMap<Int, AtomicInteger>,
+                                                           time: Long) {
+        // TODO: Test this
         subscribersCountByNumberOfInteractions.map {
-                Pair(cohortResources.get(it.key), it.value.get().toString())
+            Pair(cohortResources.get(it.key), it.value.get().toString())
         }.forEach {
             logTarget.append("resourceLevel($time, '${list.id()}', '${it.first}', ${it.second}).")
             logTarget.newLine()
-
         }
     }
+
+    internal fun findList() = this.agents.filter { it is ListAgent }.firstOrNull() as ListAgent
 
     internal fun calculateSubscribersCountByNumberOfInteractions(list: ListAgent): HashMap<Int, AtomicInteger> {
         // TODO: Test this
