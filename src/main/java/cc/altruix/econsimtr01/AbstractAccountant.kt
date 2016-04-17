@@ -33,7 +33,7 @@ abstract class AbstractAccountant (val logTarget: StringBuilder,
     open fun convertToPrologString(name: String): String
             = name.replace("'", "''")
 
-    open protected fun logStockLevels(time: Long) {
+    open internal fun logStockLevels(time: Long) {
         agents.forEach { agent ->
             resources.forEach { resource ->
                 appendResourceAmount(time, agent, resource)
