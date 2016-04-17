@@ -6,6 +6,8 @@ import cc.altruix.econsimtr01.shouldBe
 import org.fest.assertions.Assertions
 import org.junit.Test
 import org.mockito.Mockito
+import java.util.*
+import java.util.concurrent.atomic.AtomicInteger
 
 /**
  * @author Dmitri Pisarenko (dp@altruix.co)
@@ -48,5 +50,27 @@ class Sim2AccountantTests {
         Assertions.assertThat(act.get(5)?.get()).isEqualTo(0)
         Assertions.assertThat(act.get(6)?.get()).isEqualTo(0)
         Assertions.assertThat(act.get(7)?.get()).isEqualTo(0)
+    }
+    @Test
+    fun logCohortData() {
+        val out = createSim2Accountant()
+        val list = ListAgent("list")
+        Mockito.doReturn(list).`when`(out).findList()
+        val subscribersCountByNumberOfInteractions =
+                HashMap<Int, AtomicInteger>()
+        Mockito.doReturn(subscribersCountByNumberOfInteractions)
+            .`when`(out).calculateSubscribersCountByNumberOfInteractions(list)
+        val time = 1L
+        Mockito.doNothing().`when`(out).logSubscribersCountByNumberOfInteractions(list,
+                subscribersCountByNumberOfInteractions,
+                time)
+        // Run method under test
+        // Verify
+        Mockito.verify(out).findList()
+        Mockito.verify(out).calculateSubscribersCountByNumberOfInteractions(list)
+        Mockito.verify(out).logSubscribersCountByNumberOfInteractions(list,
+                subscribersCountByNumberOfInteractions,
+                time)
+
     }
 }
