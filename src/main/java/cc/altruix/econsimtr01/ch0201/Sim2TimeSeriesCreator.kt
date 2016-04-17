@@ -44,7 +44,6 @@ open class Sim2TimeSeriesCreator : DefaultTimeSeriesCreator() {
                              prolog: Prolog,
                              times: List<Long>,
                              columns: Array<ColumnDescriptor>) {
-        // TODO: Test this
         times.forEach { t ->
             val data = calculateData(prolog, t, columns)
             appendRow(builder, data)
