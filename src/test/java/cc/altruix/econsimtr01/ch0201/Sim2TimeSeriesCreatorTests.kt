@@ -3,6 +3,7 @@ package cc.altruix.econsimtr01.ch0201
 import alice.tuprolog.Prolog
 import cc.altruix.econsimtr01.shouldBe
 import cc.altruix.javaprologinterop.PlUtils
+import org.fest.assertions.Assertions
 import org.junit.Test
 import org.mockito.Mockito
 import java.io.File
@@ -57,11 +58,25 @@ class Sim2TimeSeriesCreatorTests {
     }
     @Test
     fun appendHeader() {
-        val out = Mockito.spy(Sim2TimeSeriesCreator())
+        val out = Sim2TimeSeriesCreator()
         val builder = StringBuilder()
         // Run method under test
         out.appendHeader(builder, Sim2TimeSeriesCreator.columns)
         // Verify
         builder.toString().shouldBe("\"t [sec]\";\"Time\";\"Money @ Stacy\";\"Copies of software @ Target audience\";\"Total number of subscribers in the list\";\"Subscribers (1 interaction)\";\"Subscribers (2 interactions)\";\"Subscribers (3 interactions)\";\"Subscribers (4 interactions)\";\"Subscribers (5 interactions)\";\"Subscribers (6 interactions)\";\"Subscribers (7 or more interactions)\";${System.lineSeparator()}")
+    }
+
+    @Test
+    fun calculateData() {
+        val out = Sim2TimeSeriesCreator()
+        val prolog = Prolog()
+        val columns = arrayOf(
+                ColumnDescriptor("c1", {x, y -> "d1"}),
+                ColumnDescriptor("c2", {x, y -> "d2"})
+        )
+        // Run method under test
+        val act = out.calculateData(prolog, 0L, columns)
+        // Verify
+        Assertions.assertThat(act).isEqualTo(arrayOf("d1", "d2"))
     }
 }
