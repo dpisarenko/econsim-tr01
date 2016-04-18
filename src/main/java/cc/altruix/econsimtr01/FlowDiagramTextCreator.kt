@@ -1,9 +1,12 @@
 package cc.altruix.econsimtr01
 
+import org.slf4j.LoggerFactory
+
 /**
  * Created by pisarenko on 05.04.2016.
  */
 class FlowDiagramTextCreator(val resources:List<PlResource>) {
+    val LOGGER = LoggerFactory.getLogger(FlowDiagramTextCreator::class.java)
     fun createFlowDiagramText(flows:List<ResourceFlow>):String {
         val builder = StringBuilder()
         if (flows.isNotEmpty() && resources.isNotEmpty()) {
@@ -21,9 +24,11 @@ class FlowDiagramTextCreator(val resources:List<PlResource>) {
     }
 
     private fun findUnit(res: String): String {
-        val resource = resources.filter { x -> x.id.equals(res) }.first()
+        val resource = resources.filter { x -> x.id.equals(res.removeSingleQuotes()) }.firstOrNull()
         if (resource != null) {
             return resource.unit
+        } else {
+            LOGGER.error("Can't find resource '$res'")
         }
         return "?"
     }

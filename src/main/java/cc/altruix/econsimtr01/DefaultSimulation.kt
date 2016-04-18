@@ -19,7 +19,9 @@ abstract class DefaultSimulation(val simParametersProvider: ISimParametersProvid
         return results
     }
 
-    internal fun minimalSimulationCycle(agents: List<IAgent>, sensors: List<ISensor>, oldTime: DateTime): DateTime {
+    internal fun minimalSimulationCycle(agents: List<IAgent>,
+                                        sensors: List<ISensor>,
+                                        oldTime: DateTime): DateTime {
         val newTime = oldTime.plusMinutes(1)
         agents.forEach { it.act(newTime) }
         sensors.forEach { it.measure(newTime) }
@@ -32,7 +34,9 @@ abstract class DefaultSimulation(val simParametersProvider: ISimParametersProvid
     fun findAgent(agentId: String) =
             simParametersProvider.agents.filter { x -> x.id().equals(agentId) }.first()
 
-    protected fun attachFlowToAgent(agents: List<IAgent>, flow: PlFlow, flows:MutableList<ResourceFlow>) {
+    protected fun attachFlowToAgent(agents: List<IAgent>,
+                                    flow: PlFlow,
+                                    flows:MutableList<ResourceFlow>) {
         val agent = simParametersProvider.agents
                 .filter { x -> x.id().equals(flow.src) }
                 .firstOrNull()
