@@ -64,7 +64,7 @@ open class ListAgent(id:String,
     open fun subscribersBuy(): Int {
         val potentialBuyers = this.subscribers.filter {
             (it.interactionsWithStacy >= interactionsBeforePurchase) &&
-                    !it.boughtSomething
+                    (!it.boughtSomething)
         }
         val indices = getIndicesOfSubscribersToUpdate(potentialBuyers, percentageOfBuyers)
         indices.forEach { this.subscribers.get(it).boughtSomething = true }
