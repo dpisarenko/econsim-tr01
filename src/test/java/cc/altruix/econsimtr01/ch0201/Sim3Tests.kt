@@ -16,7 +16,7 @@ class Sim3Tests {
 
         val flows = LinkedList<ResourceFlow>()
         val log = StringBuilder()
-        val simParametersProvider = Sim2ParametersProvider(
+        val simParametersProvider = Sim3ParametersProvider(
                 File("src/test/resources/ch0201Sim3Tests.params.pl").readText()
         )
         val sim = Sim3(
