@@ -39,7 +39,7 @@ open class Sim1ParametersProvider(val theoryTxt: String) : ISimParametersProvide
             infiniteResourceSupplies.add(
                     InfiniteResourceSupply(
                             map.get("Agent") ?: "",
-                            map.get("Resource") ?: ""
+                            map.get("Resource")?.removeSingleQuotes() ?: ""
                     )
             )
         }
