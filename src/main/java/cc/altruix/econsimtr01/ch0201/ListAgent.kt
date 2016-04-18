@@ -57,7 +57,6 @@ open class ListAgent(id:String,
         }
     }
     open override fun actionOccurred(sender: IAction, time: DateTime) {
-        buyersCount = 0 // TODO: Test this
         updateInteractionsCount()
         buyersCount = subscribersBuy()
     }
@@ -65,7 +64,6 @@ open class ListAgent(id:String,
     open fun subscribersBuy(): Int {
         val potentialBuyers = calculatePotentialBuyers()
         val indices = getIndicesOfSubscribersToUpdate(potentialBuyers, percentageOfBuyers)
-        // TODO: Verify that the next statement operates on potentialBuyers, not on this.subscribers
         updateBoughtSomethingProperty(indices, potentialBuyers)
         return indices.size
     }
