@@ -113,10 +113,9 @@ class Sim2Tests {
                 simParametersProvider
         )
         // Run method under test
-        // TODO: Are these milliseconds or seconds?
-        sim.continueCondition(31536000L.millisToSimulationDateTime()).shouldBeTrue()
-        sim.continueCondition(31622400L.millisToSimulationDateTime()).shouldBeFalse()
-        sim.continueCondition(31708800L.millisToSimulationDateTime()).shouldBeFalse()
+        sim.continueCondition(31536000L.secondsToSimulationDateTime()).shouldBeTrue()
+        sim.continueCondition(31622400L.secondsToSimulationDateTime()).shouldBeFalse()
+        sim.continueCondition(31708800L.secondsToSimulationDateTime()).shouldBeFalse()
     }
 
     private fun verifySubscriberCreation(list: ListAgent,
