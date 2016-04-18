@@ -81,14 +81,15 @@ open class ListAgent(id:String,
         }
     }
 
-    internal fun getIndicesOfSubscribersToUpdate(subscribers: Collection<Subscriber>,
+    internal fun getIndicesOfSubscribersToUpdate(subscribers: List<Subscriber>,
                                                  percentage: Double): ArrayList<Int> {
         val readersCount = (subscribers.size * percentage).toInt()
         val processedIndices = ArrayList<Int>(readersCount)
 
         for (i in 1..readersCount) {
             var readerIndex = random.nextInt(subscribers.size)
-            while (processedIndices.contains(readerIndex)) {
+            /* TODO: Insert here the additional check that subscriber at readerIndex didn't buy anything */
+            while (processedIndices.contains(readerIndex) || subscribers.get(readerIndex).boughtSomething) {
                 readerIndex = random.nextInt(subscribers.size)
             }
             processedIndices.add(readerIndex)
