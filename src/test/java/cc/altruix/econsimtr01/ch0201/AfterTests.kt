@@ -34,16 +34,15 @@ class AfterTests {
     }
 
     @Test
-    fun invokeResetsNextFireTimeAtMidnight() {
+    fun invokeResetsNextFireTimeWhenItFires() {
         val out = Mockito.spy(After("f1"))
         val t0 = 0L.millisToSimulationDateTime()
-        out.nextFireTime = t0.plusSeconds(1)
-        out.invoke(t0)
-        Assertions.assertThat(out.nextFireTime).isNull()
+        out.nextFireTime = t0.plusMinutes(1)
+        out.invoke(t0).shouldBeFalse()
+        Assertions.assertThat(out.nextFireTime).isNotNull
 
-        out.nextFireTime = t0.plusSeconds(1)
-        out.invoke(t0.plusSeconds(1))
-        Assertions.assertThat(out.nextFireTime).isEqualTo(t0.plusSeconds(2))
+        out.invoke(t0.plusMinutes(1)).shouldBeTrue()
+        Assertions.assertThat(out.nextFireTime).isNull()
     }
     @Test
     fun connectToInitiatingFunctionFlowSunnyDay() {

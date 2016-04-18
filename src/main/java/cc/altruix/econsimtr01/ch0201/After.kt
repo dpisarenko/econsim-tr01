@@ -20,17 +20,10 @@ open class After(val flowId:String) : (DateTime) -> Boolean {
     }
 
     override fun invoke(p1: DateTime): Boolean {
-        // TODO: Test this
         val fire = ((nextFireTime != null) &&  p1.isEqual(nextFireTime))
         if (fire) {
             reset()
         }
-        /*
-        if (isMidnight(p1)) {
-            reset()
-        }
-        */
-        // return p1.millis == nextFireTime
         return fire
     }
 
