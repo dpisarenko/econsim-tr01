@@ -70,14 +70,14 @@ open class ListAgent(id:String,
         return indices.size
     }
 
-    internal fun calculatePotentialBuyers(): List<Subscriber> {
+    open internal fun calculatePotentialBuyers(): List<Subscriber> {
         return this.subscribers.filter {
             (it.interactionsWithStacy >= interactionsBeforePurchase) &&
                     (!it.boughtSomething)
         }
     }
 
-    internal fun updateBoughtSomethingProperty(indices: List<Int>, potentialBuyers: List<Subscriber>) {
+    open internal fun updateBoughtSomethingProperty(indices: List<Int>, potentialBuyers: List<Subscriber>) {
         indices.forEach { potentialBuyers.get(it).boughtSomething = true }
     }
 
