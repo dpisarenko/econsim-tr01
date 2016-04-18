@@ -36,6 +36,8 @@ initialResourceLevel(stacy, r2, 3000.0).
 
 infiniteResourceSupply(stacy, r5).
 infiniteResourceSupply(list, r2).
+infiniteResourceSupply(groceryStore, r4).
+infiniteResourceSupply(landlord, r3).
 
 % Sending out the mailing with link to a blog post
 hasFlow(f1,
