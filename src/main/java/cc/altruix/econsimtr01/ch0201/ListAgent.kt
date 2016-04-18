@@ -68,7 +68,8 @@ open class ListAgent(id:String,
                     (!it.boughtSomething)
         }
         val indices = getIndicesOfSubscribersToUpdate(potentialBuyers, percentageOfBuyers)
-        indices.forEach { this.subscribers.get(it).boughtSomething = true }
+        // TODO: Verify that the next statement operates on potentialBuyers, not on this.subscribers
+        indices.forEach { potentialBuyers.get(it).boughtSomething = true }
         return indices.size
     }
 
@@ -88,8 +89,7 @@ open class ListAgent(id:String,
 
         for (i in 1..readersCount) {
             var readerIndex = random.nextInt(subscribers.size)
-            /* TODO: Insert here the additional check that subscriber at readerIndex didn't buy anything */
-            while (processedIndices.contains(readerIndex) || subscribers.get(readerIndex).boughtSomething) {
+            while (processedIndices.contains(readerIndex)) {
                 readerIndex = random.nextInt(subscribers.size)
             }
             processedIndices.add(readerIndex)
