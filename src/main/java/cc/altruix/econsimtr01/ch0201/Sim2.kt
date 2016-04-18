@@ -36,7 +36,6 @@ open class Sim2(val logTarget:StringBuilder,
                                          initialResourceLevel: InitialResourceLevel) {
         if ((agent != null) && (agent is ListAgent) &&
                 Sim2Accountant.cohortResources.values.contains(initialResourceLevel.resource)) {
-            // TODO: Test this
             addSubscribers(agent, initialResourceLevel)
         } else  if ((agent != null) &&
                 (agent is DefaultAgent) &&

@@ -133,7 +133,7 @@ class Sim2Tests {
                 )
         )
         val list = ListAgent("list")
-        val irl = InitialResourceLevel("list", "subscribers", 1000.0)
+        val irl = InitialResourceLevel("list", "r06-pc1", 1000.0)
         Mockito.doNothing().`when`(sim).addSubscribers(list, irl)
         // Run method under test
         sim.setInitialResourceLevel(list, irl)
