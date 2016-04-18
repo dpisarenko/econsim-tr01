@@ -9,7 +9,7 @@ import org.joda.time.DateTime
  */
 class Simulation1(val logTarget:StringBuilder,
                   val flows:MutableList<ResourceFlow>,
-                  simParametersProvider: SimParametersProvider) : DefaultSimulation(Timing(), simParametersProvider) {
+                  simParametersProvider: SimParametersProvider) : DefaultSimulation(simParametersProvider) {
     val foodStorage = DefaultResourceStorage("FoodStorage")
     val farmer = Farmer(
             foodStorage,

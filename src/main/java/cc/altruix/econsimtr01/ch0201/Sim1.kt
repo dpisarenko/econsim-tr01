@@ -9,8 +9,7 @@ import org.joda.time.DateTime
 class Sim1(val logTarget:StringBuilder,
             val flows:MutableList<ResourceFlow>,
             simParametersProvider: Sim1ParametersProvider) :
-        DefaultSimulation(Timing(),
-                simParametersProvider) {
+        DefaultSimulation(simParametersProvider) {
     override fun continueCondition(time: DateTime): Boolean = (time.monthOfYear <= 3)
 
     override fun createAgents(): MutableList<IAgent> {

@@ -9,7 +9,7 @@ import java.util.*
  */
 open class Sim2(val logTarget:StringBuilder,
            val flows:MutableList<ResourceFlow>,
-           simParametersProvider: Sim2ParametersProvider) : DefaultSimulation(Timing(), simParametersProvider) {
+           simParametersProvider: Sim2ParametersProvider) : DefaultSimulation(simParametersProvider) {
     override fun continueCondition(time: DateTime): Boolean = (time.year == 0)
 
     override fun createAgents(): List<IAgent> {

@@ -1,5 +1,6 @@
 package cc.altruix.econsimtr01
 
+import org.junit.Ignore
 import org.junit.Test
 
 /**
@@ -8,7 +9,8 @@ import org.junit.Test
 class DefaultSimulationTests {
     //class DefaultSimulationForTesting : DefaultSimulation(Timing())
     @Test
+    @Ignore
     fun runTicksEveryMinute() {
-
+        // TODO: Implement this test
     }
 }
