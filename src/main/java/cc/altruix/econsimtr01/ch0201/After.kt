@@ -9,19 +9,19 @@ import org.slf4j.LoggerFactory
  */
 open class After(val flowId:String) : (DateTime) -> Boolean {
     val LOGGER = LoggerFactory.getLogger(After::class.java)
-    var nextFireTime:Long = -1
+    var nextFireTime:DateTime? = null
 
     init {
         reset()
     }
 
     private fun reset() {
-        nextFireTime = -1
+        nextFireTime = null
     }
 
     override fun invoke(p1: DateTime): Boolean {
         // TODO: Test this
-        val fire = (p1.millis == nextFireTime)
+        val fire = ((nextFireTime != null) &&  p1.isEqual(nextFireTime))
         if (fire) {
             reset()
         }
@@ -48,6 +48,6 @@ open class After(val flowId:String) : (DateTime) -> Boolean {
     open fun updateNextFiringTime(time: DateTime) {
         // TODO: Test this
         // this.nextFireTime = time.millis + 1000
-        this.nextFireTime = time.plusSeconds(1).millis
+        this.nextFireTime = time.plusSeconds(1)
     }
 }
