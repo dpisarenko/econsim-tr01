@@ -8,6 +8,7 @@ import cc.altruix.javaprologinterop.PlUtils
 import org.fest.assertions.Assertions
 import org.junit.Test
 import org.mockito.Mockito
+import java.io.File
 import java.util.*
 
 /**
@@ -393,6 +394,16 @@ class Sim2ParametersProviderTests {
         val act = out.createF2(fdata, prolog)
         // Verify
         Mockito.verify(out).readPriceOfOneCopyOfSoftware(prolog)
+    }
+
+    @Test
+    fun initSubscribesListAgentToF1() {
+        val out = Sim2ParametersProvider(
+                File("src/test/resources/ch0201Sim2Tests.params.pl").readText()
+        )
+        val f1 = out.flows.filter { it.id == "f1" }.firstOrNull()
+        Assertions.assertThat(f1).isNotNull
+
     }
 
     private fun doAfterTriggerChecks(f2: PlFlow?) {
