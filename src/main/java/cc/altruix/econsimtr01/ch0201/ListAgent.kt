@@ -77,7 +77,7 @@ open class ListAgent(id:String,
         }
     }
 
-    internal fun updateBoughtSomethingProperty(indices: ArrayList<Int>, potentialBuyers: List<Subscriber>) {
+    internal fun updateBoughtSomethingProperty(indices: List<Int>, potentialBuyers: List<Subscriber>) {
         indices.forEach { potentialBuyers.get(it).boughtSomething = true }
     }
 
@@ -91,7 +91,7 @@ open class ListAgent(id:String,
     }
 
     internal fun getIndicesOfSubscribersToUpdate(subscribers: List<Subscriber>,
-                                                 percentage: Double): ArrayList<Int> {
+                                                 percentage: Double): List<Int> {
         val readersCount = (subscribers.size * percentage).toInt()
         val processedIndices = ArrayList<Int>(readersCount)
 

@@ -143,4 +143,20 @@ class ListAgentTests {
             actual[i].shouldBe(expected[i])
         }
     }
+
+    @Test
+    fun subscribersBuyPassesTheRightListToUpdateBoughtSomethingProperty() {
+        val out = Mockito.spy(ListAgent("list"))
+        val potentialBuyers = emptyList<Subscriber>()
+        Mockito.doReturn(potentialBuyers).`when`(out).calculatePotentialBuyers()
+        val indices = emptyList<Int>()
+        Mockito.doReturn(indices).`when`(out).getIndicesOfSubscribersToUpdate(potentialBuyers, out.percentageOfBuyers)
+        Mockito.doNothing().`when`(out).updateBoughtSomethingProperty(indices, potentialBuyers)
+        // Run method under test
+        out.subscribersBuy()
+        // Verify
+        Mockito.verify(out).calculatePotentialBuyers()
+        Mockito.verify(out).getIndicesOfSubscribersToUpdate(potentialBuyers, out.percentageOfBuyers)
+        Mockito.verify(out).updateBoughtSomethingProperty(indices, potentialBuyers)
+    }
 }
