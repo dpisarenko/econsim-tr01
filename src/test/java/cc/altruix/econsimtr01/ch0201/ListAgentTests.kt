@@ -6,6 +6,7 @@ import cc.altruix.econsimtr01.shouldBe
 import org.fest.assertions.Assertions
 import org.junit.Test
 import org.mockito.Mockito
+import java.util.*
 
 /**
  * Created by pisarenko on 14.04.2016.
@@ -57,6 +58,43 @@ class ListAgentTests {
         Mockito.verify(f1).subscribe(out)
         Mockito.verify(f2, Mockito.never()).subscribe(out)
     }
+
+    @Test
+    fun interactionsCountUpdateIsDeterministic() {
+        val out = ListAgent("list")
+        for (i in 1..10) {
+            out.subscribers.add(
+                    Subscriber(
+                            UUID.randomUUID().toString(),
+                            1)
+            )
+            out.subscribers.add(
+                    Subscriber(
+                            UUID.randomUUID().toString(),
+                            2)
+            )
+        }
+
+        countSubscribers(out, 1).shouldBe(10)
+        countSubscribers(out, 2).shouldBe(10)
+        countSubscribers(out, 3).shouldBe(0)
+
+        out.updateInteractionsCount()
+
+        countSubscribers(out, 1).shouldBe(0)
+        countSubscribers(out, 2).shouldBe(10)
+        countSubscribers(out, 3).shouldBe(10)
+
+        out.updateInteractionsCount()
+
+        countSubscribers(out, 1).shouldBe(0)
+        countSubscribers(out, 2).shouldBe(0)
+        countSubscribers(out, 3).shouldBe(10)
+
+    }
+
+    private fun countSubscribers(out: ListAgent, interactions: Int) =
+            out.subscribers.filter { it.interactionsWithStacy == interactions }.count()
 
     private fun mockFlow(id: String): PlFlow =
             Mockito.spy(PlFlow(id, "src", "target", "resource", null, {true}))
