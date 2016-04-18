@@ -11,7 +11,8 @@ import org.slf4j.LoggerFactory
 class OncePerWeek(val dayOfWeek:String) : (DateTime) -> Boolean {
     val LOGGER = LoggerFactory.getLogger(OncePerWeek::class.java)
     override fun invoke(t: DateTime): Boolean {
-        LOGGER.debug("t: ${t.secondsSinceT0()} / $t, dayOfWeek: ${t.dayOfWeek}, toDayOfWeekName: ${t.toDayOfWeekName()}, result: ${dayOfWeek.equals(t.toDayOfWeekName())}")
-        return dayOfWeek.equals(t.toDayOfWeekName())
+//        LOGGER.debug("t: ${t.secondsSinceT0()} / $t, dayOfWeek: ${t.dayOfWeek}, toDayOfWeekName: ${t.toDayOfWeekName()}, result: ${dayOfWeek.equals(t.toDayOfWeekName())}")
+        return dayOfWeek.equals(t.toDayOfWeekName()) && (t.hourOfDay == 0) && (t.minuteOfHour == 0) &&
+                (t.secondOfMinute == 0)
     }
 }
