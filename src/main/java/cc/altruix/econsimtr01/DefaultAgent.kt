@@ -16,6 +16,7 @@ open class DefaultAgent(val id:String) : IAgent, IResourceStorage {
         actionsToRun.forEach { it.notifySubscribers(time) }
 
         // TODO: Test this (start)
+        /*
         actionsToRun.filter { it is PlFlow }
                 .filter { (it as PlFlow).followingTriggers.size > 0 }
                 .forEach { flow ->
@@ -23,6 +24,7 @@ open class DefaultAgent(val id:String) : IAgent, IResourceStorage {
                         ft.updateNextFiringTime(time)
                     }
                 }
+                */
         // TODO: Test this (end)
     }
 
