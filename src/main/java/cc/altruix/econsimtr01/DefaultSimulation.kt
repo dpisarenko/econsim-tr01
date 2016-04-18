@@ -15,11 +15,17 @@ abstract class DefaultSimulation(val simParametersProvider: ISimParametersProvid
         var time = 0L.millisToSimulationDateTime()
         // TODO: Verify that we tick every 1 minute
         while (continueCondition(time)) {
-            time = time.plusMinutes(1)
-            agents.forEach { x -> x.act(time) }
-            sensors.forEach { x -> x.measure(time) }
+            time = minimalSimulationCycle(agents, sensors, time)
         }
         return results
+    }
+
+    internal fun minimalSimulationCycle(agents: List<IAgent>, sensors: List<ISensor>, time: DateTime): DateTime {
+        var time1 = time
+        time1 = time1.plusMinutes(1)
+        agents.forEach { x -> x.act(time1) }
+        sensors.forEach { x -> x.measure(time1) }
+        return time1
     }
 
     internal abstract fun continueCondition(tick: DateTime): Boolean
