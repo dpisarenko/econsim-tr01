@@ -57,7 +57,7 @@ open class ListAgent(id:String,
         }
     }
     open override fun actionOccurred(sender: IAction, time: DateTime) {
-        buyersCount = 0
+        buyersCount = 0 // TODO: Test this
         updateInteractionsCount()
         buyersCount = subscribersBuy()
     }
