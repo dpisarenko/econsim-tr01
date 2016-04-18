@@ -90,7 +90,7 @@ open class ListAgent(id:String,
         }
     }
 
-    internal fun getIndicesOfSubscribersToUpdate(subscribers: List<Subscriber>,
+    open internal fun getIndicesOfSubscribersToUpdate(subscribers: List<Subscriber>,
                                                  percentage: Double): List<Int> {
         val readersCount = (subscribers.size * percentage).toInt()
         val processedIndices = ArrayList<Int>(readersCount)
