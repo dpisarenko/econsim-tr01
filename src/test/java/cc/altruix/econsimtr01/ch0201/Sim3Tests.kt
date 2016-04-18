@@ -13,8 +13,6 @@ import java.util.*
 class Sim3Tests {
     @Test
     fun test() {
-        // TODO: We model the fact that each new blog post not only activates existing subscribers, but attracts new ones into her list.
-
         val flows = LinkedList<ResourceFlow>()
         val log = StringBuilder()
         val simParametersProvider = Sim3ParametersProvider(
