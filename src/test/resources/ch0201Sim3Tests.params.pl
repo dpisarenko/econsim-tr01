@@ -39,6 +39,8 @@ infiniteResourceSupply(list, r2).
 infiniteResourceSupply(groceryStore, r4).
 infiniteResourceSupply(landlord, r3).
 
+infiniteResourceSupply(internets, "r06-pc1").
+
 % Sending out the mailing with link to a blog post
 hasFlow(f1,
     stacy,
@@ -91,3 +93,13 @@ hasFlow(f7,
     2534.0,
     daily(19, 01)
 ).
+
+% Influx of new people into Stacy's list
+% 2) Whenever Stacy publishes a post, two things happen:
+% 2.1) Additional 10 people subscribe to her list.
+hasFlow(f8,
+    internets,
+    list,
+    "r06-pc1",
+    10,
+    after(f1)).

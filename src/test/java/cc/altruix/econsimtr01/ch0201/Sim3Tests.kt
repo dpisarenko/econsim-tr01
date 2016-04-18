@@ -12,7 +12,6 @@ import java.util.*
 class Sim3Tests {
     @Test
     fun test() {
-        // TODO: We add the expenses so that we can see, whether the sales of the software allow Stacy to survive.
         // TODO: We model the fact that each new blog post not only activates existing subscribers, but attracts new ones into her list.
 
         val flows = LinkedList<ResourceFlow>()
