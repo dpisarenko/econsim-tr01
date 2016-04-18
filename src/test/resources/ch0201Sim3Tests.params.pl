@@ -22,6 +22,20 @@ resource("r10-pc5", "People, who were exposed to Stacy''s writings 5 times", "Pe
 resource("r11-pc6", "People, who were exposed to Stacy''s writings 6 times", "People").
 resource("r12-pc7", "People, who were exposed to Stacy''s writings seven times", "People").
 
+initialResourceLevel(list, "r06-pc1", 143).
+initialResourceLevel(list, "r07-pc2", 143).
+initialResourceLevel(list, "r08-pc3", 143).
+initialResourceLevel(list, "r09-pc4", 143).
+initialResourceLevel(list, "r10-pc5", 143).
+initialResourceLevel(list, "r11-pc6", 143).
+initialResourceLevel(list, "r12-pc7", 142).
+
+initialResourceLevel(stacy, r2, 3000.0).
+
+infiniteResourceSupply(stacy, r5).
+infiniteResourceSupply(list, r2).
+
+% Sending out the mailing with link to a blog post
 hasFlow(f1,
     stacy,
     list,
@@ -29,6 +43,7 @@ hasFlow(f1,
     1,
     oncePerWeek("Monday")).
 
+% Subscribes buy copies of Stacy's software
 hasFlow(f2,
     list,
     stacy,
@@ -42,15 +57,33 @@ hasFlow(f3,
     _, % numberOfCopiesOfSoftwareSoldToNewlyActivatedAudience()
     after(f1)).
 
-initialResourceLevel(list, "r06-pc1", 143).
-initialResourceLevel(list, "r07-pc2", 143).
-initialResourceLevel(list, "r08-pc3", 143).
-initialResourceLevel(list, "r09-pc4", 143).
-initialResourceLevel(list, "r10-pc5", 143).
-initialResourceLevel(list, "r11-pc6", 143).
-initialResourceLevel(list, "r12-pc7", 142).
-
-initialResourceLevel(stacy, r2, 3000.0).
-
-infiniteResourceSupply(stacy, r5).
-infiniteResourceSupply(list, r2).
+% Rent
+hasFlow(f4,
+    stacy,
+    landlord,
+    r2,
+    1000.0,
+    oncePerMonth(1)
+).
+hasFlow(f5,
+    landlord,
+    stacy,
+    r3,
+    30.0,
+    oncePerMonth(1)
+).
+% Food
+hasFlow(f6,
+    stacy,
+    groceryStore,
+    r2,
+    30.0,
+    daily(19, 00)
+).
+hasFlow(f7,
+    groceryStore,
+    stacy,
+    r4,
+    2534.0,
+    daily(19, 01)
+).
