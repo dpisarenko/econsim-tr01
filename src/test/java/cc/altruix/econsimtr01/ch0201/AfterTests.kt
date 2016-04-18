@@ -1,6 +1,7 @@
 package cc.altruix.econsimtr01.ch0201
 
 import cc.altruix.econsimtr01.*
+import org.fest.assertions.Assertions
 import org.joda.time.DateTime
 import org.junit.Ignore
 import org.junit.Test
@@ -13,7 +14,7 @@ class AfterTests {
     @Test
     fun initResetsNextFireTime() {
         val out = After("f1")
-        out.nextFireTime.shouldBe(-1)
+        Assertions.assertThat(out.nextFireTime).isNull()
     }
 
     @Test
@@ -21,7 +22,7 @@ class AfterTests {
         val out = After("f1")
         val t = 0L.millisToSimulationDateTime()
         out.updateNextFiringTime(t)
-        out.nextFireTime.shouldBe(t.millis + 1L)
+        Assertions.assertThat(out.nextFireTime).isEqualTo(t.plusSeconds(1))
     }
 
     @Test
@@ -35,14 +36,14 @@ class AfterTests {
     @Test
     fun invokeResetsNextFireTimeAtMidnight() {
         val out = Mockito.spy(After("f1"))
-        out.nextFireTime = 1
         val t0 = 0L.millisToSimulationDateTime()
+        out.nextFireTime = t0.plusSeconds(1)
         out.invoke(t0)
-        out.nextFireTime.shouldBe(-1)
+        Assertions.assertThat(out.nextFireTime).isNull()
 
-        out.nextFireTime = 1
+        out.nextFireTime = t0.plusSeconds(1)
         out.invoke(t0.plusSeconds(1))
-        out.nextFireTime.shouldBe(1)
+        Assertions.assertThat(out.nextFireTime).isEqualTo(t0.plusSeconds(2))
     }
     @Test
     fun connectToInitiatingFunctionFlowSunnyDay() {
