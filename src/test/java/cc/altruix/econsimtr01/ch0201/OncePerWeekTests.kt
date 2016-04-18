@@ -21,6 +21,18 @@ class OncePerWeekTests {
         }
     }
 
+    @Test
+    fun invokeReturnsTrueOnMondayAtMidnight() {
+        val t0 = 0L.secondsToSimulationDateTime()
+        val t = t0.plusDays(2)
+        val out = OncePerWeek("Monday")
+        t.toDayOfWeekName().shouldBe("Monday")
+
+        out.invoke(t).shouldBeTrue()
+        out.invoke(t.minusSeconds(1)).shouldBeFalse()
+        out.invoke(t.plusSeconds(1)).shouldBeFalse()
+    }
+
     private fun testLogic(daysOfWeek: Array<String>, time: DateTime, dayOfWeek: String) {
         time.toDayOfWeekName().shouldBe(dayOfWeek)
 
