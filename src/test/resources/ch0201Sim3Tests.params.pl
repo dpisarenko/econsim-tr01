@@ -101,5 +101,5 @@ hasFlow(f8,
     internets,
     list,
     "r06-pc1",
-    10,
+    10.0,
     after(f1)).
