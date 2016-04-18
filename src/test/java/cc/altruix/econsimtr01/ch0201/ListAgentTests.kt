@@ -129,12 +129,17 @@ class ListAgentTests {
     private fun mockFlow(id: String): PlFlow =
             Mockito.spy(PlFlow(id, "src", "target", "resource", null, {true}))
 
+
+    /**
+     * We need the random number generator to always return the same random numbers in order
+     * for the results to be repeatable.
+     */
     @Test
     fun randomNumberGeneratorHasFixedSeed() {
         val out = ListAgent("list")
-        val expected = arrayOf(1, 2, 3, 4, 5, 6, 7)
+        val expected = arrayOf(1398255702, 1071063251, 850666878, -758044659, -6236124, 866330746, 776471069)
         val actual = expected.map { out.random.nextInt() }.toIntArray()
-        for (i in 0..expected.size) {
+        for (i in 0..(expected.size-1)) {
             actual[i].shouldBe(expected[i])
         }
     }

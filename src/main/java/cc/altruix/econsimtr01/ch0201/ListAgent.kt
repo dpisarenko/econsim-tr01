@@ -27,7 +27,6 @@ open class ListAgent(id:String,
                 Pair("r12-pc2", 7)
         )
     }
-    // TODO: Test the seed setting
     val random = Random(8682522807148012L) // We need to set the seed in order to always get the same random numbers
     val subscribers : MutableList<Subscriber> = LinkedList<Subscriber>()
     var buyersCount : Int = 0
