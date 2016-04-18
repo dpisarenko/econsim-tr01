@@ -1,5 +1,7 @@
 package cc.altruix.econsimtr01
 
+import org.joda.time.DateTime
+
 /**
  * @author Dmitri Pisarenko (dp@altruix.co)
  * @version $Id$
@@ -37,5 +39,5 @@ class Simulation1(val logTarget:StringBuilder,
         return agents
     }
 
-    override fun continueCondition(tick:Long): Boolean = farmer.alive
+    override fun continueCondition(tick: DateTime): Boolean = farmer.alive
 }

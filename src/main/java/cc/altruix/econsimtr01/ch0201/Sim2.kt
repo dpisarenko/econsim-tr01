@@ -1,6 +1,7 @@
 package cc.altruix.econsimtr01.ch0201
 
 import cc.altruix.econsimtr01.*
+import org.joda.time.DateTime
 import java.util.*
 
 /**
@@ -9,10 +10,7 @@ import java.util.*
 open class Sim2(val logTarget:StringBuilder,
            val flows:MutableList<ResourceFlow>,
            simParametersProvider: Sim2ParametersProvider) : DefaultSimulation(Timing(), simParametersProvider) {
-    override fun continueCondition(tick: Long): Boolean {
-        val t = tick.secondsToSimulationDateTime()
-        return (t.year == 0)
-    }
+    override fun continueCondition(time: DateTime): Boolean = (time.year == 0)
 
     override fun createAgents(): List<IAgent> {
         attachFlowsToAgents(

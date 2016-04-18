@@ -1,5 +1,6 @@
 package cc.altruix.econsimtr01
 
+import org.joda.time.DateTime
 import org.slf4j.LoggerFactory
 
 /**
@@ -12,10 +13,13 @@ abstract class DefaultSimulation(val timing : ITiming,
         val results = SimResults()
         val agents = createAgents()
         val sensors = createSensors()
-        var lastTick = 0L
-        while (timing.gotFuture() && continueCondition(lastTick)) {
-            lastTick = timing.tick()
-            val time = t0().plus(lastTick*1000L)
+        var time = 0L.millisToSimulationDateTime()
+        //var lastTick = 0L
+        // TODO: Verify that we tick every 1 second
+        while (timing.gotFuture() && continueCondition(time)) {
+            //lastTick = timing.tick()
+            //val time = t0().plus(lastTick*1000L)
+            time = time.plusSeconds(1)
             agents.forEach { x -> x.act(time) }
             sensors.forEach { x -> x.measure(time) }
         }
@@ -23,7 +27,7 @@ abstract class DefaultSimulation(val timing : ITiming,
 
     }
 
-    internal abstract fun continueCondition(tick:Long): Boolean
+    internal abstract fun continueCondition(tick: DateTime): Boolean
     protected abstract fun createAgents(): List<IAgent>
     protected abstract fun createSensors(): List<ISensor>
     fun findAgent(agentId: String) =
