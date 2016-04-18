@@ -13,7 +13,6 @@ abstract class DefaultSimulation(val simParametersProvider: ISimParametersProvid
         val agents = createAgents()
         val sensors = createSensors()
         var time = 0L.millisToSimulationDateTime()
-        // TODO: Verify that we tick every 1 minute
         while (continueCondition(time)) {
             time = minimalSimulationCycle(agents, sensors, time)
         }

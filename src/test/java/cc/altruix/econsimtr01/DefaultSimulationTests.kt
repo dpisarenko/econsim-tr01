@@ -12,14 +12,14 @@ import java.util.*
  * Created by pisarenko on 18.04.2016.
  */
 class DefaultSimulationTests {
-    class SimParametersProvider(override val agents: MutableList<IAgent>,
+    private class SimParametersProvider(override val agents: MutableList<IAgent>,
                                 override val flows: MutableList<PlFlow>,
                                 override val initialResourceLevels: MutableList<InitialResourceLevel>,
                                 override val infiniteResourceSupplies: MutableList<InfiniteResourceSupply>) :
             ISimParametersProvider {
 
     }
-    class DefaultSimulationForTesting : DefaultSimulation(
+    private class DefaultSimulationForTesting : DefaultSimulation(
             SimParametersProvider(
                     LinkedList<IAgent>(),
                     LinkedList<PlFlow>(),
@@ -33,7 +33,6 @@ class DefaultSimulationTests {
     }
 
     @Test
-    @Ignore
     fun runTicksEveryMinute() {
         val out = DefaultSimulationForTesting()
         val t0 = 0L.millisToSimulationDateTime()
@@ -41,5 +40,8 @@ class DefaultSimulationTests {
         val t1 = t0.plusMinutes(1)
         Assertions.assertThat(act1).isEqualTo(t1)
 
+        val act2 = out.minimalSimulationCycle(emptyList(), emptyList(), t1)
+        val t2 = t1.plusMinutes(1)
+        Assertions.assertThat(act2).isEqualTo(t2)
     }
 }
