@@ -20,7 +20,7 @@ open class Sim2ParametersProvider(val theoryTxt2:String) :
     }
 
     private fun initFlowSubscriptions() {
-        val f1 = flows.filter { it.id == "f1" }.firstOrNull() as PlFlow
+        val f1 = flows.filter { (it.id == "f1") && (it is PlFlow) }.firstOrNull()
         if (f1 == null) {
             LOGGER.error("Could not find flow 'f1'")
             return
