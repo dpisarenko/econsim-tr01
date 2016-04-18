@@ -1,5 +1,6 @@
 package cc.altruix.econsimtr01
 
+import cc.altruix.econsimtr01.ch0201.After
 import org.joda.time.DateTime
 import java.util.*
 
@@ -13,6 +14,14 @@ open class DefaultAgent(val id:String) : IAgent, IResourceStorage {
         val actionsToRun = actions.filter { x -> x.timeToRun(time) }
         actionsToRun.forEach { it.run(time) }
         actionsToRun.forEach { it.notifySubscribers(time) }
+
+        // TODO: Test this (start)
+
+        actionsToRun.filter { it is PlFlow }
+                .filter { (it as PlFlow).timeTriggerFunction is After }
+                .map { (it as PlFlow).timeTriggerFunction as After }
+                .forEach { (it as After). }
+        // TODO: Test this (end)
     }
 
     override fun id(): String = id
