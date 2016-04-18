@@ -19,7 +19,7 @@ abstract class DefaultSimulation(val timing : ITiming,
         while (timing.gotFuture() && continueCondition(time)) {
             //lastTick = timing.tick()
             //val time = t0().plus(lastTick*1000L)
-            time = time.plusSeconds(1)
+            time = time.plusMinutes(1)
             agents.forEach { x -> x.act(time) }
             sensors.forEach { x -> x.measure(time) }
         }
