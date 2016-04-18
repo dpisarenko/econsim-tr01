@@ -6,25 +6,20 @@ import org.slf4j.LoggerFactory
 /**
  * Created by pisarenko on 04.04.2016.
  */
-abstract class DefaultSimulation(val timing : ITiming,
-                                 val simParametersProvider: ISimParametersProvider) : ISimulation {
+abstract class DefaultSimulation(val simParametersProvider: ISimParametersProvider) : ISimulation {
     val LOGGER = LoggerFactory.getLogger(DefaultSimulation::class.java)
     override fun run():SimResults {
         val results = SimResults()
         val agents = createAgents()
         val sensors = createSensors()
         var time = 0L.millisToSimulationDateTime()
-        //var lastTick = 0L
         // TODO: Verify that we tick every 1 minute
-        while (timing.gotFuture() && continueCondition(time)) {
-            //lastTick = timing.tick()
-            //val time = t0().plus(lastTick*1000L)
+        while (continueCondition(time)) {
             time = time.plusMinutes(1)
             agents.forEach { x -> x.act(time) }
             sensors.forEach { x -> x.measure(time) }
         }
         return results
-
     }
 
     internal abstract fun continueCondition(tick: DateTime): Boolean
