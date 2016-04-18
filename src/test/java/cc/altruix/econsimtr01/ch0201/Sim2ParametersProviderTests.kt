@@ -112,16 +112,16 @@ class Sim2ParametersProviderTests {
         f1.agents = listOf(list, stacy)
         f1.flows = LinkedList<ResourceFlow>()
 
-        (after1 as After).nextFireTime.shouldBe(-1)
-        (after2 as After).nextFireTime.shouldBe(-1)
+        Assertions.assertThat((after1 as After).nextFireTime).isNull()
+        Assertions.assertThat((after2 as After).nextFireTime).isNull()
 
         f1.followingTriggers.contains(after1).shouldBeTrue()
         f1.followingTriggers.contains(after2).shouldBeTrue()
 
         f1.run(monday)
 
-        after1.nextFireTime.shouldBe(monday.millis+1)
-        after2.nextFireTime.shouldBe(monday.millis+1)
+        Assertions.assertThat(after1.nextFireTime).isEqualTo(monday.plusSeconds(1))
+        Assertions.assertThat(after2.nextFireTime).isEqualTo(monday.plusSeconds(1))
     }
 
     @Test
