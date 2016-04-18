@@ -16,6 +16,21 @@ open class Sim2ParametersProvider(val theoryTxt2:String) :
     init {
         initAfterFlows()
         initListRelatedFlows(agents, flows)
+        initFlowSubscriptions()
+    }
+
+    private fun initFlowSubscriptions() {
+        val f1 = flows.filter { it.id == "f1" }.firstOrNull() as PlFlow
+        if (f1 == null) {
+            LOGGER.error("Could not find flow 'f1'")
+            return
+        }
+        val list = findListAgent(agents)
+        if (list == null) {
+            LOGGER.error("Could not find list agent")
+            return
+        }
+        f1.subscribe(list)
     }
 
     open fun initListRelatedFlows(agents: List<IAgent>, flws: List<PlFlow>) {
