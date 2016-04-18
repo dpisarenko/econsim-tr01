@@ -61,6 +61,8 @@ class ListAgentTests {
 
     @Test
     fun interactionsCountUpdateIsDeterministic() {
+        // TODO: Make sure this test checks that the cohort sizes
+        // are deterministic. You know what I mean.
         val out = ListAgent("list")
         for (i in 1..10) {
             out.subscribers.add(
@@ -81,15 +83,35 @@ class ListAgentTests {
 
         out.updateInteractionsCount()
 
-        countSubscribers(out, 1).shouldBe(0)
+        countSubscribers(out, 1).shouldBe(5)
         countSubscribers(out, 2).shouldBe(10)
-        countSubscribers(out, 3).shouldBe(10)
+        countSubscribers(out, 3).shouldBe(5)
 
         out.updateInteractionsCount()
 
-        countSubscribers(out, 1).shouldBe(0)
+        countSubscribers(out, 1).shouldBe(1)
         countSubscribers(out, 2).shouldBe(0)
         countSubscribers(out, 3).shouldBe(10)
+    }
+
+    @Test
+    fun getIndicesOfSubscribersToUpdateIsDeterministic() {
+        for (j in 1..3) {
+            val out = ListAgent("list")
+            for (i in 1..10) {
+                out.subscribers.add(
+                        Subscriber(
+                                UUID.randomUUID().toString(),
+                                1)
+                )
+                out.subscribers.add(
+                        Subscriber(
+                                UUID.randomUUID().toString(),
+                                2)
+                )
+            }
+            out.getIndicesOfSubscribersToUpdate(out.subscribers, out.percentageOfReaders).size.shouldBe(5)
+        }
 
     }
 

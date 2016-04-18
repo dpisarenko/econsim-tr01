@@ -76,15 +76,15 @@ open class ListAgent(id:String,
         processedIndices.forEach { this.subscribers.get(it).interactionsWithStacy++ }
     }
 
-    private fun getIndicesOfSubscribersToUpdate(parameter: Collection<Subscriber>,
-                                                percentage: Double): ArrayList<Int> {
-        val readersCount = (parameter.size * percentage).toInt()
+    internal fun getIndicesOfSubscribersToUpdate(subscribers: Collection<Subscriber>,
+                                                 percentage: Double): ArrayList<Int> {
+        val readersCount = (subscribers.size * percentage).toInt()
         val processedIndices = ArrayList<Int>(readersCount)
 
         for (i in 1..readersCount) {
-            var readerIndex = random.nextInt(parameter.size)
+            var readerIndex = random.nextInt(subscribers.size)
             while (processedIndices.contains(readerIndex)) {
-                readerIndex = random.nextInt(parameter.size)
+                readerIndex = random.nextInt(subscribers.size)
             }
             processedIndices.add(readerIndex)
         }
