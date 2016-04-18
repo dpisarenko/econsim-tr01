@@ -120,8 +120,8 @@ class Sim2ParametersProviderTests {
 
         f1.run(monday)
 
-        Assertions.assertThat(after1.nextFireTime).isEqualTo(monday.plusSeconds(1))
-        Assertions.assertThat(after2.nextFireTime).isEqualTo(monday.plusSeconds(1))
+        Assertions.assertThat(after1.nextFireTime).isEqualTo(monday.plusMinutes(1))
+        Assertions.assertThat(after2.nextFireTime).isEqualTo(monday.plusMinutes(1))
     }
 
     @Test
