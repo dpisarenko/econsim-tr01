@@ -27,7 +27,8 @@ open class ListAgent(id:String,
                 Pair("r12-pc2", 7)
         )
     }
-    val random = Random()
+    // TODO: Test the seed setting
+    val random = Random(8682522807148012L) // We need to set the seed in order to always get the same random numbers
     val subscribers : MutableList<Subscriber> = LinkedList<Subscriber>()
     var buyersCount : Int = 0
     override fun put(res: String, amt: Double) {
@@ -73,7 +74,11 @@ open class ListAgent(id:String,
 
     open fun updateInteractionsCount() {
         val processedIndices = getIndicesOfSubscribersToUpdate(subscribers, percentageOfReaders)
-        processedIndices.forEach { this.subscribers.get(it).interactionsWithStacy++ }
+        processedIndices.forEach {
+            val old = this.subscribers.get(it).interactionsWithStacy
+            val new = old + 1
+            this.subscribers.get(it).interactionsWithStacy = new
+        }
     }
 
     internal fun getIndicesOfSubscribersToUpdate(subscribers: Collection<Subscriber>,

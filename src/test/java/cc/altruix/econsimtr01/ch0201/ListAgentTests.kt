@@ -61,8 +61,12 @@ class ListAgentTests {
 
     @Test
     fun interactionsCountUpdateIsDeterministic() {
-        // TODO: Make sure this test checks that the cohort sizes
-        // are deterministic. You know what I mean.
+        for (j in 1..10) {
+            interactionsCountUpdateIsDeterministicTestLogic()
+        }
+    }
+
+    private fun interactionsCountUpdateIsDeterministicTestLogic() {
         val out = ListAgent("list")
         for (i in 1..10) {
             out.subscribers.add(
@@ -83,36 +87,40 @@ class ListAgentTests {
 
         out.updateInteractionsCount()
 
-        countSubscribers(out, 1).shouldBe(5)
-        countSubscribers(out, 2).shouldBe(10)
-        countSubscribers(out, 3).shouldBe(5)
+        countSubscribers(out, 1).shouldBe(6)
+        countSubscribers(out, 2).shouldBe(8)
+        countSubscribers(out, 3).shouldBe(6)
 
         out.updateInteractionsCount()
 
-        countSubscribers(out, 1).shouldBe(1)
-        countSubscribers(out, 2).shouldBe(0)
-        countSubscribers(out, 3).shouldBe(10)
+        countSubscribers(out, 1).shouldBe(3)
+        countSubscribers(out, 2).shouldBe(7)
+        countSubscribers(out, 3).shouldBe(7)
     }
 
     @Test
     fun getIndicesOfSubscribersToUpdateIsDeterministic() {
-        for (j in 1..3) {
-            val out = ListAgent("list")
-            for (i in 1..10) {
-                out.subscribers.add(
-                        Subscriber(
-                                UUID.randomUUID().toString(),
-                                1)
-                )
-                out.subscribers.add(
-                        Subscriber(
-                                UUID.randomUUID().toString(),
-                                2)
-                )
-            }
-            out.getIndicesOfSubscribersToUpdate(out.subscribers, out.percentageOfReaders).size.shouldBe(5)
+        for (j in 1..100) {
+            getIndicesOfSubscribersToUpdateIsDeterministicTestLogic()
         }
 
+    }
+
+    private fun getIndicesOfSubscribersToUpdateIsDeterministicTestLogic() {
+        val out = ListAgent("list")
+        for (i in 1..10) {
+            out.subscribers.add(
+                    Subscriber(
+                            UUID.randomUUID().toString(),
+                            1)
+            )
+            out.subscribers.add(
+                    Subscriber(
+                            UUID.randomUUID().toString(),
+                            2)
+            )
+        }
+        out.getIndicesOfSubscribersToUpdate(out.subscribers, out.percentageOfReaders).size.shouldBe(10)
     }
 
     private fun countSubscribers(out: ListAgent, interactions: Int) =
@@ -120,4 +128,14 @@ class ListAgentTests {
 
     private fun mockFlow(id: String): PlFlow =
             Mockito.spy(PlFlow(id, "src", "target", "resource", null, {true}))
+
+    @Test
+    fun randomNumberGeneratorHasFixedSeed() {
+        val out = ListAgent("list")
+        val expected = arrayOf(1, 2, 3, 4, 5, 6, 7)
+        val actual = expected.map { out.random.nextInt() }.toIntArray()
+        for (i in 0..expected.size) {
+            actual[i].shouldBe(expected[i])
+        }
+    }
 }
