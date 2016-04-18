@@ -403,7 +403,10 @@ class Sim2ParametersProviderTests {
         )
         val f1 = out.flows.filter { it.id == "f1" }.firstOrNull()
         Assertions.assertThat(f1).isNotNull
-
+        if (f1 == null) {
+            return
+        }
+        f1.subscribers.size.shouldBe(1)
     }
 
     private fun doAfterTriggerChecks(f2: PlFlow?) {
