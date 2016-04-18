@@ -63,14 +63,22 @@ open class ListAgent(id:String,
     }
 
     open fun subscribersBuy(): Int {
-        val potentialBuyers = this.subscribers.filter {
+        val potentialBuyers = calculatePotentialBuyers()
+        val indices = getIndicesOfSubscribersToUpdate(potentialBuyers, percentageOfBuyers)
+        // TODO: Verify that the next statement operates on potentialBuyers, not on this.subscribers
+        updateBoughtSomethingProperty(indices, potentialBuyers)
+        return indices.size
+    }
+
+    internal fun calculatePotentialBuyers(): List<Subscriber> {
+        return this.subscribers.filter {
             (it.interactionsWithStacy >= interactionsBeforePurchase) &&
                     (!it.boughtSomething)
         }
-        val indices = getIndicesOfSubscribersToUpdate(potentialBuyers, percentageOfBuyers)
-        // TODO: Verify that the next statement operates on potentialBuyers, not on this.subscribers
+    }
+
+    internal fun updateBoughtSomethingProperty(indices: ArrayList<Int>, potentialBuyers: List<Subscriber>) {
         indices.forEach { potentialBuyers.get(it).boughtSomething = true }
-        return indices.size
     }
 
     open fun updateInteractionsCount() {
