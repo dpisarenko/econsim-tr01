@@ -123,7 +123,7 @@ open class Sim1ParametersProvider(val theoryTxt: String) : ISimParametersProvide
                     extractAmount(res),
                     extractFiringFunction(res))
 
-    protected fun extractResource(res: SolveInfo) = res.getTerm("Resource").toString()
+    protected fun extractResource(res: SolveInfo) = res.getTerm("Resource").toString().removeSingleQuotes()
 
     protected fun extractTarget(res: SolveInfo) = res.getTerm("Target").toString()
 
