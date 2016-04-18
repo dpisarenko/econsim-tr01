@@ -46,8 +46,6 @@ open class After(val flowId:String) : (DateTime) -> Boolean {
         }
     }
     open fun updateNextFiringTime(time: DateTime) {
-        // TODO: Test this
-        // this.nextFireTime = time.millis + 1000
         this.nextFireTime = time.plusMinutes(1)
     }
 }

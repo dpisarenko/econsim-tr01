@@ -22,7 +22,7 @@ class AfterTests {
         val out = After("f1")
         val t = 0L.millisToSimulationDateTime()
         out.updateNextFiringTime(t)
-        Assertions.assertThat(out.nextFireTime).isEqualTo(t.plusSeconds(1))
+        Assertions.assertThat(out.nextFireTime).isEqualTo(t.plusMinutes(1))
     }
 
     @Test
