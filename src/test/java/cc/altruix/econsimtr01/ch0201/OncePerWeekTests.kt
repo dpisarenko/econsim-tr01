@@ -8,7 +8,6 @@ import org.junit.Test
  * Created by pisarenko on 14.04.2016.
  */
 class OncePerWeekTests {
-    // TODO: Continue here, Once per week must fire every Monday, at Midnight
     @Test
     fun sunnyDay() {
         val daysOfWeek = arrayOf("Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
