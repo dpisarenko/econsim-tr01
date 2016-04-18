@@ -13,6 +13,7 @@ import java.util.*
 class Sim2Tests {
     @Test
     fun test() {
+        // TODO: We have a different problem now: She sells 2441 copies of software, even though there are only 1000 people in the list.
         val flows = LinkedList<ResourceFlow>()
         val log = StringBuilder()
         val simParametersProvider = Sim2ParametersProvider(
