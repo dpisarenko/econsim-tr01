@@ -19,12 +19,11 @@ abstract class DefaultSimulation(val simParametersProvider: ISimParametersProvid
         return results
     }
 
-    internal fun minimalSimulationCycle(agents: List<IAgent>, sensors: List<ISensor>, time: DateTime): DateTime {
-        var time1 = time
-        time1 = time1.plusMinutes(1)
-        agents.forEach { x -> x.act(time1) }
-        sensors.forEach { x -> x.measure(time1) }
-        return time1
+    internal fun minimalSimulationCycle(agents: List<IAgent>, sensors: List<ISensor>, oldTime: DateTime): DateTime {
+        val newTime = oldTime.plusMinutes(1)
+        agents.forEach { it.act(newTime) }
+        sensors.forEach { it.measure(newTime) }
+        return newTime
     }
 
     internal abstract fun continueCondition(tick: DateTime): Boolean

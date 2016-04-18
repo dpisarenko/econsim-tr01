@@ -4,7 +4,6 @@ import cc.altruix.econsimtr01.ch0201.InfiniteResourceSupply
 import cc.altruix.econsimtr01.ch0201.InitialResourceLevel
 import org.fest.assertions.Assertions
 import org.joda.time.DateTime
-import org.junit.Ignore
 import org.junit.Test
 import java.util.*
 

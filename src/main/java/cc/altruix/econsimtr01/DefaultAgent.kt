@@ -14,18 +14,6 @@ open class DefaultAgent(val id:String) : IAgent, IResourceStorage {
         val actionsToRun = actions.filter { x -> x.timeToRun(time) }
         actionsToRun.forEach { it.run(time) }
         actionsToRun.forEach { it.notifySubscribers(time) }
-
-        // TODO: Test this (start)
-        /*
-        actionsToRun.filter { it is PlFlow }
-                .filter { (it as PlFlow).followingTriggers.size > 0 }
-                .forEach { flow ->
-                    (flow as PlFlow).followingTriggers.forEach { ft ->
-                        ft.updateNextFiringTime(time)
-                    }
-                }
-                */
-        // TODO: Test this (end)
     }
 
     override fun id(): String = id
