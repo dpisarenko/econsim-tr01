@@ -407,6 +407,7 @@ class Sim2ParametersProviderTests {
             return
         }
         f1.subscribers.size.shouldBe(1)
+        Assertions.assertThat(f1.subscribers.get(0) is ListAgent).isTrue()
     }
 
     private fun doAfterTriggerChecks(f2: PlFlow?) {
