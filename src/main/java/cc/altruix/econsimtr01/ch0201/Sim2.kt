@@ -41,7 +41,6 @@ open class Sim2(val logTarget:StringBuilder,
         } else  if ((agent != null) &&
                 (agent is DefaultAgent) &&
                 !Sim2Accountant.cohortResources.values.contains(initialResourceLevel.resource)) {
-            // TODO: Test this
             setInitialResourceLevel2(agent, initialResourceLevel)
         } else {
             LOGGER.error("Can't find agent '${initialResourceLevel.agent}'")

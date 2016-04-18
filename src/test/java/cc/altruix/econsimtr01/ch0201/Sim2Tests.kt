@@ -118,6 +118,29 @@ class Sim2Tests {
         sim.continueCondition(31708800L.secondsToSimulationDateTime()).shouldBeFalse()
     }
 
+    @Test
+    fun setInitialResourceLevelCallsAddSubscribers() {
+        val flows = LinkedList<ResourceFlow>()
+        val log = StringBuilder()
+        val simParametersProvider = Sim2ParametersProvider(
+                File("src/test/resources/ch0201Sim2Tests.params.pl").readText()
+        )
+        val sim = Mockito.spy(
+                Sim2(
+                        log,
+                        flows,
+                        simParametersProvider
+                )
+        )
+        val list = ListAgent("list")
+        val irl = InitialResourceLevel("list", "subscribers", 1000.0)
+        Mockito.doNothing().`when`(sim).addSubscribers(list, irl)
+        // Run method under test
+        sim.setInitialResourceLevel(list, irl)
+        // Verify
+        Mockito.verify(sim).addSubscribers(list, irl)
+    }
+
     private fun verifySubscriberCreation(list: ListAgent,
                                          sim: Sim2,
                                          resId: String,
