@@ -51,3 +51,6 @@ initialResourceLevel(list, "r11-pc6", 143).
 initialResourceLevel(list, "r12-pc7", 142).
 
 initialResourceLevel(stacy, r2, 3000.0).
+
+infiniteResourceSupply(stacy, r5).
+infiniteResourceSupply(list, r2).

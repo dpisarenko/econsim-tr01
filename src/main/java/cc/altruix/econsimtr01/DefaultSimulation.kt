@@ -15,7 +15,7 @@ abstract class DefaultSimulation(val timing : ITiming,
         val sensors = createSensors()
         var time = 0L.millisToSimulationDateTime()
         //var lastTick = 0L
-        // TODO: Verify that we tick every 1 second
+        // TODO: Verify that we tick every 1 minute
         while (timing.gotFuture() && continueCondition(time)) {
             //lastTick = timing.tick()
             //val time = t0().plus(lastTick*1000L)
