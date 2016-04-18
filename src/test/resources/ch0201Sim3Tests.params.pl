@@ -1,6 +1,8 @@
 isAgent(stacy).
 isAgent(list).
 isAgent(internets).
+isAgent(landlord).
+isAgent(groceryStore).
 percentageOfReaders(0.5).
 interactionsBeforePurchase(7).
 percentageOfBuyers(0.1).

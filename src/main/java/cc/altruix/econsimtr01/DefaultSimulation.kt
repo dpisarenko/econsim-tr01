@@ -35,9 +35,9 @@ abstract class DefaultSimulation(val simParametersProvider: ISimParametersProvid
     protected fun attachFlowToAgent(agents: List<IAgent>, flow: PlFlow, flows:MutableList<ResourceFlow>) {
         val agent = simParametersProvider.agents
                 .filter { x -> x.id().equals(flow.src) }
-                .first()
+                .firstOrNull()
         if (agent == null) {
-            LOGGER.error("Can't find process ${flow.src}")
+            LOGGER.error("Can't find agent ${flow.src}")
         } else {
             flow.agents = agents
             flow.flows = flows
