@@ -34,6 +34,7 @@ open class Sim1ParametersProvider(val theoryTxt: String) : ISimParametersProvide
         readAgents(prolog)
         readInitialResourceLevels(prolog)
         readInfiniteResourceSupplies(prolog)
+        readTransformations(prolog)
     }
 
     private fun readInfiniteResourceSupplies(prolog: Prolog) {
@@ -81,6 +82,20 @@ open class Sim1ParametersProvider(val theoryTxt: String) : ISimParametersProvide
         }
     }
 
+    protected fun readTransformations(prolog: Prolog) {
+        try {
+            val reses = composeReses(
+                    prolog,
+                    "hasTransformation(Id, Agent, InputAmount, InputResource, OutputAmount, OutputResource, Time)."
+            )
+            reses.forEach { this.transformations.add(createTransformation(it, prolog)) }
+        } catch (exception: NoMoreSolutionException) {
+            LOGGER.error("", exception)
+        } catch (exception: MalformedGoalException) {
+            LOGGER.error("", exception)
+        }
+    }
+
     private fun composeReses(prolog: Prolog, query: String): LinkedList<SolveInfo> {
         val reses = LinkedList<SolveInfo>()
         var res = prolog.solve(query)
@@ -110,6 +125,19 @@ open class Sim1ParametersProvider(val theoryTxt: String) : ISimParametersProvide
                 fdata.timeFunction
         )
     }
+    private fun createTransformation(res: SolveInfo, prolog: Prolog): PlTransformation {
+        // "hasTransformation(Id, Agent, InputAmount, InputResource, OutputAmount, OutputResource, Time)."
+        return PlTransformation(
+                extractId(res),
+                extractAgent(res, "Agent"),
+                extractAmount(res, "InputAmount") ?: 0.0,
+                extractResource(res, "InputResource"),
+                extractAmount(res, "OutputAmount") ?: 0.0,
+                extractResource(res, "OutputResource"),
+                extractFiringFunction(res)
+        )
+    }
+
 
     data class ExtractFlowDataResult(val id:String,
                                      val src:String,
@@ -119,17 +147,17 @@ open class Sim1ParametersProvider(val theoryTxt: String) : ISimParametersProvide
                                      val timeFunction:(DateTime) -> Boolean)
     open fun extractFlowData(res:SolveInfo):ExtractFlowDataResult =
             ExtractFlowDataResult(extractId(res),
-                    extractSource(res),
-                    extractTarget(res),
-                    extractResource(res),
-                    extractAmount(res),
+                    extractAgent(res, "Source"),
+                    extractAgent(res, "Target"),
+                    extractResource(res, "Resource"),
+                    extractAmount(res, "Amount"),
                     extractFiringFunction(res))
 
-    protected fun extractResource(res: SolveInfo) = res.getTerm("Resource").toString().removeSingleQuotes()
+    protected fun extractResource(res: SolveInfo, paramName: String) = res.getTerm(paramName).toString().removeSingleQuotes()
 
-    protected fun extractTarget(res: SolveInfo) = res.getTerm("Target").toString()
+    protected fun extractAgent(res: SolveInfo, paramName: String) = res.getTerm(paramName).toString()
 
-    protected fun extractSource(res: SolveInfo) = res.getTerm("Source").toString()
+)
 
     protected fun extractId(res: SolveInfo) = res.getTerm("Id").toString()
 
@@ -163,8 +191,8 @@ open class Sim1ParametersProvider(val theoryTxt: String) : ISimParametersProvide
                         (time.secondOfMinute == 0)
             }
 
-    protected fun extractAmount(res: SolveInfo): Double? {
-        val amtRaw = res.getTerm("Amount")
+    protected fun extractAmount(res: SolveInfo, paramName: String): Double? {
+        val amtRaw = res.getTerm(paramName)
         val amt: Double?
         if (amtRaw is alice.tuprolog.Double) {
             amt = amtRaw.doubleValue()
