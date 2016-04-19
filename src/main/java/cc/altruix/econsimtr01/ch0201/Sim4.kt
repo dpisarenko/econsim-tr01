@@ -29,13 +29,12 @@ open class Sim4(logTarget:StringBuilder,
     internal open fun attachTransformationsToAgents(
             trs: MutableList<PlTransformation>,
             agents: List<IAgent>) {
-        // TODO: Test this
         trs.forEach { attachTransformationToAgent(agents, it) }
     }
 
     internal open fun attachTransformationToAgent(agents: List<IAgent>, tr: PlTransformation) {
         // TODO: Test this
-        val agent = agents.filter { it.id() == tr.agentId }.firstOrNull()
+        val agent = findAgent(agents, tr.agentId)
         if (agent == null) {
             LOGGER.error("Can't find agent ${tr.agentId}")
             return
@@ -45,6 +44,8 @@ open class Sim4(logTarget:StringBuilder,
             agent.addTransformation(tr)
         }
     }
+
+    internal fun findAgent(agents: List<IAgent>, agentId: String) = agents.filter { it.id() == agentId }.firstOrNull()
 
     override fun createSensors(): List<ISensor> {
         // TODO: Implement this

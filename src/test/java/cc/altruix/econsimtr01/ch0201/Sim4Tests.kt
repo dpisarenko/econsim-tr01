@@ -1,6 +1,7 @@
 package cc.altruix.econsimtr01.ch0201
 
 import cc.altruix.econsimtr01.*
+import org.fest.assertions.Assertions
 import org.joda.time.DateTime
 import org.junit.Test
 import org.mockito.Mockito
@@ -101,7 +102,6 @@ class Sim4Tests {
                         simParametersProvider
                 )
         )
-
         val agents = emptyList<IAgent>()
         val tr1 = mock<PlTransformation>()
         val tr2 = mock<PlTransformation>()
@@ -113,5 +113,35 @@ class Sim4Tests {
         // Verify
         Mockito.verify(out).attachTransformationToAgent(agents, tr1)
         Mockito.verify(out).attachTransformationToAgent(agents, tr2)
+    }
+    @Test
+    fun attachTransformationToAgentCallsAddTransformation() {
+        val flows = LinkedList<ResourceFlow>()
+        val log = StringBuilder()
+        val simParametersProvider = Sim4ParametersProvider(
+                File("src/test/resources/ch0201Sim4Tests.params.pl").readText()
+        )
+        val out = Mockito.spy(
+                Sim4(
+                        log,
+                        flows,
+                        simParametersProvider
+                )
+        )
+        val agent = mock<DefaultAgent>()
+        val agents = emptyList<IAgent>()
+        Mockito.doReturn(agent).`when`(out).findAgent("agent")
+        val tr = PlTransformation("id",
+                "agent",
+                1.0,
+                "res1",
+                2.0,
+                "res2",
+                {false})
+        // Run method under test
+        out.attachTransformationToAgent(agents, tr)
+        // Verify
+        Assertions.assertThat(tr.agents).isSameAs(agents)
+        Mockito.verify(agent).addTransformation(tr)
     }
 }
