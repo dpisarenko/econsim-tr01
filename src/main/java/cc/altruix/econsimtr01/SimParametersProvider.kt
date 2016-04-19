@@ -5,6 +5,7 @@ import cc.altruix.econsimtr01.ch0201.InitialResourceLevel
 import cc.altruix.javaprologinterop.PlUtils
 import org.apache.commons.io.IOUtils
 import java.io.InputStream
+import java.util.*
 
 /**
  * Created by pisarenko on 05.04.2016.
@@ -23,6 +24,8 @@ class SimParametersProvider(val theoryTxt: String,
     var dailyPotatoConsumption:Double = 0.0
         get
         private set
+    override val transformations:MutableList<PlTransformation> = LinkedList<PlTransformation>()
+        get
 
     init {
         val prolog = theoryTxt.toPrologTheory()
