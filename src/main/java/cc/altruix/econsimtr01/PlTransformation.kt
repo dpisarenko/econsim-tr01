@@ -1,18 +1,20 @@
 package cc.altruix.econsimtr01
 
 import org.joda.time.DateTime
+import org.slf4j.LoggerFactory
 import java.util.*
 
 /**
  * Created by pisarenko on 19.04.2016.
  */
 class PlTransformation(val id:String,
-                       val agent:String,
+                       val agentId:String,
                        val inputAmount:Double,
                        val inputResourceId:String,
-                       val outputAmuont:Double,
+                       val outputAmount:Double,
                        val outputResourceId:String,
                        val timeTriggerFunction: (DateTime) -> Boolean) : IAction {
+    val LOGGER = LoggerFactory.getLogger(PlTransformation::class.java)
     val subscribers : MutableList<IActionSubscriber> = LinkedList<IActionSubscriber>()
 
     // TODO: Make sure agents property is initialized
@@ -24,10 +26,36 @@ class PlTransformation(val id:String,
     override fun timeToRun(time: DateTime): Boolean = timeTriggerFunction(time)
 
     override fun run(time: DateTime) {
-        // TODO: Implement this
         // TODO: Test this
 
-        throw UnsupportedOperationException()
+        if (inputAmount == null) {
+            LOGGER.error("Input amount is null")
+            return
+        }
+
+        if (outputAmount == null) {
+            LOGGER.error("Output amount is null")
+            return
+        }
+
+        val agent = findAgent(agentId, agents)
+
+        if (agent == null) {
+            LOGGER.error("Can't find agent '$agentId'")
+            return
+        }
+
+        if (agent !is IResourceStorage) {
+            LOGGER.error("Agent '$agentId' isn't a resource storage")
+            return
+        }
+        val availableAmount = agent.amount(inputResourceId)
+        if (!agent.isInfinite(inputResourceId) && (availableAmount < inputAmount)) {
+            LOGGER.error("Quantity of $inputResourceId at $agentId ($availableAmount) is less than required amount of $inputAmount")
+        } else {
+            agent.remove(inputResourceId, inputAmount)
+            agent.put(outputResourceId, outputAmount)
+        }
     }
 
     override fun notifySubscribers(time: DateTime) {

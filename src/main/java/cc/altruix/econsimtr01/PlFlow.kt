@@ -28,8 +28,8 @@ open class PlFlow(val id:String,
     }
 
     open fun run(amount: Double?, time: DateTime) {
-        val targetAgent = findAgent(target)
-        val srcAgent = findAgent(src)
+        val targetAgent = findAgent(target, agents)
+        val srcAgent = findAgent(src, agents)
 
         if (targetAgent == null) {
             LOGGER.error("Can't find agent $target")
@@ -63,7 +63,7 @@ open class PlFlow(val id:String,
         followingTriggers.forEach { it.updateNextFiringTime(time) }
     }
 
-    private fun findAgent(id: String) = agents.filter { x -> x.id().equals(id) }.firstOrNull()
+
 
     open fun addFollowUpFlow(nextTrigger: After) {
         followingTriggers.add(nextTrigger)

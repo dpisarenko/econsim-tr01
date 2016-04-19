@@ -155,3 +155,5 @@ fun getSubscriberCount(prolog: Prolog, time: Long, interactions: Int): Double {
     val subscriberResourceLevel = prolog.extractSingleDouble("resourceLevel($time, 'list', '$resId', Val).", "Val")
     return subscriberResourceLevel
 }
+
+fun findAgent(id: String, agentList: List<IAgent>) = agentList.filter { x -> x.id().equals(id) }.firstOrNull()
