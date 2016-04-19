@@ -15,6 +15,12 @@ class PlTransformation(val id:String,
                        val timeTriggerFunction: (DateTime) -> Boolean) : IAction {
     val subscribers : MutableList<IActionSubscriber> = LinkedList<IActionSubscriber>()
 
+    // TODO: Make sure agents property is initialized
+    lateinit var agents:List<IAgent>
+
+    // TODO: Make sure agents property is initialized
+    lateinit var flows:MutableList<ResourceFlow>
+
     // TODO: Test this
     override fun timeToRun(time: DateTime): Boolean = timeTriggerFunction(time)
 
