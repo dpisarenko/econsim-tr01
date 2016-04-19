@@ -10,6 +10,7 @@ resource(r3, "Accomodation", "Days the person is allowed to live in the flat").
 resource(r4, "Food", "Calories").
 resource("r06-pc1", "People, who were exposed to Stacy''s writings once", "People").
 resource(r13, "Time available for business-building", "Hours").
+resource(r14, "Time spent developing software product X", "Hours").
 
 % Initial resource levels
 initialResourceLevel(stacy, r2, 3000.0).
@@ -79,4 +80,17 @@ hasFlow(f7,
     stacy,
     r13,
     40,
+    oncePerWeek("Monday")).
+
+% Every week, Stacy transforms 20 hours of time into units of
+% software development completion.
+% Can we measure software development completion by the amount
+% of working time we put into it?
+
+hasTransformation(t1,
+    stacy,
+    20, % 20 hours of productive time
+    r13,
+    20, % 20 hours of hours spent on creating product X
+    r14,
     oncePerWeek("Monday")).
