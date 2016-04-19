@@ -101,7 +101,7 @@ hasTransformation(t1,
 % into half a guest post. This gives one guest post in
 % 2 weeks.
 
-hasTransformation(t1,
+hasTransformation(t2,
     stacy,
     20.0, % 20 hours of productive time
     r13,
