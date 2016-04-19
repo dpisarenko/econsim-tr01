@@ -13,7 +13,6 @@ open class Sim4(logTarget:StringBuilder,
     override fun continueCondition(time: DateTime): Boolean = (time.year == 0)
 
     override fun createAgents(): List<IAgent> {
-        // TODO: Test this
         attachFlowsToAgents(
                 simParametersProvider.flows,
                 simParametersProvider.agents,
@@ -24,17 +23,17 @@ open class Sim4(logTarget:StringBuilder,
         )
         setInitialResourceLevels()
         setInfiniteResourceSupplies()
-
         return simParametersProvider.agents
     }
 
-    internal open fun attachTransformationsToAgents(transformations: MutableList<PlTransformation>,
-                                              agents: MutableList<IAgent>) {
+    internal open fun attachTransformationsToAgents(
+            trs: MutableList<PlTransformation>,
+            agents: List<IAgent>) {
         // TODO: Test this
-        transformations.forEach { attachTransformationToAgent(agents, it) }
+        trs.forEach { attachTransformationToAgent(agents, it) }
     }
 
-    private fun attachTransformationToAgent(agents: MutableList<IAgent>, tr: PlTransformation) {
+    internal open fun attachTransformationToAgent(agents: List<IAgent>, tr: PlTransformation) {
         // TODO: Test this
         val agent = agents.filter { it.id() == tr.agentId }.firstOrNull()
         if (agent == null) {

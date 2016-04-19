@@ -1,9 +1,6 @@
 package cc.altruix.econsimtr01.ch0201
 
-import cc.altruix.econsimtr01.ResourceFlow
-import cc.altruix.econsimtr01.shouldBeFalse
-import cc.altruix.econsimtr01.shouldBeTrue
-import cc.altruix.econsimtr01.simulationRunLogic
+import cc.altruix.econsimtr01.*
 import org.joda.time.DateTime
 import org.junit.Test
 import org.mockito.Mockito
@@ -89,5 +86,32 @@ class Sim4Tests {
         )
         Mockito.verify(out).setInitialResourceLevels()
         Mockito.verify(out).setInfiniteResourceSupplies()
+    }
+    @Test
+    fun attachTransformationsToAgentsCallsAttachTransformationToAgentForAllTrs() {
+        val flows = LinkedList<ResourceFlow>()
+        val log = StringBuilder()
+        val simParametersProvider = Sim4ParametersProvider(
+                File("src/test/resources/ch0201Sim4Tests.params.pl").readText()
+        )
+        val out = Mockito.spy(
+                Sim4(
+                        log,
+                        flows,
+                        simParametersProvider
+                )
+        )
+
+        val agents = emptyList<IAgent>()
+        val tr1 = mock<PlTransformation>()
+        val tr2 = mock<PlTransformation>()
+        val trs = mutableListOf(tr1, tr2)
+        Mockito.doNothing().`when`(out).attachTransformationToAgent(agents, tr1)
+        Mockito.doNothing().`when`(out).attachTransformationToAgent(agents, tr2)
+        // Run method under test
+        out.attachTransformationsToAgents(trs, agents)
+        // Verify
+        Mockito.verify(out).attachTransformationToAgent(agents, tr1)
+        Mockito.verify(out).attachTransformationToAgent(agents, tr2)
     }
 }
