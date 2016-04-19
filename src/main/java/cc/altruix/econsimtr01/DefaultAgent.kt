@@ -14,8 +14,6 @@ open class DefaultAgent(val id:String) : IAgent, IResourceStorage {
         val actionsToRun = actions.filter { x -> x.timeToRun(time) }
         actionsToRun.forEach { it.run(time) }
         actionsToRun.forEach { it.notifySubscribers(time) }
-        // TODO: Implement execution of transformations here
-        // TODO: Test execution of transformations here
     }
 
     override fun id(): String = id
