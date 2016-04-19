@@ -21,7 +21,6 @@ class PlTransformation(val id:String,
     // TODO: Make sure agents property is initialized
     lateinit var flows:MutableList<ResourceFlow>
 
-    // TODO: Test this
     override fun timeToRun(time: DateTime): Boolean = timeTriggerFunction(time)
 
     override fun run(time: DateTime) {
