@@ -14,7 +14,7 @@ class Sim4Tests {
     fun test() {
         val flows = LinkedList<ResourceFlow>()
         val log = StringBuilder()
-        val simParametersProvider = Sim3ParametersProvider(
+        val simParametersProvider = Sim4ParametersProvider(
                 File("src/test/resources/ch0201Sim4Tests.params.pl").readText()
         )
         val sim = Sim4(

@@ -11,7 +11,7 @@ import org.joda.time.DateTime
  */
 class Sim4(logTarget:StringBuilder,
            flows:MutableList<ResourceFlow>,
-           simParametersProvider: Sim2ParametersProvider) :
+           simParametersProvider: Sim4ParametersProvider) :
     DefaultSimulation(simParametersProvider){
     override fun continueCondition(tick: DateTime): Boolean {
         // TODO: Implement this
