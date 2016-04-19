@@ -100,4 +100,20 @@ class DefaultAgentTests {
         Mockito.verify(out).subscribersBuy()
         out.buyersCount.shouldBe(123)
     }
+    @Test
+    fun transformationsAreExecuted() {
+        val out = Mockito.spy(ListAgent("list"))
+        val t = 0L.millisToSimulationDateTime()
+        val tr = mock<PlTransformation>()
+        Mockito.`when`(tr.timeToRun(t)).thenReturn(true)
+        // Run method under test
+        out.addTransformation(tr)
+        // Verify
+        out.actions.contains(tr).shouldBeTrue()
+        // Run method under test
+        out.act(t)
+        // Verify
+        Mockito.verify(tr).run(t)
+        Mockito.verify(tr).notifySubscribers(t)
+    }
 }
