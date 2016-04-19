@@ -7,7 +7,7 @@ import java.util.*
 /**
  * Created by pisarenko on 19.04.2016.
  */
-class PlTransformation(val id:String,
+open class PlTransformation(val id:String,
                        val agentId:String,
                        val inputAmount:Double,
                        val inputResourceId:String,
