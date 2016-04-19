@@ -21,6 +21,7 @@ infiniteResourceSupply(groceryStore, r4).
 infiniteResourceSupply(landlord, r3).
 infiniteResourceSupply(employer, r2).
 infiniteResourceSupply(nature, r13).
+infiniteResourceSupply(internets, "r06-pc1").
 
 hasFlow(f1,
     stacy,
@@ -119,4 +120,10 @@ hasFlow(f8,
     whenResourceReachesLevel(stacy, r15, 1.0) % The flow is triggered, when certain resource reaches certain level at certain agent
 ).
 
-
+% After a guest post, 20 new people come into Stacy's list
+hasFlow(f9,
+    internets,
+    list,
+    "r06-pc1",
+    20.0,
+    after(f8)).
