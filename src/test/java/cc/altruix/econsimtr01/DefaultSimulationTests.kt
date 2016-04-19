@@ -16,6 +16,8 @@ class DefaultSimulationTests {
                                 override val initialResourceLevels: MutableList<InitialResourceLevel>,
                                 override val infiniteResourceSupplies: MutableList<InfiniteResourceSupply>) :
             ISimParametersProvider {
+        override val transformations:MutableList<PlTransformation> = LinkedList<PlTransformation>()
+            get
 
     }
     private class DefaultSimulationForTesting : DefaultSimulation(
