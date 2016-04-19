@@ -14,7 +14,6 @@ import java.util.*
 class Sim4Tests {
     @Test
     fun test() {
-        // TODO: Implement reaction to hasTransformation
         // TODO: Implement whenResourceReachesLevel
 
         val flows = LinkedList<ResourceFlow>()
