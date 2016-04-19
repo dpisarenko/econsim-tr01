@@ -29,7 +29,7 @@ abstract class DefaultSimulation(val simParametersProvider: ISimParametersProvid
     }
 
     internal abstract fun continueCondition(tick: DateTime): Boolean
-    protected abstract fun createAgents(): List<IAgent>
+    internal abstract fun createAgents(): List<IAgent>
     protected abstract fun createSensors(): List<ISensor>
     fun findAgent(agentId: String) =
             simParametersProvider.agents.filter { x -> x.id().equals(agentId) }.first()
@@ -52,7 +52,7 @@ abstract class DefaultSimulation(val simParametersProvider: ISimParametersProvid
         }
     }
 
-    protected fun attachFlowsToAgents(plFlows: MutableList<PlFlow>,
+    open internal fun attachFlowsToAgents(plFlows: MutableList<PlFlow>,
                                       agents: MutableList<IAgent>,
                                       flows: MutableList<ResourceFlow>) {
         plFlows.forEach { flow ->
@@ -64,7 +64,7 @@ abstract class DefaultSimulation(val simParametersProvider: ISimParametersProvid
         }
     }
 
-    protected fun setInfiniteResourceSupplies() {
+    open internal fun setInfiniteResourceSupplies() {
         simParametersProvider.infiniteResourceSupplies.forEach { infiniteResourceSupply ->
             val agent = findAgent(infiniteResourceSupply.agent)
             if (agent is DefaultAgent) {
@@ -73,7 +73,7 @@ abstract class DefaultSimulation(val simParametersProvider: ISimParametersProvid
         }
     }
 
-    open protected fun setInitialResourceLevels() {
+    open internal fun setInitialResourceLevels() {
         simParametersProvider.initialResourceLevels
                 .forEach { initialResourceLevel ->
             val agent = findAgent(initialResourceLevel.agent)

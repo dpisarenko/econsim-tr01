@@ -6,7 +6,7 @@ import org.joda.time.DateTime
 /**
  * Created by pisarenko on 19.04.2016.
  */
-class Sim4(logTarget:StringBuilder,
+open class Sim4(logTarget:StringBuilder,
            val flows:MutableList<ResourceFlow>,
            simParametersProvider: Sim4ParametersProvider) :
     DefaultSimulation(simParametersProvider){
@@ -28,7 +28,7 @@ class Sim4(logTarget:StringBuilder,
         return simParametersProvider.agents
     }
 
-    private fun attachTransformationsToAgents(transformations: MutableList<PlTransformation>,
+    internal open fun attachTransformationsToAgents(transformations: MutableList<PlTransformation>,
                                               agents: MutableList<IAgent>) {
         // TODO: Test this
         transformations.forEach { attachTransformationToAgent(agents, it) }

@@ -6,6 +6,7 @@ import cc.altruix.econsimtr01.shouldBeTrue
 import cc.altruix.econsimtr01.simulationRunLogic
 import org.joda.time.DateTime
 import org.junit.Test
+import org.mockito.Mockito
 import java.io.File
 import java.util.*
 
@@ -45,12 +46,48 @@ class Sim4Tests {
         val simParametersProvider = Sim4ParametersProvider(
                 File("src/test/resources/ch0201Sim4Tests.params.pl").readText()
         )
-        val sim = Sim4(
+        val out = Sim4(
                 log,
                 flows,
                 simParametersProvider
         )
-        sim.continueCondition(DateTime(0, 1, 1, 0, 0, 0)).shouldBeTrue()
-        sim.continueCondition(DateTime(1, 1, 1, 0, 0, 0)).shouldBeFalse()
+        out.continueCondition(DateTime(0, 1, 1, 0, 0, 0)).shouldBeTrue()
+        out.continueCondition(DateTime(1, 1, 1, 0, 0, 0)).shouldBeFalse()
+    }
+    @Test
+    fun createAgentsCallsAttachTransformationsToAgents() {
+        val flows = LinkedList<ResourceFlow>()
+        val log = StringBuilder()
+        val simParametersProvider = Sim4ParametersProvider(
+                File("src/test/resources/ch0201Sim4Tests.params.pl").readText()
+        )
+        val out = Mockito.spy(
+                Sim4(
+                        log,
+                        flows,
+                        simParametersProvider
+                )
+        )
+        Mockito.doNothing().`when`(out).attachFlowsToAgents(simParametersProvider.flows,
+                simParametersProvider.agents,
+                flows)
+        Mockito.doNothing().`when`(out).attachTransformationsToAgents(
+                simParametersProvider.transformations,
+                simParametersProvider.agents
+        )
+        Mockito.doNothing().`when`(out).setInitialResourceLevels()
+        Mockito.doNothing().`when`(out).setInfiniteResourceSupplies()
+        // Run method under test
+        out.createAgents()
+        // Verify
+        Mockito.verify(out).attachFlowsToAgents(simParametersProvider.flows,
+                simParametersProvider.agents,
+                flows)
+        Mockito.verify(out).attachTransformationsToAgents(
+                simParametersProvider.transformations,
+                simParametersProvider.agents
+        )
+        Mockito.verify(out).setInitialResourceLevels()
+        Mockito.verify(out).setInfiniteResourceSupplies()
     }
 }
