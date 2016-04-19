@@ -144,4 +144,23 @@ class Sim4Tests {
         Assertions.assertThat(tr.agents).isSameAs(agents)
         Mockito.verify(agent).addTransformation(tr)
     }
+    @Test
+    fun createSensorsAddsSim4Accountant() {
+        val flows = LinkedList<ResourceFlow>()
+        val log = StringBuilder()
+        val simParametersProvider = Sim4ParametersProvider(
+                File("src/test/resources/ch0201Sim4Tests.params.pl").readText()
+        )
+        val out = Mockito.spy(
+                Sim4(
+                        log,
+                        flows,
+                        simParametersProvider
+                )
+        )
+        val sensors = out.createSensors()
+        Assertions.assertThat(sensors).isNotNull
+        sensors.size.shouldBe(1)
+        Assertions.assertThat(sensors.get(0) is Sim4Accountant).isTrue()
+    }
 }

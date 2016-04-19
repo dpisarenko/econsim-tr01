@@ -6,7 +6,7 @@ import org.joda.time.DateTime
 /**
  * Created by pisarenko on 19.04.2016.
  */
-open class Sim4(logTarget:StringBuilder,
+open class Sim4(val logTarget:StringBuilder,
            val flows:MutableList<ResourceFlow>,
            simParametersProvider: Sim4ParametersProvider) :
     DefaultSimulation(simParametersProvider){
@@ -44,11 +44,14 @@ open class Sim4(logTarget:StringBuilder,
         }
     }
 
-    open internal fun findAgent(agents: List<IAgent>, agentId: String) = agents.filter { it.id() == agentId }.firstOrNull()
+    open internal fun findAgent(agents: List<IAgent>, agentId: String) =
+            agents.filter { it.id() == agentId }.firstOrNull()
 
-    override fun createSensors(): List<ISensor> {
-        // TODO: Implement this
-        // TODO: Test this
-        throw UnsupportedOperationException()
-    }
+    // TODO: Test this
+    override fun createSensors(): List<ISensor> =
+            listOf(Sim4Accountant(
+                    logTarget,
+                    simParametersProvider.agents,
+                    (simParametersProvider as Sim4ParametersProvider).resources)
+            )
 }

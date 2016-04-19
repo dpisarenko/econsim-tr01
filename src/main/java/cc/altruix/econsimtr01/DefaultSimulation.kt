@@ -30,7 +30,7 @@ abstract class DefaultSimulation(val simParametersProvider: ISimParametersProvid
 
     internal abstract fun continueCondition(tick: DateTime): Boolean
     internal abstract fun createAgents(): List<IAgent>
-    protected abstract fun createSensors(): List<ISensor>
+    internal abstract fun createSensors(): List<ISensor>
     fun findAgent(agentId: String) =
             simParametersProvider.agents.filter { x -> x.id().equals(agentId) }.firstOrNull()
 
