@@ -40,4 +40,19 @@ class PlTransformationTests {
         out.notifySubscribers(time)
         Mockito.verify(subscriber).actionOccurred(out, time)
     }
+
+    @Test
+    fun run() {
+        val out = Mockito.spy(createPlTransformation())
+        val agent = mock<DefaultAgent>()
+        Mockito.doReturn(agent).`when`(out).findAgent()
+        Mockito.`when`(agent.amount("res1")).thenReturn(25.0)
+        // Run method under test
+        out.run(0L.millisToSimulationDateTime())
+        // Verify
+        Mockito.verify(out).findAgent()
+        Mockito.verify(agent).amount("res1")
+        Mockito.verify(agent).remove("res1", 10.0)
+        Mockito.verify(agent).put("res2", 10.0)
+    }
 }

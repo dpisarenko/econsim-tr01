@@ -38,7 +38,7 @@ class PlTransformation(val id:String,
             return
         }
 
-        val agent = findAgent(agentId, agents)
+        val agent = findAgent()
 
         if (agent == null) {
             LOGGER.error("Can't find agent '$agentId'")
@@ -57,6 +57,8 @@ class PlTransformation(val id:String,
             agent.put(outputResourceId, outputAmount)
         }
     }
+
+    open internal fun findAgent() = findAgent(agentId, agents)
 
     override fun notifySubscribers(time: DateTime) {
         this.subscribers.forEach { it.actionOccurred(this, time) }
