@@ -175,7 +175,9 @@ class Sim4Tests {
                 flows,
                 simParametersProvider
         )
-
+        // Run method under test
+        out.createAgents()
+        // Verify
         simParametersProvider.transformations.size.shouldBe(2)
         simParametersProvider.transformations.forEach {
             Assertions.assertThat(it.agents).isNotNull
