@@ -24,6 +24,8 @@ open class Sim1ParametersProvider(val theoryTxt: String) : ISimParametersProvide
         get
     override val infiniteResourceSupplies:MutableList<InfiniteResourceSupply> = LinkedList<InfiniteResourceSupply>()
         get
+    override val transformations:MutableList<PlTransformation> = LinkedList<PlTransformation>()
+        get
 
     init {
         val prolog = theoryTxt.toPrologTheory()

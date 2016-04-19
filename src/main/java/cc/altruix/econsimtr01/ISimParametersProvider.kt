@@ -17,5 +17,6 @@ interface ISimParametersProvider {
         get
     val infiniteResourceSupplies:MutableList<InfiniteResourceSupply>
         get
-
+    val transformations:MutableList<PlTransformation>
+        get
 }
