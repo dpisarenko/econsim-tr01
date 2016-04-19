@@ -10,7 +10,6 @@ import java.util.*
 open class DefaultAgent(val id:String) : IAgent, IResourceStorage {
     val storage:IResourceStorage = DefaultResourceStorage(id)
     val actions = LinkedList<IAction>()
-    val transformations = LinkedList<PlTransformation>()
     override fun act(time: DateTime) {
         val actionsToRun = actions.filter { x -> x.timeToRun(time) }
         actionsToRun.forEach { it.run(time) }
@@ -36,6 +35,6 @@ open class DefaultAgent(val id:String) : IAgent, IResourceStorage {
     }
     open fun addTransformation(tr:PlTransformation) {
         // TODO: Test this
-        transformations.add(tr)
+        actions.add(tr)
     }
 }

@@ -182,6 +182,5 @@ class Sim4Tests {
         simParametersProvider.transformations.forEach {
             Assertions.assertThat(it.agents).isNotNull
         }
-
     }
 }
