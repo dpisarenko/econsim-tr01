@@ -15,11 +15,8 @@ class PlTransformation(val id:String,
                        val timeTriggerFunction: (DateTime) -> Boolean) : IAction {
     val subscribers : MutableList<IActionSubscriber> = LinkedList<IActionSubscriber>()
 
-    override fun timeToRun(time: DateTime): Boolean {
-        // TODO: Implement this
-        // TODO: Test this
-        throw UnsupportedOperationException()
-    }
+    // TODO: Test this
+    override fun timeToRun(time: DateTime): Boolean = timeTriggerFunction(time)
 
     override fun run(time: DateTime) {
         // TODO: Implement this
