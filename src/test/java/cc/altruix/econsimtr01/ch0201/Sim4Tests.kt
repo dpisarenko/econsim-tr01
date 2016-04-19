@@ -163,4 +163,23 @@ class Sim4Tests {
         sensors.size.shouldBe(1)
         Assertions.assertThat(sensors.get(0) is Sim4Accountant).isTrue()
     }
+    @Test
+    fun agentsPropertyOfPlTransformationsIsInitialized() {
+        val flows = LinkedList<ResourceFlow>()
+        val log = StringBuilder()
+        val simParametersProvider = Sim4ParametersProvider(
+                File("src/test/resources/ch0201Sim4Tests.params.pl").readText()
+        )
+        val out = Sim4(
+                log,
+                flows,
+                simParametersProvider
+        )
+
+        simParametersProvider.transformations.size.shouldBe(2)
+        simParametersProvider.transformations.forEach {
+            Assertions.assertThat(it.agents).isNotNull
+        }
+
+    }
 }
