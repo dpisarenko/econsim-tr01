@@ -35,7 +35,7 @@ class Sim4Tests {
                 "src/test/resources/ch0201/sim04/Sim4Tests.test.pl.expected.txt",
                 "src/test/resources/ch0201/sim04/Sim4Tests.test.csv.expected.txt",
                 "src/test/resources/ch0201/sim04/Sim4Tests.test.flows.actual.png",
-                Sim2TimeSeriesCreator()
+                Sim4TimeSeriesCreator()
         )
     }
 
