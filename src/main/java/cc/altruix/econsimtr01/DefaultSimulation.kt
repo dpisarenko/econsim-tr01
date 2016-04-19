@@ -32,7 +32,7 @@ abstract class DefaultSimulation(val simParametersProvider: ISimParametersProvid
     internal abstract fun createAgents(): List<IAgent>
     protected abstract fun createSensors(): List<ISensor>
     fun findAgent(agentId: String) =
-            simParametersProvider.agents.filter { x -> x.id().equals(agentId) }.first()
+            simParametersProvider.agents.filter { x -> x.id().equals(agentId) }.firstOrNull()
 
     protected fun attachFlowToAgent(agents: List<IAgent>,
                                     flow: PlFlow,
