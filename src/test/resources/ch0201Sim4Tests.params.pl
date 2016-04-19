@@ -11,6 +11,7 @@ resource(r4, "Food", "Calories").
 resource("r06-pc1", "People, who were exposed to Stacy''s writings once", "People").
 resource(r13, "Time available for business-building", "Hours").
 resource(r14, "Time spent developing software product X", "Hours").
+resource(r15, "Published guest posts", "Pieces").
 
 % Initial resource levels
 initialResourceLevel(stacy, r2, 3000.0).
@@ -89,8 +90,33 @@ hasFlow(f7,
 
 hasTransformation(t1,
     stacy,
-    20, % 20 hours of productive time
+    20.0, % 20 hours of productive time
     r13,
-    20, % 20 hours of hours spent on creating product X
+    20.0, % 20 hours of hours spent on creating product X
     r14,
     oncePerWeek("Monday")).
+
+% Every week, Stacy transforms 20 hours of productive time
+% into half a guest post. This gives one guest post in
+% 2 weeks.
+
+hasTransformation(t1,
+    stacy,
+    20.0, % 20 hours of productive time
+    r13,
+    0.5, % half a guest post
+    r15,
+    oncePerWeek("Monday")).
+
+% When the guest post is ready, flow 8 occurs.
+
+% Sending out the mailing with link to a blog post
+hasFlow(f8,
+    stacy,
+    list,
+    r15,
+    1.0,
+    whenResourceReachesLevel(stacy, r15, 1.0) % The flow is triggered, when certain resource reaches certain level at certain agent
+).
+
+

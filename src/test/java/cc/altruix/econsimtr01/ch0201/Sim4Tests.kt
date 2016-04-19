@@ -12,7 +12,10 @@ import java.util.*
 class Sim4Tests {
     @Test
     fun test() {
-        // TODO: 1. Stacy spends 20 hours per week on the guest posting activities (incl. all preparatory steps) and publishes 1 guest post every two weeks.
+        // TODO: Implement reaction to hasTransformation
+
+        // TODO: 1. Stacy spends 20 hours per week on the guest posting activities (incl. all preparatory steps)
+        // and publishes 1 guest post every two weeks.
         // TODO: 1. 1 guest post brings her, on average, 20 new subscribers.
 
         val flows = LinkedList<ResourceFlow>()
