@@ -12,7 +12,6 @@ import java.util.*
 class Sim4Tests {
     @Test
     fun test() {
-        // TODO: Add a resource "productive time".
         // TODO: Make sure that at the beginning of every week that productive time is set to 40 hours.
         // TODO: Flow, every week. 20 hours of time are transformed into imaginary software features. By working 20 hours per week, she adds X percen to software completion.
 

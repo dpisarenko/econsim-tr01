@@ -3,12 +3,22 @@ isAgent(employer).
 isAgent(landlord).
 isAgent(groceryStore).
 isAgent(savingsAccount).
+isAgent(nature).
 resource(r1, "Source code modification", "Hits of code").
 resource(r2, "Money", "2016 US dollars").
 resource(r3, "Accomodation", "Days the person is allowed to live in the flat").
 resource(r4, "Food", "Calories").
 resource("r06-pc1", "People, who were exposed to Stacy''s writings once", "People").
 resource(r13, "Time available for business-building", "Hours").
+
+% Initial resource levels
+initialResourceLevel(stacy, r2, 3000.0).
+
+% Infinite resource supplies
+infiniteResourceSupply(groceryStore, r4).
+infiniteResourceSupply(landlord, r3).
+infiniteResourceSupply(employer, r2).
+infiniteResourceSupply(nature, r13).
 
 hasFlow(f1,
     stacy,
@@ -62,8 +72,11 @@ hasFlow(f6,
     oncePerMonth(1)
 ).
 
-% Initial resource levels
-initialResourceLevel(stacy, r2, 3000.0).
-infiniteResourceSupply(groceryStore, r4).
-infiniteResourceSupply(landlord, r3).
-infiniteResourceSupply(employer, r2).
+% Every week, Stacy gets an influx of 40 hours of time, which
+% she can spend on building her business
+hasFlow(f7,
+    nature,
+    stacy,
+    r13,
+    40,
+    oncePerWeek("Monday")).
