@@ -13,7 +13,7 @@ class Sim4ParametersProviderTests {
     @Test
     fun initReadsTransformations() {
         val out = Sim1ParametersProvider(
-                File("src/test/resources/ch0201Sim4Tests.params3.pl").readText()
+                File("src/test/resources/ch0201Sim4Tests.params.pl").readText()
         )
         out.transformations.size.shouldBe(2)
 
