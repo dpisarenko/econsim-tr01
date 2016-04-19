@@ -88,7 +88,7 @@ open class Sim1ParametersProvider(val theoryTxt: String) : ISimParametersProvide
                     prolog,
                     "hasTransformation(Id, Agent, InputAmount, InputResource, OutputAmount, OutputResource, Time)."
             )
-            reses.forEach { this.transformations.add(createTransformation(it, prolog)) }
+            reses.forEach { this.transformations.add(createTransformation(it)) }
         } catch (exception: NoMoreSolutionException) {
             LOGGER.error("", exception)
         } catch (exception: MalformedGoalException) {
@@ -125,8 +125,7 @@ open class Sim1ParametersProvider(val theoryTxt: String) : ISimParametersProvide
                 fdata.timeFunction
         )
     }
-    private fun createTransformation(res: SolveInfo, prolog: Prolog): PlTransformation {
-        // "hasTransformation(Id, Agent, InputAmount, InputResource, OutputAmount, OutputResource, Time)."
+    private fun createTransformation(res: SolveInfo): PlTransformation {
         return PlTransformation(
                 extractId(res),
                 extractAgent(res, "Agent"),
