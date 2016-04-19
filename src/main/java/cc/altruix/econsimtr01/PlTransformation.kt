@@ -17,7 +17,6 @@ open class PlTransformation(val id:String,
     val LOGGER = LoggerFactory.getLogger(PlTransformation::class.java)
     val subscribers : MutableList<IActionSubscriber> = LinkedList<IActionSubscriber>()
 
-    // TODO: Make sure agents property is initialized
     lateinit var agents:List<IAgent>
 
     override fun timeToRun(time: DateTime): Boolean = timeTriggerFunction(time)
