@@ -32,7 +32,6 @@ open class DefaultAgent(val id:String) : IAgent, IResourceStorage {
         actions.add(action)
     }
     open fun addTransformation(tr:PlTransformation) {
-        // TODO: Test this
         actions.add(tr)
     }
 }
