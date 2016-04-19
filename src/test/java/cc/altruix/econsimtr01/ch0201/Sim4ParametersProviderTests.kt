@@ -12,7 +12,7 @@ import java.io.File
 class Sim4ParametersProviderTests {
     @Test
     fun initReadsTransformations() {
-        val out = Sim1ParametersProvider(
+        val out = Sim4ParametersProvider(
                 File("src/test/resources/ch0201Sim4Tests.params.pl").readText()
         )
         out.transformations.size.shouldBe(2)
