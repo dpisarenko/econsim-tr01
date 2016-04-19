@@ -26,8 +26,6 @@ open class PlTransformation(val id:String,
     override fun timeToRun(time: DateTime): Boolean = timeTriggerFunction(time)
 
     override fun run(time: DateTime) {
-        // TODO: Test this
-
         if (inputAmount == null) {
             LOGGER.error("Input amount is null")
             return
