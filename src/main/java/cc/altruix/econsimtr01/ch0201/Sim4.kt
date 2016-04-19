@@ -15,7 +15,6 @@ class Sim4(logTarget:StringBuilder,
 
     override fun createAgents(): List<IAgent> {
         // TODO: Test this
-
         attachFlowsToAgents(
                 simParametersProvider.flows,
                 simParametersProvider.agents,
@@ -32,7 +31,21 @@ class Sim4(logTarget:StringBuilder,
 
     private fun attachTransformationsToAgents(transformations: MutableList<PlTransformation>,
                                               agents: MutableList<IAgent>) {
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // TODO: Test this
+        transformations.forEach { attachTransformationToAgent(agents, it) }
+    }
+
+    private fun attachTransformationToAgent(agents: MutableList<IAgent>, tr: PlTransformation) {
+        // TODO: Test this
+        val agent = agents.filter { it.id() == tr.agentId }.firstOrNull()
+        if (agent == null) {
+            LOGGER.error("Can't find agent ${tr.agentId}")
+            return
+        }
+        tr.agents = agents
+        if (agent is DefaultAgent) {
+            agent.addTransformation(tr)
+        }
     }
 
     override fun createSensors(): List<ISensor> {

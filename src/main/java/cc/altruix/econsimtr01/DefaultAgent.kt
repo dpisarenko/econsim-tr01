@@ -10,10 +10,13 @@ import java.util.*
 open class DefaultAgent(val id:String) : IAgent, IResourceStorage {
     val storage:IResourceStorage = DefaultResourceStorage(id)
     val actions = LinkedList<IAction>()
+    val transformations = LinkedList<PlTransformation>()
     override fun act(time: DateTime) {
         val actionsToRun = actions.filter { x -> x.timeToRun(time) }
         actionsToRun.forEach { it.run(time) }
         actionsToRun.forEach { it.notifySubscribers(time) }
+        // TODO: Implement execution of transformations here
+        // TODO: Test execution of transformations here
     }
 
     override fun id(): String = id
@@ -31,5 +34,8 @@ open class DefaultAgent(val id:String) : IAgent, IResourceStorage {
     open fun addAction(action:PlFlow) {
         actions.add(action)
     }
-
+    open fun addTransformation(tr:PlTransformation) {
+        // TODO: Test this
+        transformations.add(tr)
+    }
 }
