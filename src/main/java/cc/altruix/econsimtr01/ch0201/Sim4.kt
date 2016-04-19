@@ -47,7 +47,6 @@ open class Sim4(val logTarget:StringBuilder,
     open internal fun findAgent(agents: List<IAgent>, agentId: String) =
             agents.filter { it.id() == agentId }.firstOrNull()
 
-    // TODO: Test this
     override fun createSensors(): List<ISensor> =
             listOf(Sim4Accountant(
                     logTarget,
