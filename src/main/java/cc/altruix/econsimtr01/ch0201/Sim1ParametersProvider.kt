@@ -157,8 +157,6 @@ open class Sim1ParametersProvider(val theoryTxt: String) : ISimParametersProvide
 
     protected fun extractAgent(res: SolveInfo, paramName: String) = res.getTerm(paramName).toString()
 
-)
-
     protected fun extractId(res: SolveInfo) = res.getTerm("Id").toString()
 
     open fun extractFiringFunction(res: SolveInfo): (DateTime) -> Boolean {
