@@ -32,7 +32,7 @@ open class Sim2(val logTarget:StringBuilder,
         }
     }
 
-    internal fun setInitialResourceLevel(agent: IAgent,
+    internal fun setInitialResourceLevel(agent: IAgent?,
                                          initialResourceLevel: InitialResourceLevel) {
         if ((agent != null) && (agent is ListAgent) &&
                 Sim2Accountant.cohortResources.values.contains(initialResourceLevel.resource)) {
