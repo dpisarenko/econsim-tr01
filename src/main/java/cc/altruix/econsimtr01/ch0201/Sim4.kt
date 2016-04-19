@@ -33,7 +33,6 @@ open class Sim4(logTarget:StringBuilder,
     }
 
     internal open fun attachTransformationToAgent(agents: List<IAgent>, tr: PlTransformation) {
-        // TODO: Test this
         val agent = findAgent(agents, tr.agentId)
         if (agent == null) {
             LOGGER.error("Can't find agent ${tr.agentId}")
@@ -45,7 +44,7 @@ open class Sim4(logTarget:StringBuilder,
         }
     }
 
-    internal fun findAgent(agents: List<IAgent>, agentId: String) = agents.filter { it.id() == agentId }.firstOrNull()
+    open internal fun findAgent(agents: List<IAgent>, agentId: String) = agents.filter { it.id() == agentId }.firstOrNull()
 
     override fun createSensors(): List<ISensor> {
         // TODO: Implement this

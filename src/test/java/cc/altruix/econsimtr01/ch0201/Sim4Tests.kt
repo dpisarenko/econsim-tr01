@@ -130,7 +130,7 @@ class Sim4Tests {
         )
         val agent = mock<DefaultAgent>()
         val agents = emptyList<IAgent>()
-        Mockito.doReturn(agent).`when`(out).findAgent("agent")
+        Mockito.doReturn(agent).`when`(out).findAgent(agents, "agent")
         val tr = PlTransformation("id",
                 "agent",
                 1.0,
