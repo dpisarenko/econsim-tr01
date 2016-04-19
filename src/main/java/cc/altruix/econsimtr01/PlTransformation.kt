@@ -31,13 +31,10 @@ class PlTransformation(val id:String,
     }
 
     override fun notifySubscribers(time: DateTime) {
-        // TODO: Test this
         this.subscribers.forEach { it.actionOccurred(this, time) }
     }
 
     override fun subscribe(subscriber: IActionSubscriber) {
-        // TODO: Test this
         this.subscribers.add(subscriber)
     }
-
 }
