@@ -17,10 +17,13 @@ class Sim4TimeSeriesCreator(
                 ColumnDescriptor(
                         "Time",
                         TimeLongFormColFunction()
+                ),
+                ColumnDescriptor(
+                        "Subscribers in the list (1 interaction)",
+                        SubscribersCohortColFunction(1)
                 )
         )) : DefaultTimeSeriesCreator2(columns) {
     // TODO: Add column: "Amount in savings account"
-    // TODO: Add column: "People in the list"
     // TODO: Add column: "Software completion (percentage of 480 hours)"
     override fun prologToCsv(input: File): String {
         // TODO: Implement this
