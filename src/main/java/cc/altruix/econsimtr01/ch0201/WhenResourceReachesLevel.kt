@@ -18,9 +18,15 @@ open class WhenResourceReachesLevel(val agent:String,
     val LOGGER = LoggerFactory.getLogger(WhenResourceReachesLevel::class.java)
     var nextFireTime:DateTime? = null
     override fun invoke(time: DateTime): Boolean {
-        // TODO: Implement this
         // TODO: Test this
-        throw UnsupportedOperationException()
+        val fire = ((nextFireTime != null) &&  time.isEqual(nextFireTime))
+        if (fire) {
+            reset()
+        }
+        return fire
+    }
+    private fun reset() {
+        nextFireTime = null
     }
     open fun connectToInitiatingAgent(agents:List<IAgent>) {
         val agent = findAgent(agent, agents)
