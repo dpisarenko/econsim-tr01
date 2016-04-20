@@ -60,9 +60,18 @@ class Sim4ParametersProviderTests {
         val timeFunctionPl = mock<Struct>()
         Mockito.`when`(res.getTerm("Time")).thenReturn(timeFunctionPl)
         Mockito.`when`(timeFunctionPl.name).thenReturn("whenResourceReachesLevel")
+        Mockito.`when`(timeFunctionPl.getArg(0)).thenReturn(Struct("stacy"))
+        Mockito.`when`(timeFunctionPl.getArg(1)).thenReturn(Struct("r15"))
+        Mockito.`when`(timeFunctionPl.getArg(2)).thenReturn(alice.tuprolog.Double(1.0))
         // Run method under test
-        out.extractFiringFunction(res)
+        val act = out.extractFiringFunction(res)
         // Verify
+        Assertions.assertThat(act).isNotNull
+        Assertions.assertThat(act is WhenResourceReachesLevel).isTrue()
+        val trigger = act as WhenResourceReachesLevel
+        trigger.agent.shouldBe("stacy")
+        trigger.resource.shouldBe("r15")
+        trigger.amount.shouldBe(1.0)
         Mockito.verify(out).createWhenResourceReachesLevel(timeFunctionPl)
     }
 }

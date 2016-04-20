@@ -55,7 +55,7 @@ open class Sim2ParametersProvider(val theoryTxt2:String) :
                 .forEach { (it as After).connectToInitiatingFunctionFlow(flows) }
     }
 
-    override fun extractFiringFunction(res: SolveInfo): (DateTime) -> Boolean {
+    open override fun extractFiringFunction(res: SolveInfo): (DateTime) -> Boolean {
         val timeFunctionPl = res.getTerm("Time")
         var timeFunction = { x: DateTime -> false }
         if (timeFunctionPl is Struct) {
