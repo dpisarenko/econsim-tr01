@@ -20,7 +20,7 @@ class Sim2TimeSeriesCreatorTests {
         val input = File("someFile")
         val builder = StringBuilder("Hahaha")
         Mockito.doReturn(builder).`when`(out).createStringBuilder()
-        Mockito.doNothing().`when`(out).appendHeader(builder, Sim2TimeSeriesCreator.columns)
+        Mockito.doNothing().`when`(out).appendHeader(builder, out.columns)
         val prolog = Prolog()
         Mockito.doReturn(prolog).`when`(out).createPrologEngine()
         val times = listOf(1L)
@@ -31,10 +31,10 @@ class Sim2TimeSeriesCreatorTests {
         // Verify
         act.shouldBe("Hahaha")
         Mockito.verify(out).createStringBuilder()
-        Mockito.verify(out).appendHeader(builder, Sim2TimeSeriesCreator.columns)
+        Mockito.verify(out).appendHeader(builder, out.columns)
         Mockito.verify(out).createPrologEngine()
         Mockito.verify(out).extractTimes(input, prolog)
-        Mockito.verify(out).appendRows(builder, prolog, times, Sim2TimeSeriesCreator.columns)
+        Mockito.verify(out).appendRows(builder, prolog, times, out.columns)
     }
     @Test
     fun appendRows() {
@@ -44,15 +44,15 @@ class Sim2TimeSeriesCreatorTests {
         val times = listOf(0L, 1L)
         val data1 = arrayOf<String>("data1")
         val data2 = arrayOf<String>("data2")
-        Mockito.doReturn(data1).`when`(out).calculateData(prolog, 0L, Sim2TimeSeriesCreator.columns)
-        Mockito.doReturn(data2).`when`(out).calculateData(prolog, 1L, Sim2TimeSeriesCreator.columns)
+        Mockito.doReturn(data1).`when`(out).calculateData(prolog, 0L, out.columns)
+        Mockito.doReturn(data2).`when`(out).calculateData(prolog, 1L, out.columns)
         Mockito.doNothing().`when`(out).appendRow(builder, data1)
         Mockito.doNothing().`when`(out).appendRow(builder, data2)
         // Run method under test
-        out.appendRows(builder, prolog, times, Sim2TimeSeriesCreator.columns)
+        out.appendRows(builder, prolog, times, out.columns)
         // Verify
-        Mockito.verify(out).calculateData(prolog, 0L, Sim2TimeSeriesCreator.columns)
-        Mockito.verify(out).calculateData(prolog, 1L, Sim2TimeSeriesCreator.columns)
+        Mockito.verify(out).calculateData(prolog, 0L, out.columns)
+        Mockito.verify(out).calculateData(prolog, 1L, out.columns)
         Mockito.verify(out).appendRow(builder, data1)
         Mockito.verify(out).appendRow(builder, data2)
     }
@@ -61,7 +61,7 @@ class Sim2TimeSeriesCreatorTests {
         val out = Sim2TimeSeriesCreator()
         val builder = StringBuilder()
         // Run method under test
-        out.appendHeader(builder, Sim2TimeSeriesCreator.columns)
+        out.appendHeader(builder, out.columns)
         // Verify
         builder.toString().shouldBe("\"t [sec]\";\"Time\";\"Money @ Stacy\";\"Copies of software @ Target audience\";\"Total number of subscribers in the list\";\"Subscribers (1 interaction)\";\"Subscribers (2 interactions)\";\"Subscribers (3 interactions)\";\"Subscribers (4 interactions)\";\"Subscribers (5 interactions)\";\"Subscribers (6 interactions)\";\"Subscribers (7 or more interactions)\";${System.lineSeparator()}")
     }
