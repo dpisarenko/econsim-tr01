@@ -1,5 +1,6 @@
 package cc.altruix.econsimtr01.ch0201
 
+import cc.altruix.econsimtr01.IAgent
 import org.joda.time.DateTime
 
 /**
@@ -12,5 +13,9 @@ class WhenResourceReachesLevel(val agent:String,
         // TODO: Implement this
         // TODO: Test this
         throw UnsupportedOperationException()
+    }
+    fun connectToInitiatingAgentFlow(agents:List<IAgent>) {
+        // TODO: Implement this
+        // TODO: Test this
     }
 }

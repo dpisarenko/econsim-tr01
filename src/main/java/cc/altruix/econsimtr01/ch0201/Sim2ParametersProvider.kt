@@ -17,6 +17,8 @@ open class Sim2ParametersProvider(val theoryTxt2:String) :
         initAfterFlows()
         initListRelatedFlows(agents, flows)
         initFlowSubscriptions()
+        // TODO: initWhenResourceReachesLevel()
+        initWhenResourceReachesLevel()
     }
 
     private fun initFlowSubscriptions() {
@@ -54,6 +56,14 @@ open class Sim2ParametersProvider(val theoryTxt2:String) :
                 .map { it.timeTriggerFunction }
                 .forEach { (it as After).connectToInitiatingFunctionFlow(flows) }
     }
+
+    internal fun initWhenResourceReachesLevel() {
+        // TODO: Test this
+        flows.filter { it.timeTriggerFunction is WhenResourceReachesLevel }
+            .map { it.timeTriggerFunction }
+            .forEach { (it as WhenResourceReachesLevel).connectToInitiatingAgentFlow(agents) }
+    }
+
 
     open override fun extractFiringFunction(res: SolveInfo): (DateTime) -> Boolean {
         val timeFunctionPl = res.getTerm("Time")

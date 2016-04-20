@@ -2,6 +2,7 @@ package cc.altruix.econsimtr01.ch0201
 
 import alice.tuprolog.SolveInfo
 import alice.tuprolog.Struct
+import cc.altruix.econsimtr01.PlFlow
 import cc.altruix.econsimtr01.PlTransformation
 import cc.altruix.econsimtr01.mock
 import cc.altruix.econsimtr01.shouldBe
@@ -92,5 +93,21 @@ class Sim4ParametersProviderTests {
         trigger.agent.shouldBe("stacy")
         trigger.resource.shouldBe("r15")
         trigger.amount.shouldBe(1.0)
+    }
+
+    @Test
+    fun initWhenResourceReachesLevel() {
+        val out = Mockito.spy(Sim4ParametersProvider(
+                File("src/test/resources/ch0201Sim4Tests.params.pl").readText()
+        ))
+        out.flows.clear()
+        val trigger = Mockito.spy(WhenResourceReachesLevel("stacy", "r15", 1.0))
+        val flow = PlFlow("f8", "stacy", "list", "r15", 1.0, trigger)
+        out.flows.add(flow)
+        Mockito.doNothing().`when`(trigger).connectToInitiatingAgentFlow(out.agents)
+        // Run method under test
+        out.initWhenResourceReachesLevel()
+        // Verify
+        Mockito.verify(trigger).connectToInitiatingAgentFlow(out.agents)
     }
 }
