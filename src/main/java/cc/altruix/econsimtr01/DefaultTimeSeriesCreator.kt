@@ -1,6 +1,7 @@
 package cc.altruix.econsimtr01
 
 import alice.tuprolog.Prolog
+import cc.altruix.econsimtr01.ch0201.ColumnDescriptor
 import cc.altruix.javaprologinterop.PlUtils
 import java.io.File
 import java.util.*
@@ -33,6 +34,26 @@ abstract class DefaultTimeSeriesCreator : ITimeSeriesCreator {
             builder.append("\"$it\";")
         }
         builder.newLine()
+    }
+
+    open internal fun createStringBuilder() = StringBuilder()
+    open internal fun appendRows(builder: StringBuilder,
+                                 prolog: Prolog,
+                                 times: List<Long>,
+                                 columns: Array<ColumnDescriptor>) {
+        times.forEach { t ->
+            val data = calculateData(prolog, t, columns)
+            appendRow(builder, data)
+        }
+    }
+
+    open internal fun createPrologEngine() = PlUtils.createEngine()
+    open internal fun appendHeader(builder: StringBuilder, cols: Array<ColumnDescriptor>) {
+        appendRow(builder, cols.map { it.title }.toTypedArray())
+    }
+
+    open internal fun calculateData(prolog: Prolog, t: Long, columns: Array<ColumnDescriptor>): Array<String> {
+        return columns.map { it.func(prolog, t) }.toTypedArray()
     }
 
 }
