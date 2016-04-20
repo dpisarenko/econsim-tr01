@@ -42,4 +42,17 @@ class WhenResourceReachesLevelTests {
     fun possibleResourceLevelChangeDoesNotUpdateNextFireTimeWhenResourceAmountWrong() {
         possibleResourceLevelChangeTestLogic(0.5, false)
     }
+
+    @Test
+    fun invokeResetsNextFireTimeWhenItFires() {
+        val out = Mockito.spy(WhenResourceReachesLevel("agent", "resource", 1.0))
+        val t0 = 0L.millisToSimulationDateTime()
+        out.nextFireTime = t0.plusMinutes(1)
+        out.invoke(t0).shouldBeFalse()
+        Assertions.assertThat(out.nextFireTime).isNotNull
+
+        out.invoke(t0.plusMinutes(1)).shouldBeTrue()
+        Assertions.assertThat(out.nextFireTime).isNull()
+    }
+
 }
