@@ -22,8 +22,6 @@ open class WhenResourceReachesLevel(val agent:String,
         throw UnsupportedOperationException()
     }
     open fun connectToInitiatingAgent(agents:List<IAgent>) {
-        // TODO: Implement this
-        // TODO: Test this
         val agent = findAgent(agent, agents)
         if (agent == null) {
             LOGGER.error("Can't find agent '$agent'")

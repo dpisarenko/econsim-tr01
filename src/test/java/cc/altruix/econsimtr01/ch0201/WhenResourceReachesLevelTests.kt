@@ -13,7 +13,7 @@ class WhenResourceReachesLevelTests {
     fun connectToInitiatingAgent() {
         val out = WhenResourceReachesLevel("agent", "resource", 1.0)
         val agent = mock<DefaultAgent>()
-        Mockito.`when`(agent.id).thenReturn("agent")
+        Mockito.`when`(agent.id()).thenReturn("agent")
         // Run method under test
         out.connectToInitiatingAgent(listOf(agent))
         // Verify

@@ -18,7 +18,7 @@ open class DefaultAgent(val id:String) : IAgent, IResourceStorage {
         resourceLevelObservers.forEach { it.possibleResourceLevelChange(this, time) }
     }
 
-    override fun id(): String = id
+    open override fun id(): String = id
 
     override fun put(res: String, amt: Double) = storage.put(res, amt)
 
