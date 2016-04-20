@@ -21,21 +21,25 @@ class WhenResourceReachesLevelTests {
     }
     @Test
     fun possibleResourceLevelChangeUpdatesNextFireTimeWhenResourceAmoungRight() {
-        val out = WhenResourceReachesLevel("agent", "resource", 1.0)
+        possibleResourceLevelChangeTestLogic(1.0, true)
+        possibleResourceLevelChangeTestLogic(1.5, true)
+    }
+
+    private fun possibleResourceLevelChangeTestLogic(curAmount: Double, nextFireTimeUpdated: Boolean) {
+        val out = WhenResourceReachesLevel("agent", "resource", curAmount)
         val agent = mock<DefaultAgent>()
-        Mockito.`when`(agent.amount("resource")).thenReturn(1.0)
+        Mockito.`when`(agent.amount("resource")).thenReturn(curAmount)
         val t = 0L.millisToSimulationDateTime()
         out.nextFireTime = null
         // Run method under test
         out.possibleResourceLevelChange(agent, t)
         // Verify
-        Assertions.assertThat(out.nextFireTime != null).isEqualTo(true)
-        out.nextFireTime?.equals(t.plusMinutes(1))?.shouldBe(true)
+        Assertions.assertThat(out.nextFireTime != null).isEqualTo(nextFireTimeUpdated)
+        out.nextFireTime?.equals(t.plusMinutes(1))?.shouldBe(nextFireTimeUpdated)
     }
+
     @Test
     fun possibleResourceLevelChangeDoesNotUpdateNextFireTimeWhenResourceAmoungWrong() {
-        // Run method under test
-        // Verify
-        // TODO: Implement
+        possibleResourceLevelChangeTestLogic(0.5, false)
     }
 }
