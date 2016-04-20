@@ -11,7 +11,7 @@ open class Sim2TimeSeriesCreator(
         columns:Array<ColumnDescriptor> =
         arrayOf(
                 ColumnDescriptor(
-                        "t [sec]",
+                        "t [min]",
                         TimeSecondsColFunction()
                 ),
                 ColumnDescriptor(
