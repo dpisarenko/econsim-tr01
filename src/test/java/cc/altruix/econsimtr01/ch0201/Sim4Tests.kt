@@ -14,8 +14,6 @@ import java.util.*
 class Sim4Tests {
     @Test
     fun test() {
-        // TODO: Implement whenResourceReachesLevel
-
         val flows = LinkedList<ResourceFlow>()
         val log = StringBuilder()
         val simParametersProvider = Sim4ParametersProvider(
