@@ -1,9 +1,13 @@
 package cc.altruix.econsimtr01.ch0201
 
+import alice.tuprolog.SolveInfo
+import alice.tuprolog.Struct
 import cc.altruix.econsimtr01.PlTransformation
+import cc.altruix.econsimtr01.mock
 import cc.altruix.econsimtr01.shouldBe
 import org.fest.assertions.Assertions
 import org.junit.Test
+import org.mockito.Mockito
 import java.io.File
 
 /**
@@ -45,5 +49,20 @@ class Sim4ParametersProviderTests {
         val tr = out.transformations.filter { it.id == id }.firstOrNull()
         Assertions.assertThat(tr).isNotNull
         return tr
+    }
+
+    @Test
+    fun extractFiringFunctionCreatesWhenResourceReachesLevel() {
+        val out = Sim4ParametersProvider(
+                File("src/test/resources/ch0201Sim4Tests.params.pl").readText()
+        )
+        val res = mock<SolveInfo>()
+        val timeFunctionPl = mock<Struct>()
+        Mockito.`when`(res.getTerm("Time")).thenReturn(timeFunctionPl)
+        Mockito.`when`(timeFunctionPl.name).thenReturn("whenResourceReachesLevel")
+        // Run method under test
+        out.extractFiringFunction(res)
+        // Verify
+        Mockito.verify(out).createWhenResourceReachesLevel(timeFunctionPl)
     }
 }
