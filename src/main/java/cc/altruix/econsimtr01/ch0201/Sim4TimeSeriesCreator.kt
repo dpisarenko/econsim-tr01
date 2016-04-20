@@ -25,7 +25,12 @@ class Sim4TimeSeriesCreator(
                 ColumnDescriptor(
                         "Subscribers in the list (1 interaction)",
                         SubscribersCohortColFunction(1)
+                ),
+                ColumnDescriptor(
+                        "Software completion [hours spent]",
+                        AbsoluteResourceLevelColFunction("stacy", "r14")
                 )
+
         )) : DefaultTimeSeriesCreator2(columns) {
     // TODO: Add column: "Software completion (percentage of 480 hours)"
 }
