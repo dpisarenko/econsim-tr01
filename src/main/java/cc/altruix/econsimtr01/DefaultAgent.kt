@@ -15,7 +15,6 @@ open class DefaultAgent(val id:String) : IAgent, IResourceStorage {
         val actionsToRun = actions.filter { x -> x.timeToRun(time) }
         actionsToRun.forEach { it.run(time) }
         actionsToRun.forEach { it.notifySubscribers(time) }
-        // TODO: Test invokation of the following line (resourceLevelObservers...)
         resourceLevelObservers.forEach { it.possibleResourceLevelChange(this, time) }
     }
 
@@ -38,7 +37,6 @@ open class DefaultAgent(val id:String) : IAgent, IResourceStorage {
         actions.add(tr)
     }
     open fun addResourceLevelObserver(rlo:IResourceLevelObserver) {
-        // TODO: Test this
         resourceLevelObservers.add(rlo)
     }
 }
