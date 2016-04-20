@@ -18,7 +18,6 @@ open class WhenResourceReachesLevel(val agent:String,
     val LOGGER = LoggerFactory.getLogger(WhenResourceReachesLevel::class.java)
     var nextFireTime:DateTime? = null
     override fun invoke(time: DateTime): Boolean {
-        // TODO: Test this
         val fire = ((nextFireTime != null) &&  time.isEqual(nextFireTime))
         if (fire) {
             reset()
