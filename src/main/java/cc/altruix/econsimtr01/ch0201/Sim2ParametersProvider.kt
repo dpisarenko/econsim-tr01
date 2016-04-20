@@ -17,7 +17,6 @@ open class Sim2ParametersProvider(val theoryTxt2:String) :
         initAfterFlows()
         initListRelatedFlows(agents, flows)
         initFlowSubscriptions()
-        // TODO: initWhenResourceReachesLevel()
         initWhenResourceReachesLevel()
     }
 
@@ -58,7 +57,6 @@ open class Sim2ParametersProvider(val theoryTxt2:String) :
     }
 
     open internal fun initWhenResourceReachesLevel() {
-        // TODO: Test this
         flows.filter { it.timeTriggerFunction is WhenResourceReachesLevel }
             .map { it.timeTriggerFunction }
             .forEach { (it as WhenResourceReachesLevel).connectToInitiatingAgentFlow(agents) }
