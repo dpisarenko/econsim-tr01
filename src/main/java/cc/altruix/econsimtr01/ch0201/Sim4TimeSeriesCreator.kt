@@ -29,8 +29,14 @@ class Sim4TimeSeriesCreator(
                 ColumnDescriptor(
                         "Software completion [hours spent]",
                         AbsoluteResourceLevelColFunction("stacy", "r14")
+                ),
+                ColumnDescriptor(
+                        "Software completion [%]",
+                        PercentageResourceLevelColFunction("stacy", "r14", 480.0)
+                ),
+                ColumnDescriptor(
+                        "Ready for transition? [yes/no]",
+                        TransitionReadinessColFunction()
                 )
-
         )) : DefaultTimeSeriesCreator2(columns) {
-    // TODO: Add column: "Software completion (percentage of 480 hours)"
 }
