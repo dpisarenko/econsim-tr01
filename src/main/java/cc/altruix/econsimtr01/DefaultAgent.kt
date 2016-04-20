@@ -10,10 +10,13 @@ import java.util.*
 open class DefaultAgent(val id:String) : IAgent, IResourceStorage {
     val storage:IResourceStorage = DefaultResourceStorage(id)
     val actions = LinkedList<IAction>()
+    val resourceLevelObservers = LinkedList<IResourceLevelObserver>()
     override fun act(time: DateTime) {
         val actionsToRun = actions.filter { x -> x.timeToRun(time) }
         actionsToRun.forEach { it.run(time) }
         actionsToRun.forEach { it.notifySubscribers(time) }
+        // TODO: Test invokation of the following line (resourceLevelObservers...)
+        resourceLevelObservers.forEach { it.possibleResourceLevelChange(this, time) }
     }
 
     override fun id(): String = id
@@ -33,5 +36,9 @@ open class DefaultAgent(val id:String) : IAgent, IResourceStorage {
     }
     open fun addTransformation(tr:PlTransformation) {
         actions.add(tr)
+    }
+    open fun addResourceLevelObserver(rlo:IResourceLevelObserver) {
+        // TODO: Test this
+        resourceLevelObservers.add(rlo)
     }
 }
