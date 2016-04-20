@@ -80,7 +80,10 @@ open class Sim2ParametersProvider(val theoryTxt2:String) :
                 }
                 // TODO: Test this
                 "whenResourceReachesLevel" -> {
-
+                    val agent = (timeFunctionPl.getArg(0) as Struct).name
+                    val resource = (timeFunctionPl.getArg(1) as Struct).name
+                    val amount = (timeFunctionPl.getArg(2) as alice.tuprolog.Double).doubleValue()
+                    timeFunction = WhenResourceReachesLevel(agent, resource, amount)
                 }
             }
         }
