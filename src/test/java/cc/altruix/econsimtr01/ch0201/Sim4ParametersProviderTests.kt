@@ -53,9 +53,9 @@ class Sim4ParametersProviderTests {
 
     @Test
     fun extractFiringFunctionCreatesWhenResourceReachesLevel() {
-        val out = Sim4ParametersProvider(
+        val out = Mockito.spy(Sim4ParametersProvider(
                 File("src/test/resources/ch0201Sim4Tests.params.pl").readText()
-        )
+        ))
         val res = mock<SolveInfo>()
         val timeFunctionPl = mock<Struct>()
         Mockito.`when`(res.getTerm("Time")).thenReturn(timeFunctionPl)
@@ -73,5 +73,24 @@ class Sim4ParametersProviderTests {
         trigger.resource.shouldBe("r15")
         trigger.amount.shouldBe(1.0)
         Mockito.verify(out).createWhenResourceReachesLevel(timeFunctionPl)
+    }
+    @Test
+    fun createWhenResourceReachesLevel() {
+        val out = Mockito.spy(Sim4ParametersProvider(
+                File("src/test/resources/ch0201Sim4Tests.params.pl").readText()
+        ))
+        val timeFunctionPl = mock<Struct>()
+        Mockito.`when`(timeFunctionPl.getArg(0)).thenReturn(Struct("stacy"))
+        Mockito.`when`(timeFunctionPl.getArg(1)).thenReturn(Struct("r15"))
+        Mockito.`when`(timeFunctionPl.getArg(2)).thenReturn(alice.tuprolog.Double(1.0))
+        // Run method under test
+        val act = out.createWhenResourceReachesLevel(timeFunctionPl)
+        // Verify
+        Assertions.assertThat(act).isNotNull
+        Assertions.assertThat(act is WhenResourceReachesLevel).isTrue()
+        val trigger = act as WhenResourceReachesLevel
+        trigger.agent.shouldBe("stacy")
+        trigger.resource.shouldBe("r15")
+        trigger.amount.shouldBe(1.0)
     }
 }

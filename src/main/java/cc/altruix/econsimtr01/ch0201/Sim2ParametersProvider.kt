@@ -78,7 +78,6 @@ open class Sim2ParametersProvider(val theoryTxt2:String) :
                     val triggeringFlowId = (timeFunctionPl.getArg(0) as Struct).name
                     timeFunction = After(triggeringFlowId)
                 }
-                // TODO: Test this
                 "whenResourceReachesLevel" -> {
                     timeFunction = createWhenResourceReachesLevel(timeFunctionPl)
                 }
