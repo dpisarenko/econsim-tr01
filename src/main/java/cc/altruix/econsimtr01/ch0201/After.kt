@@ -27,9 +27,6 @@ open class After(val flowId:String) : (DateTime) -> Boolean {
         return fire
     }
 
-    fun isMidnight(t: DateTime): Boolean =
-            arrayOf(t.hourOfDay, t.minuteOfHour, t.secondOfMinute).all { it == 0 }
-
     fun connectToInitiatingFunctionFlow(flows:MutableList<PlFlow>) {
         val initiatingFlow = flows.filter { flowId.equals(it.id) }.firstOrNull()
         if (initiatingFlow != null) {

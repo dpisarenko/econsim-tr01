@@ -26,14 +26,6 @@ class AfterTests {
     }
 
     @Test
-    fun isMidnightSunnyDay() {
-        val out = After("f1")
-        val t0 = 0L.millisToSimulationDateTime()
-        out.isMidnight(t0).shouldBeTrue()
-        out.isMidnight(t0.plusSeconds(1)).shouldBeFalse()
-    }
-
-    @Test
     fun invokeResetsNextFireTimeWhenItFires() {
         val out = Mockito.spy(After("f1"))
         val t0 = 0L.millisToSimulationDateTime()
