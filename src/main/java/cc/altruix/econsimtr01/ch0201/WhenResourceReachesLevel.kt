@@ -16,6 +16,7 @@ open class WhenResourceReachesLevel(val agent:String,
         IResourceLevelObserver {
 
     val LOGGER = LoggerFactory.getLogger(WhenResourceReachesLevel::class.java)
+    var nextFireTime:DateTime? = null
     override fun invoke(time: DateTime): Boolean {
         // TODO: Implement this
         // TODO: Test this
@@ -32,8 +33,10 @@ open class WhenResourceReachesLevel(val agent:String,
         }
     }
     override fun possibleResourceLevelChange(agent: DefaultAgent, time: DateTime) {
-        // TODO: Implement this
         // TODO: Test this
-
+        val currentAmount = agent.amount(resource)
+        if (amount == currentAmount) {
+            this.nextFireTime = time.plusMinutes(1)
+        }
     }
 }
