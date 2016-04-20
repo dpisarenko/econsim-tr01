@@ -1,41 +1,62 @@
 package cc.altruix.econsimtr01.ch0201
 
-import alice.tuprolog.Prolog
-import cc.altruix.econsimtr01.DefaultTimeSeriesCreator
-import cc.altruix.javaprologinterop.PlUtils
-import java.io.File
+import cc.altruix.econsimtr01.DefaultTimeSeriesCreator2
 
 /**
  * @author Dmitri Pisarenko (dp@altruix.co)
  * @version $Id$
  * @since 1.0
  */
-open class Sim2TimeSeriesCreator : DefaultTimeSeriesCreator() {
-    companion object {
-        val columns = arrayOf(
-                ColumnDescriptor("t [sec]", TimeSecondsColFunction()),
-                ColumnDescriptor("Time", TimeLongFormColFunction()),
-                ColumnDescriptor("Money @ Stacy", MoneyAtStacyColFunction()),
-                ColumnDescriptor("Copies of software @ Target audience", CopiesOfSoftwareAtTargetAudienceColFunction()),
-                ColumnDescriptor("Total number of subscribers in the list", TotalNumberOfSubscribersInListColFunction()),
-                ColumnDescriptor("Subscribers (1 interaction)", SubscribersCohortColFunction(1)),
-                ColumnDescriptor("Subscribers (2 interactions)", SubscribersCohortColFunction(2)),
-                ColumnDescriptor("Subscribers (3 interactions)", SubscribersCohortColFunction(3)),
-                ColumnDescriptor("Subscribers (4 interactions)", SubscribersCohortColFunction(4)),
-                ColumnDescriptor("Subscribers (5 interactions)", SubscribersCohortColFunction(5)),
-                ColumnDescriptor("Subscribers (6 interactions)", SubscribersCohortColFunction(6)),
-                ColumnDescriptor("Subscribers (7 or more interactions)", SubscribersCohortColFunction(7)
+open class Sim2TimeSeriesCreator(
+        columns:Array<ColumnDescriptor> =
+        arrayOf(
+                ColumnDescriptor(
+                        "t [sec]",
+                        TimeSecondsColFunction()
+                ),
+                ColumnDescriptor(
+                        "Time",
+                        TimeLongFormColFunction()
+                ),
+                ColumnDescriptor(
+                        "Money @ Stacy",
+                        MoneyAtStacyColFunction()
+                ),
+                ColumnDescriptor(
+                        "Copies of software @ Target audience",
+                        CopiesOfSoftwareAtTargetAudienceColFunction()
+                ),
+                ColumnDescriptor(
+                        "Total number of subscribers in the list",
+                        TotalNumberOfSubscribersInListColFunction()
+                ),
+                ColumnDescriptor(
+                        "Subscribers (1 interaction)",
+                        SubscribersCohortColFunction(1)
+                ),
+                ColumnDescriptor(
+                        "Subscribers (2 interactions)",
+                        SubscribersCohortColFunction(2)
+                ),
+                ColumnDescriptor(
+                        "Subscribers (3 interactions)",
+                        SubscribersCohortColFunction(3)
+                ),
+                ColumnDescriptor(
+                        "Subscribers (4 interactions)",
+                        SubscribersCohortColFunction(4)
+                ),
+                ColumnDescriptor(
+                        "Subscribers (5 interactions)",
+                        SubscribersCohortColFunction(5)
+                ),
+                ColumnDescriptor(
+                        "Subscribers (6 interactions)",
+                        SubscribersCohortColFunction(6)
+                ),
+                ColumnDescriptor(
+                        "Subscribers (7 or more interactions)",
+                        SubscribersCohortColFunction(7)
                 )
         )
-    }
-
-    override fun prologToCsv(input: File): String {
-        val builder = createStringBuilder()
-        appendHeader(builder, columns)
-        val prolog = createPrologEngine()
-        val times = extractTimes(input, prolog)
-        appendRows(builder, prolog, times, columns)
-        return builder.toString()
-    }
-
-}
+) : DefaultTimeSeriesCreator2(columns)
