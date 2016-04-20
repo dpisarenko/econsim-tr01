@@ -35,7 +35,7 @@ open class WhenResourceReachesLevel(val agent:String,
     override fun possibleResourceLevelChange(agent: DefaultAgent, time: DateTime) {
         // TODO: Test this
         val currentAmount = agent.amount(resource)
-        if (amount == currentAmount) {
+        if (amount >= currentAmount) {
             this.nextFireTime = time.plusMinutes(1)
         }
     }
