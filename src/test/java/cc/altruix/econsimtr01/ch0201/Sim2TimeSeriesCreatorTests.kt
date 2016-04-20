@@ -25,7 +25,7 @@ class Sim2TimeSeriesCreatorTests {
         Mockito.doReturn(prolog).`when`(out).createPrologEngine()
         val times = listOf(1L)
         Mockito.doReturn(times).`when`(out).extractTimes(input, prolog)
-        Mockito.doNothing().`when`(out).appendRows(builder, prolog, times, Sim2TimeSeriesCreator.columns)
+        Mockito.doNothing().`when`(out).appendRows(builder, prolog, times, out.columns)
         // Run method under test
         val act = out.prologToCsv(input)
         // Verify
