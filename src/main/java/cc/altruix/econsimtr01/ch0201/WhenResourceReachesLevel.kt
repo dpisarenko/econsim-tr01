@@ -6,7 +6,7 @@ import org.joda.time.DateTime
 /**
  * Created by pisarenko on 20.04.2016.
  */
-class WhenResourceReachesLevel(val agent:String,
+open class WhenResourceReachesLevel(val agent:String,
                                val resource:String,
                                val amount:Double) : (DateTime) -> Boolean {
     override fun invoke(time: DateTime): Boolean {
@@ -14,7 +14,7 @@ class WhenResourceReachesLevel(val agent:String,
         // TODO: Test this
         throw UnsupportedOperationException()
     }
-    fun connectToInitiatingAgentFlow(agents:List<IAgent>) {
+    open fun connectToInitiatingAgentFlow(agents:List<IAgent>) {
         // TODO: Implement this
         // TODO: Test this
     }

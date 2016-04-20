@@ -57,7 +57,7 @@ open class Sim2ParametersProvider(val theoryTxt2:String) :
                 .forEach { (it as After).connectToInitiatingFunctionFlow(flows) }
     }
 
-    internal fun initWhenResourceReachesLevel() {
+    open internal fun initWhenResourceReachesLevel() {
         // TODO: Test this
         flows.filter { it.timeTriggerFunction is WhenResourceReachesLevel }
             .map { it.timeTriggerFunction }

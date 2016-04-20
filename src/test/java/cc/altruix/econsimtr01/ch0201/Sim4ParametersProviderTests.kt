@@ -97,14 +97,14 @@ class Sim4ParametersProviderTests {
 
     @Test
     fun initWhenResourceReachesLevel() {
-        val out = Mockito.spy(Sim4ParametersProvider(
+        val out = Sim4ParametersProvider(
                 File("src/test/resources/ch0201Sim4Tests.params.pl").readText()
-        ))
+        )
         out.flows.clear()
         val trigger = Mockito.spy(WhenResourceReachesLevel("stacy", "r15", 1.0))
+        Mockito.doNothing().`when`(trigger).connectToInitiatingAgentFlow(out.agents)
         val flow = PlFlow("f8", "stacy", "list", "r15", 1.0, trigger)
         out.flows.add(flow)
-        Mockito.doNothing().`when`(trigger).connectToInitiatingAgentFlow(out.agents)
         // Run method under test
         out.initWhenResourceReachesLevel()
         // Verify
