@@ -9,7 +9,7 @@ import java.io.File
  */
 class Sim4TimeSeriesCreator(
         columns:Array<ColumnDescriptor> =
-        arrayOf(
+        arrayOf(/*TODO: Test this*/
                 ColumnDescriptor(
                         "t [min]",
                         TimeSecondsColFunction()
@@ -19,15 +19,13 @@ class Sim4TimeSeriesCreator(
                         TimeLongFormColFunction()
                 ),
                 ColumnDescriptor(
+                        "Money in savings account",
+                        MoneyInSavingsAccountColFunction()
+                ),
+                ColumnDescriptor(
                         "Subscribers in the list (1 interaction)",
                         SubscribersCohortColFunction(1)
                 )
         )) : DefaultTimeSeriesCreator2(columns) {
-    // TODO: Add column: "Amount in savings account"
     // TODO: Add column: "Software completion (percentage of 480 hours)"
-    override fun prologToCsv(input: File): String {
-        // TODO: Implement this
-        // TODO: Test this
-        throw UnsupportedOperationException()
-    }
 }
