@@ -87,7 +87,6 @@ open class Sim2ParametersProvider(val theoryTxt2:String) :
     }
 
     open internal fun createWhenResourceReachesLevel(timeFunctionPl: Struct): (DateTime) -> Boolean {
-        // TODO: Test this
         val agent = (timeFunctionPl.getArg(0) as Struct).name
         val resource = (timeFunctionPl.getArg(1) as Struct).name
         val amount = (timeFunctionPl.getArg(2) as alice.tuprolog.Double).doubleValue()
