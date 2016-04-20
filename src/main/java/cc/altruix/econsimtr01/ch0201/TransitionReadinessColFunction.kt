@@ -6,6 +6,11 @@ import alice.tuprolog.Prolog
  * Created by pisarenko on 20.04.2016.
  */
 class TransitionReadinessColFunction : ITimeSeriesFieldFillerFunction {
+    companion object {
+        val moneyInSavingsAccountExtractor = MoneyInSavingsAccountColFunction()
+        val peopleInListExtractor = SubscribersCohortColFunction(1)
+        val softwareCompletionExtractor = PercentageResourceLevelColFunction("stacy", "r14", 480.0)
+    }
     override fun invoke(prolog: Prolog, time: Long): String
             {
         // TODO: Test this
@@ -17,21 +22,13 @@ class TransitionReadinessColFunction : ITimeSeriesFieldFillerFunction {
         return "no"
     }
 
-    private fun softwareComplete(prolog: Prolog, time: Long): Boolean {
-        // TODO: Implement this
-        // TODO: Test this
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    // TODO: Test this
+    private fun softwareComplete(prolog: Prolog, time: Long): Boolean =
+            softwareCompletionExtractor.invoke(prolog, time).toDouble() >= 100.0
 
-    private fun enoughPeopleInList(prolog: Prolog, time: Long): Boolean {
-        // TODO: Implement this
-        // TODO: Test this
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    private fun enoughPeopleInList(prolog: Prolog, time: Long): Boolean =
+            peopleInListExtractor.invoke(prolog, time).toInt() >= 1000
 
-    internal  fun enoughMoney(prolog: Prolog, time: Long): Boolean {
-        // TODO: Implement this
-        // TODO: Test this
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    internal  fun enoughMoney(prolog: Prolog, time: Long): Boolean =
+            moneyInSavingsAccountExtractor.invoke(prolog, time).toDouble() >= 3000.0
 }
