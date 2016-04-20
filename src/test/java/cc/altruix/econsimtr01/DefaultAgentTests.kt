@@ -116,4 +116,15 @@ class DefaultAgentTests {
         Mockito.verify(tr).run(t)
         Mockito.verify(tr).notifySubscribers(t)
     }
+    @Test
+    fun addResourceLevelObserver() {
+        val out = DefaultAgent("agent")
+        val rlo = mock<IResourceLevelObserver>()
+        out.addResourceLevelObserver(rlo)
+        val t = 0L.millisToSimulationDateTime()
+        // Run method under test
+        out.act(t)
+        // Verify
+        Mockito.verify(rlo).possibleResourceLevelChange(out, t)
+    }
 }
