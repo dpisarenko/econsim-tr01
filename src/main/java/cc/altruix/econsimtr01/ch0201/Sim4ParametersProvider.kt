@@ -18,7 +18,7 @@ open class Sim4ParametersProvider(theoryTxt2:String) :
                 .map { DefaultAgent(it) }
                 .forEach { this.agents.add(it) }
     }
-    override open fun initListRelatedFlows(agents: List<IAgent>, flws: List<PlFlow>) {
+    override open fun initListRelatedFlows(agents: List<IAgent>, flws: List<PlFlow>) { }
 
-    }
+    override protected open fun initFlowSubscriptions() { }
 }
