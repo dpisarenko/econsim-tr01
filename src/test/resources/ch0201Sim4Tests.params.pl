@@ -5,6 +5,7 @@ isAgent(groceryStore).
 isAgent(savingsAccount).
 isAgent(nature).
 isAgent(list).
+isAgent(internets).
 resource(r1, "Source code modification", "Hits of code").
 resource(r2, "Money", "2016 US dollars").
 resource(r3, "Accomodation", "Days the person is allowed to live in the flat").
