@@ -31,6 +31,12 @@ open class Sim2ParametersProvider(val theoryTxt2:String) :
             }
         }
         // TODO: Test this (start)
+
+        // TODO: Test this 2 (start)
+        this.transformations.filter { it.timeTriggerFunction is After }
+                .map { it.timeTriggerFunction }
+                .forEach { (it as After).connectToInitiatingFunctionFlow(flows) }
+        // TODO: Test this 2 (end)
     }
 
     protected open fun initFlowSubscriptions() {

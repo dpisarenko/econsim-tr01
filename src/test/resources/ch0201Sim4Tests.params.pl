@@ -83,7 +83,7 @@ hasFlow(f7,
     nature,
     stacy,
     r13,
-    40,
+    40.0,
     oncePerWeek("Monday")).
 
 % Every week, Stacy transforms 20 hours of time into units of
