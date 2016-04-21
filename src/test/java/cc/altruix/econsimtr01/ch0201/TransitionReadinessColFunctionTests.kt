@@ -24,13 +24,19 @@ class TransitionReadinessColFunctionTests {
 
     }
     @Test
-    @Ignore
     fun enoughPeopleInList() {
-        // TODO: Finish this test
         val out = TransitionReadinessColFunction()
         out.enoughPeopleInList("resourceLevel(86400, list, 'r06-pc1', 0.0).".toPrologTheory(), 86400L).shouldBeFalse()
         out.enoughPeopleInList("resourceLevel(86400, list, 'r06-pc1', 999.0).".toPrologTheory(), 86400L).shouldBeFalse()
         out.enoughPeopleInList("resourceLevel(86400, list, 'r06-pc1', 1000.0).".toPrologTheory(), 86400L).shouldBeTrue()
         out.enoughPeopleInList("resourceLevel(86400, list, 'r06-pc1', 1001.0).".toPrologTheory(), 86400L).shouldBeTrue()
+    }
+    @Test
+    fun enoughMoney() {
+        val out = TransitionReadinessColFunction()
+        out.enoughMoney("resourceLevel(86400, savingsAccount, r2, 0.0).".toPrologTheory(), 86400L).shouldBeFalse()
+        out.enoughMoney("resourceLevel(86400, savingsAccount, r2, 999.0).".toPrologTheory(), 86400L).shouldBeFalse()
+        out.enoughMoney("resourceLevel(86400, savingsAccount, r2, 1000.0).".toPrologTheory(), 86400L).shouldBeTrue()
+        out.enoughMoney("resourceLevel(86400, savingsAccount, r2, 1000.1).".toPrologTheory(), 86400L).shouldBeTrue()
     }
 }

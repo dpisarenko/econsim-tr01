@@ -25,7 +25,6 @@ class TransitionReadinessColFunction : ITimeSeriesFieldFillerFunction {
     internal fun softwareComplete(prolog: Prolog, time: Long): Boolean =
             softwareCompletionExtractor.invoke(prolog, time).toDouble() >= 100.0
 
-    // TODO: Test this
     internal fun enoughPeopleInList(prolog: Prolog, time: Long): Boolean =
             peopleInListExtractor.invoke(prolog, time).toDouble() >= 1000.0
 
