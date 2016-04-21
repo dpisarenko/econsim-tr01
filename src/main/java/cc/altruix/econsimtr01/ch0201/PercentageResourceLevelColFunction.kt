@@ -11,5 +11,5 @@ class PercentageResourceLevelColFunction(val agent:String,
                                          val base:Double) : ITimeSeriesFieldFillerFunction {
     // TODO: Test this
     override fun invoke(prolog: Prolog, time: Long): String =
-            (prolog.getResults("resourceLevel($time, $agent, '$resource', Amount).", "Amount").first().toDouble() / base).toString()
+            (prolog.getResults("resourceLevel($time, $agent, '$resource', Amount).", "Amount").first().toDouble() * 100.0 / base).toString()
 }
