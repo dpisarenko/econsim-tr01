@@ -12,7 +12,7 @@ import java.util.*
  * Created by pisarenko on 19.04.2016.
  */
 class Sim4Tests {
-    // TODO: c.a.econsimtr01.DefaultSimulation - Can't find agent internets
+    // TODO: 15:13:37.757 [main] ERROR c.a.e.ch0201.Sim1ParametersProvider - Could not find list agent
     @Test
     fun test() {
         val flows = LinkedList<ResourceFlow>()
