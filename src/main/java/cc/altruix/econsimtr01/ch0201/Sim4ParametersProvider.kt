@@ -20,5 +20,5 @@ open class Sim4ParametersProvider(theoryTxt2:String) :
     }
     override open fun initListRelatedFlows(agents: List<IAgent>, flws: List<PlFlow>) { }
 
-    override protected open fun initFlowSubscriptions() { }
+    override open fun initFlowSubscriptions() { }
 }

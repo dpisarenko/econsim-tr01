@@ -12,7 +12,7 @@ import java.util.*
  * Created by pisarenko on 19.04.2016.
  */
 class Sim4Tests {
-    // TODO: 15:13:37.757 [main] ERROR c.a.e.ch0201.Sim1ParametersProvider - Could not find list agent
+    // TODO: Quantity of r13 at stacy (0.0) is less than required amount of 20.0
     @Test
     fun test() {
         val flows = LinkedList<ResourceFlow>()
