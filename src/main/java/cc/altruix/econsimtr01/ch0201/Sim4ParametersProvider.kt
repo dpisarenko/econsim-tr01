@@ -17,6 +17,16 @@ open class Sim4ParametersProvider(theoryTxt2:String) :
                 .map { x -> x.removeSingleQuotes() }
                 .map { DefaultAgent(it) }
                 .forEach { this.agents.add(it) }
+
+        // TODO: Validate that all transformations have been added to the agents.
+        // TODO: Test this (start)
+        this.transformations.forEach {
+            val agent = findAgent(it.agentId, this.agents)
+            if ((agent != null) && (agent is DefaultAgent)) {
+                agent.addTransformation(it)
+            }
+        }
+        // TODO: Test this (start)
     }
     override open fun initListRelatedFlows(agents: List<IAgent>, flws: List<PlFlow>) { }
 

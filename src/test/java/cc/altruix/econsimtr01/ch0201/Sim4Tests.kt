@@ -12,6 +12,8 @@ import java.util.*
  * Created by pisarenko on 19.04.2016.
  */
 class Sim4Tests {
+    // TODO: No subscribers come into the list
+    // TODO: Amount spent on software is not updated
     @Test
     fun test() {
         val flows = LinkedList<ResourceFlow>()

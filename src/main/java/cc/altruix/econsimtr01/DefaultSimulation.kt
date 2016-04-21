@@ -27,7 +27,6 @@ abstract class DefaultSimulation(val simParametersProvider: ISimParametersProvid
         sensors.forEach { it.measure(newTime) }
         return newTime
     }
-
     internal abstract fun continueCondition(tick: DateTime): Boolean
     internal abstract fun createAgents(): List<IAgent>
     internal abstract fun createSensors(): List<ISensor>
