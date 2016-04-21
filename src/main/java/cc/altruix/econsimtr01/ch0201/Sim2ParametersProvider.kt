@@ -18,6 +18,19 @@ open class Sim2ParametersProvider(val theoryTxt2:String) :
         initListRelatedFlows(agents, flows)
         initFlowSubscriptions()
         initWhenResourceReachesLevel()
+        attachTransformationsToAgents()
+    }
+
+    private fun attachTransformationsToAgents() {
+        // TODO: Validate that all transformations have been added to the agents.
+        // TODO: Test this (start)
+        this.transformations.forEach {
+            val agent = findAgent(it.agentId, this.agents)
+            if ((agent != null) && (agent is DefaultAgent)) {
+                agent.addTransformation(it)
+            }
+        }
+        // TODO: Test this (start)
     }
 
     protected open fun initFlowSubscriptions() {
