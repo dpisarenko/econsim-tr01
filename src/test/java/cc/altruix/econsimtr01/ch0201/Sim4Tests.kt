@@ -12,6 +12,11 @@ import java.util.*
  * Created by pisarenko on 19.04.2016.
  */
 class Sim4Tests {
+    // TODO: alice.tuprolog.Prolog - Can't find double value. Query: 'priceOfOneCopyOfSoftware(X).', variable: 'X
+    // TODO: alice.tuprolog.Prolog - Can't find double value. Query: 'percentageOfReaders(X).', variable: 'X
+    // TODO: alice.tuprolog.Prolog - Can't find int value. Query: 'interactionsBeforePurchase(X).', variable: 'X
+    // TODO: alice.tuprolog.Prolog - Can't find double value. Query: 'percentageOfBuyers(X).', variable: 'X
+    // TODO: c.a.econsimtr01.DefaultSimulation - Can't find agent internets
     @Test
     fun test() {
         val flows = LinkedList<ResourceFlow>()
