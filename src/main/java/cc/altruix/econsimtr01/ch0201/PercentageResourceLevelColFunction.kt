@@ -9,7 +9,6 @@ import cc.altruix.econsimtr01.getResults
 class PercentageResourceLevelColFunction(val agent:String,
                                          val resource:String,
                                          val base:Double) : ITimeSeriesFieldFillerFunction {
-    // TODO: Test this
     override fun invoke(prolog: Prolog, time: Long): String =
             (prolog.getResults("resourceLevel($time, $agent, '$resource', Amount).", "Amount").first().toDouble() * 100.0 / base).toString()
 }

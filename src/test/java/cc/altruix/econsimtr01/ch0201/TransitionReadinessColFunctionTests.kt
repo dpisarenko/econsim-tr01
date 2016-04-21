@@ -15,8 +15,13 @@ class TransitionReadinessColFunctionTests {
         val out = TransitionReadinessColFunction()
         out.softwareComplete("resourceLevel(86400, 'stacy', 'r14', 0.0).".toPrologTheory(),
                 86400L).shouldBeFalse()
+        out.softwareComplete("resourceLevel(86400, 'stacy', 'r14', 479.0).".toPrologTheory(),
+                86400L).shouldBeFalse()
         out.softwareComplete("resourceLevel(86400, 'stacy', 'r14', 480.0).".toPrologTheory(),
                 86400L).shouldBeTrue()
+        out.softwareComplete("resourceLevel(86400, 'stacy', 'r14', 481.0).".toPrologTheory(),
+                86400L).shouldBeTrue()
+
     }
     @Test
     @Ignore
