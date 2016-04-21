@@ -8,7 +8,7 @@ import org.junit.Test
  * Created by pisarenko on 21.04.2016.
  */
 class MoneyInSavingsAccountColFunctionTests {
-    // TODO: 15:11:36.686 [main] ERROR c.a.econsimtr01.DefaultSimulation - Can't find agent internets
+
     @Test
     fun invoke() {
         val out = MoneyInSavingsAccountColFunction()
