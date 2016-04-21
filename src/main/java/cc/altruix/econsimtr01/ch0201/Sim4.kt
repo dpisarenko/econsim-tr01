@@ -10,7 +10,7 @@ open class Sim4(val logTarget:StringBuilder,
            val flows:MutableList<ResourceFlow>,
            simParametersProvider: Sim4ParametersProvider) :
     DefaultSimulation(simParametersProvider){
-    override fun continueCondition(time: DateTime): Boolean = (time.year == 0)
+    override fun continueCondition(time: DateTime): Boolean = (time.year <= 1)
 
     override fun createAgents(): List<IAgent> {
         attachFlowsToAgents(
