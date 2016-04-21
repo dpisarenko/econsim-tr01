@@ -9,7 +9,7 @@ import java.io.File
  */
 class Sim4TimeSeriesCreator(
         columns:Array<ColumnDescriptor> =
-        arrayOf(/*TODO: Test this*/
+        arrayOf(
                 ColumnDescriptor(
                         "t [min]",
                         TimeSecondsColFunction()
