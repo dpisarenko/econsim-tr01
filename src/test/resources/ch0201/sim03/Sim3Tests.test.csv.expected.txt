@@ -1,4 +1,4 @@
-"t [sec]";"Time";"Money @ Stacy";"Copies of software @ Target audience";"Total number of subscribers in the list";"Subscribers (1 interaction)";"Subscribers (2 interactions)";"Subscribers (3 interactions)";"Subscribers (4 interactions)";"Subscribers (5 interactions)";"Subscribers (6 interactions)";"Subscribers (7 or more interactions)";
+"t [min]";"Time";"Money @ Stacy";"Copies of software @ Target audience";"Total number of subscribers in the list";"Subscribers (1 interaction)";"Subscribers (2 interactions)";"Subscribers (3 interactions)";"Subscribers (4 interactions)";"Subscribers (5 interactions)";"Subscribers (6 interactions)";"Subscribers (7 or more interactions)";
 "86400";"0000-01-02 00:00";"2970.0";"0.0";"1000.0";"143.0";"143.0";"143.0";"143.0";"143.0";"143.0";"142.0";
 "172800";"0000-01-03 00:00";"2940.0";"0.0";"1000.0";"68.0";"149.0";"137.0";"147.0";"137.0";"153.0";"209.0";
 "259200";"0000-01-04 00:00";"3710.0";"20.0";"1010.0";"78.0";"149.0";"137.0";"147.0";"137.0";"153.0";"209.0";
