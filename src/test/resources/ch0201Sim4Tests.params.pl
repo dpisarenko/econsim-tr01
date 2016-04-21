@@ -97,7 +97,7 @@ hasTransformation(t1,
     r13,
     20.0, % 20 hours of hours spent on creating product X
     r14,
-    oncePerWeek("Monday")).
+    after(f7)).
 
 % Every week, Stacy transforms 20 hours of productive time
 % into half a guest post. This gives one guest post in
@@ -109,7 +109,7 @@ hasTransformation(t2,
     r13,
     0.5, % half a guest post
     r15,
-    oncePerWeek("Monday")).
+    after(f7)).
 
 % When the guest post is ready, flow 8 occurs.
 
