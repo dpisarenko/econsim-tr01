@@ -27,7 +27,7 @@ class TransitionReadinessColFunction : ITimeSeriesFieldFillerFunction {
 
     // TODO: Test this
     internal fun enoughPeopleInList(prolog: Prolog, time: Long): Boolean =
-            peopleInListExtractor.invoke(prolog, time).toInt() >= 1000
+            peopleInListExtractor.invoke(prolog, time).toDouble() >= 1000.0
 
     // TODO: Test this
     internal fun enoughMoney(prolog: Prolog, time: Long): Boolean =
