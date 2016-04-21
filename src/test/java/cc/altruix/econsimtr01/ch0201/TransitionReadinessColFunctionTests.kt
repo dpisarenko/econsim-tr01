@@ -35,8 +35,8 @@ class TransitionReadinessColFunctionTests {
     fun enoughMoney() {
         val out = TransitionReadinessColFunction()
         out.enoughMoney("resourceLevel(86400, savingsAccount, r2, 0.0).".toPrologTheory(), 86400L).shouldBeFalse()
-        out.enoughMoney("resourceLevel(86400, savingsAccount, r2, 999.0).".toPrologTheory(), 86400L).shouldBeFalse()
-        out.enoughMoney("resourceLevel(86400, savingsAccount, r2, 1000.0).".toPrologTheory(), 86400L).shouldBeTrue()
-        out.enoughMoney("resourceLevel(86400, savingsAccount, r2, 1000.1).".toPrologTheory(), 86400L).shouldBeTrue()
+        out.enoughMoney("resourceLevel(86400, savingsAccount, r2, 2999.0).".toPrologTheory(), 86400L).shouldBeFalse()
+        out.enoughMoney("resourceLevel(86400, savingsAccount, r2, 3000.0).".toPrologTheory(), 86400L).shouldBeTrue()
+        out.enoughMoney("resourceLevel(86400, savingsAccount, r2, 3000.1).".toPrologTheory(), 86400L).shouldBeTrue()
     }
 }
