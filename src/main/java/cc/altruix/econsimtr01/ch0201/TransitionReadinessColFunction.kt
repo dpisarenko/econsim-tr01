@@ -13,7 +13,6 @@ class TransitionReadinessColFunction : ITimeSeriesFieldFillerFunction {
     }
     override fun invoke(prolog: Prolog, time: Long): String
             {
-        // TODO: Test this
         if (enoughMoney(prolog, time) &&
                 enoughPeopleInList(prolog, time) &&
                 softwareComplete(prolog, time)) {
