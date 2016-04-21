@@ -23,12 +23,14 @@ class TransitionReadinessColFunction : ITimeSeriesFieldFillerFunction {
     }
 
     // TODO: Test this
-    private fun softwareComplete(prolog: Prolog, time: Long): Boolean =
+    internal fun softwareComplete(prolog: Prolog, time: Long): Boolean =
             softwareCompletionExtractor.invoke(prolog, time).toDouble() >= 100.0
 
-    private fun enoughPeopleInList(prolog: Prolog, time: Long): Boolean =
+    // TODO: Test this
+    internal fun enoughPeopleInList(prolog: Prolog, time: Long): Boolean =
             peopleInListExtractor.invoke(prolog, time).toInt() >= 1000
 
-    internal  fun enoughMoney(prolog: Prolog, time: Long): Boolean =
+    // TODO: Test this
+    internal fun enoughMoney(prolog: Prolog, time: Long): Boolean =
             moneyInSavingsAccountExtractor.invoke(prolog, time).toDouble() >= 3000.0
 }
