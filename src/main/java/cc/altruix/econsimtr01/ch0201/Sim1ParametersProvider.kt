@@ -125,7 +125,7 @@ open class Sim1ParametersProvider(val theoryTxt: String) : ISimParametersProvide
                 fdata.timeFunction
         )
     }
-    private fun createTransformation(res: SolveInfo): PlTransformation {
+    open protected fun createTransformation(res: SolveInfo): PlTransformation {
         return PlTransformation(
                 extractId(res),
                 extractAgent(res, "Agent"),

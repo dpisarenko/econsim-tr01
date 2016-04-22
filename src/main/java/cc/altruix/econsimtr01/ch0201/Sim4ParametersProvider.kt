@@ -22,4 +22,29 @@ open class Sim4ParametersProvider(theoryTxt2:String) :
     override open fun initListRelatedFlows(agents: List<IAgent>, flws: List<PlFlow>) { }
 
     override open fun initFlowSubscriptions() { }
+
+    override open fun createTransformation(res: SolveInfo): PlTransformation {
+        val id = extractId(res)
+
+        if (id == "t1") {
+            return T1(id,
+                    extractAgent(res, "Agent"),
+                    extractAmount(res, "InputAmount") ?: 0.0,
+                    extractResource(res, "InputResource"),
+                    extractAmount(res, "OutputAmount") ?: 0.0,
+                    extractResource(res, "OutputResource"),
+                    extractFiringFunction(res))
+        }
+
+        return PlTransformation(
+                id,
+                extractAgent(res, "Agent"),
+                extractAmount(res, "InputAmount") ?: 0.0,
+                extractResource(res, "InputResource"),
+                extractAmount(res, "OutputAmount") ?: 0.0,
+                extractResource(res, "OutputResource"),
+                extractFiringFunction(res)
+        )
+    }
+
 }
