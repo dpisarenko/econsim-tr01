@@ -32,8 +32,8 @@ class Sim4ParametersProviderTests {
         t1.inputResourceId.shouldBe("r13")
         t1.outputAmount.shouldBe(20.0)
         t1.outputResourceId.shouldBe("r14")
-        Assertions.assertThat(t1.timeTriggerFunction is OncePerWeek).isTrue()
-        (t1.timeTriggerFunction as OncePerWeek).dayOfWeek.shouldBe("Monday")
+        Assertions.assertThat(t1.timeTriggerFunction is After).isTrue()
+        (t1.timeTriggerFunction as After).flowId.shouldBe("f7")
 
         val t2 = findTransformation(out, "t2")
         if (t2 == null) {
