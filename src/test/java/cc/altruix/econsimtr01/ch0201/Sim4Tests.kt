@@ -50,7 +50,8 @@ class Sim4Tests {
                 simParametersProvider
         )
         out.continueCondition(DateTime(0, 1, 1, 0, 0, 0)).shouldBeTrue()
-        out.continueCondition(DateTime(1, 1, 1, 0, 0, 0)).shouldBeFalse()
+        out.continueCondition(DateTime(1, 1, 1, 0, 0, 0)).shouldBeTrue()
+        out.continueCondition(DateTime(2, 1, 1, 0, 0, 0)).shouldBeFalse()
     }
     @Test
     fun createAgentsCallsAttachTransformationsToAgents() {
