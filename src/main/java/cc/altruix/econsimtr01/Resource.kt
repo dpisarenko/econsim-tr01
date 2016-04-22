@@ -5,6 +5,6 @@ package cc.altruix.econsimtr01
  * @version $Id$
  * @since 1.0
  */
-enum class Resource(val unit:Unit) {
+enum class Resource(unit:Unit) {
     POTATO(Unit.KILOGRAM)
 }

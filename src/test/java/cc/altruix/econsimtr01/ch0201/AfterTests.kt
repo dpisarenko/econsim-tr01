@@ -2,8 +2,6 @@ package cc.altruix.econsimtr01.ch0201
 
 import cc.altruix.econsimtr01.*
 import org.fest.assertions.Assertions
-import org.joda.time.DateTime
-import org.junit.Ignore
 import org.junit.Test
 import org.mockito.Mockito
 

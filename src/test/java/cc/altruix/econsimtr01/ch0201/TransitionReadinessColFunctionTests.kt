@@ -4,7 +4,6 @@ import cc.altruix.econsimtr01.shouldBe
 import cc.altruix.econsimtr01.shouldBeFalse
 import cc.altruix.econsimtr01.shouldBeTrue
 import cc.altruix.econsimtr01.toPrologTheory
-import org.junit.Ignore
 import org.junit.Test
 
 /**

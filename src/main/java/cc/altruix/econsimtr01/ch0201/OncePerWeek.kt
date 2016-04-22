@@ -1,9 +1,7 @@
 package cc.altruix.econsimtr01.ch0201
 
-import cc.altruix.econsimtr01.secondsSinceT0
 import cc.altruix.econsimtr01.toDayOfWeekName
 import org.joda.time.DateTime
-import org.slf4j.LoggerFactory
 
 /**
  * Created by pisarenko on 14.04.2016.

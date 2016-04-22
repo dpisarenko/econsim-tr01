@@ -1,6 +1,5 @@
 package cc.altruix.econsimtr01
 
-import cc.altruix.econsimtr01.ch0201.After
 import org.joda.time.DateTime
 import java.util.*
 

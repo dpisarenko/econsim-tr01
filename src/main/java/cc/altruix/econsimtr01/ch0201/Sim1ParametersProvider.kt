@@ -16,15 +16,15 @@ open class Sim1ParametersProvider(val theoryTxt: String) : ISimParametersProvide
     var resources:List<PlResource>
         get
         private set
-    override val flows:MutableList<PlFlow> = LinkedList<PlFlow>()
+    override val flows:MutableList<PlFlow> = LinkedList()
         get
-    override val agents:MutableList<IAgent> = LinkedList<IAgent>()
+    override val agents:MutableList<IAgent> = LinkedList()
         get
-    override val initialResourceLevels:MutableList<InitialResourceLevel> = LinkedList<InitialResourceLevel>()
+    override val initialResourceLevels:MutableList<InitialResourceLevel> = LinkedList()
         get
-    override val infiniteResourceSupplies:MutableList<InfiniteResourceSupply> = LinkedList<InfiniteResourceSupply>()
+    override val infiniteResourceSupplies:MutableList<InfiniteResourceSupply> = LinkedList()
         get
-    override val transformations:MutableList<PlTransformation> = LinkedList<PlTransformation>()
+    override val transformations:MutableList<PlTransformation> = LinkedList()
         get
 
     init {

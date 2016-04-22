@@ -1,7 +1,6 @@
 package cc.altruix.econsimtr01.ch0201
 
 import cc.altruix.econsimtr01.PlFlow
-import cc.altruix.econsimtr01.mock
 import cc.altruix.econsimtr01.shouldBe
 import org.fest.assertions.Assertions
 import org.junit.Test

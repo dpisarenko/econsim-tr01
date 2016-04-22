@@ -1,8 +1,6 @@
 package cc.altruix.econsimtr01.ch0201
 
-import cc.altruix.econsimtr01.DefaultTimeSeriesCreator
 import cc.altruix.econsimtr01.DefaultTimeSeriesCreator2
-import java.io.File
 
 /**
  * Created by pisarenko on 19.04.2016.

@@ -1,7 +1,6 @@
 package cc.altruix.econsimtr01
 
 import cc.altruix.econsimtr01.ch0201.After
-import cc.altruix.econsimtr01.ch0201.AfterTests
 import org.joda.time.DateTime
 import org.junit.Test
 import org.mockito.Mockito

@@ -24,8 +24,8 @@ abstract class AbstractAccountant (val logTarget: StringBuilder,
 
     fun writeResourceData() {
         resources.forEach { res ->
-            val plresname = convertToPrologString(res.name)
-            logTarget.append("resource(${res.id}, \"$plresname\", \"${res.unit}\").")
+            val resName = convertToPrologString(res.name)
+            logTarget.append("resource(${res.id}, \"$resName\", \"${res.unit}\").")
             logTarget.newLine()
         }
     }

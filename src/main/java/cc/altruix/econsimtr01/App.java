@@ -25,6 +25,7 @@ public final class App {
                     new Date().getTime()
             );
             final File dir = new File(dirName);
+            //noinspection ResultOfMethodCallIgnored
             dir.mkdir();
 
             final String theoryTxt = IOUtils.toString(stream);
