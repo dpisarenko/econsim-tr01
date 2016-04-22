@@ -28,7 +28,7 @@ open class ListAgent(id:String,
         )
     }
     val random = Random(8682522807148012L) // We need to set the seed in order to always get the same random numbers
-    val subscribers : MutableList<Subscriber> = LinkedList<Subscriber>()
+    val subscribers : MutableList<Subscriber> = LinkedList()
     var buyersCount : Int = 0
     override fun put(res: String, amt: Double) {
         if (subscriberTypes.containsKey(res)) {

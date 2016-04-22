@@ -20,7 +20,7 @@ open class PlFlow(val id:String,
 
     lateinit var agents:List<IAgent>
     lateinit var flows:MutableList<ResourceFlow>
-    val subscribers : MutableList<IActionSubscriber> = LinkedList<IActionSubscriber>()
+    val subscribers : MutableList<IActionSubscriber> = LinkedList()
 
     override fun timeToRun(time: DateTime): Boolean = timeTriggerFunction(time)
     override fun run(time: DateTime) {

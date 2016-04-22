@@ -15,7 +15,7 @@ open class PlTransformation(val id:String,
                        val outputResourceId:String,
                        val timeTriggerFunction: (DateTime) -> Boolean) : IAction {
     val LOGGER = LoggerFactory.getLogger(PlTransformation::class.java)
-    val subscribers : MutableList<IActionSubscriber> = LinkedList<IActionSubscriber>()
+    val subscribers : MutableList<IActionSubscriber> = LinkedList()
 
     lateinit var agents:List<IAgent>
 
