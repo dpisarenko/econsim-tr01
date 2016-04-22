@@ -36,6 +36,7 @@ class Sim4Tests {
                 Sim4TimeSeriesCreator()
         )
     }
+    // TODO: Fix this test failure
     @Test
     fun continueCondition() {
         val flows = LinkedList<ResourceFlow>()

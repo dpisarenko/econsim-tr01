@@ -15,6 +15,7 @@ import java.io.File
  * Created by pisarenko on 19.04.2016.
  */
 class Sim4ParametersProviderTests {
+    // TODO: Fix this test failure
     @Test
     fun initReadsTransformations() {
         val out = Sim4ParametersProvider(
