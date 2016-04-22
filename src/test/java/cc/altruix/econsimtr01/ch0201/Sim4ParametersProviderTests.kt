@@ -44,7 +44,8 @@ class Sim4ParametersProviderTests {
         t2.inputResourceId.shouldBe("r13")
         t2.outputAmount.shouldBe(0.5)
         t2.outputResourceId.shouldBe("r15")
-        (t2.timeTriggerFunction as OncePerWeek).dayOfWeek.shouldBe("Monday")
+        Assertions.assertThat(t2.timeTriggerFunction is After).isTrue()
+        (t2.timeTriggerFunction as After).flowId.shouldBe("f7")
     }
 
     private fun findTransformation(out: Sim1ParametersProvider, id: String): PlTransformation? {
