@@ -12,21 +12,27 @@ import org.joda.time.DateTime
 class Sim1(val logTarget:StringBuilder,
            val flows:MutableList<ResourceFlow>,
            simParametersProvider: Sim1ParametersProvider) : DefaultSimulation(simParametersProvider) {
-    override fun continueCondition(tick: DateTime): Boolean {
-        // TODO: Implement this
-        // TODO: Test this
-        throw UnsupportedOperationException()
+    companion object {
+        /**
+         * OFFLINE_NETWORKING_INTENSITY
+         * Unit: People per week
+         *
+         * Number of people, which he didn't previously know, and
+         * which he meets every week.
+         */
+        val OFFLINE_NETWORKING_INTENSITY:Int = 5
     }
 
+    override fun continueCondition(time: DateTime): Boolean = time.year <= 1
+
     override fun createAgents(): List<IAgent> {
-        // TODO: Implement this
         // TODO: Test this
-        throw UnsupportedOperationException()
+        return listOf(RealEstateAgent())
     }
 
     override fun createSensors(): List<ISensor> {
         // TODO: Implement this
         // TODO: Test this
-        throw UnsupportedOperationException()
+        return emptyList()
     }
 }
