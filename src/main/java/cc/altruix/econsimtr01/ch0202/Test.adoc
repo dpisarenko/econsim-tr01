@@ -2,6 +2,8 @@
 
 TBD
 
+TIP: Do this
+
 == Headline 2
 
 TBD
