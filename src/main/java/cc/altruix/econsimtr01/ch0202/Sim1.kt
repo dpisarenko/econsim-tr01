@@ -7,7 +7,16 @@ import cc.altruix.econsimtr01.ResourceFlow
 import org.joda.time.DateTime
 
 /**
- * Created by pisarenko on 26.04.2016.
+ * Simulation 1
+ * ============
+ * * Test 1
+ * * Test 2
+ * * Test **3**
+ *
+ * ***
+ *
+ * 1. Abc
+ * 1. Def
  */
 class Sim1(val logTarget:StringBuilder,
            val flows:MutableList<ResourceFlow>,
