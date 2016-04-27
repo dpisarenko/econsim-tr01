@@ -22,21 +22,15 @@ open class Sim2ParametersProvider(val theoryTxt2:String) :
     }
 
     private fun attachTransformationsToAgents() {
-        // TODO: Validate that all transformations have been added to the agents.
-        // TODO: Test this (start)
         this.transformations.forEach {
             val agent = findAgent(it.agentId, this.agents)
             if ((agent != null) && (agent is DefaultAgent)) {
                 agent.addTransformation(it)
             }
         }
-        // TODO: Test this (start)
-
-        // TODO: Test this 2 (start)
         this.transformations.filter { it.timeTriggerFunction is After }
                 .map { it.timeTriggerFunction }
                 .forEach { (it as After).connectToInitiatingFunctionFlow(flows) }
-        // TODO: Test this 2 (end)
     }
 
     protected open fun initFlowSubscriptions() {

@@ -18,6 +18,14 @@ class Sim1(val logTarget:StringBuilder,
          * which he meets every week.
          */
         val OFFLINE_NETWORKING_INTENSITY:Int = 5
+
+        /**
+         * AVAILABLE_TIME_PER_WEEK
+         * Unit: Hours per week
+         *
+         * Amount of time the protagonist can work
+         */
+        val AVAILABLE_TIME_PER_WEEK:Int = 40
     }
 
     override fun continueCondition(time: DateTime): Boolean = time.year <= 1

@@ -12,7 +12,6 @@ import java.util.*
  * Created by pisarenko on 19.04.2016.
  */
 class Sim4Tests {
-    // TODO: Make sure that no transformation of resources occurs after there have been 480 hours spent
     @Test
     fun test() {
         val flows = LinkedList<ResourceFlow>()
