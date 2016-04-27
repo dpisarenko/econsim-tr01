@@ -24,17 +24,18 @@ class Protagonist(val offlineNetworkingIntensity:Int,
                         timeTriggerFunction = OncePerWeek("Monday")
                 )
         )
+        this.addAction(
+                OfflineNetworkingSession(offlineNetworkingIntensity)
+        )
     }
     /**
      * TODO: Remove these notes
      *
      * Where are we stuck?
-     *
-     * TODO: Add a flow, which adds X hours of available time to Protagonist
-     *
-     * How is it done in the previous simulation?
+     * TODO: Add networking meeting
      */
-    override fun act(time: DateTime) {
-        super.act(time)
+    var offlineNetworkingSessionsHeld:Int = 0
+    override fun act(now: DateTime) {
+        super.act(now)
     }
 }
