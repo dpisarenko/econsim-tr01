@@ -7,7 +7,7 @@ import org.joda.time.DateTime
  */
 class OfflineNetworkingSessionTriggerFun(val offlineNetworkingIntensity:Int,
                                          val agent:Protagonist) : (DateTime) -> Boolean {
-    override fun invoke(p1: DateTime): Boolean {
+    override fun invoke(time: DateTime): Boolean {
         // TODO: Implement this
         // TODO: Test this
         throw UnsupportedOperationException()

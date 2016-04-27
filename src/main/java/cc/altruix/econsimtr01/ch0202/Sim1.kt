@@ -12,6 +12,7 @@ class Sim1(val logTarget:StringBuilder,
                 name = "Available time",
                 unit = "Hours"
         )
+
         /**
          * OFFLINE_NETWORKING_INTENSITY
          * Unit: People per week
@@ -38,7 +39,8 @@ class Sim1(val logTarget:StringBuilder,
                 Protagonist(
                         OFFLINE_NETWORKING_INTENSITY,
                         AVAILABLE_TIME_PER_WEEK
-                )
+                ),
+                Population()
         )
     }
 
