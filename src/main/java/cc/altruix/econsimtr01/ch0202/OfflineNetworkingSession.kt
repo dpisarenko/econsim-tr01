@@ -16,17 +16,14 @@ class OfflineNetworkingSession(val offlineNetworkingIntensity:Int,
                 )
         )  {
     override fun run(time: DateTime) {
-
+        // TODO: Implement this
+        // TODO: Test this
         throw UnsupportedOperationException()
     }
 
     override fun notifySubscribers(time: DateTime) {
-        throw UnsupportedOperationException()
     }
 
     override fun subscribe(subscriber: IActionSubscriber) {
-        throw UnsupportedOperationException()
     }
-
-    override fun timeToRun(time: DateTime): Boolean = false
 }

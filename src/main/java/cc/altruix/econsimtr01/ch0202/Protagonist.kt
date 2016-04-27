@@ -24,8 +24,11 @@ class Protagonist(val offlineNetworkingIntensity:Int,
                         timeTriggerFunction = OncePerWeek("Monday")
                 )
         )
-        this.addAction(
-                OfflineNetworkingSession(offlineNetworkingIntensity)
+        this.actions.add(
+                OfflineNetworkingSession(
+                        offlineNetworkingIntensity,
+                        this
+                )
         )
     }
     /**
