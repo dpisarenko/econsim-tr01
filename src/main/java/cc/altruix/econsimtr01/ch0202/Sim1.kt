@@ -29,6 +29,13 @@ class Sim1(val logTarget:StringBuilder,
          * Amount of time the protagonist can work
          */
         val AVAILABLE_TIME_PER_WEEK:Int = 40
+
+        /**
+         * Maximum number of offline networking sessions, which the protagonist can
+         * hold on one business day.
+         * Unit: Times per (business) day
+         */
+        var MAX_NETWORKING_SESSIONS_PER_BUSINESS_DAY:Int = 3
     }
 
     override fun continueCondition(time: DateTime): Boolean = time.year <= 1
@@ -38,7 +45,8 @@ class Sim1(val logTarget:StringBuilder,
         return listOf(
                 Protagonist(
                         OFFLINE_NETWORKING_INTENSITY,
-                        AVAILABLE_TIME_PER_WEEK
+                        AVAILABLE_TIME_PER_WEEK,
+                        MAX_NETWORKING_SESSIONS_PER_BUSINESS_DAY
                 ),
                 Population()
         )

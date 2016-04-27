@@ -9,11 +9,13 @@ import org.joda.time.DateTime
  * Created by pisarenko on 26.04.2016.
  */
 class Protagonist(val offlineNetworkingIntensity:Int,
-                  val availableTimePerWeek:Int) : DefaultAgent(ID) {
+                  val availableTimePerWeek:Int,
+                  val maxNetworkingSessionsPerBusinessDay:Int) : DefaultAgent(ID) {
     companion object {
         val ID = "protagonist"
     }
     init {
+        val mondayMidnight = OncePerWeek("Monday")
         this.addAction(
                 PlFlow(
                         id = "prF1",
@@ -21,13 +23,20 @@ class Protagonist(val offlineNetworkingIntensity:Int,
                         target = ID,
                         resource = Sim1.RESOURCE_AVAILABLE_TIME.id,
                         amount = availableTimePerWeek.toDouble(),
-                        timeTriggerFunction = OncePerWeek("Monday")
+                        timeTriggerFunction = mondayMidnight
+                )
+        )
+        this.actions.add(
+                OfflineNetworkingSessionsHeldResetAction(
+                        this,
+                        mondayMidnight
                 )
         )
         this.actions.add(
                 OfflineNetworkingSession(
+                        this,
                         offlineNetworkingIntensity,
-                        this
+                        maxNetworkingSessionsPerBusinessDay
                 )
         )
     }
@@ -38,6 +47,7 @@ class Protagonist(val offlineNetworkingIntensity:Int,
      * TODO: Add networking meeting
      */
     var offlineNetworkingSessionsHeld:Int = 0
+
     override fun act(now: DateTime) {
         super.act(now)
     }

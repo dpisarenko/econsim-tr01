@@ -7,12 +7,14 @@ import org.joda.time.DateTime
 /**
  * Created by pisarenko on 27.04.2016.
  */
-class OfflineNetworkingSession(val offlineNetworkingIntensity:Int,
-                               val agent:Protagonist) :
+class OfflineNetworkingSession(val agent: Protagonist,
+                               val offlineNetworkingIntensity: Int,
+                               val maxNetworkingSessionsPerBusinessDay:Int) :
         DefaultAction(
                 OfflineNetworkingSessionTriggerFun(
+                        agent,
                         offlineNetworkingIntensity,
-                        agent
+                        maxNetworkingSessionsPerBusinessDay
                 )
         )  {
     override fun run(time: DateTime) {
