@@ -6,18 +6,6 @@ import cc.altruix.econsimtr01.ISensor
 import cc.altruix.econsimtr01.ResourceFlow
 import org.joda.time.DateTime
 
-/**
- * Simulation 1
- * ============
- * * Test 1
- * * Test 2
- * * Test **3**
- *
- * ***
- *
- * 1. Abc
- * 1. Def
- */
 class Sim1(val logTarget:StringBuilder,
            val flows:MutableList<ResourceFlow>,
            simParametersProvider: Sim1ParametersProvider) : DefaultSimulation(simParametersProvider) {
@@ -36,7 +24,7 @@ class Sim1(val logTarget:StringBuilder,
 
     override fun createAgents(): List<IAgent> {
         // TODO: Test this
-        return listOf(RealEstateAgent())
+        return listOf(Protagonist(OFFLINE_NETWORKING_INTENSITY))
     }
 
     override fun createSensors(): List<ISensor> {
