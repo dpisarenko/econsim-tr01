@@ -8,3 +8,15 @@ Simulation 1
 
 1. Abc
 1. Def
+
+Это тест.
+
+Now let's type something.
+
+And another line.
+
+Another.
+
+But the key press data aren't saved in the log.
+
+Let's see now.
