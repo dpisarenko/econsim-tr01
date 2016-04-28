@@ -3,6 +3,7 @@ package cc.altruix.econsimtr01.ch0202
 import cc.altruix.econsimtr01.DefaultAgent
 import cc.altruix.econsimtr01.PlFlow
 import cc.altruix.econsimtr01.ch0201.OncePerWeek
+import cc.altruix.econsimtr01.dailyAtMidnight
 import org.joda.time.DateTime
 
 /**
@@ -30,6 +31,12 @@ class Protagonist(val offlineNetworkingIntensity:Int,
                 OfflineNetworkingSessionsHeldDuringWeekResetAction(
                         this,
                         mondayMidnight
+                )
+        )
+        this.actions.add(
+                OfflineNetworkingSessionsHeldDuringDayResetAction(
+                        this,
+                        dailyAtMidnight()
                 )
         )
         this.actions.add(

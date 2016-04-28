@@ -10,15 +10,32 @@ class OfflineNetworkingSessionTriggerFun(val agent: Protagonist,
                                          val offlineNetworkingIntensity: Int,
                                          val maxNetworkingSessionsPerBusinessDay:Int) : (DateTime) -> Boolean {
     override fun invoke(time: DateTime): Boolean {
+        /**
+         * The protagonist works on business days only.
+         */
         if (!time.isBusinessDay()) {
             return false;
         }
 
-        // if (agent.offlineNetworkingSessionsHeldDuringCurrentWeek)
+        /**
+         * Now let's check, if we haven't exceed our weekly limit on sessions.
+         */
+        if (agent.offlineNetworkingSessionsHeldDuringCurrentWeek >= offlineNetworkingIntensity) {
+            return false
+        }
 
-        // TODO: Continue here
-        // TODO: Implement this
+        /**
+         * Did we exceed our limit of networking sessions per day?
+         */
+        if (agent.offlineNetworkingSessionsHeldDuringCurrentDay >= maxNetworkingSessionsPerBusinessDay) {
+            return false
+        }
+
+        /**
+         * Question: Do we care about time?
+         * Answer: No
+         */
         // TODO: Test this
-        throw UnsupportedOperationException()
+        return true
     }
 }
