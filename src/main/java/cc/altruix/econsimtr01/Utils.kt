@@ -157,3 +157,8 @@ fun getSubscriberCount(prolog: Prolog, time: Long, interactions: Int): Double {
 }
 
 fun findAgent(id: String, agentList: List<IAgent>) = agentList.filter { x -> x.id().equals(id) }.firstOrNull()
+
+fun DateTime.isBusinessDay():Boolean = when (this.dayOfWeek) {
+    DateTimeConstants.SATURDAY, DateTimeConstants.SUNDAY -> false
+    else -> true
+}

@@ -27,7 +27,7 @@ class Protagonist(val offlineNetworkingIntensity:Int,
                 )
         )
         this.actions.add(
-                OfflineNetworkingSessionsHeldResetAction(
+                OfflineNetworkingSessionsHeldDuringWeekResetAction(
                         this,
                         mondayMidnight
                 )
@@ -39,6 +39,7 @@ class Protagonist(val offlineNetworkingIntensity:Int,
                         maxNetworkingSessionsPerBusinessDay
                 )
         )
+
     }
     /**
      * TODO: Remove these notes
@@ -46,7 +47,9 @@ class Protagonist(val offlineNetworkingIntensity:Int,
      * Where are we stuck?
      * TODO: Add networking meeting
      */
-    var offlineNetworkingSessionsHeld:Int = 0
+    var offlineNetworkingSessionsHeldDuringCurrentWeek:Int = 0
+
+    var offlineNetworkingSessionsHeldDuringCurrentDay:Int = 0
 
     override fun act(now: DateTime) {
         super.act(now)

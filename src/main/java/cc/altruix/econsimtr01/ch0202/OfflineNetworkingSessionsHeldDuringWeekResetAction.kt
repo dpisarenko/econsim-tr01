@@ -7,11 +7,11 @@ import org.joda.time.DateTime
 /**
  * Created by pisarenko on 27.04.2016.
  */
-class OfflineNetworkingSessionsHeldResetAction(val agent:Protagonist,
-                                               val triggerFun: (DateTime) -> Boolean)
-    : DefaultAction(triggerFun){
+class OfflineNetworkingSessionsHeldDuringWeekResetAction(val agent:Protagonist,
+                                                         val triggerFun: (DateTime) -> Boolean)
+    : DefaultAction(triggerFun) {
     override fun run(time: DateTime) {
-        agent.offlineNetworkingSessionsHeld = 0
+        agent.offlineNetworkingSessionsHeldDuringCurrentWeek = 0
     }
 
     override fun notifySubscribers(time: DateTime) {
