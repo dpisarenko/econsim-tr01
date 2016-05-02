@@ -48,8 +48,7 @@ class Sim1(val logTarget:StringBuilder,
                         AVAILABLE_TIME_PER_WEEK,
                         MAX_NETWORKING_SESSIONS_PER_BUSINESS_DAY,
                         population
-                ),
-                population
+                )
         )
     }
 
