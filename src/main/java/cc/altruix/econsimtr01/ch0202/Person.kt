@@ -9,5 +9,11 @@ import cc.altruix.econsimtr01.generateId
  * @since 1.0
  */
 class Person : DefaultAgent("person-${generateId()}") {
+    var willingToMeet: Boolean = false
+        get
+        set
+    var willingToRecommend: Boolean = false
+        get
+        set
 
 }
