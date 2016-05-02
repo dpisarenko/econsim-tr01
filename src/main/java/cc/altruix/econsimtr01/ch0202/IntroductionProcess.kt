@@ -22,11 +22,17 @@ open class IntroductionProcess(
         val recommenders = getRecommenders(network)
         val successfulRecommenders = recommend(recommenders)
         successfulRecommenders.forEach {
-            val person = Person()
-            person.willingToMeet = true
+            val person = createPersonWillingToMeet()
             population.addPerson(person)
         }
     }
+
+    open fun createPersonWillingToMeet(): Person {
+        val person = Person()
+        person.willingToMeet = true
+        return person
+    }
+
     open fun getNetwork(population:IPopulation):List<Person> =
             population
                     .people()

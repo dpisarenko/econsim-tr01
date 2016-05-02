@@ -33,14 +33,23 @@ class IntroductionProcessTests {
         Mockito.doReturn(leads).`when`(out).recommend(recommenders)
         Assertions.assertThat(person1.willingToMeet).isFalse()
         Assertions.assertThat(person2.willingToMeet).isFalse()
+        val personWillingToMeet1 = Person()
+        val personWillingToMeet2 = Person()
+        Mockito.doReturn(personWillingToMeet1)
+                .doReturn(personWillingToMeet2)
+                .`when`(out)
+                .createPersonWillingToMeet()
         // Run method under test
         out.run(0L.millisToSimulationDateTime())
         // Verify
         Mockito.verify(out).getNetwork(population)
         Mockito.verify(out).getRecommenders(network)
         Mockito.verify(out).recommend(recommenders)
-        Assertions.assertThat(person1.willingToMeet).isTrue()
-        Assertions.assertThat(person2.willingToMeet).isTrue()
+        Assertions.assertThat(person1.willingToMeet).isFalse()
+        Assertions.assertThat(person2.willingToMeet).isFalse()
+        Mockito.verify(out, Mockito.times(2)).createPersonWillingToMeet()
+        Mockito.verify(population).addPerson(personWillingToMeet1)
+        Mockito.verify(population).addPerson(personWillingToMeet2)
     }
     @Test
     fun getNetwork() {
