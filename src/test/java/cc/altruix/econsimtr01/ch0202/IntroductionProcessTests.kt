@@ -41,4 +41,24 @@ class IntroductionProcessTests {
         Assertions.assertThat(person1.willingToMeet).isTrue()
         Assertions.assertThat(person2.willingToMeet).isTrue()
     }
+    @Test
+    fun getNetwork() {
+        val networkMember = Person()
+        networkMember.willingToRecommend = true
+        val stranger = Person()
+        networkMember.willingToRecommend = false
+        val people = arrayListOf(networkMember, stranger)
+        val population = mock<IPopulation>()
+        Mockito.`when`(population.people())
+                .thenReturn(people)
+        val out = IntroductionProcess(
+                population,
+                { true }
+        )
+        // Run method under test
+        val network = out.getNetwork(population)
+        // Verify
+        Assertions.assertThat(network).isNotNull
+        Assertions.assertThat(network).containsOnly(networkMember)
+    }
 }

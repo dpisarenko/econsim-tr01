@@ -22,7 +22,10 @@ open class IntroductionProcess(
     }
     // TODO: Test this
     open fun getNetwork(population:IPopulation):List<Person> =
-            population.people().filter { it.willingToRecommend }.toList()
+            population
+                    .people()
+                    .filter { it.willingToRecommend }
+                    .toList()
 
     open fun getRecommenders(network:List<IAgent>):List<Person> {
         // TODO: Implement this
