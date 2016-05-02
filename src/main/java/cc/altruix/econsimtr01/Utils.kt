@@ -9,6 +9,7 @@ import org.joda.time.DateTimeConstants
 import org.joda.time.Duration
 import org.slf4j.LoggerFactory
 import java.io.File
+import java.util.UUID
 
 /**
  * @author Dmitri Pisarenko (dp@altruix.co)
@@ -162,3 +163,5 @@ fun DateTime.isBusinessDay():Boolean = when (this.dayOfWeek) {
     DateTimeConstants.SATURDAY, DateTimeConstants.SUNDAY -> false
     else -> true
 }
+
+fun generateId():String = UUID.randomUUID().toString()
