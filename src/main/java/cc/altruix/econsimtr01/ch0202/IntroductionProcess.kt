@@ -15,12 +15,11 @@ class IntroductionProcess(
         triggerFun:(DateTime) -> Boolean) :
         DefaultAction(triggerFun) {
     override fun run(time: DateTime) {
-        // TODO: Implement this
         // TODO: Test this
         val network = getNetwork(population)
         val recommenders = getRecommenders(network)
         val leads = recommend(recommenders)
-        // leads.forEach {  }
+        leads.forEach { it.willingToMeet = true }
     }
     fun getNetwork(population:IPopulation):List<Person> {
         // TODO: Implement this
