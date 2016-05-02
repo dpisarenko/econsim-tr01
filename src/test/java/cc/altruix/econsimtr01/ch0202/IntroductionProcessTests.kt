@@ -43,10 +43,8 @@ class IntroductionProcessTests {
     }
     @Test
     fun getNetwork() {
-        val networkMember = Person()
-        networkMember.willingToRecommend = true
-        val stranger = Person()
-        networkMember.willingToRecommend = false
+        val networkMember = createPerson(true)
+        val stranger = createPerson(false)
         val people = arrayListOf(networkMember, stranger)
         val population = mock<IPopulation>()
         Mockito.`when`(population.people())
@@ -60,5 +58,11 @@ class IntroductionProcessTests {
         // Verify
         Assertions.assertThat(network).isNotNull
         Assertions.assertThat(network).containsOnly(networkMember)
+    }
+    private fun createPerson(willingToRecommend:Boolean):Person
+    {
+        val result = Person()
+        result.willingToRecommend = willingToRecommend
+        return result
     }
 }
