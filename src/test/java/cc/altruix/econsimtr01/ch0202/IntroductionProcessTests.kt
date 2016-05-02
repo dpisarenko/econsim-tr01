@@ -81,6 +81,27 @@ class IntroductionProcessTests {
         }
     }
 
+    @Test
+    fun recommend() {
+        val population = mock<IPopulation>()
+        val out = IntroductionProcess(
+                population,
+                { true },
+                0.2,
+                0.6
+        )
+        val recommendersCount = 10
+        val recommenders = ArrayList<Person>(recommendersCount)
+        for (i in 1..recommendersCount) {
+            recommenders.add(Person())
+        }
+        val leads = out.recommend(recommenders)
+        Assertions.assertThat(leads.size).isEqualTo(6)
+        leads.forEach {
+            Assertions.assertThat(recommenders.contains(it)).isTrue()
+        }
+    }
+
     private fun createPerson(willingToRecommend:Boolean):Person
     {
         val result = Person()
