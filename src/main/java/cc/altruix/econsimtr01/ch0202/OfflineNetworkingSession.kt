@@ -9,7 +9,8 @@ import org.joda.time.DateTime
  */
 class OfflineNetworkingSession(val agent: Protagonist,
                                val offlineNetworkingIntensity: Int,
-                               val maxNetworkingSessionsPerBusinessDay:Int) :
+                               val maxNetworkingSessionsPerBusinessDay: Int,
+                               population: Population) :
         DefaultAction(
                 OfflineNetworkingSessionTriggerFun(
                         agent,
@@ -21,6 +22,7 @@ class OfflineNetworkingSession(val agent: Protagonist,
         // TODO: Continue here
         // TODO: Implement this
         // TODO: Test this
+
 
 
         throw UnsupportedOperationException()

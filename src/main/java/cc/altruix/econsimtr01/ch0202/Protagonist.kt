@@ -9,9 +9,10 @@ import org.joda.time.DateTime
 /**
  * Created by pisarenko on 26.04.2016.
  */
-class Protagonist(val offlineNetworkingIntensity:Int,
-                  val availableTimePerWeek:Int,
-                  val maxNetworkingSessionsPerBusinessDay:Int) : DefaultAgent(ID) {
+class Protagonist(val offlineNetworkingIntensity: Int,
+                  val availableTimePerWeek: Int,
+                  val maxNetworkingSessionsPerBusinessDay: Int,
+                  val population: Population) : DefaultAgent(ID) {
     companion object {
         val ID = "protagonist"
     }
@@ -43,7 +44,8 @@ class Protagonist(val offlineNetworkingIntensity:Int,
                 OfflineNetworkingSession(
                         this,
                         offlineNetworkingIntensity,
-                        maxNetworkingSessionsPerBusinessDay
+                        maxNetworkingSessionsPerBusinessDay,
+                        population
                 )
         )
 

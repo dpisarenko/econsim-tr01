@@ -41,14 +41,15 @@ class Sim1(val logTarget:StringBuilder,
     override fun continueCondition(time: DateTime): Boolean = time.year <= 1
 
     override fun createAgents(): List<IAgent> {
-        // TODO: Test this
+        val population = Population()
         return listOf(
                 Protagonist(
                         OFFLINE_NETWORKING_INTENSITY,
                         AVAILABLE_TIME_PER_WEEK,
-                        MAX_NETWORKING_SESSIONS_PER_BUSINESS_DAY
+                        MAX_NETWORKING_SESSIONS_PER_BUSINESS_DAY,
+                        population
                 ),
-                Population()
+                population
         )
     }
 
