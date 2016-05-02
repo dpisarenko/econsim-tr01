@@ -35,13 +35,15 @@ class Sim1(val logTarget:StringBuilder,
          * hold on one business day.
          * Unit: Times per (business) day
          */
-        var MAX_NETWORKING_SESSIONS_PER_BUSINESS_DAY:Int = 3
+        val MAX_NETWORKING_SESSIONS_PER_BUSINESS_DAY:Int = 3
+
+        val INITIAL_NETWORK_SIZE:Int = 100
     }
 
     override fun continueCondition(time: DateTime): Boolean = time.year <= 1
 
     override fun createAgents(): List<IAgent> {
-        val population = Population()
+        val population = Population(INITIAL_NETWORK_SIZE)
         return listOf(
                 Protagonist(
                         OFFLINE_NETWORKING_INTENSITY,
