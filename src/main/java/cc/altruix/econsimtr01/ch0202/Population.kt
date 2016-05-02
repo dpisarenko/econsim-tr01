@@ -9,6 +9,7 @@ class Population(val initialNetworkSize:Int) : IPopulation {
     var people:MutableList<Person> = LinkedList()
         get
         private set
+
     init {
         // TODO: Implement this
         // TODO: Test this
@@ -18,4 +19,5 @@ class Population(val initialNetworkSize:Int) : IPopulation {
             people.add(person)
         }
     }
+    override fun people(): MutableList<Person> = this.people
 }

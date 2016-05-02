@@ -20,11 +20,10 @@ open class IntroductionProcess(
         val leads = recommend(recommenders)
         leads.forEach { it.willingToMeet = true }
     }
-    open fun getNetwork(population:IPopulation):List<Person> {
-        // TODO: Implement this
-        // TODO: Test this
-        return emptyList()
-    }
+    // TODO: Test this
+    open fun getNetwork(population:IPopulation):List<Person> =
+            population.people().filter { it.willingToRecommend }.toList()
+
     open fun getRecommenders(network:List<IAgent>):List<Person> {
         // TODO: Implement this
         // TODO: Test this

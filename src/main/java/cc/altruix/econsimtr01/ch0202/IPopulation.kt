@@ -6,4 +6,5 @@ package cc.altruix.econsimtr01.ch0202
  * @since 1.0
  */
 interface IPopulation {
+    fun people(): MutableList<Person>
 }
