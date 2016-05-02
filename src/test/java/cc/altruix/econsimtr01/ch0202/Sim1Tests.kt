@@ -37,6 +37,6 @@ class Sim1Tests {
         Assertions.assertThat(actResult).isNotNull
         Assertions.assertThat(actResult.size).isEqualTo(2)
         Assertions.assertThat(actResult.get(0) is Protagonist).isTrue()
-        Assertions.assertThat(actResult.get(1) is Population).isTrue()
+        Assertions.assertThat(actResult.get(1) is IPopulation).isTrue()
     }
 }
