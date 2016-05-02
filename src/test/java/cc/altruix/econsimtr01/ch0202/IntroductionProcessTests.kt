@@ -5,6 +5,7 @@ import cc.altruix.econsimtr01.mock
 import org.fest.assertions.Assertions
 import org.junit.Test
 import org.mockito.Mockito
+import java.util.*
 
 /**
  * @author Dmitri Pisarenko (dp@altruix.co)
@@ -58,6 +59,26 @@ class IntroductionProcessTests {
         // Verify
         Assertions.assertThat(network).isNotNull
         Assertions.assertThat(network).containsOnly(networkMember)
+    }
+
+    @Test
+    fun getRecommenders() {
+        val population = mock<IPopulation>()
+        val out = IntroductionProcess(
+                population,
+                { true },
+                0.2
+        )
+        val peopleInNetwork = 10
+        val network = ArrayList<Person>(peopleInNetwork)
+        for (i in 1..peopleInNetwork) {
+            network.add(Person())
+        }
+        val recommenders = out.getRecommenders(network)
+        Assertions.assertThat(recommenders.size).isEqualTo(2)
+        recommenders.forEach {
+            Assertions.assertThat(network.contains(it)).isTrue()
+        }
     }
 
     private fun createPerson(willingToRecommend:Boolean):Person

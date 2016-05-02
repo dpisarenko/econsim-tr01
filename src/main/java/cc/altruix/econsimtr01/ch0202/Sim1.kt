@@ -50,6 +50,16 @@ class Sim1(val logTarget:StringBuilder,
          * a given week).
          */
         val AVERAGE_NETWORK_ACTIVITY:Double = 0.1
+
+        /**
+         * Average suggestibility of strangers
+         *
+         * Average suggestibility of strangers - how likely is a stranger to change
+         * his mind (become willing to meet my friend) after the recommendation of a
+         * person inside the network (percentage of people outside the network, who were contacted by people
+         * inside the network and actually agreed to meet my friend) ?
+         */
+        val AVERAGE_SUGGESTIBILITY_OF_STRANGERS:Double = 0.6
     }
 
     override fun continueCondition(time: DateTime): Boolean = time.year <= 1
