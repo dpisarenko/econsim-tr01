@@ -3,6 +3,7 @@ package cc.altruix.econsimtr01.ch0202
 import cc.altruix.econsimtr01.millisToSimulationDateTime
 import cc.altruix.econsimtr01.mock
 import org.fest.assertions.Assertions
+import org.joda.time.DateTime
 import org.junit.Test
 import org.mockito.Mockito
 import java.util.*
@@ -109,6 +110,20 @@ class IntroductionProcessTests {
         leads.forEach {
             Assertions.assertThat(recommenders.contains(it)).isTrue()
         }
+    }
+
+    @Test
+    fun simulationWithDifferentParameters() {
+        // TODO: Continue here
+        val data = HashMap<DateTime,Map<String,Double>>()
+        val population = Population(100)
+        val out = IntroductionProcess(
+                population = population,
+                triggerFun = {true},
+                averageNetworkActivity = 0.1,
+                averageSuggestibilityOfStrangers = 0.3
+        )
+
     }
 
     private fun createPerson(willingToRecommend:Boolean):Person
