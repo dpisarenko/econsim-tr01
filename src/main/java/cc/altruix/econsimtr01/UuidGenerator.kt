@@ -9,6 +9,6 @@ object UuidGenerator {
     private var i = 0;
     fun createUuid():String {
         i++
-        return String.format("%00000d", i)
+        return String.format("%06d", i)
     }
 }

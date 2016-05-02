@@ -11,8 +11,8 @@ import org.junit.Test
 class UuidGeneratorTests {
     @Test
     fun createUuid() {
-        Assertions.assertThat(UuidGenerator.createUuid()).isEqualTo("00001")
-        Assertions.assertThat(UuidGenerator.createUuid()).isEqualTo("00002")
-        Assertions.assertThat(UuidGenerator.createUuid()).isEqualTo("00003")
+        Assertions.assertThat(UuidGenerator.createUuid()).isEqualTo("000001")
+        Assertions.assertThat(UuidGenerator.createUuid()).isEqualTo("000002")
+        Assertions.assertThat(UuidGenerator.createUuid()).isEqualTo("000003")
     }
 }
