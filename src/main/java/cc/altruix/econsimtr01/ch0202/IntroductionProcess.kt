@@ -17,14 +17,25 @@ class IntroductionProcess(
     override fun run(time: DateTime) {
         // TODO: Implement this
         // TODO: Test this
-        val network = getNetwork(population);
-        val recommenders = getRecommenders();
+        val network = getNetwork(population)
+        val recommenders = getRecommenders(network)
+        val leads = recommend(recommenders)
 
     }
-    fun getNetwork(population:IPopulation):List<IAgent> {
+    fun getNetwork(population:IPopulation):List<Person> {
         // TODO: Implement this
         // TODO: Test this
-        return emptyList<IAgent>()
+        return emptyList()
+    }
+    fun getRecommenders(network:List<IAgent>):List<Person> {
+        // TODO: Implement this
+        // TODO: Test this
+        return emptyList()
+    }
+    fun recommend(recommenders:List<IAgent>):List<Person> {
+        // TODO: Implement this
+        // TODO: Test this
+        return emptyList()
     }
     override fun notifySubscribers(time: DateTime) {
     }
