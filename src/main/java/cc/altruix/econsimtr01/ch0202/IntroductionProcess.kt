@@ -10,28 +10,28 @@ import org.joda.time.DateTime
  * @version $Id$
  * @since 1.0
  */
-class IntroductionProcess(
+open class IntroductionProcess(
         val population:IPopulation,
         triggerFun:(DateTime) -> Boolean) :
         DefaultAction(triggerFun) {
-    override fun run(time: DateTime) {
+    open override fun run(time: DateTime) {
         // TODO: Test this
         val network = getNetwork(population)
         val recommenders = getRecommenders(network)
         val leads = recommend(recommenders)
         leads.forEach { it.willingToMeet = true }
     }
-    fun getNetwork(population:IPopulation):List<Person> {
+    open fun getNetwork(population:IPopulation):List<Person> {
         // TODO: Implement this
         // TODO: Test this
         return emptyList()
     }
-    fun getRecommenders(network:List<IAgent>):List<Person> {
+    open fun getRecommenders(network:List<IAgent>):List<Person> {
         // TODO: Implement this
         // TODO: Test this
         return emptyList()
     }
-    fun recommend(recommenders:List<IAgent>):List<Person> {
+    open fun recommend(recommenders:List<IAgent>):List<Person> {
         // TODO: Implement this
         // TODO: Test this
         return emptyList()
