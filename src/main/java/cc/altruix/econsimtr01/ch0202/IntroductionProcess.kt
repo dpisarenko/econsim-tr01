@@ -15,7 +15,6 @@ open class IntroductionProcess(
         triggerFun:(DateTime) -> Boolean) :
         DefaultAction(triggerFun) {
     open override fun run(time: DateTime) {
-        // TODO: Test this
         val network = getNetwork(population)
         val recommenders = getRecommenders(network)
         val leads = recommend(recommenders)
