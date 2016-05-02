@@ -9,6 +9,7 @@ import org.joda.time.DateTimeConstants
 import org.joda.time.Duration
 import org.slf4j.LoggerFactory
 import java.io.File
+import java.util.*
 
 /**
  * @author Dmitri Pisarenko (dp@altruix.co)
@@ -162,3 +163,21 @@ fun DateTime.isBusinessDay():Boolean = when (this.dayOfWeek) {
     DateTimeConstants.SATURDAY, DateTimeConstants.SUNDAY -> false
     else -> true
 }
+
+fun <T>List<T>.extractRandomElements(percentageToExtract:Double,
+                                     random:Random):List<T> {
+    val elementsCount = (this.size * percentageToExtract).toInt()
+    val processedIndices = ArrayList<Int>(elementsCount)
+    for (i in 1..elementsCount) {
+        var elemIdx = random.nextInt(this.size)
+        while (processedIndices.contains(elemIdx)) {
+            elemIdx = random.nextInt(this.size)
+        }
+        processedIndices.add(elemIdx)
+    }
+    return processedIndices.map { this.get(it) }.toList()
+}
+
+// We need to set the seed in order to always get the same random numbers
+fun createRandom():java.util.Random =
+        java.util.Random(8682522807148012L)

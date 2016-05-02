@@ -1,8 +1,6 @@
 package cc.altruix.econsimtr01.ch0202
 
-import cc.altruix.econsimtr01.DefaultAction
-import cc.altruix.econsimtr01.IActionSubscriber
-import cc.altruix.econsimtr01.IAgent
+import cc.altruix.econsimtr01.*
 import org.joda.time.DateTime
 
 /**
@@ -12,7 +10,8 @@ import org.joda.time.DateTime
  */
 open class IntroductionProcess(
         val population:IPopulation,
-        triggerFun:(DateTime) -> Boolean) :
+        triggerFun:(DateTime) -> Boolean,
+        val averageNetworkActivity:Double = Sim1.AVERAGE_NETWORK_ACTIVITY) :
         DefaultAction(triggerFun) {
     open override fun run(time: DateTime) {
         val network = getNetwork(population)
@@ -20,18 +19,16 @@ open class IntroductionProcess(
         val leads = recommend(recommenders)
         leads.forEach { it.willingToMeet = true }
     }
-    // TODO: Test this
     open fun getNetwork(population:IPopulation):List<Person> =
             population
                     .people()
                     .filter { it.willingToRecommend }
                     .toList()
 
-    open fun getRecommenders(network:List<IAgent>):List<Person> {
-        // TODO: Implement this
-        // TODO: Test this
-        return emptyList()
-    }
+    // TODO: Test this
+    open fun getRecommenders(network:List<Person>):List<Person> =
+            network.extractRandomElements(averageNetworkActivity, Random)
+
     open fun recommend(recommenders:List<IAgent>):List<Person> {
         // TODO: Implement this
         // TODO: Test this

@@ -59,6 +59,7 @@ class IntroductionProcessTests {
         Assertions.assertThat(network).isNotNull
         Assertions.assertThat(network).containsOnly(networkMember)
     }
+
     private fun createPerson(willingToRecommend:Boolean):Person
     {
         val result = Person()

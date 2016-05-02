@@ -1,9 +1,6 @@
 package cc.altruix.econsimtr01.ch0201
 
-import cc.altruix.econsimtr01.DefaultAgent
-import cc.altruix.econsimtr01.IAction
-import cc.altruix.econsimtr01.IActionSubscriber
-import cc.altruix.econsimtr01.PlFlow
+import cc.altruix.econsimtr01.*
 import org.joda.time.DateTime
 import org.slf4j.LoggerFactory
 import java.util.*
@@ -27,7 +24,7 @@ open class ListAgent(id:String,
                 Pair("r12-pc2", 7)
         )
     }
-    val random = Random(8682522807148012L) // We need to set the seed in order to always get the same random numbers
+    val random = createRandom()
     val subscribers : MutableList<Subscriber> = LinkedList()
     var buyersCount : Int = 0
     override fun put(res: String, amt: Double) {
@@ -88,8 +85,9 @@ open class ListAgent(id:String,
         }
     }
 
-    open internal fun getIndicesOfSubscribersToUpdate(subscribers: List<Subscriber>,
-                                                 percentage: Double): List<Int> {
+    open internal fun getIndicesOfSubscribersToUpdate(
+            subscribers: List<Subscriber>,
+            percentage: Double): List<Int> {
         val readersCount = (subscribers.size * percentage).toInt()
         val processedIndices = ArrayList<Int>(readersCount)
 

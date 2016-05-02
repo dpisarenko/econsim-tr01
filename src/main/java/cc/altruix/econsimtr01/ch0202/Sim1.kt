@@ -37,7 +37,19 @@ class Sim1(val logTarget:StringBuilder,
          */
         val MAX_NETWORKING_SESSIONS_PER_BUSINESS_DAY:Int = 3
 
+        /**
+         * Initial network size: Number of people, willing to recommend my friend at
+         * the start of simulation (note that this number will change during the simulation).
+         */
         val INITIAL_NETWORK_SIZE:Int = 100
+
+        /**
+         * Average activity his network - how often, on average, does a person inside
+         * his network decides to recommend my friend to other people (percentage of
+         * people inside the network, who recommend my friend to the people they know in
+         * a given week).
+         */
+        val AVERAGE_NETWORK_ACTIVITY:Double = 0.1
     }
 
     override fun continueCondition(time: DateTime): Boolean = time.year <= 1
