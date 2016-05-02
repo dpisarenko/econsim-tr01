@@ -11,8 +11,6 @@ class Population(val initialNetworkSize:Int) : IPopulation {
         private set
 
     init {
-        // TODO: Implement this
-        // TODO: Test this
         for (i in 1..initialNetworkSize) {
             val person = Person()
             person.willingToRecommend = true
