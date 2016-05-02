@@ -6,9 +6,14 @@ import java.util.*
  * Created by pisarenko on 27.04.2016.
  */
 class Population(val initialNetworkSize:Int) : IPopulation {
-    val people:MutableList<Person> = LinkedList()
+    var people:MutableList<Person> = LinkedList()
+        get
+        private set
     init {
         // TODO: Implement this
         // TODO: Test this
+        for (i in 1..initialNetworkSize) {
+
+        }
     }
 }
