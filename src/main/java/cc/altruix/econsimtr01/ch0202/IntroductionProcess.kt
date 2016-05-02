@@ -20,7 +20,7 @@ class IntroductionProcess(
         val network = getNetwork(population)
         val recommenders = getRecommenders(network)
         val leads = recommend(recommenders)
-
+        // leads.forEach {  }
     }
     fun getNetwork(population:IPopulation):List<Person> {
         // TODO: Implement this
