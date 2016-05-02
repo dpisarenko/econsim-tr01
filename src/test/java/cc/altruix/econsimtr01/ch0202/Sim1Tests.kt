@@ -35,8 +35,7 @@ class Sim1Tests {
                         transformations))
         val actResult = out.createAgents()
         Assertions.assertThat(actResult).isNotNull
-        Assertions.assertThat(actResult.size).isEqualTo(2)
+        Assertions.assertThat(actResult.size).isEqualTo(1)
         Assertions.assertThat(actResult.get(0) is Protagonist).isTrue()
-        Assertions.assertThat(actResult.get(1) is IPopulation).isTrue()
     }
 }

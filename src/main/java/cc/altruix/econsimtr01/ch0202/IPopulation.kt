@@ -7,4 +7,6 @@ package cc.altruix.econsimtr01.ch0202
  */
 interface IPopulation {
     fun people(): MutableList<Person>
+
+    fun addPerson(person: Person)
 }

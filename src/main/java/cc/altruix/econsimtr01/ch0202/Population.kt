@@ -18,4 +18,8 @@ class Population(val initialNetworkSize:Int) : IPopulation {
         }
     }
     override fun people(): MutableList<Person> = this.people
+
+    override fun addPerson(person: Person) {
+        people.add(person)
+    }
 }

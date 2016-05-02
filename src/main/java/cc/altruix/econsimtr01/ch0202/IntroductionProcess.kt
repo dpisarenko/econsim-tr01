@@ -20,8 +20,12 @@ open class IntroductionProcess(
     open override fun run(time: DateTime) {
         val network = getNetwork(population)
         val recommenders = getRecommenders(network)
-        val leads = recommend(recommenders)
-        leads.forEach { it.willingToMeet = true }
+        val successfulRecommenders = recommend(recommenders)
+        successfulRecommenders.forEach {
+            val person = Person()
+            person.willingToMeet = true
+            population.addPerson(person)
+        }
     }
     open fun getNetwork(population:IPopulation):List<Person> =
             population
@@ -32,7 +36,6 @@ open class IntroductionProcess(
     open fun getRecommenders(network:List<Person>):List<Person> =
             network.extractRandomElements(averageNetworkActivity, Random)
 
-    // TODO: Test this
     open fun recommend(recommenders:List<Person>):List<Person> =
             recommenders.extractRandomElements(averageSuggestibilityOfStrangers, Random)
 
