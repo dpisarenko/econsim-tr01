@@ -136,7 +136,7 @@ class IntroductionProcessTests {
                 val descriptor = it.first
                 val objects = it.second
                 objects.process.run(t)
-                val peopleWillingToMeet = calculatePeopleWillingToMeet(objects.population)
+                val peopleWillingToMeet = calculatePeopleWillingToMeet(objects.process.population)
                 rowData.put(descriptor, peopleWillingToMeet)
             }
             t = t.plusDays(1)
