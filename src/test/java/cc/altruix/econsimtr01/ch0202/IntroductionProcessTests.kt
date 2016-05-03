@@ -3,12 +3,14 @@ package cc.altruix.econsimtr01.ch0202
 import cc.altruix.econsimtr01.ch0201.OncePerWeek
 import cc.altruix.econsimtr01.millisToSimulationDateTime
 import cc.altruix.econsimtr01.mock
+import cc.altruix.econsimtr01.newLine
+import cc.altruix.econsimtr01.toSimulationDateTimeString
 import org.fest.assertions.Assertions
 import org.joda.time.DateTime
 import org.junit.Test
 import org.mockito.Mockito
+import java.io.File
 import java.util.*
-
 /**
  * @author Dmitri Pisarenko (dp@altruix.co)
  * @version $Id$
@@ -116,19 +118,15 @@ class IntroductionProcessTests {
     @Test
     fun simulationWithDifferentParameters() {
         // TODO: Continue here
-
         val scenarioDescriptors = listOf(
                 Sim1ScenarioDescriptor(100, 0.1, 0.6),
                 Sim1ScenarioDescriptor(100, 0.05, 0.1),
                 Sim1ScenarioDescriptor(1000, 0.05, 0.1)
         )
-
         val simDescriptorsAndObjects = scenarioDescriptors.map {
             createSimObjects(it)
         }.toList()
-
         val data = HashMap<DateTime,Map<Sim1ScenarioDescriptor,Double>>()
-
         var t = 0L.millisToSimulationDateTime()
         for (day in 1..(365*2)) {
             val rowData = HashMap<Sim1ScenarioDescriptor,Double>()
@@ -142,16 +140,28 @@ class IntroductionProcessTests {
             }
             t = t.plusDays(1)
         }
-/*
-        val data = HashMap<DateTime,Map<Sim1ScenarioDescriptor,Double>>()
-        val population = Population(100)
-        val out = IntroductionProcess(
-                population = population,
-                triggerFun = {true},
-                averageNetworkActivity = 0.1,
-                averageSuggestibilityOfStrangers = 0.3
-        )
-*/
+        val builder = StringBuilder()
+        val times = data.keys.sorted()
+        builder.append("Time;")
+        scenarioDescriptors.forEach { sim ->
+            builder.append(sim.toString())
+            builder.append(";")
+        }
+        builder.newLine()
+        times.forEach { t ->
+            val rowData = data.get(t)
+            builder.append(t.toSimulationDateTimeString())
+            builder.append(";")
+            scenarioDescriptors.forEach { sim ->
+                builder.append(rowData?.get(sim))
+                builder.append(";")
+            }
+            builder.newLine()
+        }
+        val expectedSimResultsFileName =
+                "src/test/resources/ch0202/IntroductionProcessTests.simulationWithDifferentParameters.expected.csv"
+        val expectedResult = File(expectedSimResultsFileName).readText()
+        Assertions.assertThat(builder.toString()).isEqualTo(builder.toString())
     }
 
     private fun calculatePeopleWillingToMeet(population: IPopulation): Double =
