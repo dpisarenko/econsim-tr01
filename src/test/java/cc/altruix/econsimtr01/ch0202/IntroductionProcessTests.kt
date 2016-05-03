@@ -134,7 +134,9 @@ class IntroductionProcessTests {
             simDescriptorsAndObjects.forEach {
                 val descriptor = it.first
                 val objects = it.second
-                objects.process.run(t)
+                if (objects.process.timeToRun(t)) {
+                    objects.process.run(t)
+                }
                 val peopleWillingToMeet = calculatePeopleWillingToMeet(objects.process.population)
                 rowData.put(descriptor, peopleWillingToMeet)
             }
