@@ -115,7 +115,14 @@ class IntroductionProcessTests {
     @Test
     fun simulationWithDifferentParameters() {
         // TODO: Continue here
-        val data = HashMap<DateTime,Map<String,Double>>()
+
+        val scenarios = listOf(
+                Sim1Scenario(100, 0.1, 0.6),
+                Sim1Scenario(100, 0.05, 0.1),
+                Sim1Scenario(1000, 0.05, 0.1)
+        )
+
+        val data = HashMap<DateTime,Map<Sim1Scenario,Double>>()
         val population = Population(100)
         val out = IntroductionProcess(
                 population = population,
