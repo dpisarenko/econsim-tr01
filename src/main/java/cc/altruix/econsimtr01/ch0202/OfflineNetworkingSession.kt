@@ -9,7 +9,8 @@ import org.joda.time.DateTime
  */
 class OfflineNetworkingSession(val agent: Protagonist,
                                val maxNetworkingSessionsPerBusinessDay: Int,
-                               population: Population) :
+                               val timePerOfflineNetworkingSessions:Double,
+                               population: IPopulation) :
         DefaultAction(
                 OfflineNetworkingSessionTriggerFun(
                         agent,

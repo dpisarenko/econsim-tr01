@@ -14,20 +14,8 @@ class Sim1(val logTarget:StringBuilder,
         )
 
         /**
-         * AVAILABLE_TIME_PER_WEEK
-         * Unit: Hours per week
-         *
-         * Amount of time the protagonist can work
+         * Parameters of process 1 (introduction) (START)
          */
-        val AVAILABLE_TIME_PER_WEEK:Int = 40
-
-        /**
-         * Maximum number of offline networking sessions, which the protagonist can
-         * hold on one business day.
-         * Unit: Times per (business) day
-         */
-        val MAX_NETWORKING_SESSIONS_PER_BUSINESS_DAY:Int = 3
-
         /**
          * Initial network size: Number of people, willing to recommend my friend at
          * the start of simulation (note that this number will change during the simulation).
@@ -51,6 +39,36 @@ class Sim1(val logTarget:StringBuilder,
          * inside the network and actually agreed to meet my friend) ?
          */
         val AVERAGE_SUGGESTIBILITY_OF_STRANGERS:Double = 0.6
+        /**
+         * Parameters of process 1 (introduction) (END)
+         */
+
+        /**
+         * Parameters of process 2 (offline networking session) (START)
+         */
+        /**
+         * AVAILABLE_TIME_PER_WEEK
+         * Unit: Hours per week
+         *
+         * Amount of time the protagonist can work
+         */
+        val TOTAL_TIME_FOR_OFFLINE_NETWORKING_PER_WEEK:Int = 40
+
+        /**
+         * TIME_PER_OFFLINE_NETWORKING_SESSION
+         * Unit: Hours
+         */
+        val TIME_PER_OFFLINE_NETWORKING_SESSION:Double = 3.0
+
+        /**
+         * Maximum number of offline networking sessions, which the protagonist can
+         * hold on one business day.
+         * Unit: Times per (business) day
+         */
+        val MAX_NETWORKING_SESSIONS_PER_BUSINESS_DAY:Int = 3
+        /**
+         * Parameters of process 2 (offline networking session) (END)
+         */
     }
 
     override fun continueCondition(time: DateTime): Boolean = time.year <= 1
@@ -58,9 +76,9 @@ class Sim1(val logTarget:StringBuilder,
     override fun createAgents(): List<IAgent> {
         val population = Population(INITIAL_NETWORK_SIZE)
         return listOf(
-                Protagonist(
-                        AVAILABLE_TIME_PER_WEEK,
+                Protagonist(TOTAL_TIME_FOR_OFFLINE_NETWORKING_PER_WEEK,
                         MAX_NETWORKING_SESSIONS_PER_BUSINESS_DAY,
+                        TIME_PER_OFFLINE_NETWORKING_SESSION,
                         population
                 )
         )

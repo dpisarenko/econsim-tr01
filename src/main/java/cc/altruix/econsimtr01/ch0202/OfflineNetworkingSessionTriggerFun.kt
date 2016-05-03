@@ -22,12 +22,6 @@ class OfflineNetworkingSessionTriggerFun(val agent: Protagonist,
         if (agent.offlineNetworkingSessionsHeldDuringCurrentDay >= maxNetworkingSessionsPerBusinessDay) {
             return false
         }
-
-        /**
-         * Question: Do we care about time?
-         * Answer: No
-         */
-        // TODO: Test this
         return true
     }
 }

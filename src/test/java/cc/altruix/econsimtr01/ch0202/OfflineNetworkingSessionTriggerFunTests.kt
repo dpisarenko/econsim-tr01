@@ -16,7 +16,8 @@ class OfflineNetworkingSessionTriggerFunTests {
         val protagonist = Protagonist(
                 availableTimePerWeek = 40,
                 maxNetworkingSessionsPerBusinessDay = 3,
-                population = Population(10)
+                population = Population(10),
+                timePerOfflineNetworkingSessions = 3.0
         )
         val out = OfflineNetworkingSessionTriggerFun(protagonist,
                 3)
@@ -33,7 +34,8 @@ class OfflineNetworkingSessionTriggerFunTests {
         val protagonist = Protagonist(
                 availableTimePerWeek = 40,
                 maxNetworkingSessionsPerBusinessDay = 3,
-                population = Population(10)
+                population = Population(10),
+                timePerOfflineNetworkingSessions = 3.0
         )
         val out = OfflineNetworkingSessionTriggerFun(protagonist,
                 3)
@@ -48,6 +50,7 @@ class OfflineNetworkingSessionTriggerFunTests {
         val protagonist = Protagonist(
                 availableTimePerWeek = 40,
                 maxNetworkingSessionsPerBusinessDay = 3,
+                timePerOfflineNetworkingSessions = 3.0,
                 population = Population(10)
         )
         val out = OfflineNetworkingSessionTriggerFun(protagonist,
