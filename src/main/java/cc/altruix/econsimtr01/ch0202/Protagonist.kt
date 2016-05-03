@@ -50,13 +50,6 @@ class Protagonist(val offlineNetworkingIntensity: Int,
         )
 
     }
-    /**
-     * TODO: Remove these notes
-     *
-     * Where are we stuck?
-     * TODO: Add networking meeting
-     */
-    var offlineNetworkingSessionsHeldDuringCurrentWeek:Int = 0
 
     var offlineNetworkingSessionsHeldDuringCurrentDay:Int = 0
 

@@ -16,14 +16,6 @@ class OfflineNetworkingSessionTriggerFun(val agent: Protagonist,
         if (!time.isBusinessDay()) {
             return false;
         }
-
-        /**
-         * Now let's check, if we haven't exceed our weekly limit on sessions.
-         */
-        if (agent.offlineNetworkingSessionsHeldDuringCurrentWeek >= offlineNetworkingIntensity) {
-            return false
-        }
-
         /**
          * Did we exceed our limit of networking sessions per day?
          */
