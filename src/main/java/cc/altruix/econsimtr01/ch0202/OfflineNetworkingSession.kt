@@ -9,7 +9,7 @@ import org.joda.time.DateTime
  */
 class OfflineNetworkingSession(val agent: Protagonist,
                                val maxNetworkingSessionsPerBusinessDay: Int,
-                               val timePerOfflineNetworkingSessions:Double,
+                               val timePerOfflineNetworkingSession:Double,
                                population: IPopulation) :
         DefaultAction(
                 OfflineNetworkingSessionTriggerFun(
@@ -18,6 +18,12 @@ class OfflineNetworkingSession(val agent: Protagonist,
                 )
         )  {
     override fun run(time: DateTime) {
+        // Check, if we have time for another networking session
+
+        if (!validate()) {
+            return
+        }
+
         // TODO: Continue here
         // TODO: Implement this
         // TODO: Test this
@@ -25,6 +31,21 @@ class OfflineNetworkingSession(val agent: Protagonist,
 
 
         throw UnsupportedOperationException()
+    }
+
+    fun validate():Boolean {
+        // TODO: Test this
+        if (agent.offlineNetworkingSessionsHeldDuringCurrentDay >= maxNetworkingSessionsPerBusinessDay) {
+            return false
+        }
+
+        // TODO: Test this
+        if (agent.amount(Sim1.RESOURCE_AVAILABLE_TIME.id) < timePerOfflineNetworkingSession) {
+            return false
+        }
+
+        // TODO: Test this
+        return true
     }
 
     override fun notifySubscribers(time: DateTime) {
