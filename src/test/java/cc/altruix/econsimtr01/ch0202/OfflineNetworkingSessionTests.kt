@@ -70,6 +70,26 @@ class OfflineNetworkingSessionTests {
 
     @Test
     fun validateReturnsTrueIfEverythingOk() {
-        // TODO: Implement this
+        val population = Population(100)
+        val agent = Protagonist(
+                availableTimePerWeek = 40,
+                maxNetworkingSessionsPerBusinessDay = 2,
+                timePerOfflineNetworkingSessions = 3.0,
+                population = population
+        )
+        agent.offlineNetworkingSessionsHeldDuringCurrentDay = 2
+        agent.put(
+                Sim1.RESOURCE_AVAILABLE_TIME.id,
+                3.0
+        )
+        Assertions
+                .assertThat(agent.amount(Sim1.RESOURCE_AVAILABLE_TIME.id))
+                .isEqualTo(3.0)
+        val out = OfflineNetworkingSession(agent = agent,
+                maxNetworkingSessionsPerBusinessDay = 3,
+                timePerOfflineNetworkingSession = 3.0,
+                population = population
+        )
+        Assertions.assertThat(out.validate()).isTrue()
     }
 }
