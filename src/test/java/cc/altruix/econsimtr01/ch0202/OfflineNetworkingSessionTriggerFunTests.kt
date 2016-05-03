@@ -26,6 +26,10 @@ class OfflineNetworkingSessionTriggerFunTests {
     }
     @Test
     fun invokeReturnsFalseWhenDailyLimitExceeded() {
+        dailyLimitExceededTestLogic(3)
+        dailyLimitExceededTestLogic(4)
+    }
+    private fun dailyLimitExceededTestLogic(sessionsHeldDuringCurrentDay: Int) {
         val protagonist = Protagonist(
                 availableTimePerWeek = 40,
                 maxNetworkingSessionsPerBusinessDay = 3,
@@ -35,8 +39,23 @@ class OfflineNetworkingSessionTriggerFunTests {
                 3)
         val t = 0L.millisToSimulationDateTime().plusDays(2)
         Assertions.assertThat(t.isBusinessDay()).isTrue()
-        protagonist.offlineNetworkingSessionsHeldDuringCurrentDay = 4
+        protagonist.offlineNetworkingSessionsHeldDuringCurrentDay =
+                sessionsHeldDuringCurrentDay
         Assertions.assertThat(out.invoke(t)).isFalse()
     }
-
+    @Test
+    fun invokeReturnsTrueIfBusinessDayAndDailyLimitNotExceeded() {
+        val protagonist = Protagonist(
+                availableTimePerWeek = 40,
+                maxNetworkingSessionsPerBusinessDay = 3,
+                population = Population(10)
+        )
+        val out = OfflineNetworkingSessionTriggerFun(protagonist,
+                3)
+        val t = 0L.millisToSimulationDateTime().plusDays(2)
+        Assertions.assertThat(t.isBusinessDay()).isTrue()
+        protagonist.offlineNetworkingSessionsHeldDuringCurrentDay =
+                2
+        Assertions.assertThat(out.invoke(t)).isTrue()
+    }
 }
