@@ -1,5 +1,6 @@
 package cc.altruix.econsimtr01.ch0202
 
+import cc.altruix.econsimtr01.ch0201.OncePerWeek
 import cc.altruix.econsimtr01.millisToSimulationDateTime
 import cc.altruix.econsimtr01.mock
 import org.fest.assertions.Assertions
@@ -116,13 +117,24 @@ class IntroductionProcessTests {
     fun simulationWithDifferentParameters() {
         // TODO: Continue here
 
-        val scenarios = listOf(
-                Sim1Scenario(100, 0.1, 0.6),
-                Sim1Scenario(100, 0.05, 0.1),
-                Sim1Scenario(1000, 0.05, 0.1)
+        val scenarioDescriptors = listOf(
+                Sim1ScenarioDescriptor(100, 0.1, 0.6),
+                Sim1ScenarioDescriptor(100, 0.05, 0.1),
+                Sim1ScenarioDescriptor(1000, 0.05, 0.1)
         )
 
-        val data = HashMap<DateTime,Map<Sim1Scenario,Double>>()
+        val simDescriptorsAndObjects = scenarioDescriptors.map {
+            createSimObjects(it)
+        }.toList()
+
+        val data = HashMap<DateTime,Map<Sim1ScenarioDescriptor,Double>>()
+
+        val t = 0L.millisToSimulationDateTime()
+        for (day in 1..(365*2)) {
+
+        }
+/*
+        val data = HashMap<DateTime,Map<Sim1ScenarioDescriptor,Double>>()
         val population = Population(100)
         val out = IntroductionProcess(
                 population = population,
@@ -130,7 +142,21 @@ class IntroductionProcessTests {
                 averageNetworkActivity = 0.1,
                 averageSuggestibilityOfStrangers = 0.3
         )
+*/
+    }
 
+    private fun createSimObjects(it: Sim1ScenarioDescriptor): Pair<Sim1ScenarioDescriptor, Sim1ScenarioObjects> {
+        val population = Population(it.initialNetworkSize)
+
+        val process = IntroductionProcess(
+                population = population,
+                triggerFun = OncePerWeek("Monday"),
+                averageNetworkActivity =
+                it.averageNetworkActivity,
+                averageSuggestibilityOfStrangers =
+                it.averageSuggestibilityOfStrangers
+        )
+        return Pair(it, Sim1ScenarioObjects(Population(it.initialNetworkSize), process))
     }
 
     private fun createPerson(willingToRecommend:Boolean):Person
