@@ -159,9 +159,9 @@ class IntroductionProcessTests {
             builder.newLine()
         }
         val expectedSimResultsFileName =
-                "src/test/resources/ch0202/IntroductionProcessTests.simulationWithDifferentParameters.expected.csv"
+                "src/test/resources/ch0202/sim01/IntroductionProcessTests.simulationWithDifferentParameters.expected.csv"
         val expectedResult = File(expectedSimResultsFileName).readText()
-        Assertions.assertThat(builder.toString()).isEqualTo(builder.toString())
+        Assertions.assertThat(builder.toString()).isEqualTo(expectedResult)
     }
 
     private fun calculatePeopleWillingToMeet(population: IPopulation): Double =
