@@ -21,4 +21,14 @@ class UtilsTests {
                 0
         ).isEqualTo(DateTime(0, 1, 1, 18, 0, 0, 0))
     }
+    @Test
+    fun randomEventWithProbabilityDefaultScenario() {
+        var heads = 0
+        for (i in 1..100) {
+            if (randomEventWithProbability(0.6)) {
+                heads++
+            }
+        }
+        Assertions.assertThat(heads).isEqualTo(60)
+    }
 }
