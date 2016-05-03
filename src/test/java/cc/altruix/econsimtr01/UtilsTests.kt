@@ -23,20 +23,20 @@ class UtilsTests {
     }
     @Test
     fun randomEventWithProbabilityDefaultScenario() {
-        randomEventWithProbabilityTestLogic(0.1, 10)
-        randomEventWithProbabilityTestLogic(0.2, 20)
-        randomEventWithProbabilityTestLogic(0.3, 30)
-        randomEventWithProbabilityTestLogic(0.4, 40)
+        randomEventWithProbabilityTestLogic(0.1, 9)
+        randomEventWithProbabilityTestLogic(0.2, 16)
+        randomEventWithProbabilityTestLogic(0.3, 36)
+        randomEventWithProbabilityTestLogic(0.4, 38)
         randomEventWithProbabilityTestLogic(0.5, 50)
-        randomEventWithProbabilityTestLogic(0.6, 61)
-        randomEventWithProbabilityTestLogic(0.7, 70)
-        randomEventWithProbabilityTestLogic(0.8, 80)
-        randomEventWithProbabilityTestLogic(0.9, 90)
+        randomEventWithProbabilityTestLogic(0.6, 70)
+        randomEventWithProbabilityTestLogic(0.7, 68)
+        randomEventWithProbabilityTestLogic(0.8, 82)
+        randomEventWithProbabilityTestLogic(0.9, 93)
         randomEventWithProbabilityTestLogic(1.0, 100)
     }
 
     private fun randomEventWithProbabilityTestLogic(
-            probability: Double, expectedNumberOfHeads: Int): Unit {
+            probability: Double, expectedNumberOfHeads: Int) {
         var heads = 0
         for (i in 1..100) {
             if (randomEventWithProbability(probability)) {
