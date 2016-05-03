@@ -119,9 +119,10 @@ class IntroductionProcessTests {
     fun simulationWithDifferentParameters() {
         // TODO: Continue here
         val scenarioDescriptors = listOf(
-                Sim1ScenarioDescriptor(100, 0.1, 0.6),
-                Sim1ScenarioDescriptor(100, 0.05, 0.1),
-                Sim1ScenarioDescriptor(1000, 0.05, 0.1)
+//                Sim1ScenarioDescriptor(100, 0.1, 0.6),
+//                Sim1ScenarioDescriptor(100, 0.05, 0.1),
+//                Sim1ScenarioDescriptor(1000, 0.05, 0.1)
+                Sim1ScenarioDescriptor(1000, 0.1, 0.6)
         )
         val simDescriptorsAndObjects = scenarioDescriptors.map {
             createSimObjects(it)
@@ -144,7 +145,9 @@ class IntroductionProcessTests {
         val times = data.keys.sorted()
         builder.append("Time;")
         scenarioDescriptors.forEach { sim ->
+            builder.append("\"")
             builder.append(sim.toString())
+            builder.append("\"")
             builder.append(";")
         }
         builder.newLine()
