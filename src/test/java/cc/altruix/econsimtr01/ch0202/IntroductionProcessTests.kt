@@ -129,7 +129,7 @@ class IntroductionProcessTests {
 
         val data = HashMap<DateTime,Map<Sim1ScenarioDescriptor,Double>>()
 
-        val t = 0L.millisToSimulationDateTime()
+        var t = 0L.millisToSimulationDateTime()
         for (day in 1..(365*2)) {
             val rowData = HashMap<Sim1ScenarioDescriptor,Double>()
             data.put(t, rowData)
@@ -140,6 +140,7 @@ class IntroductionProcessTests {
                 val peopleWillingToMeet = calculatePeopleWillingToMeet(objects.population)
                 rowData.put(descriptor, peopleWillingToMeet)
             }
+            t = t.plusDays(1)
         }
 /*
         val data = HashMap<DateTime,Map<Sim1ScenarioDescriptor,Double>>()
@@ -153,9 +154,8 @@ class IntroductionProcessTests {
 */
     }
 
-    private fun calculatePeopleWillingToMeet(population: IPopulation): Double {
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    private fun calculatePeopleWillingToMeet(population: IPopulation): Double =
+            population.people().filter { it.willingToMeet }.count().toDouble()
 
     private fun createSimObjects(it: Sim1ScenarioDescriptor): Pair<Sim1ScenarioDescriptor, Sim1ScenarioObjects> {
         val population = Population(it.initialNetworkSize)
