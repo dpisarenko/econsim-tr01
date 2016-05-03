@@ -7,5 +7,7 @@ package cc.altruix.econsimtr01
  */
 object Random : IRandom {
     val random = createRandom()
+
     override fun nextInt(bound: Int): Int = random.nextInt(bound)
+    override fun nextDouble(): Double = random.nextDouble()
 }

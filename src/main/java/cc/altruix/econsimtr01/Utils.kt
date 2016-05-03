@@ -181,3 +181,6 @@ fun <T>List<T>.extractRandomElements(percentageToExtract:Double,
 // We need to set the seed in order to always get the same random numbers
 fun createRandom():java.util.Random =
         java.util.Random(8682522807148012L)
+
+fun randomEventWithProbability(probability:Double) =
+        Random.nextDouble() <= probability

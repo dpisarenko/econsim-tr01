@@ -7,4 +7,6 @@ package cc.altruix.econsimtr01
  */
 interface IRandom {
     fun nextInt(bound:Int):Int
+
+    fun nextDouble(): Double
 }
