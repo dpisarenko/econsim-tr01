@@ -7,7 +7,8 @@ import org.joda.time.DateTime
  * Created by pisarenko on 27.04.2016.
  */
 class OfflineNetworkingSessionTriggerFun(val agent: Protagonist,
-                                         val maxNetworkingSessionsPerBusinessDay:Int) : (DateTime) -> Boolean {
+                                         val maxNetworkingSessionsPerBusinessDay:Int)
+    : (DateTime) -> Boolean {
     override fun invoke(time: DateTime): Boolean {
         /**
          * The protagonist works on business days only.

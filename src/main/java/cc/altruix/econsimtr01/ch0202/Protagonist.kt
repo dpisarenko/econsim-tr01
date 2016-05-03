@@ -28,12 +28,6 @@ class Protagonist(val availableTimePerWeek: Int,
                 )
         )
         this.actions.add(
-                OfflineNetworkingSessionsHeldDuringWeekResetAction(
-                        this,
-                        mondayMidnight
-                )
-        )
-        this.actions.add(
                 OfflineNetworkingSessionsHeldDuringDayResetAction(
                         this,
                         dailyAtMidnight()
