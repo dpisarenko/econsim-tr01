@@ -24,5 +24,19 @@ class OfflineNetworkingSessionTriggerFunTests {
         Assertions.assertThat(t.isBusinessDay()).isFalse()
         Assertions.assertThat(out.invoke(t)).isFalse()
     }
+    @Test
+    fun invokeReturnsFalseWhenDailyLimitExceeded() {
+        val protagonist = Protagonist(
+                availableTimePerWeek = 40,
+                maxNetworkingSessionsPerBusinessDay = 3,
+                population = Population(10)
+        )
+        val out = OfflineNetworkingSessionTriggerFun(protagonist,
+                3)
+        val t = 0L.millisToSimulationDateTime().plusDays(2)
+        Assertions.assertThat(t.isBusinessDay()).isTrue()
+        protagonist.offlineNetworkingSessionsHeldDuringCurrentDay = 4
+        Assertions.assertThat(out.invoke(t)).isFalse()
+    }
 
 }
