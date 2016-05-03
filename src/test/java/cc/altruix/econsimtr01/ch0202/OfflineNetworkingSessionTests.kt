@@ -2,6 +2,7 @@ package cc.altruix.econsimtr01.ch0202
 
 import org.fest.assertions.Assertions
 import org.junit.Test
+import org.junit.Assert
 
 /**
  * @author Dmitri Pisarenko (dp@altruix.co)
@@ -12,6 +13,7 @@ class OfflineNetworkingSessionTests {
     @Test
     fun doesntDoAnythingIfValidateReturnsFalse() {
         // TODO: Implement this
+        Assert.fail("Not implemented")
     }
 
     @Test
