@@ -8,13 +8,11 @@ import org.joda.time.DateTime
  * Created by pisarenko on 27.04.2016.
  */
 class OfflineNetworkingSession(val agent: Protagonist,
-                               val offlineNetworkingIntensity: Int,
                                val maxNetworkingSessionsPerBusinessDay: Int,
                                population: Population) :
         DefaultAction(
                 OfflineNetworkingSessionTriggerFun(
                         agent,
-                        offlineNetworkingIntensity,
                         maxNetworkingSessionsPerBusinessDay
                 )
         )  {

@@ -14,15 +14,6 @@ class Sim1(val logTarget:StringBuilder,
         )
 
         /**
-         * OFFLINE_NETWORKING_INTENSITY
-         * Unit: People per week
-         *
-         * Number of people, which he didn't previously know, and
-         * which he meets every week.
-         */
-        val OFFLINE_NETWORKING_INTENSITY:Int = 5
-
-        /**
          * AVAILABLE_TIME_PER_WEEK
          * Unit: Hours per week
          *
@@ -68,7 +59,6 @@ class Sim1(val logTarget:StringBuilder,
         val population = Population(INITIAL_NETWORK_SIZE)
         return listOf(
                 Protagonist(
-                        OFFLINE_NETWORKING_INTENSITY,
                         AVAILABLE_TIME_PER_WEEK,
                         MAX_NETWORKING_SESSIONS_PER_BUSINESS_DAY,
                         population
