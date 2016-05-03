@@ -15,5 +15,10 @@ class Person : DefaultAgent("person-${UuidGenerator.createUuid()}") {
     var willingToRecommend: Boolean = false
         get
         set
-
+    var offlineNetworkingSessionHeld:Boolean = false
+        get
+        set
+    var willinToRecommend:Boolean = false
+        get
+        set
 }

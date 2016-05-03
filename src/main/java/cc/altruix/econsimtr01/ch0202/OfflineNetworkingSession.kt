@@ -10,7 +10,7 @@ import org.joda.time.DateTime
 class OfflineNetworkingSession(val agent: Protagonist,
                                val maxNetworkingSessionsPerBusinessDay: Int,
                                val timePerOfflineNetworkingSession:Double,
-                               population: IPopulation) :
+                               val population: IPopulation) :
         DefaultAction(
                 OfflineNetworkingSessionTriggerFun(
                         agent,
@@ -18,33 +18,46 @@ class OfflineNetworkingSession(val agent: Protagonist,
                 )
         )  {
     override fun run(time: DateTime) {
-        // Check, if we have time for another networking session
-
         if (!validate()) {
             return
         }
-
+        val meetingPartner = findMeetingPartner()
+        if (meetingPartner != null) {
+            agent.offlineNetworkingSessionsHeldDuringCurrentDay++
+            agent.remove(Sim1.RESOURCE_AVAILABLE_TIME.id, timePerOfflineNetworkingSession)
+            updateWillingnessToRecommend(meetingPartner)
+            updateWillingnessToPurchase(meetingPartner)
+        }
         // TODO: Continue here
         // TODO: Implement this
         // TODO: Test this
-
-
-
         throw UnsupportedOperationException()
     }
 
-    fun validate():Boolean {
+    open protected fun updateWillingnessToPurchase(meetingPartner: Person) {
+        // TODO: Implement this
         // TODO: Test this
+        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    open protected fun updateWillingnessToRecommend(meetingPartner: Person) {
+        // TODO: Implement this
+        // TODO: Test this
+        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    // TODO: Test this
+    protected fun findMeetingPartner(): Person? = population.people()
+                .filter { it.willingToMeet && !it.offlineNetworkingSessionHeld }
+                .firstOrNull()
+
+    fun validate():Boolean {
         if (agent.offlineNetworkingSessionsHeldDuringCurrentDay >= maxNetworkingSessionsPerBusinessDay) {
             return false
         }
-
-        // TODO: Test this
         if (agent.amount(Sim1.RESOURCE_AVAILABLE_TIME.id) < timePerOfflineNetworkingSession) {
             return false
         }
-
-        // TODO: Test this
         return true
     }
 
