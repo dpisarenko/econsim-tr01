@@ -117,7 +117,6 @@ class IntroductionProcessTests {
 
     @Test
     fun simulationWithDifferentParameters() {
-        // TODO: Continue here
         val scenarioDescriptors = listOf(
                 Sim1ScenarioDescriptor(100, 0.1, 0.6),
                 Sim1ScenarioDescriptor(100, 0.05, 0.1),
