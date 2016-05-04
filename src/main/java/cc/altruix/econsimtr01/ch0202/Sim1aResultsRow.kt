@@ -7,5 +7,5 @@ import java.util.*
  * Created by pisarenko on 04.05.2016.
  */
 class Sim1aResultsRow(val time: DateTime) {
-    val data:Map<String,Map<Sim1aResultRowField,Double>> = HashMap()
+    val data:MutableMap<String,MutableMap<Sim1aResultRowField,Double>> = HashMap()
 }
