@@ -1,6 +1,7 @@
 package cc.altruix.econsimtr01.ch0202
 
 import cc.altruix.econsimtr01.millisToSimulationDateTime
+import cc.altruix.econsimtr01.mock
 import cc.altruix.econsimtr01.shouldBe
 import org.fest.assertions.Assertions
 import org.joda.time.DateTime
@@ -21,7 +22,7 @@ class Sim1aAccountantTests {
         val t = 0L.millisToSimulationDateTime()
         val row = Sim1aResultsRow(t)
         Mockito.doReturn(row).`when`(out).findOrCreateRow(resultsStorage, t)
-        val data = HashMap<Sim1aResultRowField,Double>()
+        val data = mock<MutableMap<Sim1aResultRowField,Double>>()
         Mockito.doReturn(data).`when`(out).findOrCreateDataMap(row, scenarioName)
         val peopleWillingToMeet = 1.0
         val peopleWillingToRecommend = 2.0
@@ -42,29 +43,10 @@ class Sim1aAccountantTests {
         Mockito.verify(out).calculatePeopleWillingToRecommend(t)
         Mockito.verify(out).calculatePeopleMet(t)
         Mockito.verify(out).calculatePeopleWillingToPurchase(t)
-        Assertions.assertThat(resultsStorage.get(t)).isNotNull
-        Assertions.assertThat(resultsStorage.get(t)?.data).isNotNull
-        Assertions.assertThat(resultsStorage.get(t)?.data?.get(scenarioName)).isNotNull
-        resultsStorage.get(t)
-                ?.data
-                ?.get(scenarioName)
-                ?.get(Sim1aResultRowField.PEOPLE_WILLING_TO_MEET)
-                ?.shouldBe(peopleWillingToMeet)
-        resultsStorage.get(t)
-                ?.data
-                ?.get(scenarioName)
-                ?.get(Sim1aResultRowField.PEOPLE_WILLING_TO_RECOMMEND)
-                ?.shouldBe(peopleWillingToRecommend)
-        resultsStorage.get(t)
-                ?.data
-                ?.get(scenarioName)
-                ?.get(Sim1aResultRowField.PEOPLE_MET)
-                ?.shouldBe(peopleMet)
-        resultsStorage.get(t)
-                ?.data
-                ?.get(scenarioName)
-                ?.get(Sim1aResultRowField.PEOPLE_WILLING_TO_PURCHASE)
-                ?.shouldBe(peopleWillingToPurchase)
 
+        Mockito.verify(data).put(Sim1aResultRowField.PEOPLE_WILLING_TO_MEET, peopleWillingToMeet)
+        Mockito.verify(data).put(Sim1aResultRowField.PEOPLE_WILLING_TO_RECOMMEND, peopleWillingToRecommend)
+        Mockito.verify(data).put(Sim1aResultRowField.PEOPLE_MET, peopleMet)
+        Mockito.verify(data).put(Sim1aResultRowField.PEOPLE_WILLING_TO_PURCHASE, peopleWillingToPurchase)
     }
 }
