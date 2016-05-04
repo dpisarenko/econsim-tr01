@@ -17,8 +17,8 @@ class OfflineNetworkingSessionTriggerFunTests {
                 availableTimePerWeek = 40,
                 maxNetworkingSessionsPerBusinessDay = 3,
                 population = Population(10),
-                recommendationConversion = Sim1.RECOMMENDATION_CONVERSION,
-                willingnessToPurchaseConversion = Sim1.WILLINGNESS_TO_PURCHASE_CONVERSION,
+                recommendationConversion = Sim1ParametersProvider.RECOMMENDATION_CONVERSION,
+                willingnessToPurchaseConversion = Sim1ParametersProvider.WILLINGNESS_TO_PURCHASE_CONVERSION,
                 timePerOfflineNetworkingSessions = 3.0
         )
         val out = OfflineNetworkingSessionTriggerFun(protagonist,
@@ -37,8 +37,8 @@ class OfflineNetworkingSessionTriggerFunTests {
                 availableTimePerWeek = 40,
                 maxNetworkingSessionsPerBusinessDay = 3,
                 population = Population(10),
-                recommendationConversion = Sim1.RECOMMENDATION_CONVERSION,
-                willingnessToPurchaseConversion = Sim1.WILLINGNESS_TO_PURCHASE_CONVERSION,
+                recommendationConversion = Sim1ParametersProvider.RECOMMENDATION_CONVERSION,
+                willingnessToPurchaseConversion = Sim1ParametersProvider.WILLINGNESS_TO_PURCHASE_CONVERSION,
                 timePerOfflineNetworkingSessions = 3.0
         )
         val out = OfflineNetworkingSessionTriggerFun(protagonist,
@@ -55,8 +55,8 @@ class OfflineNetworkingSessionTriggerFunTests {
                 availableTimePerWeek = 40,
                 maxNetworkingSessionsPerBusinessDay = 3,
                 timePerOfflineNetworkingSessions = 3.0,
-                recommendationConversion = Sim1.RECOMMENDATION_CONVERSION,
-                willingnessToPurchaseConversion = Sim1.WILLINGNESS_TO_PURCHASE_CONVERSION,
+                recommendationConversion = Sim1ParametersProvider.RECOMMENDATION_CONVERSION,
+                willingnessToPurchaseConversion = Sim1ParametersProvider.WILLINGNESS_TO_PURCHASE_CONVERSION,
                 population = Population(10)
         )
         val out = OfflineNetworkingSessionTriggerFun(protagonist,
