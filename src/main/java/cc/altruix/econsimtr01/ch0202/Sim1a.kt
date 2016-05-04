@@ -12,15 +12,15 @@ class Sim1a(logTarget:StringBuilder,
             simParametersProvider: Sim1ParametersProvider) :
         Sim1(logTarget, flows, simParametersProvider) {
     override fun createUnattachedProcesses(): List<IAction> {
-
+        val sim1Params = simParametersProvider as Sim1ParametersProvider
         return listOf(
                 IntroductionProcess(
                 population = population,
                 triggerFun = OncePerWeek("Monday"),
                 averageNetworkActivity =
-                    simParametersProvider.averageNetworkActivity,
+                    sim1Params.averageNetworkActivity,
                 averageSuggestibilityOfStrangers =
-                    simParametersProvider.averageSuggestibilityOfStrangers
+                    sim1Params.averageSuggestibilityOfStrangers
                 )
         )
     }
