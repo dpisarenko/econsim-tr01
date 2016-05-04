@@ -21,6 +21,8 @@ class OfflineNetworkingSessionTests {
                         availableTimePerWeek = 40,
                         maxNetworkingSessionsPerBusinessDay = 3,
                         timePerOfflineNetworkingSessions = 3.0,
+                        recommendationConversion = Sim1.RECOMMENDATION_CONVERSION,
+                        willingnessToPurchaseConversion = Sim1.WILLINGNESS_TO_PURCHASE_CONVERSION,
                         population = population
                 )
         )
@@ -29,6 +31,8 @@ class OfflineNetworkingSessionTests {
                         agent = agent,
                         maxNetworkingSessionsPerBusinessDay = 3,
                         timePerOfflineNetworkingSession = 3.0,
+                        recommendationConversion = Sim1.RECOMMENDATION_CONVERSION,
+                        willingnessToPurchaseConversion = Sim1.WILLINGNESS_TO_PURCHASE_CONVERSION,
                         population = population
                 )
         )
@@ -56,6 +60,8 @@ class OfflineNetworkingSessionTests {
                         availableTimePerWeek = 40,
                         maxNetworkingSessionsPerBusinessDay = 3,
                         timePerOfflineNetworkingSessions = 3.0,
+                        recommendationConversion = Sim1.RECOMMENDATION_CONVERSION,
+                        willingnessToPurchaseConversion = Sim1.WILLINGNESS_TO_PURCHASE_CONVERSION,
                         population = population
                 )
         )
@@ -64,6 +70,8 @@ class OfflineNetworkingSessionTests {
                         agent = agent,
                         maxNetworkingSessionsPerBusinessDay = 3,
                         timePerOfflineNetworkingSession = 3.0,
+                        recommendationConversion = Sim1.RECOMMENDATION_CONVERSION,
+                        willingnessToPurchaseConversion = Sim1.WILLINGNESS_TO_PURCHASE_CONVERSION,
                         population = population
                 )
         )
@@ -90,6 +98,8 @@ class OfflineNetworkingSessionTests {
                         availableTimePerWeek = 40,
                         maxNetworkingSessionsPerBusinessDay = 3,
                         timePerOfflineNetworkingSessions = 3.0,
+                        recommendationConversion = Sim1.RECOMMENDATION_CONVERSION,
+                        willingnessToPurchaseConversion = Sim1.WILLINGNESS_TO_PURCHASE_CONVERSION,
                         population = population
                 )
         )
@@ -98,6 +108,8 @@ class OfflineNetworkingSessionTests {
                         agent = agent,
                         maxNetworkingSessionsPerBusinessDay = 3,
                         timePerOfflineNetworkingSession = 3.0,
+                        recommendationConversion = Sim1.RECOMMENDATION_CONVERSION,
+                        willingnessToPurchaseConversion = Sim1.WILLINGNESS_TO_PURCHASE_CONVERSION,
                         population = population
                 )
         )
@@ -134,11 +146,15 @@ class OfflineNetworkingSessionTests {
                 availableTimePerWeek = 40,
                 maxNetworkingSessionsPerBusinessDay = 3,
                 timePerOfflineNetworkingSessions = 3.0,
+                recommendationConversion = Sim1.RECOMMENDATION_CONVERSION,
+                willingnessToPurchaseConversion = Sim1.WILLINGNESS_TO_PURCHASE_CONVERSION,
                 population = population
         )
         val out = OfflineNetworkingSession(agent = agent,
                 maxNetworkingSessionsPerBusinessDay = 3,
                 timePerOfflineNetworkingSession = 3.0,
+                recommendationConversion = Sim1.RECOMMENDATION_CONVERSION,
+                willingnessToPurchaseConversion = Sim1.WILLINGNESS_TO_PURCHASE_CONVERSION,
                 population = population)
         agent.offlineNetworkingSessionsHeldDuringCurrentDay = sessionsAlreadyHeldToday
         Assertions.assertThat(out.validate()).isFalse()
@@ -157,6 +173,8 @@ class OfflineNetworkingSessionTests {
                 availableTimePerWeek = 40,
                 maxNetworkingSessionsPerBusinessDay = 2,
                 timePerOfflineNetworkingSessions = 3.0,
+                recommendationConversion = Sim1.RECOMMENDATION_CONVERSION,
+                willingnessToPurchaseConversion = Sim1.WILLINGNESS_TO_PURCHASE_CONVERSION,
                 population = population
         )
         agent.offlineNetworkingSessionsHeldDuringCurrentDay = 2
@@ -170,6 +188,8 @@ class OfflineNetworkingSessionTests {
         val out = OfflineNetworkingSession(agent = agent,
                 maxNetworkingSessionsPerBusinessDay = 3,
                 timePerOfflineNetworkingSession = 3.0,
+                recommendationConversion = Sim1.RECOMMENDATION_CONVERSION,
+                willingnessToPurchaseConversion = Sim1.WILLINGNESS_TO_PURCHASE_CONVERSION,
                 population = population
         )
         Assertions.assertThat(out.validate()).isFalse()
@@ -182,6 +202,8 @@ class OfflineNetworkingSessionTests {
                 availableTimePerWeek = 40,
                 maxNetworkingSessionsPerBusinessDay = 2,
                 timePerOfflineNetworkingSessions = 3.0,
+                recommendationConversion = Sim1.RECOMMENDATION_CONVERSION,
+                willingnessToPurchaseConversion = Sim1.WILLINGNESS_TO_PURCHASE_CONVERSION,
                 population = population
         )
         agent.offlineNetworkingSessionsHeldDuringCurrentDay = 2
@@ -195,6 +217,8 @@ class OfflineNetworkingSessionTests {
         val out = OfflineNetworkingSession(agent = agent,
                 maxNetworkingSessionsPerBusinessDay = 3,
                 timePerOfflineNetworkingSession = 3.0,
+                recommendationConversion = Sim1.RECOMMENDATION_CONVERSION,
+                willingnessToPurchaseConversion = Sim1.WILLINGNESS_TO_PURCHASE_CONVERSION,
                 population = population
         )
         Assertions.assertThat(out.validate()).isTrue()
