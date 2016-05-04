@@ -90,13 +90,25 @@ class Sim1aAccountantTests {
         val actResult = out.findOrCreateRow(resultsStorage, t)
         // Verify
         Assertions.assertThat(actResult).isSameAs(row)
+        Assertions.assertThat(actResult.time).isEqualTo(t)
+        Assertions.assertThat(actResult.data).isNotNull
+        Assertions.assertThat(actResult.data).isEmpty()
     }
     @Test
     fun findOrCreateRowCreatesRow() {
         // TODO: Implement
         // Prepare
+        val resultsStorage = HashMap<DateTime, Sim1aResultsRow>()
+        val scenarioName = "Scenario 1"
+        val t = 0L.millisToSimulationDateTime()
+        val out = Sim1aAccountant(resultsStorage, scenarioName)
         // Run method under test
+        val actResult = out.findOrCreateRow(resultsStorage, t)
         // Verify
-    }
+        Assertions.assertThat(actResult).isNotNull
+        Assertions.assertThat(actResult.time).isEqualTo(t)
+        Assertions.assertThat(actResult.data).isNotNull
+        Assertions.assertThat(actResult.data).isEmpty()
 
+    }
 }
