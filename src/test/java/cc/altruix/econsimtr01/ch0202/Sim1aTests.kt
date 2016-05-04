@@ -34,17 +34,24 @@ class Sim1aTests {
                     initialNetworkSize = 1000
                 )
         )
-
+        val simResults = HashMap<DateTime,Sim1aResultsRow>()
         val scenarioResults = scenarioDescriptors.map {
+            // TODO: Remove (if you can) logTarget
             val logTarget = StringBuilder()
+            // TODO: Remove (if you can) flows
             val flows = ArrayList<ResourceFlow>()
+            // TODO: Remove plFileName
             val plFileName = it.name.replace(" ", "_")
+            // TODO: Remove plPathActual
             val plPathActual = "src/test/resources/ch0202/sim01a/Sim1aTests$plFileName.pl.actual.txt"
+            // TODO: Remove plPathExpected
             val plPathExpected = "src/test/resources/ch0202/sim01a/Sim1aTests$plFileName.pl.expected.txt"
+            // TODO: Remove csvPathActual
             val csvPathActual = "src/test/resources/ch0202/sim01a/Sim1aTests$plFileName.csv.actual.txt"
+            // TODO: Remove csvPathExpected
             val csvPathExpected = "src/test/resources/ch0202/sim01a/Sim1aTests$plFileName.csv.expected.txt"
 
-            val sim = Sim1a(logTarget, flows, it)
+            val sim = Sim1a(logTarget, flows, it, simResults)
             ScenarioResultsTuple(
                     sim,
                     plPathActual,
@@ -53,27 +60,15 @@ class Sim1aTests {
                     csvPathExpected
             )
         }
-
-        val simResults = HashMap<DateTime,Sim1aResultsRow>()
-
         val timeSeriesCreator = Sim1aTimeSeriesCreator()
         scenarioResults.forEach {
             it.sim.run()
-
-            val actualPlData = (it.sim as Sim1a).logTarget.toString()
-            val plActualFile = File(it.plPathActual)
-            plActualFile.writeText(actualPlData)
-            val expectedPlData = File(it.plPathExpected).readText()
-            Assertions.assertThat(actualPlData).isEqualTo(expectedPlData)
-
-            val actualCsvData = timeSeriesCreator.prologToCsv(plActualFile)
-            val csvActualFile = File(it.csvPathActual)
-            csvActualFile.writeText(actualCsvData)
-
-            val expectedCsvData = File(it.csvPathExpected).readText()
-            Assertions.assertThat(actualCsvData).isEqualTo(expectedCsvData)
-
-
         }
+
+        val actualFileName = "src/test/resources/ch0202/sim01a/Sim1aTests.test.actual.csv"
+        val expectedFileName = "src/test/resources/ch0202/sim01a/Sim1aTests.test.actual.csv"
+        // TODO: Continue here
+        // TODO: Write out the data from simResults to actualFileName
+        // TODO: Compare contents of actualFileName with expectedFileName (should be equal)
     }
 }
