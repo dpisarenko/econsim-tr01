@@ -3,6 +3,7 @@ package cc.altruix.econsimtr01.ch0202
 import cc.altruix.econsimtr01.ResourceFlow
 import cc.altruix.econsimtr01.millisToSimulationDateTime
 import org.fest.assertions.Assertions
+import org.joda.time.DateTime
 import org.junit.Test
 import java.io.File
 import java.util.*
@@ -52,6 +53,9 @@ class Sim1aTests {
                     csvPathExpected
             )
         }
+
+        val simResults = HashMap<DateTime,Sim1aResultsRow>()
+
         val timeSeriesCreator = Sim1aTimeSeriesCreator()
         scenarioResults.forEach {
             it.sim.run()
