@@ -123,15 +123,18 @@ class Sim1aAccountantTests {
     }
     @Test
     fun calculatePeopleWillingToPurchase() {
-        // TODO: Implement
-        Assert.fail()
         // Prepare
         val resultsStorage = HashMap<DateTime, Sim1aResultsRow>()
         val scenarioName = "Scenario 1"
         val t = 0L.millisToSimulationDateTime()
         val out = Sim1aAccountant(resultsStorage, scenarioName)
-        // Run method under test
-        // Verify
+        val population = Population(0)
+        // Run method under test and verify
+        Assertions.assertThat(out.calculatePeopleWillingToPurchase(t, population)).isEqualTo(0.0)
+        val person = Person()
+        person.willingToPurchase = true
+        population.people.add(person)
+        Assertions.assertThat(out.calculatePeopleWillingToPurchase(t, population)).isEqualTo(1.0)
     }
     @Test
     fun calculatePeopleMet() {
@@ -142,7 +145,9 @@ class Sim1aAccountantTests {
         val scenarioName = "Scenario 1"
         val t = 0L.millisToSimulationDateTime()
         val out = Sim1aAccountant(resultsStorage, scenarioName)
+        val population = Population(0)
         // Run method under test
+
         // Verify
     }
     @Test
@@ -154,6 +159,7 @@ class Sim1aAccountantTests {
         val scenarioName = "Scenario 1"
         val t = 0L.millisToSimulationDateTime()
         val out = Sim1aAccountant(resultsStorage, scenarioName)
+        val population = Population(0)
         // Run method under test
         // Verify
     }
@@ -166,6 +172,7 @@ class Sim1aAccountantTests {
         val scenarioName = "Scenario 1"
         val t = 0L.millisToSimulationDateTime()
         val out = Sim1aAccountant(resultsStorage, scenarioName)
+        val population = Population(0)
         // Run method under test
         // Verify
     }
