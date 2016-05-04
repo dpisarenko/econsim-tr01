@@ -44,12 +44,10 @@ open class OfflineNetworkingSession(val agent: Protagonist,
         if (experiment(recommendationConversion)) {
             meetingPartner.willingToRecommend = true
         }
-        // TODO: Test this
     }
 
     open fun experiment(probability:Double):Boolean = randomEventWithProbability(probability)
 
-    // TODO: Test this
     open fun findMeetingPartner(): Person? = population.people()
                 .filter { it.willingToMeet && !it.offlineNetworkingSessionHeld }
                 .firstOrNull()

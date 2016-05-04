@@ -1,6 +1,7 @@
 package cc.altruix.econsimtr01.ch0202
 
 import cc.altruix.econsimtr01.millisToSimulationDateTime
+import cc.altruix.econsimtr01.mock
 import org.fest.assertions.Assertions
 import org.junit.Test
 import org.mockito.Mockito
@@ -87,7 +88,6 @@ class OfflineNetworkingSessionTests {
         Mockito.verify(agent, Mockito.never()).remove(Sim1.RESOURCE_AVAILABLE_TIME.id,
                 3.0)
     }
-
     @Test
     fun runDefaultScenario() {
         // Prepare
@@ -131,13 +131,11 @@ class OfflineNetworkingSessionTests {
         Mockito.verify(out).updateWillingnessToPurchase(meetingPartner)
         Assertions.assertThat(meetingPartner.offlineNetworkingSessionHeld).isTrue()
     }
-
     @Test
     fun updateWillingnessToPurchaseDefaultScenario() {
         updateWillingnessToPurchaseTestLogic(true, true)
         updateWillingnessToPurchaseTestLogic(false, false)
     }
-
     private fun updateWillingnessToPurchaseTestLogic(experimentResult: Boolean,
                                                      expectedResult:Boolean) {
         // Prepare
@@ -171,13 +169,11 @@ class OfflineNetworkingSessionTests {
         Mockito.verify(out).experiment(out.willingnessToPurchaseConversion)
         Assertions.assertThat(meetingPartner.willingToPurchase).isEqualTo(expectedResult)
     }
-
     @Test
     fun updateWillingnessToRecommendDefaultScenario() {
         updateWillingnessToRecommendTestLogic(true, true)
         updateWillingnessToRecommendTestLogic(false, false)
     }
-
     private fun updateWillingnessToRecommendTestLogic(experimentResult: Boolean,
                                                       expectedFlagValue: Boolean) {
         // Prepare
@@ -210,16 +206,13 @@ class OfflineNetworkingSessionTests {
         // Verify
         Mockito.verify(out).experiment(out.willingnessToPurchaseConversion)
         Assertions.assertThat(meetingPartner.willingToRecommend).isEqualTo(expectedFlagValue)
-
     }
-
     @Test
     fun validateDetectsDailyLimitExceeded() {
         dailyLimitDetectionTestLogic(3)
         dailyLimitDetectionTestLogic(4)
         dailyLimitDetectionTestLogic(5)
     }
-
     private fun dailyLimitDetectionTestLogic(sessionsAlreadyHeldToday: Int) {
         val population = Population(100)
         val agent = Protagonist(
@@ -239,14 +232,12 @@ class OfflineNetworkingSessionTests {
         agent.offlineNetworkingSessionsHeldDuringCurrentDay = sessionsAlreadyHeldToday
         Assertions.assertThat(out.validate()).isFalse()
     }
-
     @Test
     fun validateDetectsAgentHasTooLittleTimeLeft() {
         agentHasTooLittleTimeLeftTestLogic(1.0)
         agentHasTooLittleTimeLeftTestLogic(2.0)
         agentHasTooLittleTimeLeftTestLogic(2.99)
     }
-
     private fun agentHasTooLittleTimeLeftTestLogic(availableTime: Double) {
         val population = Population(100)
         val agent = Protagonist(
@@ -274,7 +265,6 @@ class OfflineNetworkingSessionTests {
         )
         Assertions.assertThat(out.validate()).isFalse()
     }
-
     @Test
     fun validateReturnsTrueIfEverythingOk() {
         val population = Population(100)
@@ -302,5 +292,44 @@ class OfflineNetworkingSessionTests {
                 population = population
         )
         Assertions.assertThat(out.validate()).isTrue()
+    }
+    @Test
+    fun findMeetingPartnerDefaultScenario() {
+        // Prepare
+        val person1 = createPotentialMeetingPartner(false, false)
+        val person2 = createPotentialMeetingPartner(true, false)
+        val person3 = createPotentialMeetingPartner(false, true)
+        val person4 = createPotentialMeetingPartner(true, true)
+        val people = arrayListOf(person1, person2, person3, person4)
+        val population = mock<IPopulation>()
+        Mockito.`when`(population.people()).thenReturn(people)
+        val agent = Protagonist(
+                availableTimePerWeek = 40,
+                maxNetworkingSessionsPerBusinessDay = 2,
+                timePerOfflineNetworkingSessions = 3.0,
+                recommendationConversion = Sim1.RECOMMENDATION_CONVERSION,
+                willingnessToPurchaseConversion = Sim1.WILLINGNESS_TO_PURCHASE_CONVERSION,
+                population = population
+        )
+        val out = OfflineNetworkingSession(agent = agent,
+                maxNetworkingSessionsPerBusinessDay = 3,
+                timePerOfflineNetworkingSession = 3.0,
+                recommendationConversion = Sim1.RECOMMENDATION_CONVERSION,
+                willingnessToPurchaseConversion = Sim1.WILLINGNESS_TO_PURCHASE_CONVERSION,
+                population = population
+        )
+        // Run method under test
+        val meetingPartner = out.findMeetingPartner()
+        // Verify
+        Assertions.assertThat(meetingPartner).isNotNull
+        Assertions.assertThat(meetingPartner).isSameAs(person2)
+    }
+
+    private fun createPotentialMeetingPartner(willingToMeet: Boolean,
+                                              offlineNetworkingSessionHeld: Boolean): Person {
+        val person = Person()
+        person.willingToMeet = willingToMeet
+        person.offlineNetworkingSessionHeld = offlineNetworkingSessionHeld
+        return person
     }
 }

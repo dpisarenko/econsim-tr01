@@ -14,7 +14,7 @@ open class Protagonist(val availableTimePerWeek: Int,
                   val timePerOfflineNetworkingSessions:Double,
                   val recommendationConversion:Double,
                   val willingnessToPurchaseConversion:Double,
-                  val population: Population) : DefaultAgent(ID) {
+                  val population: IPopulation) : DefaultAgent(ID) {
     companion object {
         val ID = "protagonist"
     }
