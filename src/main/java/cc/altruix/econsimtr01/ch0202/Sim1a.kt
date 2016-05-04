@@ -12,7 +12,7 @@ import org.joda.time.DateTime
 class Sim1a(logTarget:StringBuilder,
             flows:MutableList<ResourceFlow>,
             simParametersProvider: Sim1ParametersProvider,
-            val resultsStorage:Map<DateTime,Sim1aResultsRow>) :
+            val resultsStorage:MutableMap<DateTime,Sim1aResultsRow>) :
         Sim1(logTarget, flows, simParametersProvider) {
     override fun createUnattachedProcesses(): List<IAction> {
         val sim1Params = simParametersProvider as Sim1ParametersProvider
