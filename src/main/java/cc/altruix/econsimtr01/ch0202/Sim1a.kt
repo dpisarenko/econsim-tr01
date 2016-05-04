@@ -24,4 +24,5 @@ class Sim1a(logTarget:StringBuilder,
                 )
         )
     }
+
 }
