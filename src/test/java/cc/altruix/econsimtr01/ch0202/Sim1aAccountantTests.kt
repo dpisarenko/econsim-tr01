@@ -96,7 +96,6 @@ class Sim1aAccountantTests {
     }
     @Test
     fun findOrCreateRowCreatesRow() {
-        // TODO: Implement
         // Prepare
         val resultsStorage = HashMap<DateTime, Sim1aResultsRow>()
         val scenarioName = "Scenario 1"
@@ -109,6 +108,5 @@ class Sim1aAccountantTests {
         Assertions.assertThat(actResult.time).isEqualTo(t)
         Assertions.assertThat(actResult.data).isNotNull
         Assertions.assertThat(actResult.data).isEmpty()
-
     }
 }

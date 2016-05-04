@@ -59,7 +59,6 @@ open class Sim1aAccountant(val resultsStorage: MutableMap<DateTime, Sim1aResults
     internal open fun findOrCreateRow(resultsStorage: MutableMap<DateTime, Sim1aResultsRow>,
                                       time: DateTime)
             : Sim1aResultsRow {
-        // TODO: Test this
         var row = resultsStorage.get(time)
         if (row == null) {
             row = Sim1aResultsRow(time)
