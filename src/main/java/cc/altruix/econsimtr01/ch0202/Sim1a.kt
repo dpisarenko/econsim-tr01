@@ -29,6 +29,12 @@ class Sim1a(logTarget:StringBuilder,
     }
     override fun createSensors(): List<ISensor> {
         // TODO: Test this
-        return listOf(Sim1aAccountant(resultsStorage))
+
+        return listOf(
+                Sim1aAccountant(
+                        resultsStorage,
+                        (simParametersProvider as Sim1ParametersProvider).name
+                )
+        )
     }
 }
