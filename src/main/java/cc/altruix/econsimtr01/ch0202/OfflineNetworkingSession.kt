@@ -41,9 +41,10 @@ open class OfflineNetworkingSession(val agent: Protagonist,
     }
 
     open fun updateWillingnessToRecommend(meetingPartner: Person) {
-        // TODO: Implement this
+        if (experiment(recommendationConversion)) {
+            meetingPartner.willingToRecommend = true
+        }
         // TODO: Test this
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     open fun experiment(probability:Double):Boolean = randomEventWithProbability(probability)
