@@ -1,6 +1,7 @@
 package cc.altruix.econsimtr01.ch0202
 
 import cc.altruix.econsimtr01.millisToSimulationDateTime
+import cc.altruix.econsimtr01.shouldBe
 import org.fest.assertions.Assertions
 import org.joda.time.DateTime
 import org.junit.Test
@@ -14,7 +15,6 @@ class Sim1aAccountantTests {
     @Test
     fun measureWiring() {
         // Prepare
-
         val resultsStorage = HashMap<DateTime, Sim1aResultsRow>()
         val scenarioName = "Scenario 1"
         val out = Mockito.spy(Sim1aAccountant(resultsStorage, scenarioName))
@@ -44,6 +44,27 @@ class Sim1aAccountantTests {
         Mockito.verify(out).calculatePeopleWillingToPurchase(t)
         Assertions.assertThat(resultsStorage.get(t)).isNotNull
         Assertions.assertThat(resultsStorage.get(t)?.data).isNotNull
-        resultsStorage.get(t)?.data?.get(scenarioName)
+        Assertions.assertThat(resultsStorage.get(t)?.data?.get(scenarioName)).isNotNull
+        resultsStorage.get(t)
+                ?.data
+                ?.get(scenarioName)
+                ?.get(Sim1aResultRowField.PEOPLE_WILLING_TO_MEET)
+                ?.shouldBe(peopleWillingToMeet)
+        resultsStorage.get(t)
+                ?.data
+                ?.get(scenarioName)
+                ?.get(Sim1aResultRowField.PEOPLE_WILLING_TO_RECOMMEND)
+                ?.shouldBe(peopleWillingToRecommend)
+        resultsStorage.get(t)
+                ?.data
+                ?.get(scenarioName)
+                ?.get(Sim1aResultRowField.PEOPLE_MET)
+                ?.shouldBe(peopleMet)
+        resultsStorage.get(t)
+                ?.data
+                ?.get(scenarioName)
+                ?.get(Sim1aResultRowField.PEOPLE_WILLING_TO_PURCHASE)
+                ?.shouldBe(peopleWillingToPurchase)
+
     }
 }
