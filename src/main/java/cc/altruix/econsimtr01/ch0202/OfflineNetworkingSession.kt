@@ -28,10 +28,6 @@ open class OfflineNetworkingSession(val agent: Protagonist,
             updateWillingnessToRecommend(meetingPartner)
             updateWillingnessToPurchase(meetingPartner)
         }
-        // TODO: Continue here
-        // TODO: Implement this
-        // TODO: Test this
-        throw UnsupportedOperationException()
     }
 
     open fun updateWillingnessToPurchase(meetingPartner: Person) {
