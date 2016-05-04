@@ -1,8 +1,10 @@
 package cc.altruix.econsimtr01.ch0202
 
+import cc.altruix.econsimtr01.millisToSimulationDateTime
 import org.fest.assertions.Assertions
 import org.junit.Test
 import org.junit.Assert
+import org.mockito.Mockito
 
 /**
  * @author Dmitri Pisarenko (dp@altruix.co)
@@ -11,9 +13,59 @@ import org.junit.Assert
  */
 class OfflineNetworkingSessionTests {
     @Test
-    fun doesntDoAnythingIfValidateReturnsFalse() {
+    fun runDoesntDoAnythingIfValidateReturnsFalse() {
+        // Prepare
+        val population = Population(100)
+        val agent = Mockito.spy(
+                Protagonist(
+                        availableTimePerWeek = 40,
+                        maxNetworkingSessionsPerBusinessDay = 3,
+                        timePerOfflineNetworkingSessions = 3.0,
+                        population = population
+                )
+        )
+        val out = Mockito.spy(
+                OfflineNetworkingSession(
+                        agent = agent,
+                        maxNetworkingSessionsPerBusinessDay = 3,
+                        timePerOfflineNetworkingSession = 3.0,
+                        population = population
+                )
+        )
+        val t = 0L.millisToSimulationDateTime()
+        Mockito.doReturn(false).`when`(out).validate()
+        agent.offlineNetworkingSessionsHeldDuringCurrentDay = 1
+        // Run method under test
+        out.run(t)
+        // Verify
+        Mockito.verify(out, Mockito.never()).findMeetingPartner()
+        Assertions.assertThat(agent.offlineNetworkingSessionsHeldDuringCurrentDay).isEqualTo(1)
+        Mockito.verify(agent, Mockito.never()).remove(Sim1.RESOURCE_AVAILABLE_TIME.id,
+                3.0)
+        Mockito.verify(out, Mockito.never()).updateWillingnessToRecommend(Mockito.any())
+        Mockito.verify(out, Mockito.never()).updateWillingnessToPurchase(Mockito.any())
         // TODO: Implement this
         Assert.fail("Not implemented")
+    }
+    @Test
+    fun runDoesntDoAnythingIfNoMeetingPartnerIsAvailable() {
+        // Prepare
+        // Run method under test
+        // Verify
+
+        // TODO: Implement this
+        Assert.fail("Not implemented")
+    }
+
+    @Test
+    fun runDefaultScenario() {
+        // Prepare
+        // Run method under test
+        // Verify
+
+        // TODO: Implement this
+        Assert.fail("Not implemented")
+
     }
 
     @Test

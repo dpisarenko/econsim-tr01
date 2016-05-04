@@ -7,7 +7,7 @@ import org.joda.time.DateTime
 /**
  * Created by pisarenko on 27.04.2016.
  */
-class OfflineNetworkingSession(val agent: Protagonist,
+open class OfflineNetworkingSession(val agent: Protagonist,
                                val maxNetworkingSessionsPerBusinessDay: Int,
                                val timePerOfflineNetworkingSession:Double,
                                val population: IPopulation) :
@@ -34,24 +34,24 @@ class OfflineNetworkingSession(val agent: Protagonist,
         throw UnsupportedOperationException()
     }
 
-    open protected fun updateWillingnessToPurchase(meetingPartner: Person) {
+    open fun updateWillingnessToPurchase(meetingPartner: Person) {
         // TODO: Implement this
         // TODO: Test this
         throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    open protected fun updateWillingnessToRecommend(meetingPartner: Person) {
+    open fun updateWillingnessToRecommend(meetingPartner: Person) {
         // TODO: Implement this
         // TODO: Test this
         throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     // TODO: Test this
-    protected fun findMeetingPartner(): Person? = population.people()
+    fun findMeetingPartner(): Person? = population.people()
                 .filter { it.willingToMeet && !it.offlineNetworkingSessionHeld }
                 .firstOrNull()
 
-    fun validate():Boolean {
+    open fun validate():Boolean {
         if (agent.offlineNetworkingSessionsHeldDuringCurrentDay >= maxNetworkingSessionsPerBusinessDay) {
             return false
         }
