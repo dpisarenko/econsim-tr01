@@ -9,7 +9,7 @@ import org.joda.time.DateTime
 /**
  * Created by pisarenko on 26.04.2016.
  */
-class Protagonist(val availableTimePerWeek: Int,
+open class Protagonist(val availableTimePerWeek: Int,
                   val maxNetworkingSessionsPerBusinessDay: Int,
                   val timePerOfflineNetworkingSessions:Double,
                   val population: Population) : DefaultAgent(ID) {
