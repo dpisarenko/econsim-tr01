@@ -2,7 +2,6 @@ package cc.altruix.econsimtr01.ch0202
 
 import cc.altruix.econsimtr01.millisToSimulationDateTime
 import cc.altruix.econsimtr01.mock
-import cc.altruix.econsimtr01.shouldBe
 import org.fest.assertions.Assertions
 import org.joda.time.DateTime
 import org.junit.Test
@@ -28,12 +27,10 @@ class Sim1aAccountantTests {
         val peopleWillingToRecommend = 2.0
         val peopleMet = 3.0
         val peopleWillingToPurchase = 4.0
-
         Mockito.doReturn(peopleWillingToMeet).`when`(out).calculatePeopleWillingToMeet(t)
         Mockito.doReturn(peopleWillingToRecommend).`when`(out).calculatePeopleWillingToRecommend(t)
         Mockito.doReturn(peopleMet).`when`(out).calculatePeopleMet(t)
         Mockito.doReturn(peopleWillingToPurchase).`when`(out).calculatePeopleWillingToPurchase(t)
-
         // Run method under test
         out.measure(t)
         // Verify
@@ -43,10 +40,41 @@ class Sim1aAccountantTests {
         Mockito.verify(out).calculatePeopleWillingToRecommend(t)
         Mockito.verify(out).calculatePeopleMet(t)
         Mockito.verify(out).calculatePeopleWillingToPurchase(t)
-
         Mockito.verify(data).put(Sim1aResultRowField.PEOPLE_WILLING_TO_MEET, peopleWillingToMeet)
         Mockito.verify(data).put(Sim1aResultRowField.PEOPLE_WILLING_TO_RECOMMEND, peopleWillingToRecommend)
         Mockito.verify(data).put(Sim1aResultRowField.PEOPLE_MET, peopleMet)
         Mockito.verify(data).put(Sim1aResultRowField.PEOPLE_WILLING_TO_PURCHASE, peopleWillingToPurchase)
+    }
+    @Test
+    fun findOrCreateDataMapFindsDataMap() {
+        // Prepare
+        val resultsStorage = HashMap<DateTime, Sim1aResultsRow>()
+        val scenarioName = "Scenario 1"
+        val out = Sim1aAccountant(resultsStorage, scenarioName)
+        val dataMap = HashMap<Sim1aResultRowField, Double>()
+        val t = 0L.millisToSimulationDateTime()
+        val row = Sim1aResultsRow(t)
+        row.data.put(scenarioName, dataMap)
+        // Run method under test
+        val actResult = out.findOrCreateDataMap(row, scenarioName)
+        // Verify
+        Assertions.assertThat(actResult).isSameAs(dataMap)
+    }
+    @Test
+    fun findOrCreateDataMapCreatesDataMap() {
+        // Prepare
+        val resultsStorage = HashMap<DateTime, Sim1aResultsRow>()
+        val scenarioName = "Scenario 1"
+        val out = Sim1aAccountant(resultsStorage, scenarioName)
+        val dataMap = HashMap<Sim1aResultRowField, Double>()
+        val t = 0L.millisToSimulationDateTime()
+        val row = Sim1aResultsRow(t)
+        row.data.put(scenarioName, dataMap)
+        // Run method under test
+        val actResult = out.findOrCreateDataMap(row, scenarioName)
+        // Verify
+        Assertions.assertThat(actResult).isNotNull
+        Assertions.assertThat(actResult.size).isEqualTo(0)
+        Assertions.assertThat(row.data.get(scenarioName)).isSameAs(actResult)
     }
 }

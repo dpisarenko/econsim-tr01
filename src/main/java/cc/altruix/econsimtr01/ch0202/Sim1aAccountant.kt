@@ -17,8 +17,6 @@ open class Sim1aAccountant(val resultsStorage: MutableMap<DateTime, Sim1aResults
         data.put(Sim1aResultRowField.PEOPLE_WILLING_TO_RECOMMEND, calculatePeopleWillingToRecommend(time))
         data.put(Sim1aResultRowField.PEOPLE_MET, calculatePeopleMet(time))
         data.put(Sim1aResultRowField.PEOPLE_WILLING_TO_PURCHASE, calculatePeopleWillingToPurchase(time))
-        // TODO: Implement this
-        // TODO: Test this
     }
 
     internal open fun calculatePeopleWillingToPurchase(time: DateTime): Double {
