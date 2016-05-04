@@ -5,6 +5,7 @@ import org.fest.assertions.Assertions
 import org.junit.Test
 import org.junit.Assert
 import org.mockito.Mockito
+import org.mockito.verification.VerificationMode
 
 /**
  * @author Dmitri Pisarenko (dp@altruix.co)
@@ -131,6 +132,46 @@ class OfflineNetworkingSessionTests {
         Mockito.verify(out).updateWillingnessToRecommend(meetingPartner)
         Mockito.verify(out).updateWillingnessToPurchase(meetingPartner)
         Assertions.assertThat(meetingPartner.offlineNetworkingSessionHeld).isTrue()
+    }
+
+    @Test
+    fun updateWillingnessToPurchaseDefaultScenario() {
+        updateWillingnessToPurchaseTestLogic(true, true)
+        updateWillingnessToPurchaseTestLogic(false, false)
+    }
+
+    private fun updateWillingnessToPurchaseTestLogic(experimentResult: Boolean,
+                                                     expectedResult:Boolean) {
+        // Prepare
+        val population = Population(100)
+        val agent = Mockito.spy(
+                Protagonist(
+                        availableTimePerWeek = 40,
+                        maxNetworkingSessionsPerBusinessDay = 3,
+                        timePerOfflineNetworkingSessions = 3.0,
+                        recommendationConversion = Sim1.RECOMMENDATION_CONVERSION,
+                        willingnessToPurchaseConversion = Sim1.WILLINGNESS_TO_PURCHASE_CONVERSION,
+                        population = population
+                )
+        )
+        val out = Mockito.spy(
+                OfflineNetworkingSession(
+                        agent = agent,
+                        maxNetworkingSessionsPerBusinessDay = 3,
+                        timePerOfflineNetworkingSession = 3.0,
+                        recommendationConversion = Sim1.RECOMMENDATION_CONVERSION,
+                        willingnessToPurchaseConversion = Sim1.WILLINGNESS_TO_PURCHASE_CONVERSION,
+                        population = population
+                )
+        )
+        val meetingPartner = Person()
+        Assertions.assertThat(meetingPartner.willingToPurchase).isFalse()
+        Mockito.doReturn(experimentResult).`when`(out).experiment(out.willingnessToPurchaseConversion)
+        // Run method under test
+        out.updateWillingnessToPurchase(meetingPartner)
+        // Verify
+        Mockito.verify(out).experiment(out.willingnessToPurchaseConversion)
+        Assertions.assertThat(meetingPartner.willingToPurchase).isEqualTo(expectedResult)
     }
 
     @Test
