@@ -125,20 +125,48 @@ class Sim1aAccountantTests {
     fun calculatePeopleWillingToPurchase() {
         // TODO: Implement
         Assert.fail()
+        // Prepare
+        val resultsStorage = HashMap<DateTime, Sim1aResultsRow>()
+        val scenarioName = "Scenario 1"
+        val t = 0L.millisToSimulationDateTime()
+        val out = Sim1aAccountant(resultsStorage, scenarioName)
+        // Run method under test
+        // Verify
     }
     @Test
     fun calculatePeopleMet() {
         // TODO: Implement
         Assert.fail()
+        // Prepare
+        val resultsStorage = HashMap<DateTime, Sim1aResultsRow>()
+        val scenarioName = "Scenario 1"
+        val t = 0L.millisToSimulationDateTime()
+        val out = Sim1aAccountant(resultsStorage, scenarioName)
+        // Run method under test
+        // Verify
     }
     @Test
     fun calculatePeopleWillingToRecommend() {
         // TODO: Implement
         Assert.fail()
+        // Prepare
+        val resultsStorage = HashMap<DateTime, Sim1aResultsRow>()
+        val scenarioName = "Scenario 1"
+        val t = 0L.millisToSimulationDateTime()
+        val out = Sim1aAccountant(resultsStorage, scenarioName)
+        // Run method under test
+        // Verify
     }
     @Test
     fun calculatePeopleWillingToMeet() {
         // TODO: Implement
         Assert.fail()
+        // Prepare
+        val resultsStorage = HashMap<DateTime, Sim1aResultsRow>()
+        val scenarioName = "Scenario 1"
+        val t = 0L.millisToSimulationDateTime()
+        val out = Sim1aAccountant(resultsStorage, scenarioName)
+        // Run method under test
+        // Verify
     }
 }
