@@ -19,7 +19,8 @@ class Sim1ParametersProvider(override val agents: MutableList<IAgent>,
                              val timePerOfflineNetworkingSession:Double = TIME_PER_OFFLINE_NETWORKING_SESSION,
                              val maxNetworkingSessionsPerBusinessDay:Int = MAX_NETWORKING_SESSIONS_PER_BUSINESS_DAY,
                              val recommendationConversion:Double = RECOMMENDATION_CONVERSION,
-                             val willingnessToPurchaseConversion:Double = WILLINGNESS_TO_PURCHASE_CONVERSION)
+                             val willingnessToPurchaseConversion:Double = WILLINGNESS_TO_PURCHASE_CONVERSION,
+                             val name:String = "")
 : ISimParametersProvider {
     companion object {
         val RESOURCE_AVAILABLE_TIME = PlResource(

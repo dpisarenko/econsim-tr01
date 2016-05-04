@@ -1,6 +1,7 @@
 package cc.altruix.econsimtr01.ch0202
 
 import cc.altruix.econsimtr01.IAction
+import cc.altruix.econsimtr01.ISensor
 import cc.altruix.econsimtr01.ResourceFlow
 import cc.altruix.econsimtr01.ch0201.OncePerWeek
 
@@ -24,5 +25,10 @@ class Sim1a(logTarget:StringBuilder,
                 )
         )
     }
-
+    override fun createSensors(): List<ISensor> {
+        // TODO: Implement this
+        // TODO: Test this
+        // TBD
+        return emptyList()
+    }
 }
