@@ -206,7 +206,7 @@ class OfflineNetworkingSessionTests {
         Assertions.assertThat(meetingPartner.willingToRecommend).isFalse()
         Mockito.doReturn(experimentResult).`when`(out).experiment(out.willingnessToPurchaseConversion)
         // Run method under test
-        out.updateWillingnessToPurchase(meetingPartner)
+        out.updateWillingnessToRecommend(meetingPartner)
         // Verify
         Mockito.verify(out).experiment(out.willingnessToPurchaseConversion)
         Assertions.assertThat(meetingPartner.willingToRecommend).isEqualTo(expectedFlagValue)
