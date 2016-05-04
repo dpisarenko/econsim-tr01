@@ -39,7 +39,8 @@ open class Sim1aAccountant(val resultsStorage: MutableMap<DateTime, Sim1aResults
     internal open fun findProtagonist(agents: List<IAgent>): Protagonist =
             agents.filter { it is Protagonist }.first() as Protagonist
 
-    internal open fun calculatePeopleWillingToPurchase(time: DateTime, population: IPopulation): Double {
+    internal open fun calculatePeopleWillingToPurchase(time: DateTime,
+                                                       population: IPopulation): Double {
         // TODO: Implement this
         // TODO: Test this
         throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.

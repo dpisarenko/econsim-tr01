@@ -5,6 +5,7 @@ import cc.altruix.econsimtr01.millisToSimulationDateTime
 import cc.altruix.econsimtr01.mock
 import org.fest.assertions.Assertions
 import org.joda.time.DateTime
+import org.junit.Assert
 import org.junit.Test
 import org.mockito.Mockito
 import java.util.*
@@ -119,5 +120,25 @@ class Sim1aAccountantTests {
         Assertions.assertThat(actResult.time).isEqualTo(t)
         Assertions.assertThat(actResult.data).isNotNull
         Assertions.assertThat(actResult.data).isEmpty()
+    }
+    @Test
+    fun calculatePeopleWillingToPurchase() {
+        // TODO: Implement
+        Assert.fail()
+    }
+    @Test
+    fun calculatePeopleMet() {
+        // TODO: Implement
+        Assert.fail()
+    }
+    @Test
+    fun calculatePeopleWillingToRecommend() {
+        // TODO: Implement
+        Assert.fail()
+    }
+    @Test
+    fun calculatePeopleWillingToMeet() {
+        // TODO: Implement
+        Assert.fail()
     }
 }
