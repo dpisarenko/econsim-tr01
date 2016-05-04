@@ -3,9 +3,7 @@ package cc.altruix.econsimtr01.ch0202
 import cc.altruix.econsimtr01.millisToSimulationDateTime
 import org.fest.assertions.Assertions
 import org.junit.Test
-import org.junit.Assert
 import org.mockito.Mockito
-import org.mockito.verification.VerificationMode
 
 /**
  * @author Dmitri Pisarenko (dp@altruix.co)
@@ -172,6 +170,47 @@ class OfflineNetworkingSessionTests {
         // Verify
         Mockito.verify(out).experiment(out.willingnessToPurchaseConversion)
         Assertions.assertThat(meetingPartner.willingToPurchase).isEqualTo(expectedResult)
+    }
+
+    @Test
+    fun updateWillingnessToRecommendDefaultScenario() {
+        updateWillingnessToRecommendTestLogic(true, true)
+        updateWillingnessToRecommendTestLogic(false, false)
+    }
+
+    private fun updateWillingnessToRecommendTestLogic(experimentResult: Boolean,
+                                                      expectedFlagValue: Boolean) {
+        // Prepare
+        val population = Population(100)
+        val agent = Mockito.spy(
+                Protagonist(
+                        availableTimePerWeek = 40,
+                        maxNetworkingSessionsPerBusinessDay = 3,
+                        timePerOfflineNetworkingSessions = 3.0,
+                        recommendationConversion = Sim1.RECOMMENDATION_CONVERSION,
+                        willingnessToPurchaseConversion = Sim1.WILLINGNESS_TO_PURCHASE_CONVERSION,
+                        population = population
+                )
+        )
+        val out = Mockito.spy(
+                OfflineNetworkingSession(
+                        agent = agent,
+                        maxNetworkingSessionsPerBusinessDay = 3,
+                        timePerOfflineNetworkingSession = 3.0,
+                        recommendationConversion = Sim1.RECOMMENDATION_CONVERSION,
+                        willingnessToPurchaseConversion = Sim1.WILLINGNESS_TO_PURCHASE_CONVERSION,
+                        population = population
+                )
+        )
+        val meetingPartner = Person()
+        Assertions.assertThat(meetingPartner.willingToRecommend).isFalse()
+        Mockito.doReturn(experimentResult).`when`(out).experiment(out.willingnessToPurchaseConversion)
+        // Run method under test
+        out.updateWillingnessToPurchase(meetingPartner)
+        // Verify
+        Mockito.verify(out).experiment(out.willingnessToPurchaseConversion)
+        Assertions.assertThat(meetingPartner.willingToRecommend).isEqualTo(expectedFlagValue)
+
     }
 
     @Test

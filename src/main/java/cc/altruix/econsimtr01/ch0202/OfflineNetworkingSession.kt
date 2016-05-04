@@ -38,7 +38,6 @@ open class OfflineNetworkingSession(val agent: Protagonist,
         if (experiment(willingnessToPurchaseConversion)) {
             meetingPartner.willingToPurchase = true
         }
-        // TODO: Test this
     }
 
     open fun updateWillingnessToRecommend(meetingPartner: Person) {
