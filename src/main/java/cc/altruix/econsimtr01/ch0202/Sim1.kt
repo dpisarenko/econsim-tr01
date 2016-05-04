@@ -66,6 +66,19 @@ class Sim1(val logTarget:StringBuilder,
          * Unit: Times per (business) day
          */
         val MAX_NETWORKING_SESSIONS_PER_BUSINESS_DAY:Int = 3
+
+        /**
+         * Recommendation conversion: Percentage of people, who become willing to recommend my friend after they
+         * had lunch with him.
+         */
+        val RECOMMENDATION_CONVERSION:Double = 0.5
+
+        /**
+         * Willingness to purchase conversion: Percentage of people, who decide that they will use my friend's service,
+         * should they ever need to buy or sell a property.
+         */
+        val WILLINGNESS_TO_PURCHASE_CONVERSION:Double = 0.5
+
         /**
          * Parameters of process 2 (offline networking session) (END)
          */
@@ -79,6 +92,8 @@ class Sim1(val logTarget:StringBuilder,
                 Protagonist(TOTAL_TIME_FOR_OFFLINE_NETWORKING_PER_WEEK,
                         MAX_NETWORKING_SESSIONS_PER_BUSINESS_DAY,
                         TIME_PER_OFFLINE_NETWORKING_SESSION,
+                        RECOMMENDATION_CONVERSION,
+                        WILLINGNESS_TO_PURCHASE_CONVERSION,
                         population
                 )
         )

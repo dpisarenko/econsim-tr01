@@ -108,6 +108,7 @@ class OfflineNetworkingSessionTests {
         agent.offlineNetworkingSessionsHeldDuringCurrentDay = 1
         Mockito.doNothing().`when`(out).updateWillingnessToPurchase(meetingPartner)
         Mockito.doNothing().`when`(out).updateWillingnessToRecommend(meetingPartner)
+        Assertions.assertThat(meetingPartner.offlineNetworkingSessionHeld).isFalse()
         // Run method under test
         out.run(t)
         // Verify
@@ -117,6 +118,7 @@ class OfflineNetworkingSessionTests {
                 3.0)
         Mockito.verify(out).updateWillingnessToRecommend(meetingPartner)
         Mockito.verify(out).updateWillingnessToPurchase(meetingPartner)
+        Assertions.assertThat(meetingPartner.offlineNetworkingSessionHeld).isTrue()
     }
 
     @Test

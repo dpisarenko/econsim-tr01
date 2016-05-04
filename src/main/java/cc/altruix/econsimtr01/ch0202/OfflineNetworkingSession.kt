@@ -2,6 +2,7 @@ package cc.altruix.econsimtr01.ch0202
 
 import cc.altruix.econsimtr01.DefaultAction
 import cc.altruix.econsimtr01.IActionSubscriber
+import cc.altruix.econsimtr01.randomEventWithProbability
 import org.joda.time.DateTime
 
 /**
@@ -10,6 +11,8 @@ import org.joda.time.DateTime
 open class OfflineNetworkingSession(val agent: Protagonist,
                                val maxNetworkingSessionsPerBusinessDay: Int,
                                val timePerOfflineNetworkingSession:Double,
+                               val recommendationConversion:Double,
+                               val willingnessToPurchaseConversion:Double,
                                val population: IPopulation) :
         DefaultAction(
                 OfflineNetworkingSessionTriggerFun(
@@ -27,13 +30,15 @@ open class OfflineNetworkingSession(val agent: Protagonist,
             agent.remove(Sim1.RESOURCE_AVAILABLE_TIME.id, timePerOfflineNetworkingSession)
             updateWillingnessToRecommend(meetingPartner)
             updateWillingnessToPurchase(meetingPartner)
+            meetingPartner.offlineNetworkingSessionHeld = true
         }
     }
 
     open fun updateWillingnessToPurchase(meetingPartner: Person) {
-        // TODO: Implement this
+        if (experiment(willingnessToPurchaseConversion)) {
+            meetingPartner.willingToPurchase = true
+        }
         // TODO: Test this
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     open fun updateWillingnessToRecommend(meetingPartner: Person) {
@@ -41,6 +46,8 @@ open class OfflineNetworkingSession(val agent: Protagonist,
         // TODO: Test this
         throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
+
+    open fun experiment(probability:Double):Boolean = randomEventWithProbability(probability)
 
     // TODO: Test this
     open fun findMeetingPartner(): Person? = population.people()

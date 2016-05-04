@@ -12,6 +12,8 @@ import org.joda.time.DateTime
 open class Protagonist(val availableTimePerWeek: Int,
                   val maxNetworkingSessionsPerBusinessDay: Int,
                   val timePerOfflineNetworkingSessions:Double,
+                  val recommendationConversion:Double,
+                  val willingnessToPurchaseConversion:Double,
                   val population: Population) : DefaultAgent(ID) {
     companion object {
         val ID = "protagonist"
@@ -39,6 +41,8 @@ open class Protagonist(val availableTimePerWeek: Int,
                         this,
                         maxNetworkingSessionsPerBusinessDay,
                         timePerOfflineNetworkingSessions,
+                        recommendationConversion,
+                        willingnessToPurchaseConversion,
                         population
                 )
         )
