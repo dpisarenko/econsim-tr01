@@ -27,7 +27,7 @@ open class OfflineNetworkingSession(val agent: Protagonist,
         val meetingPartner = findMeetingPartner()
         if (meetingPartner != null) {
             agent.offlineNetworkingSessionsHeldDuringCurrentDay++
-            agent.remove(Sim1.RESOURCE_AVAILABLE_TIME.id, timePerOfflineNetworkingSession)
+            agent.remove(Sim1ParametersProvider.RESOURCE_AVAILABLE_TIME.id, timePerOfflineNetworkingSession)
             updateWillingnessToRecommend(meetingPartner)
             updateWillingnessToPurchase(meetingPartner)
             meetingPartner.offlineNetworkingSessionHeld = true
@@ -56,7 +56,7 @@ open class OfflineNetworkingSession(val agent: Protagonist,
         if (agent.offlineNetworkingSessionsHeldDuringCurrentDay >= maxNetworkingSessionsPerBusinessDay) {
             return false
         }
-        if (agent.amount(Sim1.RESOURCE_AVAILABLE_TIME.id) < timePerOfflineNetworkingSession) {
+        if (agent.amount(Sim1ParametersProvider.RESOURCE_AVAILABLE_TIME.id) < timePerOfflineNetworkingSession) {
             return false
         }
         return true

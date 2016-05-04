@@ -25,7 +25,7 @@ open class Protagonist(val availableTimePerWeek: Int,
                         id = "prF1",
                         src = "nature",
                         target = ID,
-                        resource = Sim1.RESOURCE_AVAILABLE_TIME.id,
+                        resource = Sim1ParametersProvider.RESOURCE_AVAILABLE_TIME.id,
                         amount = availableTimePerWeek.toDouble(),
                         timeTriggerFunction = mondayMidnight
                 )

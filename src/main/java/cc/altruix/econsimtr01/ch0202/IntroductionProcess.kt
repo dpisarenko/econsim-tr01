@@ -14,9 +14,11 @@ import org.joda.time.DateTime
 open class IntroductionProcess(
         val population:IPopulation,
         triggerFun:(DateTime) -> Boolean,
-        val averageNetworkActivity:Double = Sim1.AVERAGE_NETWORK_ACTIVITY,
-        val averageSuggestibilityOfStrangers:Double = Sim1.AVERAGE_SUGGESTIBILITY_OF_STRANGERS) :
-        DefaultAction(triggerFun) {
+        val averageNetworkActivity:Double =
+            Sim1ParametersProvider.AVERAGE_NETWORK_ACTIVITY,
+        val averageSuggestibilityOfStrangers:Double =
+            Sim1ParametersProvider.AVERAGE_SUGGESTIBILITY_OF_STRANGERS
+) : DefaultAction(triggerFun) {
     open override fun run(time: DateTime) {
         val network = getNetwork(population)
         val recommenders = getRecommenders(network)
