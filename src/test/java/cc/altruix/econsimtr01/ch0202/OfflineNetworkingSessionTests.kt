@@ -33,6 +33,8 @@ class OfflineNetworkingSessionTests {
                 )
         )
         val t = 0L.millisToSimulationDateTime()
+        val meetingPartner = Person()
+        Mockito.doReturn(meetingPartner).`when`(out).findMeetingPartner()
         Mockito.doReturn(false).`when`(out).validate()
         agent.offlineNetworkingSessionsHeldDuringCurrentDay = 1
         // Run method under test
@@ -42,10 +44,8 @@ class OfflineNetworkingSessionTests {
         Assertions.assertThat(agent.offlineNetworkingSessionsHeldDuringCurrentDay).isEqualTo(1)
         Mockito.verify(agent, Mockito.never()).remove(Sim1.RESOURCE_AVAILABLE_TIME.id,
                 3.0)
-        Mockito.verify(out, Mockito.never()).updateWillingnessToRecommend(Mockito.any())
-        Mockito.verify(out, Mockito.never()).updateWillingnessToPurchase(Mockito.any())
-        // TODO: Implement this
-        Assert.fail("Not implemented")
+        Mockito.verify(out, Mockito.never()).updateWillingnessToRecommend(meetingPartner)
+        Mockito.verify(out, Mockito.never()).updateWillingnessToPurchase(meetingPartner)
     }
     @Test
     fun runDoesntDoAnythingIfNoMeetingPartnerIsAvailable() {

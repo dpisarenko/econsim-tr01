@@ -47,7 +47,7 @@ open class OfflineNetworkingSession(val agent: Protagonist,
     }
 
     // TODO: Test this
-    fun findMeetingPartner(): Person? = population.people()
+    open fun findMeetingPartner(): Person? = population.people()
                 .filter { it.willingToMeet && !it.offlineNetworkingSessionHeld }
                 .firstOrNull()
 
