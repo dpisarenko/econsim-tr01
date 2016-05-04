@@ -3,7 +3,7 @@ package cc.altruix.econsimtr01.ch0202
 import cc.altruix.econsimtr01.*
 import org.joda.time.DateTime
 
-class Sim1(val logTarget:StringBuilder,
+open class Sim1(val logTarget:StringBuilder,
            val flows:MutableList<ResourceFlow>,
            simParametersProvider: Sim1ParametersProvider) : DefaultSimulation(simParametersProvider) {
     companion object {

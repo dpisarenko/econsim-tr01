@@ -37,11 +37,11 @@ class DefaultSimulationTests {
     fun runTicksEveryMinute() {
         val out = DefaultSimulationForTesting()
         val t0 = 0L.millisToSimulationDateTime()
-        val act1 = out.minimalSimulationCycle(emptyList(), emptyList(), t0)
+        val act1 = out.minimalSimulationCycle(emptyList(), emptyList(), t0, emptyList<IAction>())
         val t1 = t0.plusMinutes(1)
         Assertions.assertThat(act1).isEqualTo(t1)
 
-        val act2 = out.minimalSimulationCycle(emptyList(), emptyList(), t1)
+        val act2 = out.minimalSimulationCycle(emptyList(), emptyList(), t1, emptyList<IAction>())
         val t2 = t1.plusMinutes(1)
         Assertions.assertThat(act2).isEqualTo(t2)
     }

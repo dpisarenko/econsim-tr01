@@ -12,24 +12,30 @@ abstract class DefaultSimulation(val simParametersProvider: ISimParametersProvid
         val results = SimResults()
         val agents = createAgents()
         val sensors = createSensors()
+        val unattachedProcesses = createUnattachedProcesses()
         var time = 0L.millisToSimulationDateTime()
         while (continueCondition(time)) {
-            time = minimalSimulationCycle(agents, sensors, time)
+            // TODO: Test that unattached processes are passed to minimalSimulationCycle
+            time = minimalSimulationCycle(agents, sensors, time, unattachedProcesses)
         }
         return results
     }
 
     internal fun minimalSimulationCycle(agents: List<IAgent>,
                                         sensors: List<ISensor>,
-                                        oldTime: DateTime): DateTime {
+                                        oldTime: DateTime,
+                                        unattachedProcesses: List<IAction>): DateTime {
         val newTime = oldTime.plusMinutes(1)
         agents.forEach { it.act(newTime) }
+        // TODO: Test that unattachedProcesses are called
+        unattachedProcesses.forEach { it.run(newTime) }
         sensors.forEach { it.measure(newTime) }
         return newTime
     }
     internal abstract fun continueCondition(tick: DateTime): Boolean
     internal abstract fun createAgents(): List<IAgent>
     internal abstract fun createSensors(): List<ISensor>
+    internal open fun createUnattachedProcesses():List<IAction> = emptyList()
     fun findAgent(agentId: String) =
             simParametersProvider.agents.filter { x -> x.id().equals(agentId) }.firstOrNull()
 
