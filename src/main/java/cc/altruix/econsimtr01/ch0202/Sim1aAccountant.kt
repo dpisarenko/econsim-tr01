@@ -48,7 +48,6 @@ open class Sim1aAccountant(val resultsStorage: MutableMap<DateTime, Sim1aResults
     internal open fun findOrCreateDataMap(row: Sim1aResultsRow,
                                     scenarioName: String)
             : MutableMap<Sim1aResultRowField, Double> {
-        // TODO: Test this
         var dataMap = row.data.get(scenarioName)
         if (dataMap == null) {
             dataMap = HashMap()
