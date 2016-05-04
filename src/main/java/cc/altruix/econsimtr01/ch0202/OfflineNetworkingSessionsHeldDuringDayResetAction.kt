@@ -17,7 +17,6 @@ class OfflineNetworkingSessionsHeldDuringDayResetAction(val agent:Protagonist,
     }
 
     override fun run(time: DateTime) {
-        // TODO: Test this
         agent.offlineNetworkingSessionsHeldDuringCurrentDay = 0
     }
 }

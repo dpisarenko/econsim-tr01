@@ -18,7 +18,8 @@ class OfflineNetworkingSessionsHeldDuringDayResetActionTests {
                 timePerOfflineNetworkingSessions = 3.0,
                 recommendationConversion = Sim1.RECOMMENDATION_CONVERSION,
                 willingnessToPurchaseConversion = Sim1.WILLINGNESS_TO_PURCHASE_CONVERSION,
-                population = mock<IPopulation>())
+                population = mock<IPopulation>()
+        )
         val out = OfflineNetworkingSessionsHeldDuringDayResetAction(
                 agent,
                 {true}
