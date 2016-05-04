@@ -21,6 +21,32 @@ class Sim1aAccountant(val resultsStorage: MutableMap<DateTime, Sim1aResultsRow>,
         // TODO: Test this
     }
 
+    private fun calculatePeopleWillingToPurchase(time: DateTime): Double {
+        // TODO: Implement this
+        // TODO: Test this
+        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    private fun calculatePeopleMet(time: DateTime): Double {
+        // TODO: Implement this
+        // TODO: Test this
+        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    private fun calculatePeopleWillingToRecommend(time: DateTime): Double {
+        // TODO: Implement this
+        // TODO: Test this
+
+        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    internal open fun calculatePeopleWillingToMeet(time: DateTime): Double {
+        // TODO: Implement this
+        // TODO: Test this
+
+        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     private fun findOrCreateDataMap(row: Sim1aResultsRow,
                                     scenarioName: String)
             : MutableMap<Sim1aResultRowField, Double> {
