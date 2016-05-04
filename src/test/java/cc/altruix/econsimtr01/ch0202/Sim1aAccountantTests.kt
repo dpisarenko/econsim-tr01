@@ -1,5 +1,6 @@
 package cc.altruix.econsimtr01.ch0202
 
+import cc.altruix.econsimtr01.IAgent
 import cc.altruix.econsimtr01.millisToSimulationDateTime
 import cc.altruix.econsimtr01.mock
 import org.fest.assertions.Assertions
@@ -27,6 +28,15 @@ class Sim1aAccountantTests {
         val peopleWillingToRecommend = 2.0
         val peopleMet = 3.0
         val peopleWillingToPurchase = 4.0
+        val population = mock<IPopulation>()
+        val protagonist = Protagonist(availableTimePerWeek = 40,
+            maxNetworkingSessionsPerBusinessDay = Sim1ParametersProvider.MAX_NETWORKING_SESSIONS_PER_BUSINESS_DAY,
+            timePerOfflineNetworkingSessions = Sim1ParametersProvider.TIME_PER_OFFLINE_NETWORKING_SESSION,
+            recommendationConversion = Sim1ParametersProvider.RECOMMENDATION_CONVERSION,
+            willingnessToPurchaseConversion = Sim1ParametersProvider.WILLINGNESS_TO_PURCHASE_CONVERSION,
+                population = population)
+        val agents = emptyList<IAgent>()
+        Mockito.doReturn(protagonist).`when`(out).findProtagonist(agents)
         Mockito.doReturn(peopleWillingToMeet).`when`(out).calculatePeopleWillingToMeet(t, population)
         Mockito.doReturn(peopleWillingToRecommend).`when`(out).calculatePeopleWillingToRecommend(t, population)
         Mockito.doReturn(peopleMet).`when`(out).calculatePeopleMet(t, population)
@@ -34,6 +44,7 @@ class Sim1aAccountantTests {
         // Run method under test
         out.measure(t, agents)
         // Verify
+        Mockito.verify(out).findProtagonist(agents)
         Mockito.verify(out).findOrCreateRow(resultsStorage, t)
         Mockito.verify(out).findOrCreateDataMap(row, scenarioName)
         Mockito.verify(out).calculatePeopleWillingToMeet(t, population)
