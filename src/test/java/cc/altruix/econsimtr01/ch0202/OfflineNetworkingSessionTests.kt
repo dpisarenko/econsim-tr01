@@ -84,12 +84,39 @@ class OfflineNetworkingSessionTests {
     @Test
     fun runDefaultScenario() {
         // Prepare
+        val population = Population(100)
+        val agent = Mockito.spy(
+                Protagonist(
+                        availableTimePerWeek = 40,
+                        maxNetworkingSessionsPerBusinessDay = 3,
+                        timePerOfflineNetworkingSessions = 3.0,
+                        population = population
+                )
+        )
+        val out = Mockito.spy(
+                OfflineNetworkingSession(
+                        agent = agent,
+                        maxNetworkingSessionsPerBusinessDay = 3,
+                        timePerOfflineNetworkingSession = 3.0,
+                        population = population
+                )
+        )
+        val t = 0L.millisToSimulationDateTime()
+        val meetingPartner = Person()
+        Mockito.doReturn(meetingPartner).`when`(out).findMeetingPartner()
+        Mockito.doReturn(true).`when`(out).validate()
+        agent.offlineNetworkingSessionsHeldDuringCurrentDay = 1
+        Mockito.doNothing().`when`(out).updateWillingnessToPurchase(meetingPartner)
+        Mockito.doNothing().`when`(out).updateWillingnessToRecommend(meetingPartner)
         // Run method under test
+        out.run(t)
         // Verify
-
-        // TODO: Implement this
-        Assert.fail("Not implemented")
-
+        Mockito.verify(out).findMeetingPartner()
+        Assertions.assertThat(agent.offlineNetworkingSessionsHeldDuringCurrentDay).isEqualTo(2)
+        Mockito.verify(agent).remove(Sim1.RESOURCE_AVAILABLE_TIME.id,
+                3.0)
+        Mockito.verify(out).updateWillingnessToRecommend(meetingPartner)
+        Mockito.verify(out).updateWillingnessToPurchase(meetingPartner)
     }
 
     @Test
