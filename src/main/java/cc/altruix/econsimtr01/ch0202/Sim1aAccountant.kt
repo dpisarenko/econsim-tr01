@@ -1,5 +1,6 @@
 package cc.altruix.econsimtr01.ch0202
 
+import cc.altruix.econsimtr01.IAgent
 import cc.altruix.econsimtr01.ISensor
 import org.joda.time.DateTime
 import java.util.*
@@ -10,35 +11,54 @@ import java.util.*
 open class Sim1aAccountant(val resultsStorage: MutableMap<DateTime, Sim1aResultsRow>,
                       val scenarioName: String)
 : ISensor {
-    override fun measure(time: DateTime) {
+    override fun measure(time: DateTime, agents: List<IAgent>) {
         val row:Sim1aResultsRow = findOrCreateRow(resultsStorage, time)
         val data:MutableMap<Sim1aResultRowField,Double> = findOrCreateDataMap(row, scenarioName)
-        data.put(Sim1aResultRowField.PEOPLE_WILLING_TO_MEET, calculatePeopleWillingToMeet(time))
-        data.put(Sim1aResultRowField.PEOPLE_WILLING_TO_RECOMMEND, calculatePeopleWillingToRecommend(time))
-        data.put(Sim1aResultRowField.PEOPLE_MET, calculatePeopleMet(time))
-        data.put(Sim1aResultRowField.PEOPLE_WILLING_TO_PURCHASE, calculatePeopleWillingToPurchase(time))
+        // TODO: Verify that this method is called
+        val protagonist = findProtagonist(agents)
+        val population = protagonist.population
+        data.put(
+                Sim1aResultRowField.PEOPLE_WILLING_TO_MEET,
+                calculatePeopleWillingToMeet(time, population)
+        )
+        data.put(
+                Sim1aResultRowField.PEOPLE_WILLING_TO_RECOMMEND,
+                calculatePeopleWillingToRecommend(time, population)
+        )
+        data.put(
+                Sim1aResultRowField.PEOPLE_MET,
+                calculatePeopleMet(time, population)
+        )
+        data.put(
+                Sim1aResultRowField.PEOPLE_WILLING_TO_PURCHASE,
+                calculatePeopleWillingToPurchase(time, population)
+        )
     }
 
-    internal open fun calculatePeopleWillingToPurchase(time: DateTime): Double {
+    // TODO: Test this
+    private fun findProtagonist(agents: List<IAgent>): Protagonist =
+            agents.filter { it is Protagonist }.first() as Protagonist
+
+    internal open fun calculatePeopleWillingToPurchase(time: DateTime, population: IPopulation): Double {
         // TODO: Implement this
         // TODO: Test this
         throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    internal open fun calculatePeopleMet(time: DateTime): Double {
+    internal open fun calculatePeopleMet(time: DateTime, population: IPopulation): Double {
         // TODO: Implement this
         // TODO: Test this
         throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    internal open fun calculatePeopleWillingToRecommend(time: DateTime): Double {
+    internal open fun calculatePeopleWillingToRecommend(time: DateTime, population: IPopulation): Double {
         // TODO: Implement this
         // TODO: Test this
 
         throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    internal open fun calculatePeopleWillingToMeet(time: DateTime): Double {
+    internal open fun calculatePeopleWillingToMeet(time: DateTime, population: IPopulation): Double {
         // TODO: Implement this
         // TODO: Test this
 

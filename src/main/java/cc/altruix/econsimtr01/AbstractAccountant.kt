@@ -11,7 +11,7 @@ abstract class AbstractAccountant (val logTarget: StringBuilder,
     val fire: (DateTime) -> Boolean = dailyAtMidnight()
     var firstTime:Boolean = true
 
-    override fun measure(time: DateTime) {
+    override fun measure(time: DateTime, agents: List<IAgent>) {
         if (fire(time)) {
             if (firstTime) {
                 writeResourceData()

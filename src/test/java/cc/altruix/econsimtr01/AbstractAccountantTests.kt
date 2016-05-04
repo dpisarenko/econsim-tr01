@@ -14,7 +14,7 @@ class AbstractAccountantTests {
                          agents:List<IAgent>,
                          resources:List<PlResource>)
         : AbstractAccountant(logTarget, agents, resources) {
-        override fun measure(time: DateTime) {
+        override fun measure(time: DateTime, agents: List<IAgent>) {
         }
     }
 

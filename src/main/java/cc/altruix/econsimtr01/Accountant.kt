@@ -10,7 +10,7 @@ class Accountant(val foodStorage: DefaultResourceStorage,
                  val logTarget: StringBuilder) : ISensor {
     val fire: (DateTime) -> Boolean = dailyAtMidnight()
 
-    override fun measure(time: DateTime) {
+    override fun measure(time: DateTime, agents: List<IAgent>) {
         if (fire(time)) {
             logMeasurementTime(time)
             logPotatoes(time)

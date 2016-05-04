@@ -27,19 +27,19 @@ class Sim1aAccountantTests {
         val peopleWillingToRecommend = 2.0
         val peopleMet = 3.0
         val peopleWillingToPurchase = 4.0
-        Mockito.doReturn(peopleWillingToMeet).`when`(out).calculatePeopleWillingToMeet(t)
-        Mockito.doReturn(peopleWillingToRecommend).`when`(out).calculatePeopleWillingToRecommend(t)
-        Mockito.doReturn(peopleMet).`when`(out).calculatePeopleMet(t)
-        Mockito.doReturn(peopleWillingToPurchase).`when`(out).calculatePeopleWillingToPurchase(t)
+        Mockito.doReturn(peopleWillingToMeet).`when`(out).calculatePeopleWillingToMeet(t, population)
+        Mockito.doReturn(peopleWillingToRecommend).`when`(out).calculatePeopleWillingToRecommend(t, population)
+        Mockito.doReturn(peopleMet).`when`(out).calculatePeopleMet(t, population)
+        Mockito.doReturn(peopleWillingToPurchase).`when`(out).calculatePeopleWillingToPurchase(t, population)
         // Run method under test
-        out.measure(t)
+        out.measure(t, agents)
         // Verify
         Mockito.verify(out).findOrCreateRow(resultsStorage, t)
         Mockito.verify(out).findOrCreateDataMap(row, scenarioName)
-        Mockito.verify(out).calculatePeopleWillingToMeet(t)
-        Mockito.verify(out).calculatePeopleWillingToRecommend(t)
-        Mockito.verify(out).calculatePeopleMet(t)
-        Mockito.verify(out).calculatePeopleWillingToPurchase(t)
+        Mockito.verify(out).calculatePeopleWillingToMeet(t, population)
+        Mockito.verify(out).calculatePeopleWillingToRecommend(t, population)
+        Mockito.verify(out).calculatePeopleMet(t, population)
+        Mockito.verify(out).calculatePeopleWillingToPurchase(t, population)
         Mockito.verify(data).put(Sim1aResultRowField.PEOPLE_WILLING_TO_MEET, peopleWillingToMeet)
         Mockito.verify(data).put(Sim1aResultRowField.PEOPLE_WILLING_TO_RECOMMEND, peopleWillingToRecommend)
         Mockito.verify(data).put(Sim1aResultRowField.PEOPLE_MET, peopleMet)

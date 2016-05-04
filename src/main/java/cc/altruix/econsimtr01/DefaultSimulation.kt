@@ -29,7 +29,7 @@ abstract class DefaultSimulation(val simParametersProvider: ISimParametersProvid
         agents.forEach { it.act(newTime) }
         // TODO: Test that unattachedProcesses are called
         unattachedProcesses.forEach { it.run(newTime) }
-        sensors.forEach { it.measure(newTime) }
+        sensors.forEach { it.measure(newTime, agents) }
         return newTime
     }
     internal abstract fun continueCondition(tick: DateTime): Boolean
