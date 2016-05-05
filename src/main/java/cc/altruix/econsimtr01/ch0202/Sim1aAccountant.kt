@@ -14,7 +14,6 @@ open class Sim1aAccountant(val resultsStorage: MutableMap<DateTime, Sim1aResults
     override fun measure(time: DateTime, agents: List<IAgent>) {
         val row:Sim1aResultsRow = findOrCreateRow(resultsStorage, time)
         val data:MutableMap<Sim1aResultRowField,Double> = findOrCreateDataMap(row, scenarioName)
-        // TODO: Verify that this method is called
         val protagonist = findProtagonist(agents)
         val population = protagonist.population
         data.put(

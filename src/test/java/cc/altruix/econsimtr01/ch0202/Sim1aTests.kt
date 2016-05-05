@@ -71,4 +71,27 @@ class Sim1aTests {
         // TODO: Write out the data from simResults to actualFileName
         // TODO: Compare contents of actualFileName with expectedFileName (should be equal)
     }
+    @Test
+    fun createSensors() {
+        // Prepare
+        val logTarget = StringBuilder()
+        val flows = ArrayList<ResourceFlow>()
+        val simResults = HashMap<DateTime,Sim1aResultsRow>()
+        val paramsProvider = Sim1ParametersProvider(
+                name = "Scenario 1",
+                agents = ArrayList(),
+                flows = ArrayList(),
+                initialResourceLevels = ArrayList(),
+                infiniteResourceSupplies = ArrayList(),
+                transformations = ArrayList(),
+                initialNetworkSize = 100
+        )
+        val sim = Sim1a(logTarget, flows, paramsProvider, simResults)
+        // Run method under test
+        val sensors = sim.createSensors()
+        // Verify
+        Assertions.assertThat(sensors).isNotNull
+        Assertions.assertThat(sensors.size).isEqualTo(1)
+        Assertions.assertThat(sensors.get(0) is Sim1aAccountant).isTrue()
+    }
 }
