@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory
  */
 abstract class DefaultSimulation(val simParametersProvider: ISimParametersProvider) : ISimulation {
     val LOGGER = LoggerFactory.getLogger(DefaultSimulation::class.java)
-    override fun run()/*:SimResults*/ {
+    override fun run() {
         val agents = createAgents()
         val sensors = createSensors()
         val unattachedProcesses = createUnattachedProcesses()
