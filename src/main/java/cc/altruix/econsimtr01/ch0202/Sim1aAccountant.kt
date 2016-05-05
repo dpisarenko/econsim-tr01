@@ -35,7 +35,6 @@ open class Sim1aAccountant(val resultsStorage: MutableMap<DateTime, Sim1aResults
         )
     }
 
-    // TODO: Test this
     internal open fun findProtagonist(agents: List<IAgent>): Protagonist =
             agents.filter { it is Protagonist }.first() as Protagonist
 
