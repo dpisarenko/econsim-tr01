@@ -14,7 +14,6 @@ abstract class DefaultSimulation(val simParametersProvider: ISimParametersProvid
         val unattachedProcesses = createUnattachedProcesses()
         var time = 0L.millisToSimulationDateTime()
         while (continueCondition(time)) {
-            // TODO: Test that unattached processes are passed to minimalSimulationCycle
             time = minimalSimulationCycle(agents, sensors, time, unattachedProcesses)
         }
     }
