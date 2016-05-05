@@ -29,12 +29,7 @@ class Sim1aAccountantTests {
         val peopleMet = 3.0
         val peopleWillingToPurchase = 4.0
         val population = mock<IPopulation>()
-        val protagonist = Protagonist(availableTimePerWeek = 40,
-            maxNetworkingSessionsPerBusinessDay = Sim1ParametersProvider.MAX_NETWORKING_SESSIONS_PER_BUSINESS_DAY,
-            timePerOfflineNetworkingSessions = Sim1ParametersProvider.TIME_PER_OFFLINE_NETWORKING_SESSION,
-            recommendationConversion = Sim1ParametersProvider.RECOMMENDATION_CONVERSION,
-            willingnessToPurchaseConversion = Sim1ParametersProvider.WILLINGNESS_TO_PURCHASE_CONVERSION,
-                population = population)
+        val protagonist = createProtagonist(population)
         val agents = emptyList<IAgent>()
         Mockito.doReturn(protagonist).`when`(out).findProtagonist(agents)
         Mockito.doReturn(peopleWillingToMeet).`when`(out).calculatePeopleWillingToMeet(t, population)
@@ -56,6 +51,16 @@ class Sim1aAccountantTests {
         Mockito.verify(data).put(Sim1aResultRowField.PEOPLE_MET, peopleMet)
         Mockito.verify(data).put(Sim1aResultRowField.PEOPLE_WILLING_TO_PURCHASE, peopleWillingToPurchase)
     }
+
+    private fun createProtagonist(population: IPopulation): Protagonist {
+        return Protagonist(availableTimePerWeek = 40,
+                maxNetworkingSessionsPerBusinessDay = Sim1ParametersProvider.MAX_NETWORKING_SESSIONS_PER_BUSINESS_DAY,
+                timePerOfflineNetworkingSessions = Sim1ParametersProvider.TIME_PER_OFFLINE_NETWORKING_SESSION,
+                recommendationConversion = Sim1ParametersProvider.RECOMMENDATION_CONVERSION,
+                willingnessToPurchaseConversion = Sim1ParametersProvider.WILLINGNESS_TO_PURCHASE_CONVERSION,
+                population = population)
+    }
+
     @Test
     fun findOrCreateDataMapFindsDataMap() {
         // Prepare
@@ -179,5 +184,22 @@ class Sim1aAccountantTests {
         person.willingToMeet = true
         population.people.add(person)
         Assertions.assertThat(out.calculatePeopleWillingToMeet(t, population)).isEqualTo(1.0)
+    }
+
+    @Test
+    fun findProtagonist() {
+        // Prepare
+        val resultsStorage = HashMap<DateTime, Sim1aResultsRow>()
+        val scenarioName = "Scenario 1"
+        val t = 0L.millisToSimulationDateTime()
+        val out = Sim1aAccountant(resultsStorage, scenarioName)
+        val population = Population(0)
+        val randomDick = mock<IAgent>()
+        val protagonist = createProtagonist(population)
+        val agents = listOf(randomDick, protagonist)
+        // Run method under test
+        val result = out.findProtagonist(agents)
+        // Verify
+        Assertions.assertThat(result).isSameAs(protagonist)
     }
 }
