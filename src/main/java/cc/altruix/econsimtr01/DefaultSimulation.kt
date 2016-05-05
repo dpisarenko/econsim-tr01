@@ -19,7 +19,7 @@ abstract class DefaultSimulation(val simParametersProvider: ISimParametersProvid
         }
     }
 
-    internal fun minimalSimulationCycle(agents: List<IAgent>,
+    internal open fun minimalSimulationCycle(agents: List<IAgent>,
                                         sensors: List<ISensor>,
                                         oldTime: DateTime,
                                         unattachedProcesses: List<IAction>): DateTime {
@@ -31,8 +31,8 @@ abstract class DefaultSimulation(val simParametersProvider: ISimParametersProvid
         return newTime
     }
     internal abstract fun continueCondition(tick: DateTime): Boolean
-    internal abstract fun createAgents(): List<IAgent>
-    internal abstract fun createSensors(): List<ISensor>
+    internal open abstract fun createAgents(): List<IAgent>
+    internal open abstract fun createSensors(): List<ISensor>
     internal open fun createUnattachedProcesses():List<IAction> = emptyList()
     fun findAgent(agentId: String) =
             simParametersProvider.agents.filter { x -> x.id().equals(agentId) }.firstOrNull()

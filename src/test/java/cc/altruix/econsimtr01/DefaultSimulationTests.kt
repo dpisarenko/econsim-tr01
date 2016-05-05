@@ -76,13 +76,13 @@ class DefaultSimulationTests {
         Mockito.doReturn(agents).`when`(out).createAgents()
         Mockito.doReturn(sensors).`when`(out).createSensors()
         Mockito.doReturn(unattachedProcesses).`when`(out).createUnattachedProcesses()
-        Mockito.doNothing().`when`(out).minimalSimulationCycle(
+        val t = 0L.millisToSimulationDateTime()
+        Mockito.doReturn(t.plusMinutes(1)).`when`(out).minimalSimulationCycle(
                 agents,
                 sensors,
                 t,
                 unattachedProcesses
         )
-        val t = 0L.millisToSimulationDateTime()
         // Run method under test
         out.run()
         // Verify
