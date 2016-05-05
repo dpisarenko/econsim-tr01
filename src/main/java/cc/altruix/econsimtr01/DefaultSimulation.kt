@@ -8,8 +8,7 @@ import org.slf4j.LoggerFactory
  */
 abstract class DefaultSimulation(val simParametersProvider: ISimParametersProvider) : ISimulation {
     val LOGGER = LoggerFactory.getLogger(DefaultSimulation::class.java)
-    override fun run():SimResults {
-        val results = SimResults()
+    override fun run()/*:SimResults*/ {
         val agents = createAgents()
         val sensors = createSensors()
         val unattachedProcesses = createUnattachedProcesses()
@@ -18,7 +17,6 @@ abstract class DefaultSimulation(val simParametersProvider: ISimParametersProvid
             // TODO: Test that unattached processes are passed to minimalSimulationCycle
             time = minimalSimulationCycle(agents, sensors, time, unattachedProcesses)
         }
-        return results
     }
 
     internal fun minimalSimulationCycle(agents: List<IAgent>,
