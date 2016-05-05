@@ -138,7 +138,6 @@ class Sim1aAccountantTests {
     }
     @Test
     fun calculatePeopleMet() {
-        Assert.fail()
         // Prepare
         val resultsStorage = HashMap<DateTime, Sim1aResultsRow>()
         val scenarioName = "Scenario 1"
@@ -154,28 +153,32 @@ class Sim1aAccountantTests {
     }
     @Test
     fun calculatePeopleWillingToRecommend() {
-        // TODO: Implement
-        Assert.fail()
         // Prepare
         val resultsStorage = HashMap<DateTime, Sim1aResultsRow>()
         val scenarioName = "Scenario 1"
         val t = 0L.millisToSimulationDateTime()
         val out = Sim1aAccountant(resultsStorage, scenarioName)
         val population = Population(0)
-        // Run method under test
-        // Verify
+        // Run method under test and verify
+        Assertions.assertThat(out.calculatePeopleWillingToRecommend(t, population)).isEqualTo(0.0)
+        val person = Person()
+        person.willingToRecommend = true
+        population.people.add(person)
+        Assertions.assertThat(out.calculatePeopleWillingToRecommend(t, population)).isEqualTo(1.0)
     }
     @Test
     fun calculatePeopleWillingToMeet() {
-        // TODO: Implement
-        Assert.fail()
         // Prepare
         val resultsStorage = HashMap<DateTime, Sim1aResultsRow>()
         val scenarioName = "Scenario 1"
         val t = 0L.millisToSimulationDateTime()
         val out = Sim1aAccountant(resultsStorage, scenarioName)
         val population = Population(0)
-        // Run method under test
-        // Verify
+        // Run method under test and verify
+        Assertions.assertThat(out.calculatePeopleWillingToMeet(t, population)).isEqualTo(0.0)
+        val person = Person()
+        person.willingToMeet = true
+        population.people.add(person)
+        Assertions.assertThat(out.calculatePeopleWillingToMeet(t, population)).isEqualTo(1.0)
     }
 }
