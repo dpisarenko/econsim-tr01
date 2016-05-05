@@ -138,7 +138,6 @@ class Sim1aAccountantTests {
     }
     @Test
     fun calculatePeopleMet() {
-        // TODO: Implement
         Assert.fail()
         // Prepare
         val resultsStorage = HashMap<DateTime, Sim1aResultsRow>()
@@ -146,9 +145,12 @@ class Sim1aAccountantTests {
         val t = 0L.millisToSimulationDateTime()
         val out = Sim1aAccountant(resultsStorage, scenarioName)
         val population = Population(0)
-        // Run method under test
-
-        // Verify
+        // Run method under test and verify
+        Assertions.assertThat(out.calculatePeopleMet(t, population)).isEqualTo(0.0)
+        val person = Person()
+        person.offlineNetworkingSessionHeld = true
+        population.people.add(person)
+        Assertions.assertThat(out.calculatePeopleMet(t, population)).isEqualTo(1.0)
     }
     @Test
     fun calculatePeopleWillingToRecommend() {
