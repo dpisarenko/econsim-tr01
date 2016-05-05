@@ -40,31 +40,17 @@ open class Sim1aAccountant(val resultsStorage: MutableMap<DateTime, Sim1aResults
             agents.filter { it is Protagonist }.first() as Protagonist
 
     internal open fun calculatePeopleWillingToPurchase(time: DateTime,
-                                                       population: IPopulation): Double {
-        // TODO: Implement this
-        // TODO: Test this
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+                                                       population: IPopulation): Double =
+            population.people().filter { it.willingToPurchase }.count().toDouble()
 
-    internal open fun calculatePeopleMet(time: DateTime, population: IPopulation): Double {
-        // TODO: Implement this
-        // TODO: Test this
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    internal open fun calculatePeopleMet(time: DateTime, population: IPopulation): Double =
+            population.people().filter { it.offlineNetworkingSessionHeld }.count().toDouble()
 
-    internal open fun calculatePeopleWillingToRecommend(time: DateTime, population: IPopulation): Double {
-        // TODO: Implement this
-        // TODO: Test this
+    internal open fun calculatePeopleWillingToRecommend(time: DateTime, population: IPopulation): Double =
+            population.people().filter { it.willingToRecommend }.count().toDouble()
 
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    internal open fun calculatePeopleWillingToMeet(time: DateTime, population: IPopulation): Double {
-        // TODO: Implement this
-        // TODO: Test this
-
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    internal open fun calculatePeopleWillingToMeet(time: DateTime, population: IPopulation): Double =
+            population.people().filter { it.willingToMeet }.count().toDouble()
 
     internal open fun findOrCreateDataMap(row: Sim1aResultsRow,
                                     scenarioName: String)
