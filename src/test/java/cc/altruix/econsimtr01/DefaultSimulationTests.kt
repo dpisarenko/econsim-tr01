@@ -34,6 +34,26 @@ class DefaultSimulationTests {
         override fun createSensors(): List<ISensor> = emptyList()
     }
 
+    private open class DefaultSimulationForTesting2 : DefaultSimulation(
+            SimParametersProvider(
+                    LinkedList<IAgent>(),
+                    LinkedList<PlFlow>(),
+                    LinkedList<InitialResourceLevel>(),
+                    LinkedList<InfiniteResourceSupply>()
+            )
+    ) {
+        var fired = false
+        override fun continueCondition(tick: DateTime): Boolean {
+            if (!fired) {
+                fired = true
+                return true
+            }
+            return false
+        }
+        override fun createAgents(): List<IAgent> = emptyList()
+        override fun createSensors(): List<ISensor> = emptyList()
+    }
+
     @Test
     fun runTicksEveryMinute() {
         val out = DefaultSimulationForTesting()
@@ -49,10 +69,25 @@ class DefaultSimulationTests {
     @Test
     fun runWiring() {
         // Prepare
-        val simParametersProvider = mock<ISimParametersProvider>()
-        val out = Mockito.spy(DefaultSimulationForTesting())
-
+        val out = Mockito.spy(DefaultSimulationForTesting2())
+        val agents = mock<List<IAgent>>()
+        val sensors = mock<List<ISensor>>()
+        val unattachedProcesses = mock<List<IAction>>()
+        Mockito.doReturn(agents).`when`(out).createAgents()
+        Mockito.doReturn(sensors).`when`(out).createSensors()
+        Mockito.doReturn(unattachedProcesses).`when`(out).createUnattachedProcesses()
+        val t = 0L.millisToSimulationDateTime()
         // Run method under test
+        out.run()
         // Verify
+        Mockito.verify(out).createAgents()
+        Mockito.verify(out).createSensors()
+        Mockito.verify(out).createUnattachedProcesses()
+        Mockito.verify(out).minimalSimulationCycle(
+                agents,
+                sensors,
+                t,
+                unattachedProcesses
+        )
     }
 }
