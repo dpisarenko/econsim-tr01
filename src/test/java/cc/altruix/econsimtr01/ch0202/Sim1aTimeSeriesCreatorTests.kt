@@ -2,6 +2,7 @@ package cc.altruix.econsimtr01.ch0202
 
 import cc.altruix.econsimtr01.millisToSimulationDateTime
 import cc.altruix.econsimtr01.mock
+import org.fest.assertions.Assertions
 import org.joda.time.DateTime
 import org.junit.Test
 import org.mockito.Mockito
@@ -22,9 +23,9 @@ class Sim1aTimeSeriesCreatorTests {
         simData.put(t0, row0)
         simData.put(t0, row1)
         val targetFileName = "targetFileName"
-        val out = Sim1aTimeSeriesCreator(simData, targetFileName)
+        val out = Mockito.spy(Sim1aTimeSeriesCreator(simData, targetFileName))
         val times = mock<MutableList<DateTime>>()
-        val builder = mock<StringBuilder>()
+        val builder = StringBuilder()
         Mockito.doReturn(builder).`when`(out).createStringBuilder()
         Mockito.doReturn(times).`when`(out).toMutableList()
         Mockito.doNothing().`when`(out).sort(times)
@@ -41,11 +42,9 @@ class Sim1aTimeSeriesCreatorTests {
         Mockito.verify(out).toMutableList()
         Mockito.verify(out).sort(times)
         Mockito.verify(out).createStringBuilder()
-        Mockito.verify(builder).append(header)
         Mockito.verify(out).composeRowData(t0)
         Mockito.verify(out).composeRowData(t1)
-        Mockito.verify(builder).append(rowString0)
-        Mockito.verify(builder).append(rowString1)
         Mockito.verify(out).writeToFile(builder)
+        Assertions.assertThat(builder.toString()).isEqualTo(header + rowString0 + rowString1)
     }
 }

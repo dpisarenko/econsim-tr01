@@ -6,7 +6,7 @@ import java.io.File
 /**
  * Created by pisarenko on 04.05.2016.
  */
-class Sim1aTimeSeriesCreator(val simData: Map<DateTime, Sim1aResultsRow>,
+open class Sim1aTimeSeriesCreator(val simData: Map<DateTime, Sim1aResultsRow>,
                              val targetFileName: String) {
     fun run() {
         // TODO: Test this
