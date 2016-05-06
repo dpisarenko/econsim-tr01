@@ -10,7 +10,7 @@ class Sim1aTimeSeriesCreator(val simData: Map<DateTime, Sim1aResultsRow>,
                              val targetFileName: String) {
     fun run() {
         // TODO: Test this
-        val times = simData.keys.toMutableList()
+        val times = toMutableList()
         sort(times)
         val builder = createStringBuilder()
         builder.append(composeHeader(simData))
@@ -18,23 +18,25 @@ class Sim1aTimeSeriesCreator(val simData: Map<DateTime, Sim1aResultsRow>,
         writeToFile(builder)
     }
 
-    protected fun writeToFile(builder: StringBuilder) {
+    open internal fun toMutableList() = simData.keys.toMutableList()
+
+    open internal fun writeToFile(builder: StringBuilder) {
         File(targetFileName).writeText(builder.toString())
     }
 
-    private fun createStringBuilder() = StringBuilder()
+    open internal fun createStringBuilder() = StringBuilder()
 
-    private fun sort(times: MutableList<DateTime>) {
+    open internal fun sort(times: MutableList<DateTime>) {
         times.sort()
     }
 
-    private fun composeHeader(simData: Map<DateTime, Sim1aResultsRow>): String {
+    open internal fun composeHeader(simData: Map<DateTime, Sim1aResultsRow>): String {
         // TODO: Implement this
         // TODO: Test this
         throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    private fun composeRowData(it: DateTime): String {
+    open internal fun composeRowData(it: DateTime): String {
         // TODO: Implement this
         // TODO: Test this
         throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
