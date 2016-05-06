@@ -4,6 +4,7 @@ import cc.altruix.econsimtr01.ResourceFlow
 import org.fest.assertions.Assertions
 import org.joda.time.DateTime
 import org.junit.Test
+import java.io.File
 import java.util.*
 
 /**
@@ -45,15 +46,17 @@ class Sim1aTests {
             it.run()
         }
         val actualFileName = "src/test/resources/ch0202/sim01a/Sim1aTests.test.actual.csv"
-        val expectedFileName = "src/test/resources/ch0202/sim01a/Sim1aTests.test.actual.csv"
         val timeSeriesCreator = Sim1aTimeSeriesCreator(
                 simResults,
                 actualFileName
         )
         timeSeriesCreator.run()
-        // TODO: Continue here
-        // TODO: Write out the data from simResults to actualFileName
-        // TODO: Compare contents of actualFileName with expectedFileName (should be equal)
+        val expectedFileName = "src/test/resources/ch0202/sim01a/Sim1aTests.test.actual.csv"
+        val expectedContents = File(expectedFileName).readText()
+        val actualContents = File(actualFileName).readText()
+        Assertions.assertThat(actualContents).isEqualTo(expectedContents)
+
+        // TODO: Make this test run
     }
     @Test
     fun createSensors() {
