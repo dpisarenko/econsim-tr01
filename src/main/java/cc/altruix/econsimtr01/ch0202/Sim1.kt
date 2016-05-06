@@ -24,9 +24,6 @@ open class Sim1(val logTarget:StringBuilder,
     }
 
     override fun createSensors(): List<ISensor> {
-        // TODO: Implement this
-        // TODO: Test this
-        // TBD
         return emptyList()
     }
 }

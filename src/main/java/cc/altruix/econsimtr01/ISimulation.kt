@@ -6,5 +6,5 @@ package cc.altruix.econsimtr01
  * @since 1.0
  */
 interface ISimulation {
-    fun run()/*:SimResults*/
+    fun run()
 }
