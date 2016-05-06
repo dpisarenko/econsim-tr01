@@ -96,4 +96,29 @@ class DefaultSimulationTests {
                 unattachedProcesses
         )
     }
+    @Test
+    fun minimalSimulationCycleWiring() {
+        // Prepare
+        val out = Mockito.spy(DefaultSimulationForTesting2())
+        val agent = mock<IAgent>()
+        val agents = listOf(agent)
+        val sensor = mock<ISensor>()
+        val sensors = listOf(sensor)
+        val unattachedProcess = mock<IAction>()
+        val unattachedProcesses = listOf(unattachedProcess)
+        val t = 0L.millisToSimulationDateTime()
+        val newTime = t.plusMinutes(1)
+        // Run method under test
+        val actResult = out.minimalSimulationCycle(
+                agents,
+                sensors,
+                t,
+                unattachedProcesses
+        )
+        // Verify
+        Assertions.assertThat(actResult).isEqualTo(newTime)
+        Mockito.verify(agent).act(newTime)
+        Mockito.verify(unattachedProcess).run(newTime)
+        Mockito.verify(sensor).measure(newTime, agents)
+    }
 }

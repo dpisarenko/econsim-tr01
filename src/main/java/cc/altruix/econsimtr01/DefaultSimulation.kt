@@ -21,7 +21,8 @@ abstract class DefaultSimulation(val simParametersProvider: ISimParametersProvid
     internal open fun minimalSimulationCycle(agents: List<IAgent>,
                                         sensors: List<ISensor>,
                                         oldTime: DateTime,
-                                        unattachedProcesses: List<IAction>): DateTime {
+                                        unattachedProcesses: List<IAction>)
+            : DateTime {
         val newTime = oldTime.plusMinutes(1)
         agents.forEach { it.act(newTime) }
         // TODO: Test that unattachedProcesses are called
