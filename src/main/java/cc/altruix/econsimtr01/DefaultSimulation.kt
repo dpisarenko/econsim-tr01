@@ -25,7 +25,6 @@ abstract class DefaultSimulation(val simParametersProvider: ISimParametersProvid
             : DateTime {
         val newTime = oldTime.plusMinutes(1)
         agents.forEach { it.act(newTime) }
-        // TODO: Test that unattachedProcesses are called
         unattachedProcesses.forEach { it.run(newTime) }
         sensors.forEach { it.measure(newTime, agents) }
         return newTime
