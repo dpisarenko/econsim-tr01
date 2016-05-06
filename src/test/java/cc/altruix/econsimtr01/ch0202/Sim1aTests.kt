@@ -1,11 +1,9 @@
 package cc.altruix.econsimtr01.ch0202
 
 import cc.altruix.econsimtr01.ResourceFlow
-import cc.altruix.econsimtr01.millisToSimulationDateTime
 import org.fest.assertions.Assertions
 import org.joda.time.DateTime
 import org.junit.Test
-import java.io.File
 import java.util.*
 
 /**
@@ -36,37 +34,23 @@ class Sim1aTests {
         )
         val simResults = HashMap<DateTime,Sim1aResultsRow>()
         val scenarioResults = scenarioDescriptors.map {
-            // TODO: Remove (if you can) logTarget
-            val logTarget = StringBuilder()
-            // TODO: Remove (if you can) flows
-            val flows = ArrayList<ResourceFlow>()
-            // TODO: Remove plFileName
-            val plFileName = it.name.replace(" ", "_")
-            // TODO: Remove plPathActual
-            val plPathActual = "src/test/resources/ch0202/sim01a/Sim1aTests$plFileName.pl.actual.txt"
-            // TODO: Remove plPathExpected
-            val plPathExpected = "src/test/resources/ch0202/sim01a/Sim1aTests$plFileName.pl.expected.txt"
-            // TODO: Remove csvPathActual
-            val csvPathActual = "src/test/resources/ch0202/sim01a/Sim1aTests$plFileName.csv.actual.txt"
-            // TODO: Remove csvPathExpected
-            val csvPathExpected = "src/test/resources/ch0202/sim01a/Sim1aTests$plFileName.csv.expected.txt"
-
-            val sim = Sim1a(logTarget, flows, it, simResults)
-            ScenarioResultsTuple(
-                    sim,
-                    plPathActual,
-                    plPathExpected,
-                    csvPathActual,
-                    csvPathExpected
+            Sim1a(
+                    logTarget = StringBuilder(),
+                    flows = ArrayList<ResourceFlow>(),
+                    simParametersProvider = it,
+                    resultsStorage = simResults
             )
         }
-        val timeSeriesCreator = Sim1aTimeSeriesCreator()
         scenarioResults.forEach {
-            it.sim.run()
+            it.run()
         }
-
         val actualFileName = "src/test/resources/ch0202/sim01a/Sim1aTests.test.actual.csv"
         val expectedFileName = "src/test/resources/ch0202/sim01a/Sim1aTests.test.actual.csv"
+        val timeSeriesCreator = Sim1aTimeSeriesCreator(
+                simResults,
+                actualFileName
+        )
+        timeSeriesCreator.run()
         // TODO: Continue here
         // TODO: Write out the data from simResults to actualFileName
         // TODO: Compare contents of actualFileName with expectedFileName (should be equal)
