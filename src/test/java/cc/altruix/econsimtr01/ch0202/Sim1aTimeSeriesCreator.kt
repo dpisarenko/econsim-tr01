@@ -9,12 +9,15 @@ import java.io.File
 open class Sim1aTimeSeriesCreator(val simData: Map<DateTime, Sim1aResultsRow>,
                              val targetFileName: String) {
     fun run() {
-        // TODO: Test this
         val times = toMutableList()
         sort(times)
         val builder = createStringBuilder()
         builder.append(composeHeader(simData))
-        times.map { composeRowData(it) }.forEach { builder.append(it) }
+        times.map {
+            composeRowData(it)
+        }.forEach {
+            builder.append(it)
+        }
         writeToFile(builder)
     }
 
