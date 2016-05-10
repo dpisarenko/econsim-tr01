@@ -1,7 +1,5 @@
 package cc.altruix.econsimtr01.ch0202
 
-import cc.altruix.econsimtr01.DefaultSimulation
-import cc.altruix.econsimtr01.newLine
 import cc.altruix.econsimtr01.toSimulationDateTimeString
 import org.joda.time.DateTime
 import org.slf4j.LoggerFactory
