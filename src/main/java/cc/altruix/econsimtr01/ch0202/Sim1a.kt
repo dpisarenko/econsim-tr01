@@ -18,7 +18,7 @@ class Sim1a(logTarget:StringBuilder,
     override fun createAgents(): List<IAgent> {
         val agents = super.createAgents()
         attachFlowsToAgents(
-                (simParametersProvider as cc.altruix.econsimtr01.ch0201.Sim1ParametersProvider).flows,
+                (simParametersProvider as Sim1ParametersProvider).flows,
                 simParametersProvider.agents,
                 this.flows)
 
