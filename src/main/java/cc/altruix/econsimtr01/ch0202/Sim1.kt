@@ -12,7 +12,7 @@ open class Sim1(val logTarget:StringBuilder,
     val population = Population(simParametersProvider.initialNetworkSize)
     override fun createAgents(): List<IAgent> {
         val sim1Params = simParametersProvider as Sim1ParametersProvider
-        return listOf(
+        val agents = listOf(
                 Protagonist(sim1Params.totalTimeForOfflineNetworkingPerWeek,
                         sim1Params.maxNetworkingSessionsPerBusinessDay,
                         sim1Params.timePerOfflineNetworkingSession,
@@ -21,6 +21,7 @@ open class Sim1(val logTarget:StringBuilder,
                         population
                 )
         )
+        return agents
     }
 
     override fun createSensors(): List<ISensor> {
