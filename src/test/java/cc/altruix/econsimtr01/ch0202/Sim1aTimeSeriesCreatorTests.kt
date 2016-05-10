@@ -23,7 +23,7 @@ class Sim1aTimeSeriesCreatorTests {
         simData.put(t0, row0)
         simData.put(t0, row1)
         val targetFileName = "targetFileName"
-        val out = Mockito.spy(Sim1aTimeSeriesCreator(simData, targetFileName))
+        val out = Mockito.spy(Sim1aTimeSeriesCreator(simData, targetFileName, emptyList()))
         val times = arrayListOf(t0, t1)
         val builder = StringBuilder()
         Mockito.doReturn(builder).`when`(out).createStringBuilder()

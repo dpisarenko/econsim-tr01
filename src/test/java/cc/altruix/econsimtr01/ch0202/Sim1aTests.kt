@@ -13,9 +13,11 @@ import java.util.*
 class Sim1aTests {
     @Test
     fun test() {
+        val sim1Name = "Scenario 1"
+        val sim2Name = "Scenario 2"
         val scenarioDescriptors = listOf(
                 Sim1ParametersProvider(
-                    name = "Scenario 1",
+                    name = sim1Name,
                     agents = ArrayList(),
                     flows = ArrayList(),
                     initialResourceLevels = ArrayList(),
@@ -24,7 +26,7 @@ class Sim1aTests {
                     initialNetworkSize = 100
                 ),
                 Sim1ParametersProvider(
-                    name = "Scenario 2",
+                    name = sim2Name,
                     agents = ArrayList(),
                     flows = ArrayList(),
                     initialResourceLevels = ArrayList(),
@@ -46,9 +48,11 @@ class Sim1aTests {
             it.run()
         }
         val actualFileName = "src/test/resources/ch0202/sim01a/Sim1aTests.test.actual.csv"
+
         val timeSeriesCreator = Sim1aTimeSeriesCreator(
                 simResults,
-                actualFileName
+                actualFileName,
+                listOf(sim1Name, sim2Name)
         )
         timeSeriesCreator.run()
         val expectedFileName = "src/test/resources/ch0202/sim01a/Sim1aTests.test.actual.csv"
