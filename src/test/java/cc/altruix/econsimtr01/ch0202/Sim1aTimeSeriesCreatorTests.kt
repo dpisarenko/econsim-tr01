@@ -30,7 +30,7 @@ class Sim1aTimeSeriesCreatorTests {
         Mockito.doReturn(times).`when`(out).toMutableList()
         Mockito.doNothing().`when`(out).sort(times)
         val header = "header"
-        Mockito.doReturn(header).`when`(out).composeHeader(simData)
+        Mockito.doReturn(header).`when`(out).composeHeader()
         val rowString0 = "rowString0"
         val rowString1 = "rowString1"
         Mockito.doReturn(rowString0).`when`(out).composeRowData(t0)
@@ -46,5 +46,27 @@ class Sim1aTimeSeriesCreatorTests {
         Mockito.verify(out).composeRowData(t1)
         Mockito.verify(out).writeToFile(builder)
         Assertions.assertThat(builder.toString()).isEqualTo(header + rowString0 + rowString1)
+    }
+    @Test
+    fun composeHeader() {
+        // Prepare
+        val simData = HashMap<DateTime, Sim1aResultsRow>()
+        val targetFileName = "targetFileName"
+        val sim1Name = "Scenario 1"
+        val sim2Name = "Scenario 2"
+        val out = Mockito.spy(
+                Sim1aTimeSeriesCreator(
+                        simData,
+                        targetFileName,
+                        listOf(sim1Name, sim2Name)
+                )
+        )
+        // Run method under test
+        val header = out.composeHeader()
+        // Verify
+        Assertions.assertThat(header).isEqualTo(
+"""t;"Scenario 1: Number of people willing to meet";"Scenario 1: Number of people willing to recommend my friend";"Scenario 1: Number of people my friend had an offline networking session with";"Scenario 1: Number of people willing to purchase my friend's services, if need arises";"Scenario 2: Number of people willing to meet";"Scenario 2: Number of people willing to recommend my friend";"Scenario 2: Number of people my friend had an offline networking session with";"Scenario 2: Number of people willing to purchase my friend's services, if need arises";
+"""
+        );
     }
 }

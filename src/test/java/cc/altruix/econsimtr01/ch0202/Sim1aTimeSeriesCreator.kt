@@ -14,7 +14,7 @@ open class Sim1aTimeSeriesCreator(val simData: Map<DateTime, Sim1aResultsRow>,
         val times = toMutableList()
         sort(times)
         val builder = createStringBuilder()
-        builder.append(composeHeader(simData))
+        builder.append(composeHeader())
         times.map {
             composeRowData(it)
         }.forEach {
@@ -35,7 +35,7 @@ open class Sim1aTimeSeriesCreator(val simData: Map<DateTime, Sim1aResultsRow>,
         times.sort()
     }
 
-    open internal fun composeHeader(simData: Map<DateTime, Sim1aResultsRow>): String {
+    open internal fun composeHeader(): String {
         // TODO: Test this
         val sb = StringBuilder()
         sb.append("t")
@@ -44,13 +44,15 @@ open class Sim1aTimeSeriesCreator(val simData: Map<DateTime, Sim1aResultsRow>,
             simName ->
                 Sim1aResultRowField.values().forEach {
                     field ->
+                        sb.append("\"")
                         sb.append(simName)
                         sb.append(": ")
                         sb.append(field.description)
+                        sb.append("\"")
                         sb.append(";")
                 }
         }
-        sb.newLine()
+        sb.append("\n")
         return sb.toString()
     }
 
