@@ -27,7 +27,7 @@ class Sim1a(logTarget:StringBuilder,
                 flows,
                 ArrayList(agents),
                 this.flows)
-        // TODO: Add agent nature
+        // TODO: Continue here, Add agent nature
         return agents
     }
 
