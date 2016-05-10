@@ -1,7 +1,10 @@
 package cc.altruix.econsimtr01.ch0202
 
+import cc.altruix.econsimtr01.DefaultSimulation
 import cc.altruix.econsimtr01.newLine
+import cc.altruix.econsimtr01.toSimulationDateTimeString
 import org.joda.time.DateTime
+import org.slf4j.LoggerFactory
 import java.io.File
 
 /**
@@ -10,6 +13,7 @@ import java.io.File
 open class Sim1aTimeSeriesCreator(val simData: Map<DateTime, Sim1aResultsRow>,
                                   val targetFileName: String,
                                   val simNames: List<String>) {
+    val LOGGER = LoggerFactory.getLogger(Sim1aTimeSeriesCreator::class.java)
     fun run() {
         val times = toMutableList()
         sort(times)
@@ -36,7 +40,6 @@ open class Sim1aTimeSeriesCreator(val simData: Map<DateTime, Sim1aResultsRow>,
     }
 
     open internal fun composeHeader(): String {
-        // TODO: Test this
         val sb = StringBuilder()
         sb.append("t")
         sb.append(";")
@@ -56,9 +59,48 @@ open class Sim1aTimeSeriesCreator(val simData: Map<DateTime, Sim1aResultsRow>,
         return sb.toString()
     }
 
-    open internal fun composeRowData(it: DateTime): String {
-        // TODO: Implement this
+    open internal fun composeRowData(time: DateTime): String {
         // TODO: Test this
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val data = simData.get(time)?.data
+
+        if (data == null) {
+            LOGGER.error("Can't find data for point in time '${time.toSimulationDateTimeString()}'")
+            return "\n"
+        }
+        val sb = StringBuilder()
+        sb.append(time.toSimulationDateTimeString())
+        sb.append(";")
+        simNames.forEach {
+            simName ->
+            val row = data.get(simName)
+            if (row == null) {
+                appendQuestionMarks(sb)
+            } else {
+                appendData(row, sb)
+            }
+        }
+        sb.append("\n")
+        return sb.toString()
+    }
+
+    protected fun appendData(row: MutableMap<Sim1aResultRowField, Double>, sb: StringBuilder) {
+        // TODO: Test this
+        Sim1aResultRowField.values().forEach {
+            field ->
+            sb.append("\"")
+            sb.append(row.get(field))
+            sb.append("\"")
+            sb.append(";")
+        }
+    }
+
+    internal fun appendQuestionMarks(sb: StringBuilder) {
+        Sim1aResultRowField.values().forEach {
+            field ->
+            sb.append("\"")
+            sb.append("?")
+            sb.append("\"")
+            sb.append(";")
+        }
     }
 }
