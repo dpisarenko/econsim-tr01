@@ -54,12 +54,10 @@ class Sim1aTimeSeriesCreatorTests {
         val targetFileName = "targetFileName"
         val sim1Name = "Scenario 1"
         val sim2Name = "Scenario 2"
-        val out = Mockito.spy(
-                Sim1aTimeSeriesCreator(
-                        simData,
-                        targetFileName,
-                        listOf(sim1Name, sim2Name)
-                )
+        val out = Sim1aTimeSeriesCreator(
+                simData,
+                targetFileName,
+                listOf(sim1Name, sim2Name)
         )
         // Run method under test
         val header = out.composeHeader()
@@ -68,5 +66,63 @@ class Sim1aTimeSeriesCreatorTests {
 """t;"Scenario 1: Number of people willing to meet";"Scenario 1: Number of people willing to recommend my friend";"Scenario 1: Number of people my friend had an offline networking session with";"Scenario 1: Number of people willing to purchase my friend's services, if need arises";"Scenario 2: Number of people willing to meet";"Scenario 2: Number of people willing to recommend my friend";"Scenario 2: Number of people my friend had an offline networking session with";"Scenario 2: Number of people willing to purchase my friend's services, if need arises";
 """
         );
+    }
+    @Test
+    fun composeRowDataDefaultScenario() {
+        // Prepare
+        val simData = HashMap<DateTime, Sim1aResultsRow>()
+        val targetFileName = "targetFileName"
+        val sim1Name = "Scenario 1"
+        val sim2Name = "Scenario 2"
+        val out = Sim1aTimeSeriesCreator(
+                simData,
+                targetFileName,
+                listOf(sim1Name, sim2Name)
+        )
+        val t = 0L.millisToSimulationDateTime()
+        val row = Sim1aResultsRow(t)
+        row.data.put(sim1Name, hashMapOf(
+                Pair(
+                        Sim1aResultRowField.PEOPLE_MET,
+                        1.0
+                ),
+                Pair(
+                        Sim1aResultRowField.PEOPLE_WILLING_TO_MEET,
+                        2.0
+                ),
+                Pair(
+                        Sim1aResultRowField.PEOPLE_WILLING_TO_PURCHASE,
+                        3.0
+                ),
+                Pair(
+                        Sim1aResultRowField.PEOPLE_WILLING_TO_RECOMMEND,
+                        4.0
+                )
+        ))
+        row.data.put(sim2Name,
+                hashMapOf(
+                Pair(
+                        Sim1aResultRowField.PEOPLE_MET,
+                        5.0
+                ),
+                Pair(
+                        Sim1aResultRowField.PEOPLE_WILLING_TO_MEET,
+                        6.0
+                ),
+                Pair(
+                        Sim1aResultRowField.PEOPLE_WILLING_TO_PURCHASE,
+                        7.0
+                ),
+                Pair(
+                        Sim1aResultRowField.PEOPLE_WILLING_TO_RECOMMEND,
+                        8.0
+                )
+        ))
+        simData.put(t, row)
+        // Run method under test
+        val actRes = out.composeRowData(t)
+        // Verify
+        Assertions.assertThat(actRes).isEqualTo("""0000-01-01 00:00;"2.0";"4.0";"1.0";"3.0";"6.0";"8.0";"5.0";"7.0";
+""")
     }
 }

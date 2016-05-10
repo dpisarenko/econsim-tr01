@@ -60,14 +60,13 @@ open class Sim1aTimeSeriesCreator(val simData: Map<DateTime, Sim1aResultsRow>,
     }
 
     open internal fun composeRowData(time: DateTime): String {
-        // TODO: Test this
-        val data = simData.get(time)?.data
+        val data = getTimeData(time)
 
         if (data == null) {
             LOGGER.error("Can't find data for point in time '${time.toSimulationDateTimeString()}'")
             return "\n"
         }
-        val sb = StringBuilder()
+        val sb = createStringBuilder()
         sb.append(time.toSimulationDateTimeString())
         sb.append(";")
         simNames.forEach {
@@ -83,8 +82,9 @@ open class Sim1aTimeSeriesCreator(val simData: Map<DateTime, Sim1aResultsRow>,
         return sb.toString()
     }
 
+    internal open fun getTimeData(time: DateTime) = simData.get(time)?.data
+
     protected fun appendData(row: MutableMap<Sim1aResultRowField, Double>, sb: StringBuilder) {
-        // TODO: Test this
         Sim1aResultRowField.values().forEach {
             field ->
             sb.append("\"")
