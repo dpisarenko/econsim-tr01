@@ -15,16 +15,17 @@ class Sim1a(logTarget:StringBuilder,
         Sim1(logTarget, flows, simParametersProvider) {
     override fun createAgents(): List<IAgent> {
         val agents = super.createAgents()
-        val flows = LinkedList<PlFlow>()
+        val plFlows = LinkedList<PlFlow>()
         agents.forEach { agt ->
             if (agt is DefaultAgent) {
                 agt.actions
                         .filter { it is PlFlow }
-                        .forEach { flows.add(it as PlFlow) }
+                        .forEach { plFlows.add(it as PlFlow) }
             }
         }
-        flows.forEach { flow ->
+        plFlows.forEach { flow ->
             flow.agents = agents
+            flow.flows = flows
         }
         return agents
     }
