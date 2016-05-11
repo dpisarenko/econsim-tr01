@@ -9,5 +9,7 @@ class Nature : DefaultAgent(ID) {
     companion object {
         val ID = "nature"
     }
-
+    init {
+        setInfinite(Sim1ParametersProvider.RESOURCE_AVAILABLE_TIME.id)
+    }
 }

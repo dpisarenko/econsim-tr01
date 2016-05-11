@@ -23,11 +23,9 @@ class Sim1a(logTarget:StringBuilder,
                         .forEach { flows.add(it as PlFlow) }
             }
         }
-        attachFlowsToAgents(
-                flows,
-                ArrayList(agents),
-                this.flows)
-        // TODO: Continue here, Add agent nature
+        flows.forEach { flow ->
+            flow.agents = agents
+        }
         return agents
     }
 
