@@ -19,7 +19,8 @@ open class Sim1(val logTarget:StringBuilder,
                         sim1Params.recommendationConversion,
                         sim1Params.willingnessToPurchaseConversion,
                         population
-                )
+                ),
+                Nature()
         )
         return agents
     }
