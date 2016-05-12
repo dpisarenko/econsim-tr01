@@ -1,10 +1,17 @@
 @startuml
-(*)  --> "check input"
-If "input is verbose" then
---> [Yes] "turn on verbosity"
---> "run command"
-else
---> "run command"
-Endif
--->(*)
+|Human|
+start
+:Seeds in a shack]
+note right: Rectangles are things.
+:Put seeds into ground;
+note right: Processes look like this.
+|Field|
+:Seeds in ground]
+:Ripen;
+:Agricultural product on the field]
+note left: Agricultural product is e. g. wheat, rye etc.
+|Human|
+:Collect;
+:Agricultural product in the shack]
+stop
 @enduml
