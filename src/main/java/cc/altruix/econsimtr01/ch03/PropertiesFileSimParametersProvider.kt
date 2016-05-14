@@ -24,8 +24,11 @@ abstract open class PropertiesFileSimParametersProvider(val file: File) : ISimPa
         get
     override val transformations:MutableList<PlTransformation> = LinkedList()
         get
-    open val validity:ValidationResult = init(file)
+    lateinit var validity:ValidationResult
         get
 
+    open fun initAndValidate() {
+        validity = init(file)
+    }
     abstract fun init(file: File):ValidationResult
 }

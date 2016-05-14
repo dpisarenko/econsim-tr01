@@ -72,5 +72,7 @@ class CmdLineParametersValidatorTests {
         Mockito.verify(out).canRead(file2)
         Mockito.verify(out).createSimParametersProvider(file1)
         Mockito.verify(out).createSimParametersProvider(file2)
+        Mockito.verify(simParamProv1).initAndValidate()
+        Mockito.verify(simParamProv2).initAndValidate()
     }
 }

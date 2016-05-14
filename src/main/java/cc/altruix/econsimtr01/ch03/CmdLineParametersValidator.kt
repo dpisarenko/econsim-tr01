@@ -26,6 +26,7 @@ open class CmdLineParametersValidator : ICmdLineParametersValidator {
             )
         }
         val simParamProviders = files.map { createSimParametersProvider(it) }
+        simParamProviders.forEach { it.initAndValidate() }
         val invalidParamProvider = simParamProviders.filter { !it.validity.valid }.firstOrNull()
         if (invalidParamProvider != null) {
             return ValidationResult(
