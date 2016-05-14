@@ -19,12 +19,12 @@ class CmdLineParametersValidatorTests {
     }
     @Test
     fun validateReturnsFalseIfFileNotReadable() {
-        val out = Mockito.spy(CmdLineParametersValidator())
         val fname1 = "fname1"
         val fname2 = "fname2"
         val args = arrayOf(fname1, fname2)
         val file1 = File("")
         val file2 = File("")
+        val out = Mockito.spy(CmdLineParametersValidator())
         Mockito.doReturn(file1).`when`(out).createFile(fname1)
         Mockito.doReturn(file2).`when`(out).createFile(fname2)
         Mockito.doReturn(true).`when`(out).canRead(file1)

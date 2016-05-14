@@ -16,6 +16,16 @@ open class CmdLineParametersValidator : ICmdLineParametersValidator {
                     message = USAGE
             )
         }
+        val files = args.map { createFile(it) }
+        val unreadableFile = files.filter { !it.canRead() }.firstOrNull()
+
+        if (unreadableFile != null) {
+            return CmdLineParametersValidationResult(
+                    valid = false,
+                    message = "Can't read file '${unreadableFile.name}'"
+            )
+        }
+
         // TODO: Test this
         // TODO: Implement this
         throw UnsupportedOperationException()
