@@ -22,8 +22,8 @@ class CmdLineParametersValidatorTests {
         val fname1 = "fname1"
         val fname2 = "fname2"
         val args = arrayOf(fname1, fname2)
-        val file1 = File("")
-        val file2 = File("")
+        val file1 = File(fname1)
+        val file2 = File(fname2)
         val out = Mockito.spy(CmdLineParametersValidator())
         Mockito.doReturn(file1).`when`(out).createFile(fname1)
         Mockito.doReturn(file2).`when`(out).createFile(fname2)

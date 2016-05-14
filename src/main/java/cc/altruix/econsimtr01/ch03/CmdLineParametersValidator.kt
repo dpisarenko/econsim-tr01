@@ -17,7 +17,7 @@ open class CmdLineParametersValidator : ICmdLineParametersValidator {
             )
         }
         val files = args.map { createFile(it) }
-        val unreadableFile = files.filter { !it.canRead() }.firstOrNull()
+        val unreadableFile = files.filter { !canRead(it) }.firstOrNull()
 
         if (unreadableFile != null) {
             return CmdLineParametersValidationResult(
@@ -26,10 +26,12 @@ open class CmdLineParametersValidator : ICmdLineParametersValidator {
             )
         }
 
+
+
         // TODO: Test this
         // TODO: Implement this
         throw UnsupportedOperationException()
     }
-    internal open fun createFile(name:String):File = File(name)
-    internal open fun canRead(file: File) : Boolean = file.canRead()
+    open fun createFile(name:String):File = File(name)
+    open fun canRead(file: File) : Boolean = file.canRead()
 }
