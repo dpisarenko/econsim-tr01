@@ -88,7 +88,7 @@ class CmdLineParametersValidatorTests {
         Mockito.doReturn(true).`when`(out).canRead(file2)
         val simParamProv1Validity = ValidationResult(true, "")
         val simParamProv2Validity = ValidationResult(true, "SimParametersProviderError")
-        val simParamProv1 = Mockito.spy(PropertiesFileSimParametersProviderForTesting(file1, simParamProv1Validity))
+        val simParamProv1 = Mockito.spy(PropertiesFileSimParametersProviderForTesting(file1, simParamProv2Validity))
         val simParamProv2 = Mockito.spy(PropertiesFileSimParametersProviderForTesting(file2, simParamProv2Validity))
         Mockito.doReturn(simParamProv1).`when`(out).createSimParametersProvider(file1)
         Mockito.doReturn(simParamProv2).`when`(out).createSimParametersProvider(file2)
