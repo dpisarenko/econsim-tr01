@@ -39,4 +39,12 @@ class CmdLineParametersValidatorTests {
         Mockito.verify(out).canRead(file1)
         Mockito.verify(out).canRead(file2)
     }
+    @Test
+    fun validateDetectsFilesWithMissingOrIncorrectData() {
+        // TODO: Implement this test
+        // TODO: Continue here
+        // Prepare
+        // Run method under test
+        // Verify
+    }
 }

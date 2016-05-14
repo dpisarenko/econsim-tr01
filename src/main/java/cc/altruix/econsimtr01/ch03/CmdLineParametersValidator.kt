@@ -25,13 +25,14 @@ open class CmdLineParametersValidator : ICmdLineParametersValidator {
                     message = "Can't read file '${unreadableFile.name}'"
             )
         }
-
-
+        val simParamProviders = files.map { createSimParametersProvider(it) }
 
         // TODO: Test this
         // TODO: Implement this
         throw UnsupportedOperationException()
     }
-    open fun createFile(name:String):File = File(name)
-    open fun canRead(file: File) : Boolean = file.canRead()
+    internal open fun createFile(name:String):File = File(name)
+    internal open fun canRead(file: File) : Boolean = file.canRead()
+    internal open fun createSimParametersProvider(file:File) : PropertiesFileSimParametersProvider =
+            PropertiesFileSimParametersProvider(file)
 }
