@@ -1,5 +1,6 @@
 package cc.altruix.econsimtr01.ch03
 
+import cc.altruix.econsimtr01.mock
 import org.fest.assertions.Assertions
 import org.junit.Test
 import org.mockito.Mockito
@@ -44,6 +45,21 @@ class CmdLineParametersValidatorTests {
         // TODO: Implement this test
         // TODO: Continue here
         // Prepare
+        val fname1 = "fname1"
+        val fname2 = "fname2"
+        val args = arrayOf(fname1, fname2)
+        val file1 = File(fname1)
+        val file2 = File(fname2)
+        val out = Mockito.spy(CmdLineParametersValidator())
+        Mockito.doReturn(file1).`when`(out).createFile(fname1)
+        Mockito.doReturn(file2).`when`(out).createFile(fname2)
+        Mockito.doReturn(true).`when`(out).canRead(file1)
+        Mockito.doReturn(true).`when`(out).canRead(file2)
+        val simParamProv1 = mock<PropertiesFileSimParametersProvider>()
+        val simParamProv2 = mock<PropertiesFileSimParametersProvider>()
+        Mockito.doReturn(simParamProv1).`when`(out).createSimParametersProvider(file1)
+        Mockito.doReturn(simParamProv2).`when`(out).createSimParametersProvider(file2)
+
         // Run method under test
         // Verify
     }

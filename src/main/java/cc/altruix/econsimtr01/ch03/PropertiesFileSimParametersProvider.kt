@@ -12,7 +12,7 @@ import java.util.*
 /**
  * Created by pisarenko on 14.05.2016.
  */
-class PropertiesFileSimParametersProvider(val file: File) : ISimParametersProvider {
+abstract open class PropertiesFileSimParametersProvider(val file: File) : ISimParametersProvider {
     override val agents:MutableList<IAgent> = LinkedList()
         get
     override val flows:MutableList<PlFlow> = LinkedList()
@@ -24,11 +24,8 @@ class PropertiesFileSimParametersProvider(val file: File) : ISimParametersProvid
         get
     override val transformations:MutableList<PlTransformation> = LinkedList()
         get
+    open val validity:ValidationResult = init(file)
+        get
 
-    fun init(file: File):Boolean {
-        // Returns true, if everything is OK
-        // TODO: Implement this
-        // TODO: Test this
-        return false
-    }
+    abstract fun init(file: File):ValidationResult
 }
