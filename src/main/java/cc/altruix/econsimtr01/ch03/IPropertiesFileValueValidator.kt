@@ -6,5 +6,5 @@ import java.util.*
  * Created by pisarenko on 14.05.2016.
  */
 interface IPropertiesFileValueValidator {
-    fun validate(data: Properties):ValidationResult
+    fun validate(data: Properties, param:String):ValidationResult
 }

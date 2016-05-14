@@ -6,10 +6,9 @@ import java.io.File
  * Created by pisarenko on 14.05.2016.
  */
 class AgriculturalSimParametersProvider(file: File) : PropertiesFileSimParametersProvider(file) {
-    override fun init(file: File): ValidationResult {
-        // Returns true, if everything is OK
+    override fun createValidators(): Map<String, List<IPropertiesFileValueValidator>> {
         // TODO: Implement this
         // TODO: Test this
-        return ValidationResult(false, "")
+        return emptyMap()
     }
 }

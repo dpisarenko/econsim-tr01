@@ -5,7 +5,7 @@ import java.util.*
 /**
  * Created by pisarenko on 14.05.2016.
  */
-object DayOfMonthValidator : IPropertiesFileValueValidator {
+object ExistenceValidator : IPropertiesFileValueValidator {
     override fun validate(data: Properties, param:String): ValidationResult {
         // TODO: Implement this
         // TODO: Test this

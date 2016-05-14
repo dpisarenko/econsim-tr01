@@ -6,6 +6,7 @@ import cc.altruix.econsimtr01.PlFlow
 import cc.altruix.econsimtr01.PlTransformation
 import cc.altruix.econsimtr01.ch0201.InfiniteResourceSupply
 import cc.altruix.econsimtr01.ch0201.InitialResourceLevel
+import org.apache.commons.io.IOUtils
 import java.io.File
 import java.util.*
 
@@ -28,7 +29,28 @@ abstract open class PropertiesFileSimParametersProvider(val file: File) : ISimPa
         get
 
     open fun initAndValidate() {
-        validity = init(file)
+        // TODO: Test this
+        val validators = createValidators()
+
+        val data = Properties()
+        data.load(file.reader())
+
+        val valResults = LinkedList<ValidationResult>()
+
+        validators.entries.forEach { entry ->
+            val parameter = entry.key
+            val parameterValidators = entry.value
+
+            parameterValidators.forEach { validator ->
+                valResults.add(validator.validate(data, parameter))
+            }
+        }
+        val valid = valResults.filter { it.valid == false }.count() > 0
+        var message = ""
+        if (!valid) {
+            message = valResults.filter { it.valid == false }.map { it.message }.joinToString { ", " }
+        }
+        validity = ValidationResult(valid, message)
     }
-    abstract fun init(file: File):ValidationResult
+    abstract fun createValidators():Map<String,List<IPropertiesFileValueValidator>>
 }

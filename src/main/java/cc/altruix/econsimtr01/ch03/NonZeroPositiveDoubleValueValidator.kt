@@ -6,7 +6,7 @@ import java.util.*
  * Created by pisarenko on 14.05.2016.
  */
 object NonZeroPositiveDoubleValueValidator : IPropertiesFileValueValidator {
-    override fun validate(data: Properties): ValidationResult {
+    override fun validate(data: Properties, param:String): ValidationResult {
         // TODO: Implement this
         // TODO: Test this
         throw UnsupportedOperationException()
