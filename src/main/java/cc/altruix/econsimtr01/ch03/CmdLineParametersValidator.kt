@@ -1,9 +1,11 @@
 package cc.altruix.econsimtr01.ch03
 
+import java.io.File
+
 /**
  * Created by pisarenko on 14.05.2016.
  */
-class CmdLineParametersValidator : ICmdLineParametersValidator {
+open class CmdLineParametersValidator : ICmdLineParametersValidator {
     companion object {
         val USAGE = "Usage: java -cp java -cp econsim-tr01-1.0-SNAPSHOT-jar-with-dependencies.jar cc.altruix.econsimtr01.ch03.BasicAgriculturalSimulationAppKt sim1.properties [sim2.properties...]"
     }
@@ -18,4 +20,6 @@ class CmdLineParametersValidator : ICmdLineParametersValidator {
         // TODO: Implement this
         throw UnsupportedOperationException()
     }
+    internal open fun createFile(name:String):File = File(name)
+    internal open fun canRead(file: File) : Boolean = file.canRead()
 }
