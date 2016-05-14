@@ -8,5 +8,5 @@ import java.io.File
 open class PropertiesFileSimParametersProviderForTesting(file: File,
                                                     val valRes:ValidationResult) :
         PropertiesFileSimParametersProvider(file) {
-    override fun init(file: File): ValidationResult = valRes
+    override fun createValidators(): Map<String, List<IPropertiesFileValueValidator>> = emptyMap()
 }
