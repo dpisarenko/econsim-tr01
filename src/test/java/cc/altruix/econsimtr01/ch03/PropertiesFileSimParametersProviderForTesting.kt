@@ -5,7 +5,7 @@ import java.io.File
 /**
  * Created by pisarenko on 14.05.2016.
  */
-class PropertiesFileSimParametersProviderForTesting(file: File,
+open class PropertiesFileSimParametersProviderForTesting(file: File,
                                                     val valRes:ValidationResult) :
         PropertiesFileSimParametersProvider(file) {
     override fun init(file: File): ValidationResult = valRes

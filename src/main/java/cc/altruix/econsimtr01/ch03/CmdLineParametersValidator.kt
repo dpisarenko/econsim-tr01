@@ -34,10 +34,8 @@ open class CmdLineParametersValidator : ICmdLineParametersValidator {
                     message = "File '${invalidParamProvider.file.name}' is invalid ('${invalidParamProvider.validity.message}')"
             )
         }
-
         // TODO: Test this
-        // TODO: Implement this
-        throw UnsupportedOperationException()
+        return ValidationResult(true, "")
     }
     internal open fun createFile(name:String):File = File(name)
     internal open fun canRead(file: File) : Boolean = file.canRead()
