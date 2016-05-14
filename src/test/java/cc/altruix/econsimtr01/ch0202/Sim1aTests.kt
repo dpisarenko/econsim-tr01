@@ -3,6 +3,7 @@ package cc.altruix.econsimtr01.ch0202
 import cc.altruix.econsimtr01.ResourceFlow
 import org.fest.assertions.Assertions
 import org.joda.time.DateTime
+import org.junit.Ignore
 import org.junit.Test
 import java.io.File
 import java.util.*
@@ -12,6 +13,7 @@ import java.util.*
  */
 class Sim1aTests {
     @Test
+    @Ignore
     fun test() {
         val sim1Name = "Scenario 1"
         val sim2Name = "Scenario 2"
