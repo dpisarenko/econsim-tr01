@@ -35,7 +35,6 @@ object DayOfMonthValidator : IPropertiesFileValueValidator {
             return createWrongDayResult(param, pvalue)
         }
         return createCorrectValidationResult()
-        // TODO: Test this
     }
 
     private fun calculateMaxDaysInMonth(month: Int): Int = when (month) {
