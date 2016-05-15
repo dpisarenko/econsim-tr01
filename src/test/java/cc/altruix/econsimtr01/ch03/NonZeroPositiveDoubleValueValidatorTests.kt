@@ -57,7 +57,18 @@ class NonZeroPositiveDoubleValueValidatorTests {
 
     @Test
     fun validateDetectsNonZeroPositiveValue() {
-
+        correctValueTestLogic("+10")
+        correctValueTestLogic("10.0")
+        correctValueTestLogic("0.000001")
+        correctValueTestLogic("+10.0")
+        correctValueTestLogic("+0.000001")
     }
 
+    private fun correctValueTestLogic(paramValue: String) {
+        val data = Properties()
+        data["someParam"] = paramValue
+        val res = NonZeroPositiveDoubleValueValidator.validate(data, "someParam")
+        Assertions.assertThat(res.valid).isTrue()
+        Assertions.assertThat(res.message).isEqualTo("")
+    }
 }
