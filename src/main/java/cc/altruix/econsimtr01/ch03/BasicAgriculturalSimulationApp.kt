@@ -40,7 +40,10 @@ class BasicAgriculturalSimulationApp(
         //cmdLineParamValidator.simParamProviders.forEach { scenario -> }
     }
     fun createSemanticValidators():List<ISemanticSimulationParametersValidator> =
-            emptyList<ISemanticSimulationParametersValidator>()
+            listOf(
+                    EnoughCapacityForPuttingGroundsIntoField,
+                    EnoughCapacityForHarvesting
+            )
 }
 fun main(args : Array<String>) {
     BasicAgriculturalSimulationApp().run(args, System.out, System.err)
