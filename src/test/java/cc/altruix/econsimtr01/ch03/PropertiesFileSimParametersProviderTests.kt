@@ -50,4 +50,31 @@ class PropertiesFileSimParametersProviderTests {
         Assertions.assertThat(out.validity.valid).isEqualTo(valid)
         Assertions.assertThat(out.validity.message).isEqualTo(message)
     }
+    @Test
+    fun createMessageCreatesEmptyMessageIfEverythingValid() {
+        // Prepare
+        val out = Mockito.spy(PropertiesFileSimParametersProviderForTesting(File("someFile")))
+        val valResults = listOf<ValidationResult>(
+                ValidationResult(true, "message 1"),
+                ValidationResult(false, "message 2")
+        )
+        // Run method under test
+        val res = out.createMessage(valResults, true)
+        // Verify
+        Assertions.assertThat(res).isEmpty()
+    }
+    @Test
+    fun createMessageCreatesRightMessageIfInvalid() {
+        // Prepare
+        val out = Mockito.spy(PropertiesFileSimParametersProviderForTesting(File("someFile")))
+        val valResults = listOf<ValidationResult>(
+                ValidationResult(true, "message 1"),
+                ValidationResult(false, "message 2"),
+                ValidationResult(false, "message 3")
+        )
+        // Run method under test
+        val res = out.createMessage(valResults, false)
+        // Verify
+        Assertions.assertThat(res).isEqualTo("message 2, message 3")
+    }
 }
