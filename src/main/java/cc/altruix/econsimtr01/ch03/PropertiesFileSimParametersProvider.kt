@@ -50,7 +50,8 @@ abstract open class PropertiesFileSimParametersProvider(val file: File) : ISimPa
     }
 
     // TODO: Test this
-    open internal fun calculateValidity(valResults: List<ValidationResult>) = valResults.filter { it.valid == false }.count() < 1
+    open internal fun calculateValidity(valResults: List<ValidationResult>) =
+            valResults.filter { it.valid == false }.count() < 1
 
     open internal fun applyValidators(data: Properties,
                                       valResults: MutableList<ValidationResult>,

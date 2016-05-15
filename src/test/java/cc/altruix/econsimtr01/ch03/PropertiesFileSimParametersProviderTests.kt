@@ -52,7 +52,7 @@ class PropertiesFileSimParametersProviderTests {
     @Test
     fun createMessageCreatesEmptyMessageIfEverythingValid() {
         // Prepare
-        val out = Mockito.spy(PropertiesFileSimParametersProviderForTesting(File("someFile")))
+        val out = PropertiesFileSimParametersProviderForTesting(File("someFile"))
         val valResults = listOf<ValidationResult>(
                 ValidationResult(true, "message 1"),
                 ValidationResult(false, "message 2")
@@ -65,7 +65,7 @@ class PropertiesFileSimParametersProviderTests {
     @Test
     fun createMessageCreatesRightMessageIfInvalid() {
         // Prepare
-        val out = Mockito.spy(PropertiesFileSimParametersProviderForTesting(File("someFile")))
+        val out = PropertiesFileSimParametersProviderForTesting(File("someFile"))
         val valResults = listOf<ValidationResult>(
                 ValidationResult(true, "message 1"),
                 ValidationResult(false, "message 2"),
@@ -75,5 +75,25 @@ class PropertiesFileSimParametersProviderTests {
         val res = out.createMessage(valResults, false)
         // Verify
         Assertions.assertThat(res).isEqualTo("message 2, message 3")
+    }
+    @Test
+    fun calculateValidity() {
+        calculateValidityTestLogic(listOf(
+                ValidationResult(true, "message 1"),
+                ValidationResult(false, "message 2"),
+                ValidationResult(false, "message 3")
+        ), false)
+        calculateValidityTestLogic(listOf(
+                ValidationResult(true, "message 1"),
+                ValidationResult(true, "message 2"),
+                ValidationResult(true, "message 3")
+        ), true)
+    }
+
+    private fun calculateValidityTestLogic(valResults: List<ValidationResult>,
+                                           expectedResult: Boolean) {
+        val out = PropertiesFileSimParametersProviderForTesting(File("someFile"))
+        val valResults2 = valResults
+        Assertions.assertThat(out.calculateValidity(valResults2)).isEqualTo(expectedResult)
     }
 }
