@@ -28,7 +28,6 @@ abstract open class PropertiesFileSimParametersProvider(val file: File) : ISimPa
         get
 
     open fun initAndValidate() {
-        // TODO: Test this
         val validators = createValidators()
         val data = loadData()
         val valResults = createValResults()
