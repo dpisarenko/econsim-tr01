@@ -23,6 +23,5 @@ class AgriculturalSimParametersProviderTests {
         out.initAndValidate()
         Assertions.assertThat(out.validity.valid).isTrue()
         Assertions.assertThat(out.validity.message).isEmpty()
-// TODO: Test this
     }
 }

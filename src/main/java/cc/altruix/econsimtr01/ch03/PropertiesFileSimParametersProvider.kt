@@ -47,7 +47,7 @@ abstract open class PropertiesFileSimParametersProvider(val file: File) : ISimPa
                 }
             }
         }
-        val valid = valResults.filter { it.valid == false }.count() > 0
+        val valid = valResults.filter { it.valid == false }.count() < 1
         var message = ""
         if (!valid) {
             message = valResults.filter { it.valid == false }.map { it.message }.joinToString { ", " }
