@@ -10,7 +10,10 @@ class AgriculturalSimParametersProvider(file: File) : PropertiesFileSimParameter
     override fun createValidators(): Map<String, List<IPropertiesFileValueValidator>> {
         // TODO: Test this
         val validators = HashMap<String, List<IPropertiesFileValueValidator>>()
-        validators["SimulationName"] = listOf(ExistenceValidator, NonBlankStringValidator)
+        validators["SimulationName"] = listOf(
+                ExistenceValidator,
+                NonBlankStringValidator
+        )
         listOf(
                 "SizeOfField",
                 "NumberOfWorkers",
@@ -29,7 +32,11 @@ class AgriculturalSimParametersProvider(file: File) : PropertiesFileSimParameter
                 "Process1Start",
                 "Process2End"
         ).forEach { param ->
-            validators[param] = listOf(ExistenceValidator, DayOfMonthValidator)
+            validators[param] = listOf(
+                    ExistenceValidator,
+                    NonBlankStringValidator,
+                    DayOfMonthValidator
+            )
         }
         return validators
     }
