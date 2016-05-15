@@ -40,9 +40,12 @@ abstract open class PropertiesFileSimParametersProvider(val file: File) : ISimPa
         validators.entries.forEach { entry ->
             val parameter = entry.key
             val parameterValidators = entry.value
-
-            parameterValidators.forEach { validator ->
-                valResults.add(validator.validate(data, parameter))
+            for (validator in parameterValidators) {
+                val vres = validator.validate(data, parameter)
+                if (!vres.valid) {
+                    valResults.add(vres)
+                    break;
+                }
             }
         }
         val valid = valResults.filter { it.valid == false }.count() > 0
