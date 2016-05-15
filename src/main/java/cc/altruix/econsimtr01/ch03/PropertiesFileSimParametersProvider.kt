@@ -49,7 +49,6 @@ abstract open class PropertiesFileSimParametersProvider(val file: File) : ISimPa
         return message
     }
 
-    // TODO: Test this
     open internal fun calculateValidity(valResults: List<ValidationResult>) =
             valResults.filter { it.valid == false }.count() < 1
 

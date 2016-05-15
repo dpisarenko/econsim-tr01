@@ -1,5 +1,6 @@
 package cc.altruix.econsimtr01.ch03
 
+import cc.altruix.econsimtr01.mock
 import org.fest.assertions.Assertions
 import org.junit.Test
 import org.mockito.Mockito
@@ -95,5 +96,39 @@ class PropertiesFileSimParametersProviderTests {
         val out = PropertiesFileSimParametersProviderForTesting(File("someFile"))
         val valResults2 = valResults
         Assertions.assertThat(out.calculateValidity(valResults2)).isEqualTo(expectedResult)
+    }
+
+    @Test
+    fun applyValidatorsInvalidCase() {
+        // Prepare
+        val out = PropertiesFileSimParametersProviderForTesting(File("someFile"))
+        val data = Properties()
+        val valResults = LinkedList<ValidationResult>()
+        val parameter = "param"
+        val validator1 = mock<IPropertiesFileValueValidator>()
+        Mockito.`when`(validator1.validate(data, parameter)).thenReturn(
+                ValidationResult(true, "message1")
+        )
+        val validator2 = mock<IPropertiesFileValueValidator>()
+        val vres2 = ValidationResult(false, "message2")
+        Mockito.`when`(validator2.validate(data, parameter)).thenReturn(
+                vres2
+        )
+        val validator3 = mock<IPropertiesFileValueValidator>()
+        Mockito.`when`(validator3.validate(data, parameter)).thenReturn(
+                ValidationResult(false, "message3")
+        )
+        val parameterValidators = listOf<IPropertiesFileValueValidator>(
+                validator1,
+                validator2,
+                validator3
+        )
+        // Run method under test
+        out.applyValidators(data, valResults, parameter, parameterValidators)
+        // Verify
+        Mockito.verify(validator1).validate(data, parameter)
+        Mockito.verify(validator2).validate(data, parameter)
+        Mockito.verify(validator3, Mockito.never()).validate(data, parameter)
+        Assertions.assertThat(valResults).contains(vres2)
     }
 }
