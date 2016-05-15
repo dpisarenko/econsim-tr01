@@ -30,6 +30,7 @@ class AgriculturalSimParametersProvider(file: File) : PropertiesFileSimParameter
         }
         listOf(
                 "Process1Start",
+                "Process1End",
                 "Process2End"
         ).forEach { param ->
             validators[param] = listOf(
