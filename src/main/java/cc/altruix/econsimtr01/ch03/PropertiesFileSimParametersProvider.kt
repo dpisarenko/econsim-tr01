@@ -33,14 +33,14 @@ abstract open class PropertiesFileSimParametersProvider(val file: File) : ISimPa
         val data = loadData()
         val valResults = createValResults()
         validators.entries.forEach { entry ->
-            applyValidators(data, entry, valResults)
+            applyValidators(data, valResults, entry.key, entry.value)
         }
         val valid = calculateValidity(valResults)
         var message = createMessage(valResults, valid)
         validity = ValidationResult(valid, message)
     }
 
-    internal fun createMessage(valResults: LinkedList<ValidationResult>, valid: Boolean): String {
+    open internal fun createMessage(valResults: List<ValidationResult>, valid: Boolean): String {
         // TODO: Test this
         var message = ""
         if (!valid) {
@@ -50,14 +50,13 @@ abstract open class PropertiesFileSimParametersProvider(val file: File) : ISimPa
     }
 
     // TODO: Test this
-    internal fun calculateValidity(valResults: LinkedList<ValidationResult>) = valResults.filter { it.valid == false }.count() < 1
+    open internal fun calculateValidity(valResults: List<ValidationResult>) = valResults.filter { it.valid == false }.count() < 1
 
-    internal fun applyValidators(data: Properties,
-                                 entry: Map.Entry<String, List<IPropertiesFileValueValidator>>,
-                                 valResults: LinkedList<ValidationResult>) {
+    open internal fun applyValidators(data: Properties,
+                                      valResults: MutableList<ValidationResult>,
+                                      parameter: String,
+                                      parameterValidators: List<IPropertiesFileValueValidator>) {
         // TODO: Test this
-        val parameter = entry.key
-        val parameterValidators = entry.value
         for (validator in parameterValidators) {
             val vres = validator.validate(data, parameter)
             if (!vres.valid) {
@@ -67,9 +66,9 @@ abstract open class PropertiesFileSimParametersProvider(val file: File) : ISimPa
         }
     }
 
-    internal fun createValResults() = LinkedList<ValidationResult>()
+    open internal fun createValResults():MutableList<ValidationResult> = LinkedList<ValidationResult>()
 
-    internal fun loadData(): Properties {
+    open internal fun loadData(): Properties {
         val data = Properties()
         data.load(file.reader())
         return data
