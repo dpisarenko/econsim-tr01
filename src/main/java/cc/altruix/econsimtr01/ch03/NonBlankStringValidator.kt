@@ -11,7 +11,9 @@ import java.util.*
 object NonBlankStringValidator : IPropertiesFileValueValidator {
     override fun validate(data: Properties, param: String): ValidationResult =
         when {
-            StringUtils.isBlank(data.getProperty(param)) -> createCorrectValidationResult()
-            else -> createIncorrectValidationResult("Value of parameter '$param' is blank")
+            StringUtils.isBlank(data.getProperty(param).trim()) ->
+                createIncorrectValidationResult("Value of parameter '$param' is blank")
+            else ->
+                createCorrectValidationResult()
         }
 }
