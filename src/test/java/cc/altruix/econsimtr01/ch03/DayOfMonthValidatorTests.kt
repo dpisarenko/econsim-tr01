@@ -14,6 +14,19 @@ class DayOfMonthValidatorTests {
         invalidFormatTestLogic("30a.08")
         invalidFormatTestLogic("30.0v8")
         invalidFormatTestLogic("30!08")
+        invalidFormatTestLogic("-1.01")
+        invalidFormatTestLogic("-1.02")
+        invalidFormatTestLogic("-1.03")
+        invalidFormatTestLogic("-1.04")
+        invalidFormatTestLogic("-1.05")
+        invalidFormatTestLogic("-1.06")
+        invalidFormatTestLogic("-1.07")
+        invalidFormatTestLogic("-1.08")
+        invalidFormatTestLogic("-1.09")
+        invalidFormatTestLogic("-1.10")
+        invalidFormatTestLogic("-1.11")
+        invalidFormatTestLogic("-1.12")
+        invalidFormatTestLogic("01.-1")
     }
     @Test
     fun validateDetectsWrongDay() {
@@ -59,22 +72,9 @@ class DayOfMonthValidatorTests {
         wrongDayTestLogic("00.10")
         wrongDayTestLogic("00.11")
         wrongDayTestLogic("00.12")
-        wrongDayTestLogic("-1.01")
-        wrongDayTestLogic("-1.02")
-        wrongDayTestLogic("-1.03")
-        wrongDayTestLogic("-1.04")
-        wrongDayTestLogic("-1.05")
-        wrongDayTestLogic("-1.06")
-        wrongDayTestLogic("-1.07")
-        wrongDayTestLogic("-1.08")
-        wrongDayTestLogic("-1.09")
-        wrongDayTestLogic("-1.10")
-        wrongDayTestLogic("-1.11")
-        wrongDayTestLogic("-1.12")
     }
     @Test
     fun validateDetectsWrongMonth() {
-        wrongMonthTestLogic("01.-1")
         wrongMonthTestLogic("01.0")
         wrongMonthTestLogic("01.13")
         wrongMonthTestLogic("01.14")
