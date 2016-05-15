@@ -9,6 +9,7 @@ open class CmdLineParametersValidator : ICmdLineParametersValidator {
     companion object {
         val USAGE = "Usage: java -cp java -cp econsim-tr01-1.0-SNAPSHOT-jar-with-dependencies.jar cc.altruix.econsimtr01.ch03.BasicAgriculturalSimulationAppKt sim1.properties [sim2.properties...]"
     }
+    var simParamProviders = emptyList<PropertiesFileSimParametersProvider>()
     override fun validate(args: Array<String>): ValidationResult {
         if (args.isEmpty()) {
             return ValidationResult(
@@ -25,7 +26,7 @@ open class CmdLineParametersValidator : ICmdLineParametersValidator {
                     message = "Can't read file '${unreadableFile.name}'"
             )
         }
-        val simParamProviders = files.map { createSimParametersProvider(it) }
+        simParamProviders = files.map { createSimParametersProvider(it) }
         simParamProviders.forEach { it.initAndValidate() }
         val invalidParamProvider = simParamProviders.filter { !it.validity.valid }.firstOrNull()
         if (invalidParamProvider != null) {

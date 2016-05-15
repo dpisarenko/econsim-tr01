@@ -1,12 +1,13 @@
 package cc.altruix.econsimtr01.ch03
 
 import java.io.PrintStream
+import java.util.*
 
 /**
  * Created by pisarenko on 13.05.2016.
  */
 class BasicAgriculturalSimulationApp(
-        val cmdLineParamValidator:ICmdLineParametersValidator = CmdLineParametersValidator()
+        val cmdLineParamValidator:CmdLineParametersValidator = CmdLineParametersValidator()
 ) {
     fun run(args: Array<String>,
             out: PrintStream,
@@ -20,7 +21,26 @@ class BasicAgriculturalSimulationApp(
             err.println(cmdLineParamValRes.message)
             return
         }
+        val validators = createSemanticValidators()
+        val scenarios = cmdLineParamValidator.simParamProviders
+        val valRes = LinkedList<ValidationResult>()
+        scenarios.forEach { scenario ->
+            validators.map { it.validate(scenario) }.forEach { valRes.add(it) }
+        }
+        val error = valRes.find { it.valid == false }
+        if (error != null) {
+            val allErrors = valRes.filter { it.valid == false }.map { it.message }.joinToString (
+                    separator = ", "
+            )
+            err.println("One or more scenarios are invalid:")
+            err.println(allErrors)
+            return
+        }
+
+        //cmdLineParamValidator.simParamProviders.forEach { scenario -> }
     }
+    fun createSemanticValidators():List<ISemanticSimulationParametersValidator> =
+            emptyList<ISemanticSimulationParametersValidator>()
 }
 fun main(args : Array<String>) {
     BasicAgriculturalSimulationApp().run(args, System.out, System.err)
