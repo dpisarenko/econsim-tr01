@@ -131,4 +131,37 @@ class PropertiesFileSimParametersProviderTests {
         Mockito.verify(validator3, Mockito.never()).validate(data, parameter)
         Assertions.assertThat(valResults).contains(vres2)
     }
+    @Test
+    fun applyValidatorsValidCase() {
+        // Prepare
+        val out = PropertiesFileSimParametersProviderForTesting(File("someFile"))
+        val data = Properties()
+        val valResults = LinkedList<ValidationResult>()
+        val parameter = "param"
+        val validator1 = mock<IPropertiesFileValueValidator>()
+        Mockito.`when`(validator1.validate(data, parameter)).thenReturn(
+                ValidationResult(true, "message1")
+        )
+        val validator2 = mock<IPropertiesFileValueValidator>()
+        val vres2 = ValidationResult(true, "message2")
+        Mockito.`when`(validator2.validate(data, parameter)).thenReturn(
+                vres2
+        )
+        val validator3 = mock<IPropertiesFileValueValidator>()
+        Mockito.`when`(validator3.validate(data, parameter)).thenReturn(
+                ValidationResult(true, "message3")
+        )
+        val parameterValidators = listOf<IPropertiesFileValueValidator>(
+                validator1,
+                validator2,
+                validator3
+        )
+        // Run method under test
+        out.applyValidators(data, valResults, parameter, parameterValidators)
+        // Verify
+        Mockito.verify(validator1).validate(data, parameter)
+        Mockito.verify(validator2).validate(data, parameter)
+        Mockito.verify(validator3).validate(data, parameter)
+        Assertions.assertThat(valResults).isEmpty()
+    }
 }
