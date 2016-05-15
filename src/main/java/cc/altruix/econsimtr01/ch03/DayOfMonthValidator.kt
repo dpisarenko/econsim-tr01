@@ -38,18 +38,19 @@ object DayOfMonthValidator : IPropertiesFileValueValidator {
         // TODO: Test this
     }
 
+    private fun calculateMaxDaysInMonth(month: Int): Int = when (month) {
+        1, 3, 5, 7, 8, 10, 12 -> 31
+        2 -> 29
+        4, 6, 9, 11 -> 30
+        else -> 0
+    }
+
+    private fun createWrongFormatResult(param: String, value: String): ValidationResult
+        = createIncorrectValidationResult("Value '$value' of '$param' has invalid format")
+
     private fun createWrongMonthResult(param: String, pvalue: String): ValidationResult =
             createIncorrectValidationResult("Invalid month in parameter '$param' value ('$pvalue')")
 
     private fun createWrongDayResult(param: String, pvalue: String): ValidationResult =
             createIncorrectValidationResult("Invalid day in parameter '$param' value ('$pvalue')")
-
-    private fun calculateMaxDaysInMonth(month: Int): Int {
-// TODO: Implement this
-// TODO: Test this
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    private fun createWrongFormatResult(param: String, value: String): ValidationResult
-        = createIncorrectValidationResult("Value '$value' of '$param' has invalid format")
 }
