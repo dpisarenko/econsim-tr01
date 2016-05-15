@@ -19,7 +19,11 @@ class AgriculturalSimParametersProvider(file: File) : PropertiesFileSimParameter
                 "Process2YieldPerSquareMeter",
                 "Process3EffortPerSquareMeter"
         ).forEach { param ->
-            validators[param] = listOf(ExistenceValidator, NonZeroPositiveDoubleValueValidator)
+            validators[param] = listOf(
+                    ExistenceValidator,
+                    NonBlankStringValidator,
+                    NonZeroPositiveDoubleValueValidator
+            )
         }
         listOf(
                 "Process1Start",

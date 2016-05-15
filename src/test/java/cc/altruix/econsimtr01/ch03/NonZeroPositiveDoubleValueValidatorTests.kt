@@ -10,16 +10,36 @@ import java.util.*
 class NonZeroPositiveDoubleValueValidatorTests {
     @Test
     fun validateDetectsInvalidNumber() {
+        invalidNumberTestLogic("abc")
+        invalidNumberTestLogic("-")
+        invalidNumberTestLogic("ß`´&/)")
+    }
+
+    private fun invalidNumberTestLogic(paramValue: String) {
         val data = Properties()
-        data["someParam"] = "abc"
+        data["someParam"] = paramValue
         val res = NonZeroPositiveDoubleValueValidator.validate(data, "someParam")
         Assertions.assertThat(res.valid).isFalse()
-        Assertions.assertThat(res.message).isEqualTo("Value of 'someParam' is equal to 'abc', which isn't numeric")
+        Assertions.assertThat(res.message).isEqualTo("Value of 'someParam' is equal to '$paramValue', which isn't numeric")
     }
+
     @Test
     fun validateDetectsZeroValue() {
-
+        zeroValueTestLogic("0")
+        zeroValueTestLogic("0.")
+        zeroValueTestLogic("0.0")
+        zeroValueTestLogic("0.0000")
+        zeroValueTestLogic("00000.0")
     }
+
+    private fun zeroValueTestLogic(paramValue: String) {
+        val data = Properties()
+        data["someParam"] = paramValue
+        val res = NonZeroPositiveDoubleValueValidator.validate(data, "someParam")
+        Assertions.assertThat(res.valid).isFalse()
+        Assertions.assertThat(res.message).isEqualTo("Value of 'someParam' zero")
+    }
+
     @Test
     fun validateDetectsNegativeValue() {
 
