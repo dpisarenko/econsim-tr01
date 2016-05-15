@@ -8,10 +8,9 @@ import java.util.*
  * Created by pisarenko on 14.05.2016.
  */
 object ExistenceValidator : IPropertiesFileValueValidator {
-    override fun validate(data: Properties, param:String): ValidationResult {
-        if (data.containsKey(param)) {
-            return createCorrectValidationResult()
+    override fun validate(data: Properties, param:String): ValidationResult =
+        when {
+            data.containsKey(param) -> createCorrectValidationResult()
+            else -> createIncorrectValidationResult("Missing parameter '$param'")
         }
-        return createIncorrectValidationResult("Missing parameter '$param'")
-    }
 }
