@@ -40,10 +40,11 @@ abstract open class PropertiesFileSimParametersProvider(val file: File) : ISimPa
     }
 
     open internal fun createMessage(valResults: List<ValidationResult>, valid: Boolean): String {
-        // TODO: Test this
         var message = ""
         if (!valid) {
-            message = valResults.filter { it.valid == false }.map { it.message }.joinToString { ", " }
+            message = valResults.filter { it.valid == false }.map { it.message }.joinToString(
+                    separator = ", "
+            )
         }
         return message
     }

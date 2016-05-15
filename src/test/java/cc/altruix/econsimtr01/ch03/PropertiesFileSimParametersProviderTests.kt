@@ -1,6 +1,5 @@
 package cc.altruix.econsimtr01.ch03
 
-import cc.altruix.econsimtr01.mock
 import org.fest.assertions.Assertions
 import org.junit.Test
 import org.mockito.Mockito
