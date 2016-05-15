@@ -26,10 +26,11 @@ abstract open class PropertiesFileSimParametersProvider(val file: File) : ISimPa
         get
     lateinit var validity:ValidationResult
         get
+    lateinit var data:Properties
 
     open fun initAndValidate() {
         val validators = createValidators()
-        val data = loadData()
+        data = loadData()
         val valResults = createValResults()
         validators.entries.forEach { entry ->
             applyValidators(data, valResults, entry.key, entry.value)
