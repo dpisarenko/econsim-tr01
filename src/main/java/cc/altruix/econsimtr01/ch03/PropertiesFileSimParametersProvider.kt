@@ -6,7 +6,6 @@ import cc.altruix.econsimtr01.PlFlow
 import cc.altruix.econsimtr01.PlTransformation
 import cc.altruix.econsimtr01.ch0201.InfiniteResourceSupply
 import cc.altruix.econsimtr01.ch0201.InitialResourceLevel
-import org.apache.commons.io.IOUtils
 import java.io.File
 import java.util.*
 
