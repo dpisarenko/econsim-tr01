@@ -10,11 +10,10 @@ import java.util.*
 class DayOfMonthValidatorTests {
     @Test
     fun validateDetectsInvalidFormat() {
-        val data = Properties()
-        data["someParam"] = "3008"
-        val res = DayOfMonthValidator.validate(data, "someParam")
-        Assertions.assertThat(res.valid).isFalse()
-        Assertions.assertThat(res.message).isEqualTo("Value '3008' of 'someParam' has invalid format")
+        invalidFormatTestLogic("3008")
+        invalidFormatTestLogic("30a.08")
+        invalidFormatTestLogic("30.0v8")
+        invalidFormatTestLogic("30!08")
     }
     @Test
     fun validateDetectsWrongDay() {
@@ -124,5 +123,12 @@ class DayOfMonthValidatorTests {
         Assertions.assertThat(res.message).isEqualTo(
                 "Invalid month in parameter 'someParam' value ('$pval')"
         )
+    }
+    private fun invalidFormatTestLogic(pval: String) {
+        val data = Properties()
+        data["someParam"] = pval
+        val res = DayOfMonthValidator.validate(data, "someParam")
+        Assertions.assertThat(res.valid).isFalse()
+        Assertions.assertThat(res.message).isEqualTo("Value '$pval' of 'someParam' has invalid format")
     }
 }
