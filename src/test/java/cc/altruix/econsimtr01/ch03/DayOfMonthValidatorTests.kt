@@ -72,36 +72,57 @@ class DayOfMonthValidatorTests {
         wrongDayTestLogic("-1.10")
         wrongDayTestLogic("-1.11")
         wrongDayTestLogic("-1.12")
-
-        // TODO: Implement this
     }
-
-    private fun correctDayTestLogic(s: String) {
-// TODO: Implement this
-// TODO: Test this
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    private fun wrongDayTestLogic(pvalue: String) {
-// TODO: Implement this
-// TODO: Test this
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
     @Test
     fun validateDetectsWrongMonth() {
-        // TODO: Implement this
+        wrongMonthTestLogic("01.-1")
+        wrongMonthTestLogic("01.0")
+        wrongMonthTestLogic("01.13")
+        wrongMonthTestLogic("01.14")
     }
     @Test
     fun validateDetectsCorrectDayAndMonth() {
-        // TODO: Implement this
-        correctDayTestLogic("31.01")
-        correctDayTestLogic("31.03")
-        correctDayTestLogic("31.05")
-        correctDayTestLogic("31.07")
-        correctDayTestLogic("31.08")
-        correctDayTestLogic("31.10")
-        correctDayTestLogic("31.12")
-
+        correctValueTestLogic("31.01")
+        correctValueTestLogic("31.03")
+        correctValueTestLogic("31.05")
+        correctValueTestLogic("31.07")
+        correctValueTestLogic("31.08")
+        correctValueTestLogic("31.10")
+        correctValueTestLogic("31.12")
+        correctValueTestLogic("01.01")
+        correctValueTestLogic("01.02")
+        correctValueTestLogic("01.03")
+        correctValueTestLogic("01.04")
+        correctValueTestLogic("01.05")
+        correctValueTestLogic("01.06")
+        correctValueTestLogic("01.07")
+        correctValueTestLogic("01.08")
+        correctValueTestLogic("01.09")
+        correctValueTestLogic("01.10")
+        correctValueTestLogic("01.11")
+        correctValueTestLogic("01.12")
+    }
+    private fun correctValueTestLogic(pvalue: String) {
+        val data = Properties()
+        data["someParam"] = pvalue
+        val res = DayOfMonthValidator.validate(data, "someParam")
+        Assertions.assertThat(res.valid).isTrue()
+        Assertions.assertThat(res.message).isEqualTo("")
+    }
+    private fun wrongDayTestLogic(pvalue: String) {
+        val data = Properties()
+        data["someParam"] = pvalue
+        val res = DayOfMonthValidator.validate(data, "someParam")
+        Assertions.assertThat(res.valid).isFalse()
+        Assertions.assertThat(res.message).isEqualTo("Invalid day in parameter 'someParam' value ('$pvalue')")
+    }
+    private fun wrongMonthTestLogic(pval: String) {
+        val data = Properties()
+        data["someParam"] = pval
+        val res = DayOfMonthValidator.validate(data, "someParam")
+        Assertions.assertThat(res.valid).isFalse()
+        Assertions.assertThat(res.message).isEqualTo(
+                "Invalid month in parameter 'someParam' value ('$pval')"
+        )
     }
 }
