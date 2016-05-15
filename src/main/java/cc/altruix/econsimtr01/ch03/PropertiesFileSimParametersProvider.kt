@@ -56,7 +56,6 @@ abstract open class PropertiesFileSimParametersProvider(val file: File) : ISimPa
                                       valResults: MutableList<ValidationResult>,
                                       parameter: String,
                                       parameterValidators: List<IPropertiesFileValueValidator>) {
-        // TODO: Test this
         for (validator in parameterValidators) {
             val vres = validator.validate(data, parameter)
             if (!vres.valid) {

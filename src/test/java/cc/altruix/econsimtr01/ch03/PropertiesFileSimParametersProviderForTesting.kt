@@ -10,7 +10,4 @@ open class PropertiesFileSimParametersProviderForTesting(file: File) :
         PropertiesFileSimParametersProvider(file){
     open override fun createValidators(): Map<String, List<IPropertiesFileValueValidator>> =
             emptyMap()
-
-    override fun applyValidators(data: Properties, valResults: MutableList<ValidationResult>, parameter: String, parameterValidators: List<IPropertiesFileValueValidator>) {
-    }
 }
