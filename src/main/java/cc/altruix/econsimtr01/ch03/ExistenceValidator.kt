@@ -1,5 +1,7 @@
 package cc.altruix.econsimtr01.ch03
 
+import cc.altruix.econsimtr01.createCorrectValidationResult
+import cc.altruix.econsimtr01.createIncorrectValidationResult
 import java.util.*
 
 /**
@@ -7,8 +9,9 @@ import java.util.*
  */
 object ExistenceValidator : IPropertiesFileValueValidator {
     override fun validate(data: Properties, param:String): ValidationResult {
-        // TODO: Implement this
-        // TODO: Test this
-        throw UnsupportedOperationException()
+        if (data.containsKey(param)) {
+            return createCorrectValidationResult()
+        }
+        return createIncorrectValidationResult("Missing parameter '$param'")
     }
 }

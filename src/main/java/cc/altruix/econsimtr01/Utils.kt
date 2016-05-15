@@ -1,6 +1,7 @@
 package cc.altruix.econsimtr01
 
 import alice.tuprolog.Prolog
+import cc.altruix.econsimtr01.ch03.ValidationResult
 import cc.altruix.javaprologinterop.PlUtils
 import net.sourceforge.plantuml.SourceStringReader
 import org.fest.assertions.Assertions
@@ -184,3 +185,6 @@ fun createRandom():java.util.Random =
 
 fun randomEventWithProbability(probability:Double) =
         Random.nextDouble() <= probability
+
+fun createCorrectValidationResult():ValidationResult = ValidationResult(true, "")
+fun createIncorrectValidationResult(msg:String):ValidationResult = ValidationResult(false, msg)
