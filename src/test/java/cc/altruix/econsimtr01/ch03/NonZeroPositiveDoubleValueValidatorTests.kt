@@ -42,8 +42,19 @@ class NonZeroPositiveDoubleValueValidatorTests {
 
     @Test
     fun validateDetectsNegativeValue() {
-
+        negativeValueTestLogic("-1")
+        negativeValueTestLogic("-0.000001")
+        negativeValueTestLogic("-20.3")
     }
+
+    private fun negativeValueTestLogic(paramValue: String) {
+        val data = Properties()
+        data["someParam"] = paramValue
+        val res = NonZeroPositiveDoubleValueValidator.validate(data, "someParam")
+        Assertions.assertThat(res.valid).isFalse()
+        Assertions.assertThat(res.message).isEqualTo("Value of 'someParam' is negative ($paramValue)")
+    }
+
     @Test
     fun validateDetectsNonZeroPositiveValue() {
 
