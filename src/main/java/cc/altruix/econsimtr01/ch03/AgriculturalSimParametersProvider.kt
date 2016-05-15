@@ -8,7 +8,6 @@ import java.util.*
  */
 class AgriculturalSimParametersProvider(file: File) : PropertiesFileSimParametersProvider(file) {
     override fun createValidators(): Map<String, List<IPropertiesFileValueValidator>> {
-        // TODO: Test this
         val validators = HashMap<String, List<IPropertiesFileValueValidator>>()
         validators["SimulationName"] = listOf(
                 ExistenceValidator,
