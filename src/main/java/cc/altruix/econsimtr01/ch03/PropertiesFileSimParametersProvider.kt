@@ -30,29 +30,50 @@ abstract open class PropertiesFileSimParametersProvider(val file: File) : ISimPa
     open fun initAndValidate() {
         // TODO: Test this
         val validators = createValidators()
-
-        val data = Properties()
-        data.load(file.reader())
-
-        val valResults = LinkedList<ValidationResult>()
-
+        val data = loadData()
+        val valResults = createValResults()
         validators.entries.forEach { entry ->
-            val parameter = entry.key
-            val parameterValidators = entry.value
-            for (validator in parameterValidators) {
-                val vres = validator.validate(data, parameter)
-                if (!vres.valid) {
-                    valResults.add(vres)
-                    break;
-                }
-            }
+            applyValidators(data, entry, valResults)
         }
-        val valid = valResults.filter { it.valid == false }.count() < 1
+        val valid = calculateValidity(valResults)
+        var message = createMessage(valResults, valid)
+        validity = ValidationResult(valid, message)
+    }
+
+    internal fun createMessage(valResults: LinkedList<ValidationResult>, valid: Boolean): String {
+        // TODO: Test this
         var message = ""
         if (!valid) {
             message = valResults.filter { it.valid == false }.map { it.message }.joinToString { ", " }
         }
-        validity = ValidationResult(valid, message)
+        return message
     }
+
+    // TODO: Test this
+    internal fun calculateValidity(valResults: LinkedList<ValidationResult>) = valResults.filter { it.valid == false }.count() < 1
+
+    internal fun applyValidators(data: Properties,
+                                 entry: Map.Entry<String, List<IPropertiesFileValueValidator>>,
+                                 valResults: LinkedList<ValidationResult>) {
+        // TODO: Test this
+        val parameter = entry.key
+        val parameterValidators = entry.value
+        for (validator in parameterValidators) {
+            val vres = validator.validate(data, parameter)
+            if (!vres.valid) {
+                valResults.add(vres)
+                break;
+            }
+        }
+    }
+
+    internal fun createValResults() = LinkedList<ValidationResult>()
+
+    internal fun loadData(): Properties {
+        val data = Properties()
+        data.load(file.reader())
+        return data
+    }
+
     abstract fun createValidators():Map<String,List<IPropertiesFileValueValidator>>
 }
