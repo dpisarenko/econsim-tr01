@@ -36,8 +36,6 @@ open class EnoughCapacityForPuttingSeedsIntoGround : ISemanticSimulationParamete
 
     open internal fun calculateTotalRequiredEffort(
             scenario: PropertiesFileSimParametersProvider): Double {
-        // TODO: Implement this
-        // TODO: Test this
         val sizeOfFieldInSquareMeters =
                 scenario.data["SizeOfField"].toString().toDouble()
         val effortPerSquareMetersInHours =

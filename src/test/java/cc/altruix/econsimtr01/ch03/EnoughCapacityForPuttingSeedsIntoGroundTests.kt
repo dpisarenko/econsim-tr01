@@ -31,12 +31,15 @@ class EnoughCapacityForPuttingSeedsIntoGroundTests {
         val data = Properties()
         data["SizeOfField"] = "250000"
         data["Process1EffortInSquareMeters"] = "0.44"
-        // Run method under test
-        val out = Mockito.spy(
+        val scenario = Mockito.spy(
                 PropertiesFileSimParametersProviderWithPredefinedData(data)
         )
+        scenario.initAndValidate()
+        val out = EnoughCapacityForPuttingSeedsIntoGround()
+        // Run method under test
+        val res = out.calculateTotalRequiredEffort(scenario)
         // Verify
-        Assertions.assertThat(out).isEqualTo(250000 * 0.44)
+        Assertions.assertThat(res).isEqualTo(250000 * 0.44)
     }
     private fun validateWiringTestLogic(totalRequiredEffort:Double,
                                         availableWorkingTime:Double,
