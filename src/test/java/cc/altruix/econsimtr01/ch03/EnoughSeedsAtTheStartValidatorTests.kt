@@ -16,13 +16,13 @@ class EnoughSeedsAtTheStartValidatorTests {
     fun validate() {
         validateTestLogic(
                 sizeOfField = "250000",
-                seedsPerSquareMeter = "Process1QuantityOfSeeds",
+                seedsPerSquareMeter = "0.0629",
                 initialSeedQuantity = "10",
                 expectedValidity = true,
                 expectedMessage = "")
         validateTestLogic(
                 sizeOfField = "250000",
-                seedsPerSquareMeter = "Process1QuantityOfSeeds",
+                seedsPerSquareMeter = "0.0629",
                 initialSeedQuantity = "10",
                 expectedValidity = false,
                 expectedMessage = "We need X kg of seeds, but only have Y")

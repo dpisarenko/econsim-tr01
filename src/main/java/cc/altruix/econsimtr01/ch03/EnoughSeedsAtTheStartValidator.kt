@@ -17,7 +17,7 @@ class EnoughSeedsAtTheStartValidator : ISemanticSimulationParametersValidator {
         val requiredAmount = calculateRequiredAmount(scenario)
         val actualAmount = scenario.data["InitialSeedQuantity"].
                 toString().toDouble()
-        if (requiredAmount < actualAmount) {
+        if (actualAmount < requiredAmount) {
             return createIncorrectValidationResult("We need $requiredAmount " +
                     "kg of seeds, but only have $actualAmount")
         }
