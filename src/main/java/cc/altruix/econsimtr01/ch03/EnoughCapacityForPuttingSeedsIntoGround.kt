@@ -9,7 +9,7 @@ import cc.altruix.econsimtr01.parseDayMonthString
  * This validator verifies that the workers will have enough time to put the plants
  * into the soil.
  */
-object EnoughCapacityForPuttingSeedsIntoGround : ISemanticSimulationParametersValidator {
+open class EnoughCapacityForPuttingSeedsIntoGround : ISemanticSimulationParametersValidator {
      override fun validate(scenario: PropertiesFileSimParametersProvider): ValidationResult {
         // TODO: Implement this
         // TODO: Test this
