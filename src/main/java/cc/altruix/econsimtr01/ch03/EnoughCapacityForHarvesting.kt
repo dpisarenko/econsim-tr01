@@ -4,8 +4,10 @@
 
 package cc.altruix.econsimtr01.ch03
 
+import cc.altruix.econsimtr01.calculateBusinessDays
 import cc.altruix.econsimtr01.createCorrectValidationResult
 import cc.altruix.econsimtr01.createIncorrectValidationResult
+import cc.altruix.econsimtr01.parseDayMonthString
 
 /**
  * Created by pisarenko on 15.05.2016.
@@ -18,17 +20,23 @@ open class EnoughCapacityForHarvesting :
         val availableTime = calculateAvailableTime(scenario)
         if (requiredEffort > availableTime) {
             return createIncorrectValidationResult(
-                    "Process 3: It requires $requiredEffort hours of effort, but" +
-                    " only $availableTime is available")
+                    "Process 3: It requires $requiredEffort hours of " +
+                            "effort, but only $availableTime is available")
         }
         return createCorrectValidationResult()
     }
 
     open internal fun calculateAvailableTime(
             scenario: PropertiesFileSimParametersProvider): Double {
-        // TODO: Implement this
+        val start = scenario.data["Process2End"].toString().parseDayMonthString()
+        val end = scenario.data["Process3End"].toString().parseDayMonthString()
+        val businessDays = calculateBusinessDays(start, end)
+        val numberOfWorkers =
+                scenario.data["NumberOfWorkers"].toString().toDouble()
+        val workingTimePerBusinessDay =
+                scenario.data["LaborPerBusinessDay"].toString().toDouble()
         // TODO: Test this
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return businessDays * numberOfWorkers * workingTimePerBusinessDay
     }
 
     open internal fun calculateRequiredEffort(scenario:
