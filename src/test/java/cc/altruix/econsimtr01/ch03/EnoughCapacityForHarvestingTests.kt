@@ -15,13 +15,13 @@ import java.util.*
 class EnoughCapacityForHarvestingTests {
     @Test
     fun validateWiring() {
-        validateWirintTestLogic(
+        validateWiringTestLogic(
                 requiredEffort = 1.0,
                 availableTime = 2.0,
                 expectedValidity = true,
                 expectedMessage = ""
         )
-        validateWirintTestLogic(
+        validateWiringTestLogic(
                 requiredEffort = 2.0,
                 availableTime = 1.0,
                 expectedValidity = false,
@@ -45,7 +45,7 @@ class EnoughCapacityForHarvestingTests {
         Assertions.assertThat(res).isEqualTo(250000.0 * 0.45)
     }
 
-    private fun validateWirintTestLogic(requiredEffort: Double,
+    private fun validateWiringTestLogic(requiredEffort: Double,
                                         availableTime: Double,
                                         expectedValidity: Boolean,
                                         expectedMessage: String) {

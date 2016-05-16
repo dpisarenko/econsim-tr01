@@ -12,7 +12,7 @@ import cc.altruix.econsimtr01.createIncorrectValidationResult
  */
 open class EnoughCapacityForHarvesting :
         ISemanticSimulationParametersValidator {
-    override fun validate(scenario: PropertiesFileSimParametersProvider)
+    open override fun validate(scenario: PropertiesFileSimParametersProvider)
             : ValidationResult {
         val requiredEffort = calculateRequiredEffort(scenario)
         val availableTime = calculateAvailableTime(scenario)
@@ -24,8 +24,8 @@ open class EnoughCapacityForHarvesting :
         return createCorrectValidationResult()
     }
 
-    open internal fun calculateAvailableTime(scenario:
-                                             PropertiesFileSimParametersProvider): Double {
+    open internal fun calculateAvailableTime(
+            scenario: PropertiesFileSimParametersProvider): Double {
         // TODO: Implement this
         // TODO: Test this
         throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
