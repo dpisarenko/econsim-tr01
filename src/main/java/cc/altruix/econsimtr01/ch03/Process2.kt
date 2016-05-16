@@ -12,6 +12,9 @@ import org.joda.time.DateTime
  * Created by pisarenko on 16.05.2016.
  */
 class Process2(val simParamProv:AgriculturalSimParametersProvider) : IAction {
+    // TODO: Make sure this process converts RESOURCE_AREA_WITH_SEEDS to
+    // RESOURCE_AREA_WITH_CROP
+
     override fun timeToRun(time: DateTime): Boolean {
         // TODO: Implement this
         // TODO: Test this

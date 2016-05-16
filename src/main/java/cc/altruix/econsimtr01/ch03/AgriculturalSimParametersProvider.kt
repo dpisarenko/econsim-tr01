@@ -4,6 +4,7 @@
 
 package cc.altruix.econsimtr01.ch03
 
+import cc.altruix.econsimtr01.PlResource
 import java.io.File
 import java.util.*
 
@@ -12,6 +13,19 @@ import java.util.*
  */
 class AgriculturalSimParametersProvider(file: File) :
         PropertiesFileSimParametersProvider(file) {
+    companion object {
+        val RESOURCE_AREA_WITH_SEEDS = PlResource(
+                id = "R1",
+                name = "Area with seeds",
+                unit = "Square meters"
+        )
+        val RESOURCE_AREA_WITH_CROP = PlResource(
+                id = "R2",
+                name = "Area with crop",
+                unit = "Square meters"
+        )
+
+    }
     override fun createValidators():
             Map<String, List<IPropertiesFileValueValidator>> {
         val validators = HashMap<String, List<IPropertiesFileValueValidator>>()
