@@ -21,8 +21,6 @@ open class EnoughCapacityForPuttingSeedsIntoGround : ISemanticSimulationParamete
 
     open internal fun calculateAvailableWorkingTime(
             scenario: PropertiesFileSimParametersProvider): Double {
-        // TODO: Implement this
-        // TODO: Test this
         val numberOfWorkers =
                 scenario.data["NumberOfWorkers"].toString().toDouble()
         val processStart =
