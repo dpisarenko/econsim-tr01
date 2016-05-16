@@ -14,7 +14,6 @@ open class EnoughCapacityForHarvesting :
         ISemanticSimulationParametersValidator {
     override fun validate(scenario: PropertiesFileSimParametersProvider)
             : ValidationResult {
-        // TODO: Test this
         val requiredEffort = calculateRequiredEffort(scenario)
         val availableTime = calculateAvailableTime(scenario)
         if (requiredEffort > availableTime) {
@@ -33,9 +32,12 @@ open class EnoughCapacityForHarvesting :
     }
 
     open internal fun calculateRequiredEffort(scenario:
-                                  PropertiesFileSimParametersProvider): Double {
-        // TODO: Implement this
+                                  PropertiesFileSimParametersProvider): Double
+    {
         // TODO: Test this
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val fieldSize = scenario.data["SizeOfField"].toString().toDouble()
+        val effortPerSquareMeter = scenario
+                .data["Process3EffortPerSquareMeter"].toString().toDouble()
+        return fieldSize * effortPerSquareMeter
     }
 }

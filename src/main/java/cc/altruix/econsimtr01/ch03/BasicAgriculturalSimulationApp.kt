@@ -46,7 +46,7 @@ class BasicAgriculturalSimulationApp(
     fun createSemanticValidators():List<ISemanticSimulationParametersValidator> =
             listOf(
                     EnoughCapacityForPuttingSeedsIntoGround(),
-                    EnoughCapacityForHarvesting
+                    EnoughCapacityForHarvesting()
                     // TODO: Add here a validator that we have enough seeds at
                     // the start (enough for the field)
                     // TODO: Add validation that Process1End is after Process1Start

@@ -216,3 +216,20 @@ fun DayAndMonth.toDateTime() : DateTime {
     day = day.plusDays(this.day - 1)
     return day
 }
+
+fun calculateBusinessDays(
+        start: DayAndMonth,
+        end: DayAndMonth
+): Int {
+    var day = start.toDateTime()
+    val end = end.toDateTime()
+    var businessDays = 0
+    do {
+        if ((day.dayOfWeek != DateTimeConstants.SATURDAY) && (day
+                .dayOfWeek != DateTimeConstants.SUNDAY)) {
+            businessDays++
+        }
+        day = day.plusDays(1)
+    } while (day.isBefore(end) || day.isEqual(end))
+    return businessDays
+}
