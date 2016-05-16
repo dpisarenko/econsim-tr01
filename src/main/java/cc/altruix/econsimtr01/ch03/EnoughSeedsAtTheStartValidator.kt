@@ -28,7 +28,7 @@ class EnoughSeedsAtTheStartValidator : ISemanticSimulationParametersValidator {
             scenario: PropertiesFileSimParametersProvider): Double {
         val fieldSize = scenario.data["SizeOfField"].toString().toDouble()
         val seedsPerSquareMeter = scenario
-                .data["Process1EffortInSquareMeters"].toString().toDouble()
+                .data["Process1QuantityOfSeeds"].toString().toDouble()
         return fieldSize * seedsPerSquareMeter
     }
 }
