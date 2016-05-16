@@ -1,9 +1,8 @@
 package cc.altruix.econsimtr01.ch03
 
-import cc.altruix.econsimtr01.DayAndMonth
-import cc.altruix.econsimtr01.createCorrectValidationResult
-import cc.altruix.econsimtr01.createIncorrectValidationResult
-import cc.altruix.econsimtr01.parseDayMonthString
+import cc.altruix.econsimtr01.*
+import org.joda.time.DateTime
+import org.joda.time.DateTimeConstants
 
 /**
  * This validator verifies that the workers will have enough time to put the plants
@@ -45,11 +44,20 @@ open class EnoughCapacityForPuttingSeedsIntoGround : ISemanticSimulationParamete
     }
 
     open internal fun calculateBusinessDaysBetweenDates(
-            processStart: DayAndMonth,
-            processEnd: DayAndMonth
+            start: DayAndMonth,
+            end: DayAndMonth
     ): Int {
-        // TODO: Implement this
+        var day = start.toDateTime()
+        val end = start.toDateTime()
+        var businessDays = 0
+        do {
+            if ((day.dayOfWeek != DateTimeConstants.SATURDAY) && (day
+                    .dayOfWeek != DateTimeConstants.SUNDAY)) {
+                businessDays++
+            }
+            day = day.plusDays(1)
+        } while (day.isBefore(end))
+        return businessDays
         // TODO: Test this
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

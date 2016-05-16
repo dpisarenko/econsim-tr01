@@ -139,7 +139,9 @@ fun Prolog.extractSingleDouble(query: String, varName:String):Double {
     if (result != null) {
         return result.toDouble()
     }
-    LoggerFactory.getLogger(Prolog::class.java).error("Can't find double value. Query: '$query', variable: '$varName")
+    LoggerFactory.getLogger(Prolog::class.java).error(
+            "Can't find double value. Query: '$query', variable: '$varName"
+    )
     return -1.0
 }
 
@@ -148,17 +150,26 @@ fun Prolog.extractSingleInt(query: String, varName:String):Int {
     if (result != null) {
         return result.toInt()
     }
-    LoggerFactory.getLogger(Prolog::class.java).error("Can't find int value. Query: '$query', variable: '$varName")
+    LoggerFactory.getLogger(Prolog::class.java).error(
+            "Can't find int value. Query: '$query', variable: '$varName"
+    )
     return -1
 }
 
 fun getSubscriberCount(prolog: Prolog, time: Long, interactions: Int): Double {
     val resId = String.format("r%02d-pc%d", (5 + interactions), interactions)
-    val subscriberResourceLevel = prolog.extractSingleDouble("resourceLevel($time, 'list', '$resId', Val).", "Val")
+    val subscriberResourceLevel =
+            prolog.extractSingleDouble(
+                    "resourceLevel($time, 'list', '$resId', Val).",
+                    "Val"
+            )
     return subscriberResourceLevel
 }
 
-fun findAgent(id: String, agentList: List<IAgent>) = agentList.filter { x -> x.id().equals(id) }.firstOrNull()
+fun findAgent(id: String, agentList: List<IAgent>) =
+        agentList
+                .filter { x -> x.id().equals(id) }
+                .firstOrNull()
 
 fun DateTime.isBusinessDay():Boolean = when (this.dayOfWeek) {
     DateTimeConstants.SATURDAY, DateTimeConstants.SUNDAY -> false
@@ -186,9 +197,18 @@ fun createRandom():java.util.Random =
 fun randomEventWithProbability(probability:Double) =
         Random.nextDouble() <= probability
 
-fun createCorrectValidationResult():ValidationResult = ValidationResult(true, "")
-fun createIncorrectValidationResult(msg:String):ValidationResult = ValidationResult(false, msg)
+fun createCorrectValidationResult():ValidationResult =
+        ValidationResult(true, "")
+fun createIncorrectValidationResult(msg:String):ValidationResult =
+        ValidationResult(false, msg)
 fun String.parseDayMonthString() : DayAndMonth {
     val parts = this.split(".")
     return DayAndMonth(parts[0].toInt(), parts[1].toInt())
+}
+
+fun DayAndMonth.toDateTime() : DateTime {
+    var day = 0L.millisToSimulationDateTime()
+    day = day.plusMonths(this.month - 1)
+    day = day.plusDays(this.day - 1)
+    return day
 }
