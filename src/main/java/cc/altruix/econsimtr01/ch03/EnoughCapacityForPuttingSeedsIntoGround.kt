@@ -1,5 +1,8 @@
 package cc.altruix.econsimtr01.ch03
 
+import cc.altruix.econsimtr01.DayAndMonth
+import cc.altruix.econsimtr01.createCorrectValidationResult
+import cc.altruix.econsimtr01.createIncorrectValidationResult
 import cc.altruix.econsimtr01.parseDayMonthString
 
 /**
@@ -7,24 +10,43 @@ import cc.altruix.econsimtr01.parseDayMonthString
  * into the soil.
  */
 object EnoughCapacityForPuttingSeedsIntoGround : ISemanticSimulationParametersValidator {
-    override fun validate(scenario: PropertiesFileSimParametersProvider): ValidationResult {
+     override fun validate(scenario: PropertiesFileSimParametersProvider): ValidationResult {
         // TODO: Implement this
         // TODO: Test this
+        val totalRequiredEffort = calculateTotalRequiredEffort(scenario)
+        val availableWorkingTime = calculateAvailableWorkingTime(scenario)
+        if (totalRequiredEffort > availableWorkingTime) {
+            return createIncorrectValidationResult(
+                    "Process 1: It requires $totalRequiredEffort hours of effort, but only $availableWorkingTime is available"
+            )
+        }
+        return createCorrectValidationResult()
+    }
 
+    internal fun calculateAvailableWorkingTime(scenario: PropertiesFileSimParametersProvider): Double {
+        // TODO: Implement this
+        // TODO: Test this
+        val numberOfWorkers = scenario.data["NumberOfWorkers"].toString().toDouble()
+        val processStart = scenario.data["Process1Start"].toString().parseDayMonthString()
+        val processEnd = scenario.data["Process1End"].toString().parseDayMonthString()
+        val businessDays = calculateBusinessDaysBetweenDates(processStart, processEnd)
+        val workingTimePerBusinessDay = scenario.data["LaborPerBusinessDay"].toString().toDouble()
+        val availableWorkingTime = businessDays.toDouble() * workingTimePerBusinessDay * numberOfWorkers
+        return availableWorkingTime
+    }
+
+    internal fun calculateTotalRequiredEffort(scenario: PropertiesFileSimParametersProvider): Double {
+        // TODO: Implement this
+        // TODO: Test this
         val sizeOfFieldInSquareMeters = scenario.data["SizeOfField"].toString().toDouble()
         val effortPerSquareMetersInHours = scenario.data["Process1EffortInSquareMeters"].toString().toDouble()
         val totalRequiredEffort = sizeOfFieldInSquareMeters * effortPerSquareMetersInHours
+        return totalRequiredEffort
+    }
 
-
-        val laborPerBusinessDayInHours = scenario.data["LaborPerBusinessDay"]
-        val numberOfWorkers = scenario.data["NumberOfWorkers"].toString().toDouble()
-
-        val processStart = scenario.data["Process1Start"].toString().parseDayMonthString()
-        val startDay = processStart.first
-        val startMonth = processStart.second
-
-        // TODO: Continue here
-
-        throw UnsupportedOperationException()
+    private fun calculateBusinessDaysBetweenDates(processStart: DayAndMonth, processEnd: DayAndMonth): Int {
+        // TODO: Implement this
+        // TODO: Test this
+        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

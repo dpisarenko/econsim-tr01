@@ -188,7 +188,7 @@ fun randomEventWithProbability(probability:Double) =
 
 fun createCorrectValidationResult():ValidationResult = ValidationResult(true, "")
 fun createIncorrectValidationResult(msg:String):ValidationResult = ValidationResult(false, msg)
-fun String.parseDayMonthString() : Pair<Int,Int> {
+fun String.parseDayMonthString() : DayAndMonth {
     val parts = this.split(".")
-    return Pair(parts[0].toInt(), parts[1].toInt())
+    return DayAndMonth(parts[0].toInt(), parts[1].toInt())
 }
