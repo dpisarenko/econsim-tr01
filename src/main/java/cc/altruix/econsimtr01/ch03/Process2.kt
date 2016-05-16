@@ -11,7 +11,7 @@ import org.joda.time.DateTime
 /**
  * Created by pisarenko on 16.05.2016.
  */
-class Process2 : IAction {
+class Process2(val simParamProv:AgriculturalSimParametersProvider) : IAction {
     override fun timeToRun(time: DateTime): Boolean {
         // TODO: Implement this
         // TODO: Test this

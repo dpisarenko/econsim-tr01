@@ -53,14 +53,9 @@ class AgriculturalSimParametersProvider(file: File) :
     override fun initAndValidate() {
         super.initAndValidate()
         if (validity.valid) {
-            agents.add(Farmers())
-            agents.add(Field())
+            // TODO: Test this
+            agents.add(Farmers(this))
+            agents.add(Field(this))
         }
-    }
-
-    private fun createProcesses() {
-// TODO: Implement this
-// TODO: Test this
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
