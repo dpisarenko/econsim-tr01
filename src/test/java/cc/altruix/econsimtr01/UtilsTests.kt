@@ -38,6 +38,52 @@ class UtilsTests {
         randomEventWithProbabilityTestLogic(0.9, 93)
         randomEventWithProbabilityTestLogic(1.0, 100)
     }
+    @Test
+    fun dateTimeBetween() {
+        dateTimeBetweenTestLogic(
+                start = DayAndMonth(30, 8),
+                end = DayAndMonth(30, 10),
+                time = DateTime(2016, 8, 29, 0, 0),
+                expectedResult = false
+        )
+        dateTimeBetweenTestLogic(
+                start = DayAndMonth(30, 8),
+                end = DayAndMonth(30, 10),
+                time = DateTime(2016, 8, 30, 0, 0),
+                expectedResult = true
+        )
+        dateTimeBetweenTestLogic(
+                start = DayAndMonth(30, 8),
+                end = DayAndMonth(30, 10),
+                time = DateTime(2016, 9, 1, 0, 0),
+                expectedResult = true
+        )
+        dateTimeBetweenTestLogic(
+                start = DayAndMonth(30, 8),
+                end = DayAndMonth(30, 10),
+                time = DateTime(2016, 8, 31, 0, 0),
+                expectedResult = true
+        )
+        dateTimeBetweenTestLogic(
+                start = DayAndMonth(30, 8),
+                end = DayAndMonth(30, 10),
+                time = DateTime(2016, 10, 30, 0, 0),
+                expectedResult = true
+        )
+        dateTimeBetweenTestLogic(
+                start = DayAndMonth(30, 8),
+                end = DayAndMonth(30, 10),
+                time = DateTime(2016, 10, 31, 0, 0),
+                expectedResult = false
+        )
+    }
+
+    private fun dateTimeBetweenTestLogic(start: DayAndMonth,
+                                         end: DayAndMonth,
+                                         time: DateTime,
+                                         expectedResult: Boolean) =
+            Assertions.assertThat(time.between(start, end))
+                    .isEqualTo(expectedResult)
 
     private fun randomEventWithProbabilityTestLogic(
             probability: Double, expectedNumberOfHeads: Int) {
