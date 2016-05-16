@@ -234,11 +234,12 @@ fun calculateBusinessDays(
     return businessDays
 }
 
+fun DayAndMonth.toDateTime(year:Int) = DateTime(year, this.month, this.day,
+        0, 0)
+
 fun DateTime.between(start:DayAndMonth, end:DayAndMonth):Boolean {
-    // TODO: Test this
-    val afterStart = (this.monthOfYear >= start.month) && (this
-            .dayOfMonth >= start.day)
-    val beforeEnd = (this.monthOfYear <= end.month) && (this.dayOfMonth
-            <= end.day)
-    return afterStart && beforeEnd
+    val startDateTime = start.toDateTime(this.year)
+    val endDateTime = end.toDateTime(this.year)
+    return (startDateTime.isBefore(this) || startDateTime.isEqual(this)) &&
+            (endDateTime.isAfter(this) || endDateTime.isEqual(this))
 }
