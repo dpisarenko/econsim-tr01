@@ -29,6 +29,20 @@ class EnoughCapacityForHarvestingTests {
                         "effort, but only 1.0 is available"
         )
     }
+    @Test
+    fun calculateRequiredEffort() {
+        // Prepare
+        val data = Properties()
+        data["SizeOfField"] = "250000"
+        data["Process3EffortPerSquareMeter"] = "0.45"
+        val scenario =
+                PropertiesFileSimParametersProviderWithPredefinedData(data)
+        val out = EnoughCapacityForHarvesting()
+        // Run method under test
+        val res = out.validate(scenario)
+        // Verify
+        Assertions.assertThat(res).isEqualTo(250000.0 * 0.45)
+    }
 
     private fun validateWirintTestLogic(requiredEffort: Double,
                                         availableTime: Double,
