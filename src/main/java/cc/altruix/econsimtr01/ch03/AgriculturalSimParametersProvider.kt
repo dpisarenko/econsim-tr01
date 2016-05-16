@@ -11,7 +11,7 @@ import java.util.*
 /**
  * Created by pisarenko on 14.05.2016.
  */
-class AgriculturalSimParametersProvider(file: File) :
+open class AgriculturalSimParametersProvider(file: File) :
         PropertiesFileSimParametersProvider(file) {
     companion object {
         val RESOURCE_AREA_WITH_SEEDS = PlResource(

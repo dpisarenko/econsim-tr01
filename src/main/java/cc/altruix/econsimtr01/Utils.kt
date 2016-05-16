@@ -205,6 +205,7 @@ fun createCorrectValidationResult():ValidationResult =
         ValidationResult(true, "")
 fun createIncorrectValidationResult(msg:String):ValidationResult =
         ValidationResult(false, msg)
+
 fun String.parseDayMonthString() : DayAndMonth {
     val parts = this.split(".")
     return DayAndMonth(parts[0].toInt(), parts[1].toInt())

@@ -11,7 +11,8 @@ import org.slf4j.LoggerFactory
 /**
  * Created by pisarenko on 16.05.2016.
  */
-class Process1(val simParamProv:AgriculturalSimParametersProvider) : IAction {
+open class Process1(val simParamProv:PropertiesFileSimParametersProvider) :
+    IAction {
     val LOGGER = LoggerFactory.getLogger(Process1::class.java)
     val start = simParamProv.data["Process1Start"].toString()
             .parseDayMonthString()
@@ -21,19 +22,20 @@ class Process1(val simParamProv:AgriculturalSimParametersProvider) : IAction {
     val field = simParamProv.agents.find { it.id() == Field.ID }
             as DefaultAgent
 
-    override fun timeToRun(time: DateTime): Boolean {
-        val evenHourAndMinute =
-                (time.hourOfDay == 0) && (time.minuteOfHour == 0)
-        if (field == null) {
-            LOGGER.error("Can't find field")
-            return false
-        }
-        // TODO: Test this
-        return time.between(start, end) && evenHourAndMinute &&
-                fieldNotFull(field)
-    }
+    // TODO: Test this
+    override fun timeToRun(time: DateTime): Boolean =
+            timeBetweenStartAndEnd(time) &&
+            evenHourAndMinute(time) &&
+            fieldNotFull(field)
+
+    open internal fun evenHourAndMinute(time:DateTime):Boolean =
+            (time.hourOfDay == 8) && (time.minuteOfHour == 0)
+
+    open internal fun timeBetweenStartAndEnd(time: DateTime) =
+            time.between(start, end)
+
     // TODO: Implement this
-    private fun fieldNotFull(field: DefaultAgent): Boolean =
+    open internal fun fieldNotFull(field: DefaultAgent): Boolean =
             field.amount(
                     AgriculturalSimParametersProvider
                             .RESOURCE_AREA_WITH_SEEDS.id
@@ -42,7 +44,7 @@ class Process1(val simParamProv:AgriculturalSimParametersProvider) : IAction {
     override fun run(time: DateTime) {
         // TODO: Implement this
         // TODO: Test this
-        throw UnsupportedOperationException()
+
     }
 
     override fun notifySubscribers(time: DateTime) {
