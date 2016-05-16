@@ -10,17 +10,23 @@ import java.io.File
 class AgriculturalSimParametersProviderTests {
     @Test
     fun ryeSimulationParametersCorrect() {
-        simulationParametersCorrectnessTestLogic("BasicAgriculturalSimulationRye.properties")
+        simulationParametersCorrectnessTestLogic(
+                "BasicAgriculturalSimulationRye.properties"
+        )
     }
     @Test
     fun wheatSimulationParametersCorrect() {
-        simulationParametersCorrectnessTestLogic("BasicAgriculturalSimulationWheat.properties")
+        simulationParametersCorrectnessTestLogic(
+                "BasicAgriculturalSimulationWheat.properties"
+        )
     }
 
     private fun simulationParametersCorrectnessTestLogic(fileName: String) {
-        val out = AgriculturalSimParametersProvider(File("src/test/resources/ch03/$fileName"))
+        val out = AgriculturalSimParametersProvider(
+                File("src/test/resources/ch03/$fileName")
+        )
         out.initAndValidate()
-        Assertions.assertThat(out.validity.valid).isTrue()
         Assertions.assertThat(out.validity.message).isEmpty()
+        Assertions.assertThat(out.validity.valid).isTrue()
     }
 }
