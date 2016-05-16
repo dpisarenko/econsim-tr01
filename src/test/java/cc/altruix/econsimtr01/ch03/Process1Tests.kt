@@ -73,4 +73,39 @@ class Process1Tests {
         val out = Process1(simParamProv)
         Assertions.assertThat(out.field).isSameAs(field)
     }
+    @Test
+    fun fieldNotFull() {
+        fieldNotFullTestLogic(sizeOfField = "250000",
+                areaWithSeeds = 249999.99,
+                expectedResult = true)
+        fieldNotFullTestLogic(sizeOfField = "250000",
+                areaWithSeeds = 250000.0,
+                expectedResult = false)
+        fieldNotFullTestLogic(sizeOfField = "250000",
+                areaWithSeeds = 250000.1,
+                expectedResult = false)
+    }
+    private fun fieldNotFullTestLogic(sizeOfField:String,
+                                      areaWithSeeds:Double,
+                                      expectedResult:Boolean) {
+        // Prepare
+        val data = Properties()
+        data["Process1Start"] = "30.08"
+        data["Process1End"] = "30.10"
+        data["SizeOfField"] = sizeOfField
+        val simParamProv =
+                AgriculturalSimParametersProviderWithPredefinedData(data)
+        simParamProv.initAndValidate()
+        val field = Field(simParamProv)
+        field.put(
+                AgriculturalSimParametersProvider.RESOURCE_AREA_WITH_SEEDS.id,
+                areaWithSeeds
+        )
+        simParamProv.agents.add(field)
+        val out = Process1(simParamProv)
+        // Run method under test
+        val res = out.fieldNotFull(field)
+        // Verify
+        Assertions.assertThat(res).isEqualTo(expectedResult)
+    }
 }
