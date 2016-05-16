@@ -18,7 +18,6 @@ open class Process1(val simParamProv:PropertiesFileSimParametersProvider) :
             .parseDayMonthString()
     val end  = simParamProv.data["Process1End"].toString()
             .parseDayMonthString()
-    // TODO: Test that Process1 actually finds the field
     val field = simParamProv.agents.find { it.id() == Field.ID }
             as DefaultAgent
 
