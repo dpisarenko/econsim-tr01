@@ -13,7 +13,6 @@ import cc.altruix.econsimtr01.createIncorrectValidationResult
 class EnoughSeedsAtTheStartValidator : ISemanticSimulationParametersValidator {
     override fun validate(scenario: PropertiesFileSimParametersProvider):
             ValidationResult {
-        // TODO: Test this
         val requiredAmount = calculateRequiredAmount(scenario)
         val actualAmount = scenario.data["InitialSeedQuantity"].
                 toString().toDouble()

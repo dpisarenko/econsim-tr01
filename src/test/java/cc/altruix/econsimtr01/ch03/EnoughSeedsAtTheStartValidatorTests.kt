@@ -17,15 +17,24 @@ class EnoughSeedsAtTheStartValidatorTests {
         validateTestLogic(
                 sizeOfField = "250000",
                 seedsPerSquareMeter = "0.0629",
-                initialSeedQuantity = "10",
+                initialSeedQuantity = "15725.0",
                 expectedValidity = true,
                 expectedMessage = "")
         validateTestLogic(
                 sizeOfField = "250000",
+                seedsPerSquareMeter = "0.0449",
+                initialSeedQuantity = "11225.0",
+                expectedValidity = true,
+                expectedMessage = "")
+
+        validateTestLogic(
+                sizeOfField = "250000",
                 seedsPerSquareMeter = "0.0629",
-                initialSeedQuantity = "10",
+                initialSeedQuantity = "15724.9",
                 expectedValidity = false,
-                expectedMessage = "We need X kg of seeds, but only have Y")
+                expectedMessage =
+                    "We need 15725.0 kg of seeds, but only have 15724.9"
+        )
 
     }
 
