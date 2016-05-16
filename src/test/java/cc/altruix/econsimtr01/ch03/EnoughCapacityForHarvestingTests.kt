@@ -37,9 +37,10 @@ class EnoughCapacityForHarvestingTests {
         data["Process3EffortPerSquareMeter"] = "0.45"
         val scenario =
                 PropertiesFileSimParametersProviderWithPredefinedData(data)
+        scenario.initAndValidate()
         val out = EnoughCapacityForHarvesting()
         // Run method under test
-        val res = out.validate(scenario)
+        val res = out.calculateRequiredEffort(scenario)
         // Verify
         Assertions.assertThat(res).isEqualTo(250000.0 * 0.45)
     }

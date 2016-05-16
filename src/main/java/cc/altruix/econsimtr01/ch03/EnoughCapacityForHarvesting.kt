@@ -34,7 +34,6 @@ open class EnoughCapacityForHarvesting :
     open internal fun calculateRequiredEffort(scenario:
                                   PropertiesFileSimParametersProvider): Double
     {
-        // TODO: Test this
         val fieldSize = scenario.data["SizeOfField"].toString().toDouble()
         val effortPerSquareMeter = scenario
                 .data["Process3EffortPerSquareMeter"].toString().toDouble()
