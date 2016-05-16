@@ -35,7 +35,6 @@ open class EnoughCapacityForHarvesting :
                 scenario.data["NumberOfWorkers"].toString().toDouble()
         val workingTimePerBusinessDay =
                 scenario.data["LaborPerBusinessDay"].toString().toDouble()
-        // TODO: Test this
         return businessDays * numberOfWorkers * workingTimePerBusinessDay
     }
 

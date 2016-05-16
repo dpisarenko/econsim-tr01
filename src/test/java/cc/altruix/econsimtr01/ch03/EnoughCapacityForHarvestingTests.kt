@@ -57,9 +57,9 @@ class EnoughCapacityForHarvestingTests {
         scenario.initAndValidate()
         val out = EnoughCapacityForHarvesting()
         // Run method under test
-        val res = out.calculateRequiredEffort(scenario)
+        val res = out.calculateAvailableTime(scenario)
         // Verify
-        Assertions.assertThat(res).isEqualTo(26.0 * 1 * 8)
+        Assertions.assertThat(res).isEqualTo(27.0 * 1 * 8)
 
     }
     private fun validateWiringTestLogic(requiredEffort: Double,
