@@ -55,6 +55,25 @@ class EnoughCapacityForPuttingSeedsIntoGroundTests {
                 44
         )
     }
+    @Test
+    fun calculateAvailableWorkingTime() {
+        // Prepare
+        val data = Properties()
+        data["NumberOfWorkers"] = "1"
+        data["Process1Start"] = "30.08"
+        data["Process1End"] = "30.10"
+        data["LaborPerBusinessDay"] = "8"
+        val scenario = Mockito.spy(
+                PropertiesFileSimParametersProviderWithPredefinedData(data)
+        )
+        scenario.initAndValidate()
+        val out = EnoughCapacityForPuttingSeedsIntoGround()
+        // Run method under test
+        val res = out.calculateAvailableWorkingTime(scenario)
+        // Verify
+        Assertions.assertThat(res).isEqualTo(1.0 * 44 * 8)
+
+    }
     private fun calculateBusinessDaysBetweenDatesTestLogic(
             start: DayAndMonth,
             end: DayAndMonth,

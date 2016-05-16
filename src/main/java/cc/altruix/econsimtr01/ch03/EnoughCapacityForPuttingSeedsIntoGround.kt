@@ -1,7 +1,6 @@
 package cc.altruix.econsimtr01.ch03
 
 import cc.altruix.econsimtr01.*
-import org.joda.time.DateTime
 import org.joda.time.DateTimeConstants
 
 /**
@@ -24,12 +23,20 @@ open class EnoughCapacityForPuttingSeedsIntoGround : ISemanticSimulationParamete
             scenario: PropertiesFileSimParametersProvider): Double {
         // TODO: Implement this
         // TODO: Test this
-        val numberOfWorkers = scenario.data["NumberOfWorkers"].toString().toDouble()
-        val processStart = scenario.data["Process1Start"].toString().parseDayMonthString()
-        val processEnd = scenario.data["Process1End"].toString().parseDayMonthString()
-        val businessDays = calculateBusinessDaysBetweenDates(processStart, processEnd)
-        val workingTimePerBusinessDay = scenario.data["LaborPerBusinessDay"].toString().toDouble()
-        val availableWorkingTime = businessDays.toDouble() * workingTimePerBusinessDay * numberOfWorkers
+        val numberOfWorkers =
+                scenario.data["NumberOfWorkers"].toString().toDouble()
+        val processStart =
+                scenario.data["Process1Start"].toString().parseDayMonthString()
+        val processEnd =
+                scenario.data["Process1End"].toString().parseDayMonthString()
+        val businessDays =
+                calculateBusinessDaysBetweenDates(processStart, processEnd)
+        val workingTimePerBusinessDay =
+                scenario.data["LaborPerBusinessDay"].toString().toDouble()
+        val availableWorkingTime =
+                businessDays.toDouble() *
+                        workingTimePerBusinessDay *
+                        numberOfWorkers
         return availableWorkingTime
     }
 
