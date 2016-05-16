@@ -10,8 +10,10 @@ import java.util.*
 /**
  * Created by pisarenko on 14.05.2016.
  */
-class AgriculturalSimParametersProvider(file: File) : PropertiesFileSimParametersProvider(file) {
-    override fun createValidators(): Map<String, List<IPropertiesFileValueValidator>> {
+class AgriculturalSimParametersProvider(file: File) :
+        PropertiesFileSimParametersProvider(file) {
+    override fun createValidators():
+            Map<String, List<IPropertiesFileValueValidator>> {
         val validators = HashMap<String, List<IPropertiesFileValueValidator>>()
         validators["SimulationName"] = listOf(
                 ExistenceValidator,
@@ -46,5 +48,19 @@ class AgriculturalSimParametersProvider(file: File) : PropertiesFileSimParameter
             )
         }
         return validators
+    }
+
+    override fun initAndValidate() {
+        super.initAndValidate()
+        if (validity.valid) {
+            agents.add(Farmers())
+            agents.add(Field())
+        }
+    }
+
+    private fun createProcesses() {
+// TODO: Implement this
+// TODO: Test this
+        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

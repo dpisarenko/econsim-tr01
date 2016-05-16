@@ -16,15 +16,18 @@ import java.util.*
 /**
  * Created by pisarenko on 14.05.2016.
  */
-abstract open class PropertiesFileSimParametersProvider(val file: File) : ISimParametersProvider {
+abstract open class PropertiesFileSimParametersProvider(val file: File) :
+        ISimParametersProvider {
     override val agents:MutableList<IAgent> = LinkedList()
         get
     override val flows:MutableList<PlFlow> = LinkedList()
         get
 
-    override val initialResourceLevels:MutableList<InitialResourceLevel> = LinkedList()
+    override val initialResourceLevels:MutableList<InitialResourceLevel> =
+            LinkedList()
         get
-    override val infiniteResourceSupplies:MutableList<InfiniteResourceSupply> = LinkedList()
+    override val infiniteResourceSupplies:MutableList<InfiniteResourceSupply> =
+            LinkedList()
         get
     override val transformations:MutableList<PlTransformation> = LinkedList()
         get
@@ -44,12 +47,12 @@ abstract open class PropertiesFileSimParametersProvider(val file: File) : ISimPa
         validity = ValidationResult(valid, message)
     }
 
-    open internal fun createMessage(valResults: List<ValidationResult>, valid: Boolean): String {
+    open internal fun createMessage(valResults: List<ValidationResult>,
+                                    valid: Boolean): String {
         var message = ""
         if (!valid) {
-            message = valResults.filter { it.valid == false }.map { it.message }.joinToString(
-                    separator = ", "
-            )
+            message = valResults.filter { it.valid == false }
+                    .map { it.message }.joinToString(separator = ", ")
         }
         return message
     }
@@ -60,7 +63,8 @@ abstract open class PropertiesFileSimParametersProvider(val file: File) : ISimPa
     open internal fun applyValidators(data: Properties,
                                       valResults: MutableList<ValidationResult>,
                                       parameter: String,
-                                      parameterValidators: List<IPropertiesFileValueValidator>) {
+                                      parameterValidators:
+                                      List<IPropertiesFileValueValidator>) {
         for (validator in parameterValidators) {
             val vres = validator.validate(data, parameter)
             if (!vres.valid) {
@@ -70,7 +74,8 @@ abstract open class PropertiesFileSimParametersProvider(val file: File) : ISimPa
         }
     }
 
-    open internal fun createValResults():MutableList<ValidationResult> = LinkedList<ValidationResult>()
+    open internal fun createValResults():MutableList<ValidationResult> =
+            LinkedList<ValidationResult>()
 
     open internal fun loadData(): Properties {
         val data = Properties()
@@ -78,5 +83,6 @@ abstract open class PropertiesFileSimParametersProvider(val file: File) : ISimPa
         return data
     }
 
-    abstract fun createValidators():Map<String,List<IPropertiesFileValueValidator>>
+    abstract fun createValidators():
+            Map<String,List<IPropertiesFileValueValidator>>
 }
