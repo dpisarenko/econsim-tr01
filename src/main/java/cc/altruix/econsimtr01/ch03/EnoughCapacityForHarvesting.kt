@@ -25,13 +25,15 @@ open class EnoughCapacityForHarvesting :
         return createCorrectValidationResult()
     }
 
-    private fun calculateAvailableTime(scenario: PropertiesFileSimParametersProvider): Double {
+    open internal fun calculateAvailableTime(scenario:
+                                             PropertiesFileSimParametersProvider): Double {
         // TODO: Implement this
         // TODO: Test this
         throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    private fun calculateRequiredEffort(scenario: PropertiesFileSimParametersProvider): Double {
+    open internal fun calculateRequiredEffort(scenario:
+                                  PropertiesFileSimParametersProvider): Double {
         // TODO: Implement this
         // TODO: Test this
         throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.

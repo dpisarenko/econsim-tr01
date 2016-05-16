@@ -36,9 +36,8 @@ class EnoughCapacityForPuttingSeedsIntoGroundTests {
         val data = Properties()
         data["SizeOfField"] = "250000"
         data["Process1EffortInSquareMeters"] = "0.44"
-        val scenario = Mockito.spy(
+        val scenario =
                 PropertiesFileSimParametersProviderWithPredefinedData(data)
-        )
         scenario.initAndValidate()
         val out = EnoughCapacityForPuttingSeedsIntoGround()
         // Run method under test

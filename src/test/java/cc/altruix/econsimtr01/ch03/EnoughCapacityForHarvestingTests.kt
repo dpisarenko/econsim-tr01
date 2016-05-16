@@ -4,7 +4,11 @@
 
 package cc.altruix.econsimtr01.ch03
 
+import org.fest.assertions.Assertions
 import org.junit.Test
+import org.mockito.Mock
+import org.mockito.Mockito
+import java.util.*
 
 /**
  * Created by pisarenko on 16.05.2016.
@@ -31,9 +35,19 @@ class EnoughCapacityForHarvestingTests {
                                         availableTime: Double,
                                         expectedValidity: Boolean,
                                         expectedMessage: String) {
-        // TODO: Continue here
-// TODO: Implement this
-// TODO: Test this
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // Prepare
+        val data = Properties()
+        val scenario =
+                PropertiesFileSimParametersProviderWithPredefinedData(data)
+        val out = Mockito.spy(EnoughCapacityForHarvesting())
+        Mockito.doReturn(requiredEffort).`when`(out)
+                .calculateRequiredEffort(scenario)
+        Mockito.doReturn(availableTime).`when`(out)
+                .calculateAvailableTime(scenario)
+        // Run method under test
+        val res = out.validate(scenario)
+        // Verify
+        Assertions.assertThat(res.message).isEqualTo(expectedMessage)
+        Assertions.assertThat(res.valid).isEqualTo(expectedValidity)
     }
 }
