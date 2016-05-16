@@ -11,8 +11,6 @@ import cc.altruix.econsimtr01.parseDayMonthString
  */
 open class EnoughCapacityForPuttingSeedsIntoGround : ISemanticSimulationParametersValidator {
      override fun validate(scenario: PropertiesFileSimParametersProvider): ValidationResult {
-        // TODO: Implement this
-        // TODO: Test this
         val totalRequiredEffort = calculateTotalRequiredEffort(scenario)
         val availableWorkingTime = calculateAvailableWorkingTime(scenario)
         if (totalRequiredEffort > availableWorkingTime) {
@@ -23,7 +21,8 @@ open class EnoughCapacityForPuttingSeedsIntoGround : ISemanticSimulationParamete
         return createCorrectValidationResult()
     }
 
-    internal fun calculateAvailableWorkingTime(scenario: PropertiesFileSimParametersProvider): Double {
+    open internal fun calculateAvailableWorkingTime(
+            scenario: PropertiesFileSimParametersProvider): Double {
         // TODO: Implement this
         // TODO: Test this
         val numberOfWorkers = scenario.data["NumberOfWorkers"].toString().toDouble()
@@ -35,16 +34,22 @@ open class EnoughCapacityForPuttingSeedsIntoGround : ISemanticSimulationParamete
         return availableWorkingTime
     }
 
-    internal fun calculateTotalRequiredEffort(scenario: PropertiesFileSimParametersProvider): Double {
+    open internal fun calculateTotalRequiredEffort(
+            scenario: PropertiesFileSimParametersProvider): Double {
         // TODO: Implement this
         // TODO: Test this
-        val sizeOfFieldInSquareMeters = scenario.data["SizeOfField"].toString().toDouble()
-        val effortPerSquareMetersInHours = scenario.data["Process1EffortInSquareMeters"].toString().toDouble()
-        val totalRequiredEffort = sizeOfFieldInSquareMeters * effortPerSquareMetersInHours
-        return totalRequiredEffort
+        val sizeOfFieldInSquareMeters =
+                scenario.data["SizeOfField"].toString().toDouble()
+        val effortPerSquareMetersInHours =
+                scenario.data["Process1EffortInSquareMeters"]
+                        .toString().toDouble()
+        return sizeOfFieldInSquareMeters * effortPerSquareMetersInHours
     }
 
-    private fun calculateBusinessDaysBetweenDates(processStart: DayAndMonth, processEnd: DayAndMonth): Int {
+    open internal fun calculateBusinessDaysBetweenDates(
+            processStart: DayAndMonth,
+            processEnd: DayAndMonth
+    ): Int {
         // TODO: Implement this
         // TODO: Test this
         throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
