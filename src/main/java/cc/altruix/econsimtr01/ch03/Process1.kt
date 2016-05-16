@@ -20,7 +20,6 @@ open class Process1(val simParamProv:PropertiesFileSimParametersProvider) :
             .parseDayMonthString()
     val field = simParamProv.agents.find { it.id() == Field.ID }
             as DefaultAgent
-
     override fun timeToRun(time: DateTime): Boolean =
             timeBetweenStartAndEnd(time) &&
             evenHourAndMinute(time) &&
@@ -32,7 +31,6 @@ open class Process1(val simParamProv:PropertiesFileSimParametersProvider) :
     open internal fun timeBetweenStartAndEnd(time: DateTime) =
             time.between(start, end)
 
-    // TODO: Implement this
     open internal fun fieldNotFull(field: DefaultAgent): Boolean =
             field.amount(
                     AgriculturalSimParametersProvider
@@ -44,10 +42,8 @@ open class Process1(val simParamProv:PropertiesFileSimParametersProvider) :
         // TODO: Test this
 
     }
-
     override fun notifySubscribers(time: DateTime) {
     }
-
     override fun subscribe(subscriber: IActionSubscriber) {
     }
 }
