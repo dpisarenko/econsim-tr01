@@ -59,4 +59,18 @@ class Process1Tests {
         // Verify
         Assertions.assertThat(res).isEqualTo(expectedResult)
     }
+    @Test
+    fun initFindsField() {
+        val data = Properties()
+        data["Process1Start"] = "30.08"
+        data["Process1End"] = "30.10"
+        val simParamProv =
+                AgriculturalSimParametersProviderWithPredefinedData(data)
+        simParamProv.initAndValidate()
+        val field = Field(simParamProv)
+        simParamProv.agents.add(field)
+        simParamProv.agents.add(Farmers(simParamProv))
+        val out = Process1(simParamProv)
+        Assertions.assertThat(out.field).isSameAs(field)
+    }
 }
