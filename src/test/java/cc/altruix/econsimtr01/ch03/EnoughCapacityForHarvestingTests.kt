@@ -44,7 +44,24 @@ class EnoughCapacityForHarvestingTests {
         // Verify
         Assertions.assertThat(res).isEqualTo(250000.0 * 0.45)
     }
+    @Test
+    fun calculateAvailableTime() {
+        // Prepare
+        val data = Properties()
+        data["Process2End"] = "05.07"
+        data["Process3End"] = "10.08"
+        data["NumberOfWorkers"] = "1"
+        data["LaborPerBusinessDay"] = "8"
+        val scenario =
+                PropertiesFileSimParametersProviderWithPredefinedData(data)
+        scenario.initAndValidate()
+        val out = EnoughCapacityForHarvesting()
+        // Run method under test
+        val res = out.calculateRequiredEffort(scenario)
+        // Verify
+        Assertions.assertThat(res).isEqualTo(26.0 * 1 * 8)
 
+    }
     private fun validateWiringTestLogic(requiredEffort: Double,
                                         availableTime: Double,
                                         expectedValidity: Boolean,
