@@ -11,7 +11,8 @@ import java.util.*
  * Created by pisarenko on 13.05.2016.
  */
 class BasicAgriculturalSimulationApp(
-        val cmdLineParamValidator:CmdLineParametersValidator = CmdLineParametersValidator()
+        val cmdLineParamValidator:CmdLineParametersValidator =
+            CmdLineParametersValidator()
 ) {
     fun run(args: Array<String>,
             out: PrintStream,
@@ -33,9 +34,9 @@ class BasicAgriculturalSimulationApp(
         }
         val error = valRes.find { it.valid == false }
         if (error != null) {
-            val allErrors = valRes.filter { it.valid == false }.map { it.message }.joinToString (
-                    separator = ", "
-            )
+            val allErrors = valRes.filter { it.valid == false }
+                    .map { it.message }
+                    .joinToString(separator = ", ")
             err.println("One or more scenarios are invalid:")
             err.println(allErrors)
             return
@@ -49,7 +50,8 @@ class BasicAgriculturalSimulationApp(
                     EnoughCapacityForHarvesting(),
                     OneDateBeforeOtherValidator("Process1Start", "Process1End"),
                     OneDateBeforeOtherValidator("Process1End", "Process2End"),
-                    OneDateBeforeOtherValidator("Process2End", "Process3End")
+                    OneDateBeforeOtherValidator("Process2End", "Process3End"),
+                    EnoughSeedsAtTheStartValidator()
                     // TODO: Add here a validator that we have enough seeds at
                     // the start (enough for the field)
             )
