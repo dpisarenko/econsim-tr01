@@ -6,7 +6,6 @@ package cc.altruix.econsimtr01.ch03
 
 import cc.altruix.econsimtr01.createCorrectValidationResult
 import cc.altruix.econsimtr01.createIncorrectValidationResult
-import java.util.*
 
 /**
  * Created by pisarenko on 16.05.2016.
