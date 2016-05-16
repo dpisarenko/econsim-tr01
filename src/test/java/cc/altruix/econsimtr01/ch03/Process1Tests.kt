@@ -41,8 +41,11 @@ class Process1Tests {
                                  expectedResult:Boolean) {
         // Prepare
         val data = Properties()
+        data["Process1Start"] = "30.08"
+        data["Process1End"] = "30.10"
         val simParamProv =
                 AgriculturalSimParametersProviderWithPredefinedData(data)
+        simParamProv.initAndValidate()
         val field = Field(simParamProv)
         simParamProv.agents.add(field)
         val out = Mockito.spy(Process1(simParamProv))
@@ -55,7 +58,5 @@ class Process1Tests {
         val res = out.timeToRun(time)
         // Verify
         Assertions.assertThat(res).isEqualTo(expectedResult)
-        // TODO: Implement
     }
-
 }

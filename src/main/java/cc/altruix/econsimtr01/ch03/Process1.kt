@@ -22,7 +22,6 @@ open class Process1(val simParamProv:PropertiesFileSimParametersProvider) :
     val field = simParamProv.agents.find { it.id() == Field.ID }
             as DefaultAgent
 
-    // TODO: Test this
     override fun timeToRun(time: DateTime): Boolean =
             timeBetweenStartAndEnd(time) &&
             evenHourAndMinute(time) &&
