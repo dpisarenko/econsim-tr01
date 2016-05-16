@@ -48,7 +48,7 @@ open class EnoughCapacityForPuttingSeedsIntoGround : ISemanticSimulationParamete
             end: DayAndMonth
     ): Int {
         var day = start.toDateTime()
-        val end = start.toDateTime()
+        val end = end.toDateTime()
         var businessDays = 0
         do {
             if ((day.dayOfWeek != DateTimeConstants.SATURDAY) && (day
@@ -56,8 +56,7 @@ open class EnoughCapacityForPuttingSeedsIntoGround : ISemanticSimulationParamete
                 businessDays++
             }
             day = day.plusDays(1)
-        } while (day.isBefore(end))
+        } while (day.isBefore(end) || day.isEqual(end))
         return businessDays
-        // TODO: Test this
     }
 }
