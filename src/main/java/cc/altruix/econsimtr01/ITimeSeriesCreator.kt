@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2016 Dmitri Pisarenko, http://altruix.cc
+ */
+
 package cc.altruix.econsimtr01
 
 import java.io.File
