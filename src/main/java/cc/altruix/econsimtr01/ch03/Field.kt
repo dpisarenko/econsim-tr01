@@ -13,5 +13,8 @@ class Field : DefaultAgent(ID) {
     companion object {
         val ID = "Field"
     }
+    init {
+        actions.add(Process2())
+    }
     // TODO: Implement process #2 (ripen)
 }

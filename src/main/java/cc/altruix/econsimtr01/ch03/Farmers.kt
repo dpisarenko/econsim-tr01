@@ -13,6 +13,10 @@ class Farmers : DefaultAgent("Farmers") {
     companion object {
         val ID = "Farmers"
     }
+    init {
+        actions.add(Process1())
+        actions.add(Process3())
+    }
     // TODO: Implement process #1 (putting seeds into ground)
     // TODO: Implement process #3 (collect the harvest)
 }
