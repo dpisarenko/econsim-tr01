@@ -1,5 +1,6 @@
 package cc.altruix.econsimtr01.ch03
 
+import cc.altruix.econsimtr01.DayAndMonth
 import org.fest.assertions.Assertions
 import org.junit.Test
 import org.mockito.Mockito
@@ -41,6 +42,31 @@ class EnoughCapacityForPuttingSeedsIntoGroundTests {
         // Verify
         Assertions.assertThat(res).isEqualTo(250000 * 0.44)
     }
+    @Test
+    fun calculateBusinessDaysBetweenDates() {
+        calculateBusinessDaysBetweenDatesTestLogic(
+                DayAndMonth(16, 5),
+                DayAndMonth(22, 5),
+                5
+        )
+        calculateBusinessDaysBetweenDatesTestLogic(
+                DayAndMonth(30, 8),
+                DayAndMonth(30, 10),
+                44
+        )
+    }
+    private fun calculateBusinessDaysBetweenDatesTestLogic(
+            start: DayAndMonth,
+            end: DayAndMonth,
+            expectedDays: Int) {
+        // Prepare
+        val out = EnoughCapacityForPuttingSeedsIntoGround()
+        // Run method under test
+        val actDays = out.calculateBusinessDaysBetweenDates(start, end)
+        // Verify
+        Assertions.assertThat(actDays).isEqualTo(expectedDays)
+    }
+
     private fun validateWiringTestLogic(totalRequiredEffort:Double,
                                         availableWorkingTime:Double,
                                         expectedValidity:Boolean,

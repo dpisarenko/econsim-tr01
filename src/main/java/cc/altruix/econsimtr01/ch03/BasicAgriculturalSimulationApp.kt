@@ -43,7 +43,11 @@ class BasicAgriculturalSimulationApp(
             listOf(
                     EnoughCapacityForPuttingSeedsIntoGround(),
                     EnoughCapacityForHarvesting
-                    // TODO: Add here a validator that we have enough seeds at the start (enough for the field)
+                    // TODO: Add here a validator that we have enough seeds at
+                    // the start (enough for the field)
+                    // TODO: Add validation that Process1End is after Process1Start
+                    // TODO: Add validation that Process2End is after
+                    // Process2Start
             )
 }
 fun main(args : Array<String>) {
