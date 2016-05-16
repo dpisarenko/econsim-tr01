@@ -43,8 +43,8 @@ class BasicAgriculturalSimulationApp(
 
         //cmdLineParamValidator.simParamProviders.forEach { scenario -> }
     }
-    fun createSemanticValidators():List<ISemanticSimulationParametersValidator> =
-            listOf(
+    fun createSemanticValidators():List<ISemanticSimulationParametersValidator>
+            = listOf(
                     EnoughCapacityForPuttingSeedsIntoGround(),
                     EnoughCapacityForHarvesting()
                     // TODO: Add here a validator that we have enough seeds at
