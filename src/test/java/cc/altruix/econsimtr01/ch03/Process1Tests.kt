@@ -94,6 +94,8 @@ class Process1Tests {
         data["Process1EffortInSquareMeters"] = "0.44"
         data["Process1QuantityOfSeeds"] = "0.0629"
         data["SizeOfField"] = "250000"
+        data["Process1Start"] = "30.08"
+        data["Process1End"] = "30.10"
         val simParamProv =
                 AgriculturalSimParametersProviderWithPredefinedData(data)
         simParamProv.initAndValidate()
