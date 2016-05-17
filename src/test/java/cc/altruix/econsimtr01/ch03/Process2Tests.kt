@@ -34,9 +34,6 @@ class Process2Tests {
     @Test
     fun run() {
         // Prepare
-        val data = Properties()
-        data["Process2YieldPerSquareMeter"] = "0.3595"
-        data["Process2End"] = "05.07"
         val simParamProv =
                 AgriculturalSimParametersProvider(
                         File(
@@ -44,7 +41,6 @@ class Process2Tests {
                         )
                 )
         simParamProv.initAndValidate()
-        simParamProv.agents.add(Field(simParamProv))
         val field = simParamProv.agents.find { it.id() == Field.ID }
                 as DefaultAgent
         Assertions.assertThat(field).isNotNull

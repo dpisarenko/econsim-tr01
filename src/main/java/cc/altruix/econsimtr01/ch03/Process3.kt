@@ -21,9 +21,15 @@ IAction {
     // TODO: Implement this
     // TODO: Test this
     override fun timeToRun(time: DateTime): Boolean =
-        time.between(start, end) &&
-        time.evenHourAndMinute(8, 0) &&
+        timeBetweenStartAndEnd(time) &&
+        evenHourAndMinute(time) &&
         cropToCollectAvailable()
+
+    open internal fun evenHourAndMinute(time: DateTime) =
+            time.evenHourAndMinute(8, 0)
+
+    open internal fun timeBetweenStartAndEnd(time: DateTime) =
+            time.between(start, end)
 
     // TODO: Test this
     open internal fun cropToCollectAvailable(): Boolean =
