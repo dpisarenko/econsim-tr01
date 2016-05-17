@@ -15,6 +15,8 @@ class Process2(val simParamProv:AgriculturalSimParametersProvider) : IAction {
     val LOGGER = LoggerFactory.getLogger(Process2::class.java)
     val end  = simParamProv.data["Process2End"].toString()
             .parseDayMonthString()
+    val field = simParamProv.agents.find { it.id() == Field.ID }
+            as DefaultAgent
 
     // TODO: Make sure this process converts RESOURCE_AREA_WITH_SEEDS to
     // RESOURCE_AREA_WITH_CROP
@@ -23,15 +25,32 @@ class Process2(val simParamProv:AgriculturalSimParametersProvider) : IAction {
             time.isEqual(end.toDateTime(time.year)) &&
             evenHourAndMinute(time)
 
-    // TODO: Implement this
-    // TODO: Test this
     open internal fun evenHourAndMinute(time: DateTime): Boolean = time
             .evenHourAndMinute(0, 0)
 
-    // TODO: Implement this
     // TODO: Test this
     override fun run(time: DateTime) {
-        throw UnsupportedOperationException()
+        val areaWithSeeds = field.amount(AgriculturalSimParametersProvider
+                .RESOURCE_AREA_WITH_SEEDS.id)
+        if (areaWithSeeds == 0.0) {
+            LOGGER.error("There are no seeds on the field")
+            return
+        }
+        val yieldPerSquareMeter = simParamProv
+                .data["Process2YieldPerSquareMeter"].toString().toDouble()
+
+        field.remove(
+                AgriculturalSimParametersProvider.RESOURCE_AREA_WITH_SEEDS.id,
+                areaWithSeeds
+        )
+        field.put(
+                AgriculturalSimParametersProvider.RESOURCE_AREA_WITH_CROP.id,
+                areaWithSeeds
+        )
+        field.put(
+                AgriculturalSimParametersProvider.RESOURCE_SEEDS.id,
+                areaWithSeeds * yieldPerSquareMeter
+        )
     }
 
     override fun notifySubscribers(time: DateTime) {
