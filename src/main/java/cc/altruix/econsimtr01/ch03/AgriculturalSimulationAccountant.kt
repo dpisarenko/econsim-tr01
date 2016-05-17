@@ -45,14 +45,15 @@ class AgriculturalSimulationAccountant(resultsStorage: MutableMap<DateTime,
         throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    private fun calculateFieldAreaWithSeeds(agents: List<IAgent>): Double {
-// TODO: Implement this
-// TODO: Test this
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    // TODO: Test this
+    internal fun calculateFieldAreaWithSeeds(agents: List<IAgent>): Double
+    = (agents.find { it.id() == Field.ID } as DefaultAgent).
+            amount(
+                    AgriculturalSimParametersProvider.RESOURCE_AREA_WITH_SEEDS.id
+            )
 
     // TODO: Test this
-    private fun calculateSeedsInShack(agents: List<IAgent>): Double =
+    internal fun calculateSeedsInShack(agents: List<IAgent>): Double =
             (agents.find { it.id() == Shack.ID } as DefaultAgent).
                     amount(AgriculturalSimParametersProvider.RESOURCE_SEEDS.id)
 }
