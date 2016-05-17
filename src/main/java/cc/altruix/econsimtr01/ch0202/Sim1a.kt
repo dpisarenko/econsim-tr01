@@ -15,7 +15,7 @@ import java.util.*
 class Sim1a(logTarget:StringBuilder,
             flows:MutableList<ResourceFlow>,
             simParametersProvider: Sim1ParametersProvider,
-            val resultsStorage:MutableMap<DateTime,Sim1aResultsRow<Sim1aResultRowField>>) :
+            val resultsStorage:MutableMap<DateTime, SimResRow<Sim1aResultRowField>>) :
         Sim1(logTarget, flows, simParametersProvider) {
     override fun createAgents(): List<IAgent> {
         val agents = super.createAgents()

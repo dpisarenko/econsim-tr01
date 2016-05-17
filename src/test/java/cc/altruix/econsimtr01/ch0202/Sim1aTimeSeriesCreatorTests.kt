@@ -19,11 +19,11 @@ class Sim1aTimeSeriesCreatorTests {
     @Test
     fun runWiring() {
         // Prepare
-        val simData = HashMap<DateTime, Sim1aResultsRow<Sim1aResultRowField>>()
+        val simData = HashMap<DateTime, SimResRow<Sim1aResultRowField>>()
         val t0 = 0L.millisToSimulationDateTime()
-        val row0 = Sim1aResultsRow<Sim1aResultRowField>(t0)
+        val row0 = SimResRow<Sim1aResultRowField>(t0)
         val t1 = t0.plusMinutes(1)
-        val row1 = Sim1aResultsRow<Sim1aResultRowField>(t1)
+        val row1 = SimResRow<Sim1aResultRowField>(t1)
         simData.put(t0, row0)
         simData.put(t0, row1)
         val targetFileName = "targetFileName"
@@ -54,7 +54,7 @@ class Sim1aTimeSeriesCreatorTests {
     @Test
     fun composeHeader() {
         // Prepare
-        val simData = HashMap<DateTime, Sim1aResultsRow<Sim1aResultRowField>>()
+        val simData = HashMap<DateTime, SimResRow<Sim1aResultRowField>>()
         val targetFileName = "targetFileName"
         val sim1Name = "Scenario 1"
         val sim2Name = "Scenario 2"
@@ -74,7 +74,7 @@ class Sim1aTimeSeriesCreatorTests {
     @Test
     fun composeRowDataDefaultScenario() {
         // Prepare
-        val simData = HashMap<DateTime, Sim1aResultsRow<Sim1aResultRowField>>()
+        val simData = HashMap<DateTime, SimResRow<Sim1aResultRowField>>()
         val targetFileName = "targetFileName"
         val sim1Name = "Scenario 1"
         val sim2Name = "Scenario 2"
@@ -84,7 +84,7 @@ class Sim1aTimeSeriesCreatorTests {
                 listOf(sim1Name, sim2Name)
         )
         val t = 0L.millisToSimulationDateTime()
-        val row = Sim1aResultsRow<Sim1aResultRowField>(t)
+        val row = SimResRow<Sim1aResultRowField>(t)
         row.data.put(sim1Name, hashMapOf(
                 Pair(
                         Sim1aResultRowField.PEOPLE_MET,

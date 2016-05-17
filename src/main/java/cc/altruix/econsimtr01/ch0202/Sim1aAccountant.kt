@@ -13,11 +13,11 @@ import java.util.*
  * Created by pisarenko on 04.05.2016.
  */
 open class Sim1aAccountant(val resultsStorage: MutableMap<DateTime,
-        Sim1aResultsRow<Sim1aResultRowField>>,
-                      val scenarioName: String)
+        SimResRow<Sim1aResultRowField>>,
+                           val scenarioName: String)
 : ISensor {
     override fun measure(time: DateTime, agents: List<IAgent>) {
-        val row:Sim1aResultsRow<Sim1aResultRowField> = findOrCreateRow(resultsStorage, time)
+        val row: SimResRow<Sim1aResultRowField> = findOrCreateRow(resultsStorage, time)
         val data:MutableMap<Sim1aResultRowField,Double> = findOrCreateDataMap(row, scenarioName)
         val protagonist = findProtagonist(agents)
         val population = protagonist.population
@@ -56,8 +56,8 @@ open class Sim1aAccountant(val resultsStorage: MutableMap<DateTime,
             population.people().filter { it.willingToMeet }.count().toDouble()
 
     internal open fun findOrCreateDataMap(row:
-                                          Sim1aResultsRow<Sim1aResultRowField>,
-                                    scenarioName: String)
+                                          SimResRow<Sim1aResultRowField>,
+                                          scenarioName: String)
             : MutableMap<Sim1aResultRowField, Double> {
         var dataMap = row.data.get(scenarioName)
         if (dataMap == null) {
@@ -68,12 +68,12 @@ open class Sim1aAccountant(val resultsStorage: MutableMap<DateTime,
     }
 
     internal open fun findOrCreateRow(resultsStorage: MutableMap<DateTime,
-                Sim1aResultsRow<Sim1aResultRowField>>,
+                SimResRow<Sim1aResultRowField>>,
                                       time: DateTime)
-            : Sim1aResultsRow<Sim1aResultRowField> {
+            : SimResRow<Sim1aResultRowField> {
         var row = resultsStorage.get(time)
         if (row == null) {
-            row = Sim1aResultsRow(time)
+            row = SimResRow(time)
             resultsStorage.put(time, row)
         }
         return row
