@@ -57,9 +57,8 @@ class Process3Tests {
                 evenHourAndMinute = true,
                 cropToCollectAvailable = true,
                 businessDay = true,
-                expectedResult = false
+                expectedResult = true
         )
-
     }
     @Test
     fun cropToCollectAvailable() {

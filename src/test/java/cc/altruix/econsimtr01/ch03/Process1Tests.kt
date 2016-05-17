@@ -89,6 +89,7 @@ class Process1Tests {
         val field = Field(simParamProv)
         simParamProv.agents.add(field)
         simParamProv.agents.add(Farmers(simParamProv))
+        simParamProv.agents.add(Shack())
         val out = Process1(simParamProv)
         Assertions.assertThat(out.field).isSameAs(field)
     }
