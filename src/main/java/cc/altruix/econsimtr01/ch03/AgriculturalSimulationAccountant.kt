@@ -51,7 +51,6 @@ open class AgriculturalSimulationAccountant(resultsStorage: MutableMap<DateTime,
                     AgriculturalSimParametersProvider.RESOURCE_AREA_WITH_SEEDS.id
             )
 
-    // TODO: Test this
     open internal fun calculateSeedsInShack(agents: List<IAgent>): Double =
             (agents.find { it.id() == Shack.ID } as DefaultAgent).
                     amount(AgriculturalSimParametersProvider.RESOURCE_SEEDS.id)
