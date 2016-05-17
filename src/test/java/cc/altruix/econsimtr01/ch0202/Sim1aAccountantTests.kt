@@ -20,11 +20,12 @@ class Sim1aAccountantTests {
     @Test
     fun measureWiring() {
         // Prepare
-        val resultsStorage = HashMap<DateTime, Sim1aResultsRow>()
+        val resultsStorage = HashMap<DateTime,
+                Sim1aResultsRow<Sim1aResultRowField>>()
         val scenarioName = "Scenario 1"
         val out = Mockito.spy(Sim1aAccountant(resultsStorage, scenarioName))
         val t = 0L.millisToSimulationDateTime()
-        val row = Sim1aResultsRow(t)
+        val row = Sim1aResultsRow<Sim1aResultRowField>(t)
         Mockito.doReturn(row).`when`(out).findOrCreateRow(resultsStorage, t)
         val data = mock<MutableMap<Sim1aResultRowField,Double>>()
         Mockito.doReturn(data).`when`(out).findOrCreateDataMap(row, scenarioName)
@@ -68,12 +69,12 @@ class Sim1aAccountantTests {
     @Test
     fun findOrCreateDataMapFindsDataMap() {
         // Prepare
-        val resultsStorage = HashMap<DateTime, Sim1aResultsRow>()
+        val resultsStorage = HashMap<DateTime, Sim1aResultsRow<Sim1aResultRowField>>()
         val scenarioName = "Scenario 1"
         val out = Sim1aAccountant(resultsStorage, scenarioName)
         val dataMap = HashMap<Sim1aResultRowField, Double>()
         val t = 0L.millisToSimulationDateTime()
-        val row = Sim1aResultsRow(t)
+        val row = Sim1aResultsRow<Sim1aResultRowField>(t)
         row.data.put(scenarioName, dataMap)
         // Run method under test
         val actResult = out.findOrCreateDataMap(row, scenarioName)
@@ -83,12 +84,12 @@ class Sim1aAccountantTests {
     @Test
     fun findOrCreateDataMapCreatesDataMap() {
         // Prepare
-        val resultsStorage = HashMap<DateTime, Sim1aResultsRow>()
+        val resultsStorage = HashMap<DateTime, Sim1aResultsRow<Sim1aResultRowField>>()
         val scenarioName = "Scenario 1"
         val out = Sim1aAccountant(resultsStorage, scenarioName)
         val dataMap = HashMap<Sim1aResultRowField, Double>()
         val t = 0L.millisToSimulationDateTime()
-        val row = Sim1aResultsRow(t)
+        val row = Sim1aResultsRow<Sim1aResultRowField>(t)
         row.data.put(scenarioName, dataMap)
         // Run method under test
         val actResult = out.findOrCreateDataMap(row, scenarioName)
@@ -100,11 +101,11 @@ class Sim1aAccountantTests {
     @Test
     fun findOrCreateRowFindsRow() {
         // Prepare
-        val resultsStorage = HashMap<DateTime, Sim1aResultsRow>()
+        val resultsStorage = HashMap<DateTime, Sim1aResultsRow<Sim1aResultRowField>>()
         val scenarioName = "Scenario 1"
         val t = 0L.millisToSimulationDateTime()
         val out = Sim1aAccountant(resultsStorage, scenarioName)
-        val row = Sim1aResultsRow(t)
+        val row = Sim1aResultsRow<Sim1aResultRowField>(t)
         resultsStorage.put(t, row)
         // Run method under test
         val actResult = out.findOrCreateRow(resultsStorage, t)
@@ -117,7 +118,7 @@ class Sim1aAccountantTests {
     @Test
     fun findOrCreateRowCreatesRow() {
         // Prepare
-        val resultsStorage = HashMap<DateTime, Sim1aResultsRow>()
+        val resultsStorage = HashMap<DateTime, Sim1aResultsRow<Sim1aResultRowField>>()
         val scenarioName = "Scenario 1"
         val t = 0L.millisToSimulationDateTime()
         val out = Sim1aAccountant(resultsStorage, scenarioName)
@@ -132,7 +133,7 @@ class Sim1aAccountantTests {
     @Test
     fun calculatePeopleWillingToPurchase() {
         // Prepare
-        val resultsStorage = HashMap<DateTime, Sim1aResultsRow>()
+        val resultsStorage = HashMap<DateTime, Sim1aResultsRow<Sim1aResultRowField>>()
         val scenarioName = "Scenario 1"
         val t = 0L.millisToSimulationDateTime()
         val out = Sim1aAccountant(resultsStorage, scenarioName)
@@ -147,7 +148,7 @@ class Sim1aAccountantTests {
     @Test
     fun calculatePeopleMet() {
         // Prepare
-        val resultsStorage = HashMap<DateTime, Sim1aResultsRow>()
+        val resultsStorage = HashMap<DateTime, Sim1aResultsRow<Sim1aResultRowField>>()
         val scenarioName = "Scenario 1"
         val t = 0L.millisToSimulationDateTime()
         val out = Sim1aAccountant(resultsStorage, scenarioName)
@@ -162,7 +163,7 @@ class Sim1aAccountantTests {
     @Test
     fun calculatePeopleWillingToRecommend() {
         // Prepare
-        val resultsStorage = HashMap<DateTime, Sim1aResultsRow>()
+        val resultsStorage = HashMap<DateTime, Sim1aResultsRow<Sim1aResultRowField>>()
         val scenarioName = "Scenario 1"
         val t = 0L.millisToSimulationDateTime()
         val out = Sim1aAccountant(resultsStorage, scenarioName)
@@ -177,7 +178,7 @@ class Sim1aAccountantTests {
     @Test
     fun calculatePeopleWillingToMeet() {
         // Prepare
-        val resultsStorage = HashMap<DateTime, Sim1aResultsRow>()
+        val resultsStorage = HashMap<DateTime, Sim1aResultsRow<Sim1aResultRowField>>()
         val scenarioName = "Scenario 1"
         val t = 0L.millisToSimulationDateTime()
         val out = Sim1aAccountant(resultsStorage, scenarioName)
@@ -193,7 +194,7 @@ class Sim1aAccountantTests {
     @Test
     fun findProtagonist() {
         // Prepare
-        val resultsStorage = HashMap<DateTime, Sim1aResultsRow>()
+        val resultsStorage = HashMap<DateTime, Sim1aResultsRow<Sim1aResultRowField>>()
         val scenarioName = "Scenario 1"
         val t = 0L.millisToSimulationDateTime()
         val out = Sim1aAccountant(resultsStorage, scenarioName)
