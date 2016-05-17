@@ -132,18 +132,18 @@ class Process1Tests {
                 field.amount(
                         AgriculturalSimParametersProvider.RESOURCE_EMPTY_AREA.id
                 )
-        ).isEqualTo(250000.0)
+        ).isEqualTo(249981.81818181818)
         Assertions.assertThat(
                 field.amount(
                         AgriculturalSimParametersProvider.
                                 RESOURCE_AREA_WITH_SEEDS.id
                 )
-        ).isEqualTo(10.0)
+        ).isEqualTo(18.181818181818183)
         Assertions.assertThat(
                 shack.amount(
                         AgriculturalSimParametersProvider.RESOURCE_SEEDS.id
                 )
-        ).isEqualTo(5.0)
+        ).isEqualTo(8.856363636363636)
     }
     private fun fieldNotFullTestLogic(sizeOfField:String,
                                       areaWithSeeds:Double,
