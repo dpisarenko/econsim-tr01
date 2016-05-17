@@ -181,6 +181,7 @@ class Process1Tests {
                 areaWithSeeds
         )
         simParamProv.agents.add(field)
+        simParamProv.agents.add(Shack())
         val out = Process1(simParamProv)
         // Run method under test
         val res = out.fieldNotFull(field)

@@ -11,4 +11,8 @@ import java.util.*
 class AgriculturalSimParametersProviderWithPredefinedData(val prop: Properties) :
         AgriculturalSimParametersProvider(File("someFile")) {
     override fun loadData():Properties = prop
+
+    override fun initAndValidate() {
+        super.initAndValidate()
+    }
 }
