@@ -13,7 +13,7 @@ import org.joda.time.DateTime
 /**
  * Created by pisarenko on 17.05.2016.
  */
-class AgriculturalSimulationAccountant(resultsStorage: MutableMap<DateTime,
+open class AgriculturalSimulationAccountant(resultsStorage: MutableMap<DateTime,
         SimResRow<AgriculturalSimulationRowField>>,
                                        scenarioName: String) :
         AbstractAccountant2<AgriculturalSimulationRowField>(resultsStorage,
@@ -34,14 +34,14 @@ class AgriculturalSimulationAccountant(resultsStorage: MutableMap<DateTime,
     }
 
     // TODO: Test this
-    private fun calculateFieldAreaWithCrop(agents: List<IAgent>): Double
+    open internal fun calculateFieldAreaWithCrop(agents: List<IAgent>): Double
             = (agents.find { it.id() == Field.ID } as DefaultAgent).
             amount(
                     AgriculturalSimParametersProvider.RESOURCE_AREA_WITH_CROP.id
             )
 
     // TODO: Test this
-    private fun calculateEmptyFieldArea(agents: List<IAgent>): Double =
+    open internal fun calculateEmptyFieldArea(agents: List<IAgent>): Double =
             (agents.find { it.id() == Field.ID } as DefaultAgent).
             amount(
                     AgriculturalSimParametersProvider.RESOURCE_EMPTY_AREA.id
@@ -49,14 +49,14 @@ class AgriculturalSimulationAccountant(resultsStorage: MutableMap<DateTime,
 
 
     // TODO: Test this
-    internal fun calculateFieldAreaWithSeeds(agents: List<IAgent>): Double
+    open internal fun calculateFieldAreaWithSeeds(agents: List<IAgent>): Double
     = (agents.find { it.id() == Field.ID } as DefaultAgent).
             amount(
                     AgriculturalSimParametersProvider.RESOURCE_AREA_WITH_SEEDS.id
             )
 
     // TODO: Test this
-    internal fun calculateSeedsInShack(agents: List<IAgent>): Double =
+    open internal fun calculateSeedsInShack(agents: List<IAgent>): Double =
             (agents.find { it.id() == Shack.ID } as DefaultAgent).
                     amount(AgriculturalSimParametersProvider.RESOURCE_SEEDS.id)
 }
