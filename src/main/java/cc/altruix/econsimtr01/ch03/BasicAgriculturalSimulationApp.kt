@@ -18,7 +18,6 @@ class BasicAgriculturalSimulationApp(
             out: PrintStream,
             err: PrintStream) {
         // TODO: Test this
-        // TODO: Implement process #3
         val cmdLineParamValRes = cmdLineParamValidator.validate(args)
         if (!cmdLineParamValRes.valid) {
             err.println(cmdLineParamValRes.message)

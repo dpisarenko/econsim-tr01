@@ -18,5 +18,4 @@ class Farmers(val simParamProv:AgriculturalSimParametersProvider) :
         actions.add(Process1(simParamProv))
         actions.add(Process3(simParamProv))
     }
-    // TODO: Implement process #3 (collect the harvest)
 }

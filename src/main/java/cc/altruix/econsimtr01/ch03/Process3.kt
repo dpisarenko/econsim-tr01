@@ -41,7 +41,6 @@ IAction {
             ) > 0.0
 
     override fun run(time: DateTime) {
-        // TODO: Test this
         val workerCount = simParamProv.data["NumberOfWorkers"]
                 .toString().toDouble()
         val workingTimePerDay =

@@ -74,7 +74,6 @@ class Process3Tests {
     }
     @Test
     fun run() {
-        // TODO: Continue here
         // Prepare
         val simParamProv =
                 AgriculturalSimParametersProvider(
@@ -103,14 +102,13 @@ class Process3Tests {
         out.run(time)
         // Verify
         Assertions.assertThat(field.amount(AgriculturalSimParametersProvider
-                .RESOURCE_EMPTY_AREA.id)).isEqualTo(0.0)
+                .RESOURCE_EMPTY_AREA.id)).isEqualTo(17.77777777777778)
         Assertions.assertThat(field.amount(AgriculturalSimParametersProvider
-                .RESOURCE_AREA_WITH_CROP.id)).isEqualTo(0.0)
+                .RESOURCE_AREA_WITH_CROP.id)).isEqualTo(249982.22222222222)
         Assertions.assertThat(field.amount(AgriculturalSimParametersProvider
-                .RESOURCE_SEEDS.id)).isEqualTo(0.0)
+                .RESOURCE_SEEDS.id)).isEqualTo(89868.60888888889)
         Assertions.assertThat(shack.amount(AgriculturalSimParametersProvider
-                .RESOURCE_SEEDS.id)).isEqualTo(0.0)
-
+                .RESOURCE_SEEDS.id)).isEqualTo(6.391111111111111)
     }
 
     private fun cropToCollectAvailableTestLogic(areaWithCrop: Double,
