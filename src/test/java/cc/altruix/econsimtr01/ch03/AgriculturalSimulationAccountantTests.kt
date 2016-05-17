@@ -50,6 +50,16 @@ class AgriculturalSimulationAccountantTests {
         Assertions.assertThat(out.calculateFieldAreaWithSeeds(agents))
                 .isEqualTo(123.45)
     }
+    @Test
+    fun calculateSeedsInShack() {
+        val shack = Shack()
+        shack.put(AgriculturalSimParametersProvider.RESOURCE_SEEDS.id,
+                123.45)
+        val agents = listOf(shack)
+        val out = createObjectUnderTest()
+        Assertions.assertThat(out.calculateSeedsInShack(agents))
+                .isEqualTo(123.45)
+    }
 
     private fun createObjectUnderTest(): AgriculturalSimulationAccountant {
         val out = AgriculturalSimulationAccountant(HashMap<DateTime,
