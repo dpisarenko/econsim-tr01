@@ -9,6 +9,8 @@ import cc.altruix.econsimtr01.IAgent
 import cc.altruix.econsimtr01.ISensor
 import cc.altruix.econsimtr01.ResourceFlow
 import cc.altruix.econsimtr01.ch0202.Sim1ParametersProvider
+import cc.altruix.econsimtr01.ch0202.Sim1aResultRowField
+import cc.altruix.econsimtr01.ch0202.SimResRow
 import org.joda.time.DateTime
 
 /**
@@ -17,18 +19,16 @@ import org.joda.time.DateTime
 class BasicAgriculturalSimulation(val logTarget:StringBuilder,
                                   val flows:MutableList<ResourceFlow>,
                                   simParametersProvider:
-                                  AgriculturalSimParametersProvider)
+                                  AgriculturalSimParametersProvider,
+                                  val resultsStorage:MutableMap<DateTime,
+                                          SimResRow<AgriculturalSimulationRowField>>)
 : DefaultSimulation(simParametersProvider){
     override fun continueCondition(time: DateTime): Boolean = time.year <= 3
 
     override fun createAgents(): List<IAgent> = simParametersProvider.agents
 
-    override fun createSensors(): List<ISensor> {
-        // TODO: Create measurement of seeds in shack
-        // TODO: Create measurement of field area with seeds
-        // TODO: Create measurement of empty field area
-        // TODO: Create measurement of field are with crop
-        throw UnsupportedOperationException()
-    }
-
+    override fun createSensors(): List<ISensor> =
+    listOf(AgriculturalSimulationAccountant(resultsStorage,
+            (simParametersProvider as AgriculturalSimParametersProvider)
+                    .data["SimulationName"].toString()))
 }
