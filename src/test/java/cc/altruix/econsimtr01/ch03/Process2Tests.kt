@@ -82,6 +82,7 @@ class Process2Tests {
         val simParamProv =
                 AgriculturalSimParametersProviderWithPredefinedData(data)
         simParamProv.initAndValidate()
+        simParamProv.agents.add(Field(simParamProv))
         val out = Process2(simParamProv)
         // Run method under test
         val res = out.timeToRun(time)
