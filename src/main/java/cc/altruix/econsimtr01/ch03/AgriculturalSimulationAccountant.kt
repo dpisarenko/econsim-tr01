@@ -33,17 +33,20 @@ class AgriculturalSimulationAccountant(resultsStorage: MutableMap<DateTime,
         throw UnsupportedOperationException()
     }
 
-    private fun calculateFieldAreaWithCrop(agents: List<IAgent>): Double {
-// TODO: Implement this
-// TODO: Test this
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    // TODO: Test this
+    private fun calculateFieldAreaWithCrop(agents: List<IAgent>): Double
+            = (agents.find { it.id() == Field.ID } as DefaultAgent).
+            amount(
+                    AgriculturalSimParametersProvider.RESOURCE_AREA_WITH_CROP.id
+            )
 
-    private fun calculateEmptyFieldArea(agents: List<IAgent>): Double {
-// TODO: Implement this
-// TODO: Test this
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    // TODO: Test this
+    private fun calculateEmptyFieldArea(agents: List<IAgent>): Double =
+            (agents.find { it.id() == Field.ID } as DefaultAgent).
+            amount(
+                    AgriculturalSimParametersProvider.RESOURCE_EMPTY_AREA.id
+            )
+
 
     // TODO: Test this
     internal fun calculateFieldAreaWithSeeds(agents: List<IAgent>): Double
