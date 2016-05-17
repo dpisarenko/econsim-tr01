@@ -18,8 +18,6 @@ class BasicAgriculturalSimulationApp(
             out: PrintStream,
             err: PrintStream) {
         // TODO: Test this
-        // TODO: Implement process #1
-        // TODO: Implement process #2
         // TODO: Implement process #3
         val cmdLineParamValRes = cmdLineParamValidator.validate(args)
         if (!cmdLineParamValRes.valid) {
@@ -41,8 +39,6 @@ class BasicAgriculturalSimulationApp(
             err.println(allErrors)
             return
         }
-
-        //cmdLineParamValidator.simParamProviders.forEach { scenario -> }
     }
     fun createSemanticValidators():List<ISemanticSimulationParametersValidator>
             = listOf(
@@ -52,8 +48,6 @@ class BasicAgriculturalSimulationApp(
                     OneDateBeforeOtherValidator("Process1End", "Process2End"),
                     OneDateBeforeOtherValidator("Process2End", "Process3End"),
                     EnoughSeedsAtTheStartValidator()
-                    // TODO: Add here a validator that we have enough seeds at
-                    // the start (enough for the field)
             )
 }
 fun main(args : Array<String>) {
