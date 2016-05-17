@@ -5,6 +5,7 @@
 package cc.altruix.econsimtr01.ch03
 
 import cc.altruix.econsimtr01.AbstractAccountant2
+import cc.altruix.econsimtr01.DefaultAgent
 import cc.altruix.econsimtr01.IAgent
 import cc.altruix.econsimtr01.ch0202.SimResRow
 import org.joda.time.DateTime
@@ -50,9 +51,8 @@ class AgriculturalSimulationAccountant(resultsStorage: MutableMap<DateTime,
         throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    private fun calculateSeedsInShack(agents: List<IAgent>): Double {
-// TODO: Implement this
-// TODO: Test this
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    // TODO: Test this
+    private fun calculateSeedsInShack(agents: List<IAgent>): Double =
+            (agents.find { it.id() == Shack.ID } as DefaultAgent).
+                    amount(AgriculturalSimParametersProvider.RESOURCE_SEEDS.id)
 }
