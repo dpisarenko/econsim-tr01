@@ -39,7 +39,6 @@ open class AgriculturalSimulationAccountant(resultsStorage: MutableMap<DateTime,
                     AgriculturalSimParametersProvider.RESOURCE_AREA_WITH_CROP.id
             )
 
-    // TODO: Test this
     open internal fun calculateEmptyFieldArea(agents: List<IAgent>): Double =
             (agents.find { it.id() == Field.ID } as DefaultAgent).
             amount(
