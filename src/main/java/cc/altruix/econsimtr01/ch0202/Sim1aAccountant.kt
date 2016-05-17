@@ -12,11 +12,12 @@ import java.util.*
 /**
  * Created by pisarenko on 04.05.2016.
  */
-open class Sim1aAccountant(val resultsStorage: MutableMap<DateTime, Sim1aResultsRow>,
-                      val scenarioName: String)
+open class Sim1aAccountant(val resultsStorage: MutableMap<DateTime,
+        SimResRow<Sim1aResultRowField>>,
+                           val scenarioName: String)
 : ISensor {
     override fun measure(time: DateTime, agents: List<IAgent>) {
-        val row:Sim1aResultsRow = findOrCreateRow(resultsStorage, time)
+        val row: SimResRow<Sim1aResultRowField> = findOrCreateRow(resultsStorage, time)
         val data:MutableMap<Sim1aResultRowField,Double> = findOrCreateDataMap(row, scenarioName)
         val protagonist = findProtagonist(agents)
         val population = protagonist.population
@@ -54,8 +55,9 @@ open class Sim1aAccountant(val resultsStorage: MutableMap<DateTime, Sim1aResults
     internal open fun calculatePeopleWillingToMeet(time: DateTime, population: IPopulation): Double =
             population.people().filter { it.willingToMeet }.count().toDouble()
 
-    internal open fun findOrCreateDataMap(row: Sim1aResultsRow,
-                                    scenarioName: String)
+    internal open fun findOrCreateDataMap(row:
+                                          SimResRow<Sim1aResultRowField>,
+                                          scenarioName: String)
             : MutableMap<Sim1aResultRowField, Double> {
         var dataMap = row.data.get(scenarioName)
         if (dataMap == null) {
@@ -65,12 +67,13 @@ open class Sim1aAccountant(val resultsStorage: MutableMap<DateTime, Sim1aResults
         return dataMap
     }
 
-    internal open fun findOrCreateRow(resultsStorage: MutableMap<DateTime, Sim1aResultsRow>,
+    internal open fun findOrCreateRow(resultsStorage: MutableMap<DateTime,
+                SimResRow<Sim1aResultRowField>>,
                                       time: DateTime)
-            : Sim1aResultsRow {
+            : SimResRow<Sim1aResultRowField> {
         var row = resultsStorage.get(time)
         if (row == null) {
-            row = Sim1aResultsRow(time)
+            row = SimResRow(time)
             resultsStorage.put(time, row)
         }
         return row

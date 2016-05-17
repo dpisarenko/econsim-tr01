@@ -24,7 +24,16 @@ open class AgriculturalSimParametersProvider(file: File) :
                 name = "Area with crop",
                 unit = "Square meters"
         )
-
+        val RESOURCE_EMPTY_AREA = PlResource(
+                id = "R3",
+                name = "Area with neither seeds, nor crop in it",
+                unit = "Square meters"
+        )
+        val RESOURCE_SEEDS = PlResource(
+                id = "R4",
+                name = "Seeds",
+                unit = "Kilograms"
+        )
     }
     override fun createValidators():
             Map<String, List<IPropertiesFileValueValidator>> {
@@ -70,6 +79,9 @@ open class AgriculturalSimParametersProvider(file: File) :
             // TODO: Test this
             agents.add(Farmers(this))
             agents.add(Field(this))
+            agents.add(Shack())
+
+            agents.forEach { it.init() }
         }
     }
 }

@@ -42,4 +42,6 @@ open class DefaultAgent(val id:String) : IAgent, IResourceStorage {
     open fun addResourceLevelObserver(rlo:IResourceLevelObserver) {
         resourceLevelObservers.add(rlo)
     }
+    open override fun init() {
+    }
 }

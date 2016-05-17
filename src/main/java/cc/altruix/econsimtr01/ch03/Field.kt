@@ -9,12 +9,12 @@ import cc.altruix.econsimtr01.DefaultAgent
 /**
  * Created by pisarenko on 16.05.2016.
  */
-class Field(val simParamProv:AgriculturalSimParametersProvider) : DefaultAgent(ID) {
+class Field(val simParamProv:AgriculturalSimParametersProvider)
+    : DefaultAgent(ID) {
     companion object {
         val ID = "Field"
     }
-    init {
+    override fun init() {
         actions.add(Process2(simParamProv))
     }
-    // TODO: Implement process #2 (ripen)
 }

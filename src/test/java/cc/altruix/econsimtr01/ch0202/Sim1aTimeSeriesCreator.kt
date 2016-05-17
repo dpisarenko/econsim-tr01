@@ -12,7 +12,7 @@ import java.io.File
 /**
  * Created by pisarenko on 04.05.2016.
  */
-open class Sim1aTimeSeriesCreator(val simData: Map<DateTime, Sim1aResultsRow>,
+open class Sim1aTimeSeriesCreator(val simData: Map<DateTime, SimResRow<Sim1aResultRowField>>,
                                   val targetFileName: String,
                                   val simNames: List<String>) {
     val LOGGER = LoggerFactory.getLogger(Sim1aTimeSeriesCreator::class.java)

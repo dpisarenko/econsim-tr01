@@ -15,6 +15,9 @@ class Farmer(foodStorage: IResourceStorage,
              flows: MutableList<ResourceFlow>,
              val maxDaysWithoutFood: Int,
              dailyPotatoConsumption: Double) : IAgent, IHuman {
+    override fun init() {
+    }
+
     override fun id(): String = "Farmer"
 
     val actions = listOf<IAction>(

@@ -12,6 +12,9 @@ import org.joda.time.DateTime
  * @since 1.0
  */
 class Nature : IAgent {
+    override fun init() {
+    }
+
     override fun id(): String = "Nature"
     override fun act(time: DateTime) {
 

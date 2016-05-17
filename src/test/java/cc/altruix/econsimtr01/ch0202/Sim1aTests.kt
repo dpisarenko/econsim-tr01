@@ -41,7 +41,7 @@ class Sim1aTests {
                     initialNetworkSize = 1000
                 )
         )
-        val simResults = HashMap<DateTime,Sim1aResultsRow>()
+        val simResults = HashMap<DateTime, SimResRow<Sim1aResultRowField>>()
         val scenarioResults = scenarioDescriptors.map {
             Sim1a(
                     logTarget = StringBuilder(),
@@ -73,7 +73,7 @@ class Sim1aTests {
         // Prepare
         val logTarget = StringBuilder()
         val flows = ArrayList<ResourceFlow>()
-        val simResults = HashMap<DateTime,Sim1aResultsRow>()
+        val simResults = HashMap<DateTime, SimResRow<Sim1aResultRowField>>()
         val paramsProvider = Sim1ParametersProvider(
                 name = "Scenario 1",
                 agents = ArrayList(),
