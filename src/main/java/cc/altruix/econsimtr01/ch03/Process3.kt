@@ -18,8 +18,6 @@ IAction {
             .parseDayMonthString()
     var field = simParamProv.agents.find { it.id() == Field.ID }
             as DefaultAgent
-    // TODO: Implement this
-    // TODO: Test this
     override fun timeToRun(time: DateTime): Boolean =
         timeBetweenStartAndEnd(time) &&
         evenHourAndMinute(time) &&

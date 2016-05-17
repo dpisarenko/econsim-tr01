@@ -4,7 +4,6 @@
 
 package cc.altruix.econsimtr01.ch03
 
-import cc.altruix.econsimtr01.DefaultAgent
 import cc.altruix.econsimtr01.millisToSimulationDateTime
 import org.fest.assertions.Assertions
 import org.junit.Test
