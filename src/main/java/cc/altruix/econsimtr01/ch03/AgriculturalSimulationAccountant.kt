@@ -29,8 +29,6 @@ open class AgriculturalSimulationAccountant(resultsStorage: MutableMap<DateTime,
                 calculateEmptyFieldArea(agents))
         target.put(AgriculturalSimulationRowField.FIELD_AREA_WITH_CROP,
                 calculateFieldAreaWithCrop(agents))
-        // TODO: Test this
-        throw UnsupportedOperationException()
     }
 
     open internal fun calculateFieldAreaWithCrop(agents: List<IAgent>): Double
