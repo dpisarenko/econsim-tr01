@@ -19,7 +19,6 @@ class Process2(val simParamProv:AgriculturalSimParametersProvider) : IAction {
     // TODO: Make sure this process converts RESOURCE_AREA_WITH_SEEDS to
     // RESOURCE_AREA_WITH_CROP
 
-    // TODO: Test this
     override fun timeToRun(time: DateTime): Boolean =
             time.isEqual(end.toDateTime(time.year)) &&
             evenHourAndMinute(time)
