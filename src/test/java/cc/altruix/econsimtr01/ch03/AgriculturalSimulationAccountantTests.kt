@@ -26,6 +26,18 @@ class AgriculturalSimulationAccountantTests {
         Assertions.assertThat(out.calculateFieldAreaWithCrop(agents))
                 .isEqualTo(123.45)
     }
+    @Test
+    fun calculateEmptyFieldArea() {
+        val simParamProv =
+                AgriculturalSimParametersProviderWithPredefinedData(Properties())
+        val field = Field(simParamProv)
+        field.put(AgriculturalSimParametersProvider.RESOURCE_EMPTY_AREA.id,
+                123.45)
+        val agents = listOf(field)
+        val out = createObjectUnderTest()
+        Assertions.assertThat(out.calculateEmptyFieldArea(agents))
+                .isEqualTo(123.45)
+    }
 
     private fun createObjectUnderTest(): AgriculturalSimulationAccountant {
         val out = AgriculturalSimulationAccountant(HashMap<DateTime,

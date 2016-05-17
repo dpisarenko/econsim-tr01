@@ -33,7 +33,6 @@ open class AgriculturalSimulationAccountant(resultsStorage: MutableMap<DateTime,
         throw UnsupportedOperationException()
     }
 
-    // TODO: Test this
     open internal fun calculateFieldAreaWithCrop(agents: List<IAgent>): Double
             = (agents.find { it.id() == Field.ID } as DefaultAgent).
             amount(
