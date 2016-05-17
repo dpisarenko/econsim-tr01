@@ -4,10 +4,12 @@
 
 package cc.altruix.econsimtr01.ch03
 
+import cc.altruix.econsimtr01.IAgent
 import cc.altruix.econsimtr01.ch0202.SimResRow
 import org.fest.assertions.Assertions
 import org.joda.time.DateTime
 import org.junit.Test
+import org.mockito.Mockito
 import java.util.*
 
 /**
@@ -59,6 +61,35 @@ class AgriculturalSimulationAccountantTests {
         val out = createObjectUnderTest()
         Assertions.assertThat(out.calculateSeedsInShack(agents))
                 .isEqualTo(123.45)
+    }
+    @Test
+    fun saveRowDataWiring() {
+        // Prepare
+        val resultsStorage = HashMap<DateTime,
+                SimResRow<AgriculturalSimulationRowField>>()
+        val out = Mockito.spy(
+                AgriculturalSimulationAccountant(
+                        resultsStorage,
+                        "scenario"
+                )
+        )
+        val agents = emptyList<IAgent>()
+        Mockito.doReturn(1.0).`when`(out).calculateSeedsInShack(agents)
+        Mockito.doReturn(2.0).`when`(out).calculateFieldAreaWithSeeds(agents)
+        Mockito.doReturn(3.0).`when`(out).calculateEmptyFieldArea(agents)
+        Mockito.doReturn(4.0).`when`(out).calculateFieldAreaWithCrop(agents)
+        val target = HashMap<AgriculturalSimulationRowField, Double>()
+        // Run method under test
+        out.saveRowData(agents, target)
+        // Verify
+        Assertions.assertThat(target[AgriculturalSimulationRowField
+                .SEEDS_IN_SHACK]).isEqualTo(1.0)
+        Assertions.assertThat(target[AgriculturalSimulationRowField
+                .FIELD_AREA_WITH_SEEDS]).isEqualTo(2.0)
+        Assertions.assertThat(target[AgriculturalSimulationRowField
+                .EMPTY_FIELD_AREA]).isEqualTo(3.0)
+        Assertions.assertThat(target[AgriculturalSimulationRowField
+                .FIELD_AREA_WITH_CROP]).isEqualTo(4.0)
     }
 
     private fun createObjectUnderTest(): AgriculturalSimulationAccountant {
