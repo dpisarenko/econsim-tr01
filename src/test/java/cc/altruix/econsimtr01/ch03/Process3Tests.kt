@@ -4,6 +4,7 @@
 
 package cc.altruix.econsimtr01.ch03
 
+import cc.altruix.econsimtr01.DefaultAgent
 import cc.altruix.econsimtr01.millisToSimulationDateTime
 import org.fest.assertions.Assertions
 import org.junit.Test
@@ -46,6 +47,39 @@ class Process3Tests {
                 cropToCollectAvailable = true,
                 expectedResult = true
         )
+    }
+    @Test
+    fun cropToCollectAvailable() {
+        cropToCollectAvailableTestLogic(
+                areaWithCrop = 0.005,
+                expectedResult = true
+        )
+        cropToCollectAvailableTestLogic(
+                areaWithCrop = 0.0,
+                expectedResult = false
+        )
+    }
+
+    private fun cropToCollectAvailableTestLogic(areaWithCrop: Double,
+                                                expectedResult: Boolean) {
+        // Prepare
+        val simParamProv =
+                AgriculturalSimParametersProvider(
+                        File(
+                                "src/test/resources/ch03/BasicAgriculturalSimulationRye.properties"
+                        )
+                )
+        simParamProv.initAndValidate()
+        val field = simParamProv.agents.find { it.id() == Field.ID } as
+                DefaultAgent
+        field.put(AgriculturalSimParametersProvider.RESOURCE_AREA_WITH_CROP.id,
+                areaWithCrop)
+        val time = 0L.millisToSimulationDateTime()
+        val out = Process3(simParamProv)
+        // Run method under test
+        val res = out.cropToCollectAvailable()
+        // Verify
+        Assertions.assertThat(res).isEqualTo(expectedResult)
     }
 
     private fun runWiringTestLogic(
