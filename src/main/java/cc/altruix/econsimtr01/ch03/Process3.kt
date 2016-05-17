@@ -29,7 +29,6 @@ IAction {
     open internal fun timeBetweenStartAndEnd(time: DateTime) =
             time.between(start, end)
 
-    // TODO: Test this
     open internal fun cropToCollectAvailable(): Boolean =
             field.amount(
                     AgriculturalSimParametersProvider.RESOURCE_AREA_WITH_CROP.id
