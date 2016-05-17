@@ -38,7 +38,6 @@ class Process2Tests {
         data["Process2YieldPerSquareMeter"] = "0.3595"
         data["Process2End"] = "05.07"
         val simParamProv =
-                //AgriculturalSimParametersProviderWithPredefinedData(data)
                 AgriculturalSimParametersProvider(
                         File(
                                 "src/test/resources/ch03/BasicAgriculturalSimulationRye.properties"
