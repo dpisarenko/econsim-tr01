@@ -15,7 +15,7 @@ class Process2(val simParamProv:AgriculturalSimParametersProvider) : IAction {
     val LOGGER = LoggerFactory.getLogger(Process2::class.java)
     val end  = simParamProv.data["Process2End"].toString()
             .parseDayMonthString()
-    val field = simParamProv.agents.find { it.id() == Field.ID }
+    var field = simParamProv.agents.find { it.id() == Field.ID }
             as DefaultAgent
 
     // TODO: Make sure this process converts RESOURCE_AREA_WITH_SEEDS to

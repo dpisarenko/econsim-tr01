@@ -12,5 +12,6 @@ import org.joda.time.DateTime
  * @since 1.0
  */
 interface IAgent : ISometingIdentifiable {
+    fun init()
     fun act(time: DateTime)
 }

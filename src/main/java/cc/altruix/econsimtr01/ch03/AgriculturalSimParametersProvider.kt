@@ -80,6 +80,8 @@ open class AgriculturalSimParametersProvider(file: File) :
             agents.add(Farmers(this))
             agents.add(Field(this))
             agents.add(Shack())
+
+            agents.forEach { it.init() }
         }
     }
 }

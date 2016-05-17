@@ -14,7 +14,7 @@ class Farmers(val simParamProv:AgriculturalSimParametersProvider) :
     companion object {
         val ID = "Farmers"
     }
-    init {
+    override fun init() {
         actions.add(Process1(simParamProv))
         actions.add(Process3(simParamProv))
     }

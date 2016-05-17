@@ -9,6 +9,7 @@ import cc.altruix.econsimtr01.millisToSimulationDateTime
 import org.fest.assertions.Assertions
 import org.joda.time.DateTime
 import org.junit.Test
+import java.io.File
 import java.util.*
 
 /**
@@ -37,8 +38,14 @@ class Process2Tests {
         data["Process2YieldPerSquareMeter"] = "0.3595"
         data["Process2End"] = "05.07"
         val simParamProv =
-                AgriculturalSimParametersProviderWithPredefinedData(data)
+                //AgriculturalSimParametersProviderWithPredefinedData(data)
+                AgriculturalSimParametersProvider(
+                        File(
+                                "src/test/resources/ch03/BasicAgriculturalSimulationRye.properties"
+                        )
+                )
         simParamProv.initAndValidate()
+        simParamProv.agents.add(Field(simParamProv))
         val field = simParamProv.agents.find { it.id() == Field.ID }
                 as DefaultAgent
         Assertions.assertThat(field).isNotNull
