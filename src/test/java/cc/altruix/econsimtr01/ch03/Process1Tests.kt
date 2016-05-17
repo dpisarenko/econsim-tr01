@@ -85,6 +85,64 @@ class Process1Tests {
                 areaWithSeeds = 250000.1,
                 expectedResult = false)
     }
+    @Test
+    fun run() {
+        // Prepare
+        val data = Properties()
+        data["NumberOfWorkers"] = "1"
+        data["LaborPerBusinessDay"] = "8"
+        data["Process1EffortInSquareMeters"] = "0.44"
+        data["Process1QuantityOfSeeds"] = "0.0629"
+        data["SizeOfField"] = "250000"
+        val simParamProv =
+                AgriculturalSimParametersProviderWithPredefinedData(data)
+        simParamProv.initAndValidate()
+        val field = Field(simParamProv)
+        field.put(AgriculturalSimParametersProvider.RESOURCE_EMPTY_AREA.id,
+                250000.0)
+        val shack = Shack()
+        shack.put(AgriculturalSimParametersProvider.RESOURCE_SEEDS.id,
+                10.0)
+        simParamProv.agents.add(field)
+        simParamProv.agents.add(shack)
+        val time = 0L.millisToSimulationDateTime()
+        val out = Process1(simParamProv)
+        Assertions.assertThat(
+                field.amount(
+                        AgriculturalSimParametersProvider.RESOURCE_EMPTY_AREA.id
+                )
+        ).isEqualTo(250000.0)
+        Assertions.assertThat(
+                field.amount(
+                        AgriculturalSimParametersProvider.
+                                RESOURCE_AREA_WITH_SEEDS.id
+                )
+        ).isEqualTo(0.0)
+        Assertions.assertThat(
+                shack.amount(
+                        AgriculturalSimParametersProvider.RESOURCE_SEEDS.id
+                )
+        ).isEqualTo(10.0)
+        // Run method under test
+        out.run(time)
+        // Verify
+        Assertions.assertThat(
+                field.amount(
+                        AgriculturalSimParametersProvider.RESOURCE_EMPTY_AREA.id
+                )
+        ).isEqualTo(250000.0)
+        Assertions.assertThat(
+                field.amount(
+                        AgriculturalSimParametersProvider.
+                                RESOURCE_AREA_WITH_SEEDS.id
+                )
+        ).isEqualTo(10.0)
+        Assertions.assertThat(
+                shack.amount(
+                        AgriculturalSimParametersProvider.RESOURCE_SEEDS.id
+                )
+        ).isEqualTo(5.0)
+    }
     private fun fieldNotFullTestLogic(sizeOfField:String,
                                       areaWithSeeds:Double,
                                       expectedResult:Boolean) {

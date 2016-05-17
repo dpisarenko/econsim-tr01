@@ -56,7 +56,6 @@ open class Process1(val simParamProv:PropertiesFileSimParametersProvider) :
         // TODO: Test this
         val workersCount = simParamProv.data["NumberOfWorkers"].toString()
                 .toDouble()
-
         val laborPerDay = simParamProv.data["LaborPerBusinessDay"].toString()
                 .toDouble()
         val effortPerSquareMeter =
