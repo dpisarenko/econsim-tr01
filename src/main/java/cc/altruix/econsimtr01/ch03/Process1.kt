@@ -22,7 +22,6 @@ open class Process1(val simParamProv:PropertiesFileSimParametersProvider) :
             as DefaultAgent
     val shack = simParamProv.agents.find { it.id() == Shack.ID }
             as DefaultAgent
-    // TODO: Test that businessDay is taken into account
     override fun timeToRun(time: DateTime): Boolean =
             businessDay(time) &&
             timeBetweenStartAndEnd(time) &&

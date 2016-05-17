@@ -17,28 +17,45 @@ class Process1Tests {
         timeToRunWiringTestLogic(timeBetweenStartAndEnd = false,
                 evenHourAndMinute = false,
                 fieldNotNull = false,
-                expectedResult = false)
+                businessDay = false,
+                expectedResult = false
+        )
         timeToRunWiringTestLogic(timeBetweenStartAndEnd = true,
                 evenHourAndMinute = false,
                 fieldNotNull = false,
-                expectedResult = false)
+                businessDay = false,
+                expectedResult = false
+        )
         timeToRunWiringTestLogic(timeBetweenStartAndEnd = false,
                 evenHourAndMinute = true,
                 fieldNotNull = false,
-                expectedResult = false)
+                businessDay = false,
+                expectedResult = false
+        )
         timeToRunWiringTestLogic(timeBetweenStartAndEnd = false,
                 evenHourAndMinute = false,
                 fieldNotNull = true,
-                expectedResult = false)
+                businessDay = false,
+                expectedResult = false
+        )
         timeToRunWiringTestLogic(timeBetweenStartAndEnd = true,
                 evenHourAndMinute = true,
                 fieldNotNull = true,
-                expectedResult = true)
+                businessDay = false,
+                expectedResult = false
+        )
+        timeToRunWiringTestLogic(timeBetweenStartAndEnd = true,
+                evenHourAndMinute = true,
+                fieldNotNull = true,
+                businessDay = true,
+                expectedResult = true
+        )
     }
-    fun timeToRunWiringTestLogic(timeBetweenStartAndEnd:Boolean,
-                                 evenHourAndMinute:Boolean,
-                                 fieldNotNull:Boolean,
-                                 expectedResult:Boolean) {
+    fun timeToRunWiringTestLogic(timeBetweenStartAndEnd: Boolean,
+                                 evenHourAndMinute: Boolean,
+                                 fieldNotNull: Boolean,
+                                 businessDay: Boolean,
+                                 expectedResult: Boolean) {
         // Prepare
         val data = Properties()
         data["Process1Start"] = "30.08"
@@ -48,12 +65,14 @@ class Process1Tests {
         simParamProv.initAndValidate()
         val field = Field(simParamProv)
         simParamProv.agents.add(field)
+        simParamProv.agents.add(Shack())
         val out = Mockito.spy(Process1(simParamProv))
         val time = 0L.millisToSimulationDateTime()
         Mockito.doReturn(timeBetweenStartAndEnd).`when`(out)
                 .timeBetweenStartAndEnd(time)
         Mockito.doReturn(evenHourAndMinute).`when`(out).evenHourAndMinute(time)
         Mockito.doReturn(fieldNotNull).`when`(out).fieldNotFull(field)
+        Mockito.doReturn(businessDay).`when`(out).businessDay(time)
         // Run method under test
         val res = out.timeToRun(time)
         // Verify
