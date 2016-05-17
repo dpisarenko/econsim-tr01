@@ -4,6 +4,9 @@
 
 package cc.altruix.econsimtr01.ch03
 
+import cc.altruix.econsimtr01.ResourceFlow
+import cc.altruix.econsimtr01.ch0202.SimResRow
+import org.joda.time.DateTime
 import java.io.PrintStream
 import java.util.*
 
@@ -38,6 +41,25 @@ class BasicAgriculturalSimulationApp(
             err.println(allErrors)
             return
         }
+        val simResults = HashMap<DateTime,
+                SimResRow<AgriculturalSimulationRowField>>()
+        val scenarioResults = scenarios
+                .map { it as AgriculturalSimParametersProvider }
+                .map {
+                    BasicAgriculturalSimulation(
+                        logTarget = StringBuilder(),
+                        flows = ArrayList<ResourceFlow>(),
+                        simParametersProvider = it,
+                        resultsStorage = simResults
+                    )
+                }
+        scenarioResults.forEach {
+            it.run()
+        }
+
+        // TODO: create AgriculturalSimulationTimeSeriesCreator here
+        // TODO: Continue here
+
     }
     fun createSemanticValidators():List<ISemanticSimulationParametersValidator>
             = listOf(
