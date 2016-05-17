@@ -244,3 +244,6 @@ fun DateTime.between(start:DayAndMonth, end:DayAndMonth):Boolean {
     return (startDateTime.isBefore(this) || startDateTime.isEqual(this)) &&
             (endDateTime.isAfter(this) || endDateTime.isEqual(this))
 }
+
+fun DateTime.evenHourAndMinute(hour:Int, minute:Int):Boolean =
+        (this.hourOfDay == hour) && (this.minuteOfHour == minute)

@@ -32,7 +32,7 @@ open class Process1(val simParamProv:PropertiesFileSimParametersProvider) :
             time.isBusinessDay()
 
     open internal fun evenHourAndMinute(time:DateTime):Boolean =
-            (time.hourOfDay == 8) && (time.minuteOfHour == 0)
+            time.evenHourAndMinute(8, 0)
 
     open internal fun timeBetweenStartAndEnd(time: DateTime) =
             time.between(start, end)

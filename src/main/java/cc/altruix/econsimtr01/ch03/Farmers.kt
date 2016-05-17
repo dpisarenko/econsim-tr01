@@ -10,7 +10,7 @@ import cc.altruix.econsimtr01.DefaultAgent
  * Created by pisarenko on 16.05.2016.
  */
 class Farmers(val simParamProv:AgriculturalSimParametersProvider) :
-        DefaultAgent("Farmers") {
+        DefaultAgent(ID) {
     companion object {
         val ID = "Farmers"
     }
@@ -18,6 +18,5 @@ class Farmers(val simParamProv:AgriculturalSimParametersProvider) :
         actions.add(Process1(simParamProv))
         actions.add(Process3(simParamProv))
     }
-    // TODO: Implement process #1 (putting seeds into ground)
     // TODO: Implement process #3 (collect the harvest)
 }
