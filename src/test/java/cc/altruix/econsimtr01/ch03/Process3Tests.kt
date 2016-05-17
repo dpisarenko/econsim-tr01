@@ -85,13 +85,31 @@ class Process3Tests {
         simParamProv.initAndValidate()
         val field = simParamProv.agents.find { it.id() == Field.ID } as
                 DefaultAgent
+        val shack = simParamProv.agents.find { it.id() == Shack.ID } as
+                DefaultAgent
+        Assertions.assertThat(shack.amount(AgriculturalSimParametersProvider
+                .RESOURCE_SEEDS.id)).isEqualTo(0.0)
+
+        Assertions.assertThat(field.amount(AgriculturalSimParametersProvider
+                .RESOURCE_EMPTY_AREA.id)).isZero
         field.put(AgriculturalSimParametersProvider.RESOURCE_AREA_WITH_CROP.id,
                 250000.0)
+        field.put(AgriculturalSimParametersProvider.RESOURCE_SEEDS.id,
+                250000.0 * 0.3595)
+
         val time = 0L.millisToSimulationDateTime()
         val out = Process3(simParamProv)
         // Run method under test
         out.run(time)
         // Verify
+        Assertions.assertThat(field.amount(AgriculturalSimParametersProvider
+                .RESOURCE_EMPTY_AREA.id)).isEqualTo(0.0)
+        Assertions.assertThat(field.amount(AgriculturalSimParametersProvider
+                .RESOURCE_AREA_WITH_CROP.id)).isEqualTo(0.0)
+        Assertions.assertThat(field.amount(AgriculturalSimParametersProvider
+                .RESOURCE_SEEDS.id)).isEqualTo(0.0)
+        Assertions.assertThat(shack.amount(AgriculturalSimParametersProvider
+                .RESOURCE_SEEDS.id)).isEqualTo(0.0)
 
     }
 
