@@ -17,5 +17,4 @@ class Field(val simParamProv:AgriculturalSimParametersProvider)
     override fun init() {
         actions.add(Process2(simParamProv))
     }
-    // TODO: Implement process #2 (ripen)
 }

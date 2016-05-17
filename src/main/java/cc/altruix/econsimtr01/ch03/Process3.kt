@@ -25,14 +25,8 @@ class Process3(val simParamProv:AgriculturalSimParametersProvider) : IAction {
     }
 
     override fun notifySubscribers(time: DateTime) {
-        // TODO: Implement this
-        // TODO: Test this
-        throw UnsupportedOperationException()
     }
 
     override fun subscribe(subscriber: IActionSubscriber) {
-        // TODO: Implement this
-        // TODO: Test this
-        throw UnsupportedOperationException()
     }
 }
