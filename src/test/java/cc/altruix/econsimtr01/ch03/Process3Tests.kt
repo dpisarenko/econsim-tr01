@@ -72,6 +72,28 @@ class Process3Tests {
                 expectedResult = false
         )
     }
+    @Test
+    fun run() {
+        // TODO: Continue here
+        // Prepare
+        val simParamProv =
+                AgriculturalSimParametersProvider(
+                        File(
+                                "src/test/resources/ch03/BasicAgriculturalSimulationRye.properties"
+                        )
+                )
+        simParamProv.initAndValidate()
+        val field = simParamProv.agents.find { it.id() == Field.ID } as
+                DefaultAgent
+        field.put(AgriculturalSimParametersProvider.RESOURCE_AREA_WITH_CROP.id,
+                250000.0)
+        val time = 0L.millisToSimulationDateTime()
+        val out = Process3(simParamProv)
+        // Run method under test
+        out.run(time)
+        // Verify
+
+    }
 
     private fun cropToCollectAvailableTestLogic(areaWithCrop: Double,
                                                 expectedResult: Boolean) {
@@ -87,7 +109,6 @@ class Process3Tests {
                 DefaultAgent
         field.put(AgriculturalSimParametersProvider.RESOURCE_AREA_WITH_CROP.id,
                 areaWithCrop)
-        val time = 0L.millisToSimulationDateTime()
         val out = Process3(simParamProv)
         // Run method under test
         val res = out.cropToCollectAvailable()
