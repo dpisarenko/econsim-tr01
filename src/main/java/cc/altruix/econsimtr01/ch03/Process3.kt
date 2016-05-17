@@ -18,10 +18,16 @@ IAction {
             .parseDayMonthString()
     var field = simParamProv.agents.find { it.id() == Field.ID }
             as DefaultAgent
+    var shack = simParamProv.agents.find { it.id() == Shack.ID }
+            as DefaultAgent
     override fun timeToRun(time: DateTime): Boolean =
+        businessDay(time) &&
         timeBetweenStartAndEnd(time) &&
         evenHourAndMinute(time) &&
         cropToCollectAvailable()
+
+    open internal fun businessDay(time: DateTime): Boolean =
+            time.isBusinessDay()
 
     open internal fun evenHourAndMinute(time: DateTime) =
             time.evenHourAndMinute(8, 0)
@@ -35,9 +41,41 @@ IAction {
             ) > 0.0
 
     override fun run(time: DateTime) {
-        // TODO: Implement this
         // TODO: Test this
-        throw UnsupportedOperationException()
+        val workerCount = simParamProv.data["NumberOfWorkers"]
+                .toString().toDouble()
+        val workingTimePerDay =
+                simParamProv.data["LaborPerBusinessDay"].toString().toDouble()
+        val effortPerSquareMeter =
+                simParamProv.data["Process3EffortPerSquareMeter"]
+                        .toString().toDouble()
+        val areaWorkersCanProcess =
+                (workerCount * workingTimePerDay) / effortPerSquareMeter
+        val totalAreaToProcess = field.amount(
+                AgriculturalSimParametersProvider.RESOURCE_AREA_WITH_CROP.id
+        )
+        val processedArea = Math.min(areaWorkersCanProcess, totalAreaToProcess)
+
+        val yieldPerSquareMeter = simParamProv
+                .data["Process2YieldPerSquareMeter"].toString().toDouble()
+        val cropAmount = yieldPerSquareMeter * processedArea
+
+        field.remove(
+                AgriculturalSimParametersProvider.RESOURCE_AREA_WITH_CROP.id,
+                processedArea
+        )
+        field.put(
+                AgriculturalSimParametersProvider.RESOURCE_EMPTY_AREA.id,
+                processedArea
+        )
+        field.remove(
+                AgriculturalSimParametersProvider.RESOURCE_SEEDS.id,
+                cropAmount
+        )
+        shack.put(
+                AgriculturalSimParametersProvider.RESOURCE_SEEDS.id,
+                cropAmount
+        )
     }
 
     override fun notifySubscribers(time: DateTime) {

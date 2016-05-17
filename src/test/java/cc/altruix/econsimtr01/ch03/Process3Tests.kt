@@ -21,32 +21,45 @@ class Process3Tests {
                 timeBetweenStartAndEnd = false,
                 evenHourAndMinute = false,
                 cropToCollectAvailable = false,
+                businessDay = false,
                 expectedResult = false
         )
         runWiringTestLogic(
                 timeBetweenStartAndEnd = true,
                 evenHourAndMinute = false,
                 cropToCollectAvailable = false,
+                businessDay = false,
                 expectedResult = false
         )
         runWiringTestLogic(
                 timeBetweenStartAndEnd = false,
                 evenHourAndMinute = true,
                 cropToCollectAvailable = false,
+                businessDay = false,
                 expectedResult = false
         )
         runWiringTestLogic(
                 timeBetweenStartAndEnd = false,
                 evenHourAndMinute = false,
                 cropToCollectAvailable = true,
+                businessDay = false,
                 expectedResult = false
         )
         runWiringTestLogic(
                 timeBetweenStartAndEnd = true,
                 evenHourAndMinute = true,
                 cropToCollectAvailable = true,
-                expectedResult = true
+                businessDay = false,
+                expectedResult = false
         )
+        runWiringTestLogic(
+                timeBetweenStartAndEnd = true,
+                evenHourAndMinute = true,
+                cropToCollectAvailable = true,
+                businessDay = true,
+                expectedResult = false
+        )
+
     }
     @Test
     fun cropToCollectAvailable() {
@@ -86,6 +99,7 @@ class Process3Tests {
             timeBetweenStartAndEnd: Boolean,
             evenHourAndMinute: Boolean,
             cropToCollectAvailable: Boolean,
+            businessDay: Boolean,
             expectedResult: Boolean) {
         // Prepare
         val simParamProv =
@@ -102,6 +116,7 @@ class Process3Tests {
         Mockito.doReturn(evenHourAndMinute).`when`(out).evenHourAndMinute(time)
         Mockito.doReturn(cropToCollectAvailable).`when`(out)
                 .cropToCollectAvailable()
+        Mockito.doReturn(businessDay).`when`(out).businessDay(time)
         // Run method under test
         val res = out.timeToRun(time)
         // Verify
