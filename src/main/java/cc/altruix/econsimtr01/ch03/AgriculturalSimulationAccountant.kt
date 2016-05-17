@@ -17,23 +17,42 @@ class AgriculturalSimulationAccountant(resultsStorage: MutableMap<DateTime,
                                        scenarioName: String) :
         AbstractAccountant2<AgriculturalSimulationRowField>(resultsStorage,
                 scenarioName) {
-    override fun measure(time: DateTime,
-                         agents: List<IAgent>,
-                         target:
-                         MutableMap<AgriculturalSimulationRowField, Double>) {
-
-        /*
-        {
-            // TODO: Create measurement of seeds in shack
-            // TODO: Create measurement of field area with seeds
-            // TODO: Create measurement of empty field area
-            // TODO: Create measurement of field are with crop
-            throw UnsupportedOperationException()
-        }
-    */
-
-        // TODO: Implement this
+    override fun saveRowData(agents: List<IAgent>,
+                         target: MutableMap<AgriculturalSimulationRowField,
+                                 Double>) {
+        target.put(AgriculturalSimulationRowField.SEEDS_IN_SHACK,
+                calculateSeedsInShack(agents))
+        target.put(AgriculturalSimulationRowField.FIELD_AREA_WITH_SEEDS,
+                calculateFieldAreaWithSeeds(agents))
+        target.put(AgriculturalSimulationRowField.EMPTY_FIELD_AREA,
+                calculateEmptyFieldArea(agents))
+        target.put(AgriculturalSimulationRowField.FIELD_AREA_WITH_CROP,
+                calculateFieldAreaWithCrop(agents))
         // TODO: Test this
         throw UnsupportedOperationException()
+    }
+
+    private fun calculateFieldAreaWithCrop(agents: List<IAgent>): Double {
+// TODO: Implement this
+// TODO: Test this
+        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    private fun calculateEmptyFieldArea(agents: List<IAgent>): Double {
+// TODO: Implement this
+// TODO: Test this
+        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    private fun calculateFieldAreaWithSeeds(agents: List<IAgent>): Double {
+// TODO: Implement this
+// TODO: Test this
+        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    private fun calculateSeedsInShack(agents: List<IAgent>): Double {
+// TODO: Implement this
+// TODO: Test this
+        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

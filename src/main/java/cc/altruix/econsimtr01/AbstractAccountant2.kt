@@ -17,11 +17,10 @@ abstract class AbstractAccountant2<T>(val resultsStorage: MutableMap<DateTime,
     override fun measure(time: DateTime, agents: List<IAgent>) {
         val row: SimResRow<T> = findOrCreateRow(resultsStorage, time)
         val data:MutableMap<T,Double> = findOrCreateDataMap(row, scenarioName)
-        measure(time, agents, data)
+        saveRowData(agents, data)
     }
-    abstract fun measure(time: DateTime,
-                         agents: List<IAgent>,
-                         target:MutableMap<T,Double>)
+    abstract fun saveRowData(agents: List<IAgent>,
+                         target: MutableMap<T, Double>)
 
     internal open fun findOrCreateDataMap(row:
                                           SimResRow<T>,
