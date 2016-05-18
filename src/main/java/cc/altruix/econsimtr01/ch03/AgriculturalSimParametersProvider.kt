@@ -78,8 +78,11 @@ open class AgriculturalSimParametersProvider(file: File) :
         if (validity.valid) {
             agents.add(Farmers(this))
             agents.add(Field(this))
-            agents.add(Shack())
+            val shack = Shack()
+            agents.add(shack)
             agents.forEach { it.init() }
+            shack.put(AgriculturalSimParametersProvider.RESOURCE_SEEDS.id,
+                    data["InitialSeedQuantity"].toString().toDouble())
         }
     }
 }
