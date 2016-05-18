@@ -42,6 +42,24 @@ class AgriculturalSimParametersProviderTests {
                 .RESOURCE_EMPTY_AREA.id)).isEqualTo(out.data["SizeOfField"]
                 .toString().toDouble())
     }
+    @Test
+    fun initAndValidateInitializesSeedsInShack() {
+        // Prepare
+        val out = AgriculturalSimParametersProvider(
+                File(
+                        "src/test/resources/ch03/"+
+                                "BasicAgriculturalSimulationRye.properties"
+                )
+        )
+        // Run method under test
+        out.initAndValidate()
+        // Verify
+        val shack = out.agents.find { it.id() == Shack.ID } as DefaultAgent
+        Assertions.assertThat(shack.amount(AgriculturalSimParametersProvider
+                .RESOURCE_SEEDS.id)).isEqualTo(out.data["InitialSeedQuantity"]
+                .toString().toDouble())
+    }
+
     private fun simulationParametersCorrectnessTestLogic(fileName: String) {
         val out = AgriculturalSimParametersProvider(
                 File("src/test/resources/ch03/$fileName")
