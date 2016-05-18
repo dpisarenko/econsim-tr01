@@ -75,6 +75,7 @@ class AgriculturalSimParametersProviderTests {
             fileName: String,
             expectedResult: Double) {
         val out = AgriculturalSimParametersProvider(File(fileName))
+        out.initAndValidate()
         Assertions.assertThat(out.data["InitialSeedQuantity"].toString()
                 .toDouble()).isEqualTo(expectedResult)
     }
