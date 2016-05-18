@@ -19,7 +19,9 @@ class AgriculturalSimulationAccountantTests {
     @Test
     fun calculateFieldAreaWithCrop() {
         val simParamProv =
-                AgriculturalSimParametersProviderWithPredefinedData(Properties())
+                AgriculturalSimParametersProviderWithPredefinedData(
+                        Properties()
+                )
         val field = Field(simParamProv)
         field.put(AgriculturalSimParametersProvider.RESOURCE_AREA_WITH_CROP.id,
                 123.45)
@@ -31,7 +33,9 @@ class AgriculturalSimulationAccountantTests {
     @Test
     fun calculateEmptyFieldArea() {
         val simParamProv =
-                AgriculturalSimParametersProviderWithPredefinedData(Properties())
+                AgriculturalSimParametersProviderWithPredefinedData(
+                        Properties()
+                )
         val field = Field(simParamProv)
         field.put(AgriculturalSimParametersProvider.RESOURCE_EMPTY_AREA.id,
                 123.45)
@@ -43,7 +47,9 @@ class AgriculturalSimulationAccountantTests {
     @Test
     fun calculateFieldAreaWithSeeds() {
         val simParamProv =
-                AgriculturalSimParametersProviderWithPredefinedData(Properties())
+                AgriculturalSimParametersProviderWithPredefinedData(
+                        Properties()
+                )
         val field = Field(simParamProv)
         field.put(AgriculturalSimParametersProvider.RESOURCE_AREA_WITH_SEEDS.id,
                 123.45)

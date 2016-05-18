@@ -25,6 +25,23 @@ class AgriculturalSimParametersProviderTests {
                 "BasicAgriculturalSimulationWheat.properties"
         )
     }
+    @Test
+    fun initAndValidateInitializesEmptyAreaOfField() {
+        // Prepare
+        val out = AgriculturalSimParametersProvider(
+                File(
+                        "src/test/resources/ch03/"+
+                        "BasicAgriculturalSimulationRye.properties"
+                )
+        )
+        // Run method under test
+        out.initAndValidate()
+        // Verify
+        val field = out.agents.find { it.id() == Field.ID } as DefaultAgent
+        Assertions.assertThat(field.amount(AgriculturalSimParametersProvider
+                .RESOURCE_EMPTY_AREA.id)).isEqualTo(out.data["SizeOfField"]
+                .toString().toDouble())
+    }
     private fun simulationParametersCorrectnessTestLogic(fileName: String) {
         val out = AgriculturalSimParametersProvider(
                 File("src/test/resources/ch03/$fileName")
