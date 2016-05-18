@@ -77,7 +77,8 @@ class Process3Tests {
         val simParamProv =
                 AgriculturalSimParametersProvider(
                         File(
-                                "src/test/resources/ch03/BasicAgriculturalSimulationRye.properties"
+                                "src/test/resources/ch03/"+
+                                "BasicAgriculturalSimulationRye.properties"
                         )
                 )
         simParamProv.initAndValidate()
@@ -85,6 +86,11 @@ class Process3Tests {
                 DefaultAgent
         val shack = simParamProv.agents.find { it.id() == Shack.ID } as
                 DefaultAgent
+        shack.remove(AgriculturalSimParametersProvider.RESOURCE_SEEDS.id,
+                shack.amount(
+                        AgriculturalSimParametersProvider.RESOURCE_SEEDS.id
+                )
+        )
         Assertions.assertThat(shack.amount(AgriculturalSimParametersProvider
                 .RESOURCE_SEEDS.id)).isEqualTo(0.0)
 
