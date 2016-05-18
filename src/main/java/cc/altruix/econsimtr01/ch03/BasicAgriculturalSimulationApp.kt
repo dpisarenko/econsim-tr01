@@ -18,7 +18,8 @@ import java.util.*
 class BasicAgriculturalSimulationApp(
         val cmdLineParamValidator:CmdLineParametersValidator =
             CmdLineParametersValidator(),
-        val timeProvider:ITimeProvider = TimeProvider()
+        val timeProvider:ITimeProvider = TimeProvider(),
+        val targetDir:String = System.getProperty("user.dir")
 ) {
     fun run(args: Array<String>,
             out: PrintStream,
@@ -71,7 +72,7 @@ class BasicAgriculturalSimulationApp(
     }
 
     internal open fun composeTargetFileName(): String =
-            "agriculture-${timeProvider.now().millis}.csv"
+            "$targetDir/agriculture-${timeProvider.now().millis}.csv"
 
     fun createSemanticValidators():List<ISemanticSimulationParametersValidator>
             = listOf(

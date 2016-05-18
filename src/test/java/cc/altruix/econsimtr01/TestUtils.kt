@@ -58,3 +58,11 @@ fun simulationRunLogic(sim: ISimulation,
     val seqDiagramTxt = FlowDiagramTextCreator(resources).createFlowDiagramText(flows)
     // seqDiagramTxt.toSequenceDiagramFile(File(flowDiagramFileName))
 }
+
+fun assertFilesEqual(actualFile:File, expectedFile:File) {
+    val actualContents = actualFile.readText()
+    val expectedContents = expectedFile.readText()
+    Assertions.assertThat(actualContents).isEqualTo(expectedContents)
+
+}
+
