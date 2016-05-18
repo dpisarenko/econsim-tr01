@@ -32,7 +32,8 @@ open class TimeSeriesCreator<T>(val simData: Map<DateTime, SimResRow<T>>,
             //builder.append(it)
             targetFile.appendText(it)
         }
-        writeToFile(builder)
+        // TODO: Test this
+        //writeToFile(builder)
     }
 
     open internal fun toMutableList() = simData.keys.toMutableList()
