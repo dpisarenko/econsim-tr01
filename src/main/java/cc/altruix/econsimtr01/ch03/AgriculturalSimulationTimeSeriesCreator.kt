@@ -16,6 +16,7 @@ class AgriculturalSimulationTimeSeriesCreator(simData: Map<DateTime, SimResRow<A
                 simData,
                 targetFileName,
                 simNames,
+                AgriculturalSimulationRowField.values(),
                 AgriculturalSimulationRowField.values()) {
 
 }

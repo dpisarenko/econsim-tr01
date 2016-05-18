@@ -2,6 +2,7 @@ package cc.altruix.econsimtr01
 
 import cc.altruix.econsimtr01.ch0202.Sim1aResultRowField
 import cc.altruix.econsimtr01.ch0202.SimResRow
+import cc.altruix.econsimtr01.ch03.RowField
 import org.joda.time.DateTime
 import org.slf4j.LoggerFactory
 import java.io.File
@@ -11,10 +12,12 @@ import java.io.File
  * @version $Id$
  * @since 1.0
  */
-open class TimeSeriesCreator<T>(val simData: Map<DateTime, SimResRow<T>>,
+open class TimeSeriesCreator<T>(val simData: Map<DateTime,
+        SimResRow<T>>,
                            val targetFileName: String,
                            val simNames: List<String>,
-                           val fieldsToPrint:Array<T>) {
+                           val fieldsToPrint:Array<T>,
+                           val headers:Array<out RowField>) {
     val LOGGER = LoggerFactory.getLogger(TimeSeriesCreator::class.java)
     fun run() {
         val times = toMutableList()
@@ -54,12 +57,15 @@ open class TimeSeriesCreator<T>(val simData: Map<DateTime, SimResRow<T>>,
         sb.append(";")
         simNames.forEach {
             simName ->
-            Sim1aResultRowField.values().forEach {
+            headers.forEach {
                 field ->
                 sb.append("\"")
                 sb.append(simName)
                 sb.append(": ")
                 sb.append(field.description)
+                sb.append(" [")
+                sb.append(field.unit)
+                sb.append("]")
                 sb.append("\"")
                 sb.append(";")
             }

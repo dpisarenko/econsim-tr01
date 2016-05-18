@@ -7,8 +7,9 @@ package cc.altruix.econsimtr01.ch03
 /**
  * Created by pisarenko on 17.05.2016.
  */
-enum class AgriculturalSimulationRowField(val description:String,
-                                          val unit:String) {
+enum class AgriculturalSimulationRowField(override val description:String,
+                                          override val unit:String)
+: RowField {
     SEEDS_IN_SHACK("Seeds in shack", "kg"),
     FIELD_AREA_WITH_SEEDS("Area with seeds", "Square Meters"),
     EMPTY_FIELD_AREA("Empty field area", "Square Meters"),
