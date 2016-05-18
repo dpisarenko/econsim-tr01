@@ -28,6 +28,8 @@ class BasicAgriculturalSimulationAppTests {
         // Run method under test
         val res = out.composeTargetFileName()
         // Verify
-        Assertions.assertThat(res).isEqualToIgnoringCase("agriculture-0.csv")
+        Assertions.assertThat(res).isEqualToIgnoringCase(
+                "agriculture-1463541960000.csv"
+        )
     }
 }

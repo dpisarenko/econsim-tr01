@@ -69,7 +69,6 @@ class BasicAgriculturalSimulationApp(
         // TODO: Continue here
     }
 
-    // TODO: Test this
     internal open fun composeTargetFileName(): String =
             "agriculture-${timeProvider.now().millis}.csv"
 
