@@ -19,12 +19,16 @@ open class TimeSeriesCreator<T>(val simData: Map<DateTime, SimResRow<T>>,
     fun run() {
         val times = toMutableList()
         sort(times)
+        val targetFile = File(targetFileName)
+
         val builder = createStringBuilder()
         builder.append(composeHeader())
         times.map {
             composeRowData(it)
         }.forEach {
-            builder.append(it)
+            // TODO: Test this
+            //builder.append(it)
+            targetFile.appendText(it)
         }
         writeToFile(builder)
     }
