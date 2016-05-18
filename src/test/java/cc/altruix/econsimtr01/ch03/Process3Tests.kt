@@ -88,6 +88,12 @@ class Process3Tests {
         Assertions.assertThat(shack.amount(AgriculturalSimParametersProvider
                 .RESOURCE_SEEDS.id)).isEqualTo(0.0)
 
+        field.remove(
+                AgriculturalSimParametersProvider.RESOURCE_EMPTY_AREA.id,
+                field.amount(
+                        AgriculturalSimParametersProvider.RESOURCE_EMPTY_AREA.id
+                )
+        )
         Assertions.assertThat(field.amount(AgriculturalSimParametersProvider
                 .RESOURCE_EMPTY_AREA.id)).isZero
         field.put(AgriculturalSimParametersProvider.RESOURCE_AREA_WITH_CROP.id,
