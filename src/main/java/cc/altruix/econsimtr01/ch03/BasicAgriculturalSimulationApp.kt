@@ -71,7 +71,7 @@ class BasicAgriculturalSimulationApp(
 
     // TODO: Test this
     internal open fun composeTargetFileName(): String =
-            "agriculture-${timeProvider.now().millis}"
+            "agriculture-${timeProvider.now().millis}.csv"
 
     fun createSemanticValidators():List<ISemanticSimulationParametersValidator>
             = listOf(
