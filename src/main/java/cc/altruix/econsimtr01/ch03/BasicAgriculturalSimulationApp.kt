@@ -78,7 +78,6 @@ class BasicAgriculturalSimulationApp(
                     EnoughCapacityForPuttingSeedsIntoGround(),
                     EnoughCapacityForHarvesting(),
                     OneDateBeforeOtherValidator("Process1Start", "Process1End"),
-                    OneDateBeforeOtherValidator("Process1End", "Process2End"),
                     OneDateBeforeOtherValidator("Process2End", "Process3End"),
                     EnoughSeedsAtTheStartValidator()
             )
