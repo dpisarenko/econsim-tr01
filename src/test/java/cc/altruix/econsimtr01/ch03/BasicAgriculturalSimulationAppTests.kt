@@ -23,13 +23,14 @@ class BasicAgriculturalSimulationAppTests {
         val timeProvider = mockTimeProvider()
         val out = BasicAgriculturalSimulationApp(
                 cmdLineParamValidator = CmdLineParametersValidator(),
-                timeProvider = timeProvider
+                timeProvider = timeProvider,
+                targetDir = "home"
         )
         // Run method under test
         val res = out.composeTargetFileName()
         // Verify
         Assertions.assertThat(res).isEqualToIgnoringCase(
-                "agriculture-1463541960000.csv"
+                "home/agriculture-1463541960000.csv"
         )
     }
 
