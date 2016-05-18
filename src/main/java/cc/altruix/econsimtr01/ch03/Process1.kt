@@ -60,10 +60,13 @@ open class Process1(val simParamProv:PropertiesFileSimParametersProvider) :
                 .toDouble()
         val maxDailyProcessedArea = (workersCount * laborPerDay) /
                 effortPerSquareMeter
-        val totalAreaToPutSeedsIn = sizeOfField() - fieldAreaWithSeeds(field)
-
         val dailyProcessedArea =
-                Math.min(maxDailyProcessedArea, totalAreaToPutSeedsIn)
+                Math.min(maxDailyProcessedArea,
+                        field.amount(
+                                AgriculturalSimParametersProvider.
+                                        RESOURCE_EMPTY_AREA.id
+                        )
+                )
         if (dailyProcessedArea == 0.0) {
             return
         }
@@ -74,6 +77,7 @@ open class Process1(val simParamProv:PropertiesFileSimParametersProvider) :
                         AgriculturalSimParametersProvider.RESOURCE_SEEDS.id
                 )
         )
+
         field.remove(
                 AgriculturalSimParametersProvider.RESOURCE_EMPTY_AREA.id,
                 dailyProcessedArea
