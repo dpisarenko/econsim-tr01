@@ -42,7 +42,8 @@ class BasicAgriculturalSimulationAppTests {
 
     @Test
     fun integrationTest() {
-        val actualFileName="src/test/resources/ch03/agriculture-1463541960000.csv"
+        val actualFileName=
+                "src/test/resources/ch03/agriculture-1463541960000.csv"
         val actualFile = File(actualFileName)
         if (actualFile.exists()) {
             actualFile.delete()
@@ -54,8 +55,9 @@ class BasicAgriculturalSimulationAppTests {
                 "src/test/resources/ch03/"
         )
         out.run(arrayOf("src/test/resources/ch03/"+
-                "BasicAgriculturalSimulationRye.properties", "src/test/resources/ch03/"+
-                "BasicAgriculturalSimulationRye.properties"),
+                "BasicAgriculturalSimulationRye.properties",
+                "src/test/resources/ch03/"+
+                "BasicAgriculturalSimulationWheat.properties"),
                 System.out,
                 System.err)
         assertFilesEqual(actualFile,

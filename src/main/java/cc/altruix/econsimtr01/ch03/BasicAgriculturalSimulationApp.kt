@@ -68,7 +68,6 @@ class BasicAgriculturalSimulationApp(
                 targetFileName,
                 simNames)
         timeSeriesCreator.run()
-        // TODO: Continue here
     }
 
     internal open fun composeTargetFileName(): String =
