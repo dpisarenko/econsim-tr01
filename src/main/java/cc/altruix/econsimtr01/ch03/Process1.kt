@@ -64,32 +64,16 @@ open class Process1(val simParamProv:PropertiesFileSimParametersProvider) :
 
         val dailyProcessedArea =
                 Math.min(maxDailyProcessedArea, totalAreaToPutSeedsIn)
-/*
-        if (field.amount(AgriculturalSimParametersProvider
-                .RESOURCE_EMPTY_AREA.id) < dailyProcessedArea) {
-            LOGGER.error("Not enough empty area on the field")
-            return
-        }
-*/
         if (dailyProcessedArea == 0.0) {
             return
         }
         val seedsqPerSquareMeter = simParamProv
                 .data["Process1QuantityOfSeeds"].toString().toDouble()
-//        val dailySeeds = dailyProcessedArea * seedsqPerSquareMeter
         val dailySeeds = Math.min(dailyProcessedArea * seedsqPerSquareMeter,
                 shack.amount(
                         AgriculturalSimParametersProvider.RESOURCE_SEEDS.id
                 )
         )
-/*
-        if (shack.amount(AgriculturalSimParametersProvider.RESOURCE_SEEDS.id)
-                < dailySeeds) {
-            LOGGER.error("Not enough empty seeds in the shack")
-            return
-
-        }
-*/
         field.remove(
                 AgriculturalSimParametersProvider.RESOURCE_EMPTY_AREA.id,
                 dailyProcessedArea
