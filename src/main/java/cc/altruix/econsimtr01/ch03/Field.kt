@@ -15,6 +15,8 @@ class Field(val simParamProv:AgriculturalSimParametersProvider)
         val ID = "Field"
     }
     override fun init() {
+        put(AgriculturalSimParametersProvider.RESOURCE_EMPTY_AREA.id,
+                simParamProv.data["SizeOfField"].toString().toDouble())
         actions.add(Process2(simParamProv))
     }
 }
