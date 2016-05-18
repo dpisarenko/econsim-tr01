@@ -4,7 +4,9 @@
 
 package cc.altruix.econsimtr01.ch03
 
+import cc.altruix.econsimtr01.ITimeProvider
 import cc.altruix.econsimtr01.ResourceFlow
+import cc.altruix.econsimtr01.TimeProvider
 import cc.altruix.econsimtr01.ch0202.SimResRow
 import org.joda.time.DateTime
 import java.io.PrintStream
@@ -15,7 +17,8 @@ import java.util.*
  */
 class BasicAgriculturalSimulationApp(
         val cmdLineParamValidator:CmdLineParametersValidator =
-            CmdLineParametersValidator()
+            CmdLineParametersValidator(),
+        val timeProvider:ITimeProvider = TimeProvider()
 ) {
     fun run(args: Array<String>,
             out: PrintStream,
@@ -56,11 +59,20 @@ class BasicAgriculturalSimulationApp(
         scenarioResults.forEach {
             it.run()
         }
-
-        // TODO: create AgriculturalSimulationTimeSeriesCreator here
+        val targetFileName = composeTargetFileName()
+        val simNames = scenarios.map { it.data["SimulationName"].toString() }
+                .toList()
+        val timeSeriesCreator = AgriculturalSimulationTimeSeriesCreator(
+                simResults,
+                targetFileName,
+                simNames)
         // TODO: Continue here
-
     }
+
+    // TODO: Test this
+    internal open fun composeTargetFileName(): String =
+            "agriculture-${timeProvider.now().millis}"
+
     fun createSemanticValidators():List<ISemanticSimulationParametersValidator>
             = listOf(
                     EnoughCapacityForPuttingSeedsIntoGround(),
