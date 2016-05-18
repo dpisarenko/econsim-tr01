@@ -8,6 +8,7 @@ import cc.altruix.econsimtr01.AbstractAccountant2
 import cc.altruix.econsimtr01.DefaultAgent
 import cc.altruix.econsimtr01.IAgent
 import cc.altruix.econsimtr01.ch0202.SimResRow
+import cc.altruix.econsimtr01.evenHourAndMinute
 import org.joda.time.DateTime
 
 /**
@@ -18,6 +19,8 @@ open class AgriculturalSimulationAccountant(resultsStorage: MutableMap<DateTime,
                                        scenarioName: String) :
         AbstractAccountant2<AgriculturalSimulationRowField>(resultsStorage,
                 scenarioName) {
+    override fun timeToMeasure(time: DateTime): Boolean =
+            time.evenHourAndMinute(0, 0)
     override fun saveRowData(agents: List<IAgent>,
                          target: MutableMap<AgriculturalSimulationRowField,
                                  Double>) {

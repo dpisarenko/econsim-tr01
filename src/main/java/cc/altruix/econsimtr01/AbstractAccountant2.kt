@@ -15,10 +15,16 @@ abstract class AbstractAccountant2<T>(val resultsStorage: MutableMap<DateTime,
         SimResRow<T>>,
                              val scenarioName: String) : ISensor {
     override fun measure(time: DateTime, agents: List<IAgent>) {
+        if (!timeToMeasure(time)) {
+            return
+        }
         val row: SimResRow<T> = findOrCreateRow(resultsStorage, time)
         val data:MutableMap<T,Double> = findOrCreateDataMap(row, scenarioName)
         saveRowData(agents, data)
     }
+
+    abstract fun timeToMeasure(time: DateTime): Boolean
+
     abstract fun saveRowData(agents: List<IAgent>,
                          target: MutableMap<T, Double>)
 
