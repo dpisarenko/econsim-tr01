@@ -59,6 +59,25 @@ class AgriculturalSimParametersProviderTests {
                 .RESOURCE_SEEDS.id)).isEqualTo(out.data["InitialSeedQuantity"]
                 .toString().toDouble())
     }
+    @Test
+    fun initialSeedQuantityIsParsedCorrectly() {
+        initialSeedQuantityIsParsedCorrectlyTestLogic(
+                "src/test/resources/ch03/"+
+                "BasicAgriculturalSimulationRye.properties", 28.305
+        )
+        initialSeedQuantityIsParsedCorrectlyTestLogic(
+                "src/test/resources/ch03/"+
+                        "BasicAgriculturalSimulationWheat.properties", 20.3
+        )
+    }
+
+    private fun initialSeedQuantityIsParsedCorrectlyTestLogic(
+            fileName: String,
+            expectedResult: Double) {
+        val out = AgriculturalSimParametersProvider(File(fileName))
+        Assertions.assertThat(out.data["InitialSeedQuantity"].toString()
+                .toDouble()).isEqualTo(expectedResult)
+    }
 
     private fun simulationParametersCorrectnessTestLogic(fileName: String) {
         val out = AgriculturalSimParametersProvider(
