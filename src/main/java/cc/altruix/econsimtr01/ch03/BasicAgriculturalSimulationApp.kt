@@ -66,6 +66,7 @@ class BasicAgriculturalSimulationApp(
                 simResults,
                 targetFileName,
                 simNames)
+        timeSeriesCreator.run()
         // TODO: Continue here
     }
 
