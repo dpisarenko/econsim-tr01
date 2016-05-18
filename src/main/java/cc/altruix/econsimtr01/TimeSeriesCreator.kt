@@ -22,7 +22,9 @@ open class TimeSeriesCreator<T>(val simData: Map<DateTime, SimResRow<T>>,
         val targetFile = File(targetFileName)
 
         val builder = createStringBuilder()
-        builder.append(composeHeader())
+        // TODO: Test this
+        // builder.append(composeHeader())
+        targetFile.appendText(composeHeader())
         times.map {
             composeRowData(it)
         }.forEach {
