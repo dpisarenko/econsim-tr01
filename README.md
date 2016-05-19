@@ -13,6 +13,23 @@ How to run
 ----------
 `java -cp econsim-tr01-0.1-jar-with-dependencies.jar cc.altruix.econsimtr01.ch03.BasicAgriculturalSimulationAppKt`
 
+
+How to install TuProlog in Maven repository
+-------------------------------------------
+This project requires
+[TuProlog](http://apice.unibo.it/xwiki/bin/view/Tuprolog/).
+In order to install it into your local Maven repository, please do the
+following steps:
+
+ 1. Download the file `2p-3.0.1.zip` from [TuProlog repository](https://bitbucket.org/tuprologteam/tuprolog/downloads).
+ 1. Unpack into directory `TUPROLOG`.
+ 1. Go to `TUPROLOG\2p-3.0.1\bin`.
+ 1. There, run following commands:
+   1) `mvn install:install-file -Dfile=2p.jar -DgroupId=tuprolog
+   -DartifactId=tuprolog-2p -Dversion=3.0.1 -Dpackaging=jar`
+   1) `mvn install:install-file -Dfile=tuprolog.jar -DgroupId=tuprolog
+ -DartifactId=tuprolog -Dversion=3.0.1 -Dpackaging=jar`
+
 How to create a distribution
 ----------------------------
 1. Create a directory `dist` by copying `dist-template`

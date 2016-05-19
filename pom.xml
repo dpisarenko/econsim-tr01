@@ -105,6 +105,13 @@
             <artifactId>plantuml</artifactId>
             <version>8038</version>
         </dependency>
+        <!-- Guava is required by java-prolog-interop, see
+        cc.altruix.javaprologinterop.PlUtilsLogic -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>19.0</version>
+        </dependency>
     </dependencies>
     <build>
         <resources>
