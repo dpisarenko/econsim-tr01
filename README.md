@@ -19,3 +19,8 @@ How to create a distribution
 1. Build the JAR file (`mvn package`) and put into `dist`.
 1. Copy `target/econsim-tr01-1.0-SNAPSHOT-jar-with-dependencies.jar` to `dist`
 1. Test that it works.
+
+License
+-------
+This software is distributed under the terms of the [General Public License](http://www.gnu.org/licenses/quick-guide-gplv3.html).
+See file `COPYING` for details.
