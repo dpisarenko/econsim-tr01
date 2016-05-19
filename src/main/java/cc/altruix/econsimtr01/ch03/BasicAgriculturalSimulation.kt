@@ -34,8 +34,6 @@ import cc.altruix.econsimtr01.DefaultSimulation
 import cc.altruix.econsimtr01.IAgent
 import cc.altruix.econsimtr01.ISensor
 import cc.altruix.econsimtr01.ResourceFlow
-import cc.altruix.econsimtr01.ch0202.Sim1ParametersProvider
-import cc.altruix.econsimtr01.ch0202.Sim1aResultRowField
 import cc.altruix.econsimtr01.ch0202.SimResRow
 import org.joda.time.DateTime
 
