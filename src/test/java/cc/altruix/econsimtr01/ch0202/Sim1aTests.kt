@@ -91,8 +91,6 @@ class Sim1aTests {
         val expectedContents = File(expectedFileName).readText()
         val actualContents = File(actualFileName).readText()
         Assertions.assertThat(actualContents).isEqualTo(expectedContents)
-
-        // TODO: Make this test run
     }
     @Test
     fun createSensors() {
