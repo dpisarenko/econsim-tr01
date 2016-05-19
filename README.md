@@ -3,7 +3,7 @@ Basic agriculture model
 What is it?
 -----------
 Implementation of a basic model of growing wheat and rye. The description
-of the underlying model can be found [here](altruix.cc/information-centric-model-of-economy/basic-model-of-agriculture/).
+of the underlying model can be found [here](http://altruix.cc/information-centric-model-of-economy/basic-model-of-agriculture/).
 
 How to build
 ------------
