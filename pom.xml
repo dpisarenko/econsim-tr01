@@ -36,10 +36,10 @@
 
     <groupId>cc.altruix</groupId>
     <artifactId>econsim-tr01</artifactId>
-    <version>0.1</version>
+    <version>0.2</version>
 
     <properties>
-        <kotlin.version>1.0.1-2</kotlin.version>
+        <kotlin.version>1.0.2</kotlin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
