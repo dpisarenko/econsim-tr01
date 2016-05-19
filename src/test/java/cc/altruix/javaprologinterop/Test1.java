@@ -52,11 +52,13 @@ import java.util.List;
  */
 public final class Test1 {
     @Test
-    public void test() throws InvalidTheoryException, InvalidObjectIdException, MalformedGoalException, IOException,
+    public void test() throws InvalidTheoryException, InvalidObjectIdException,
+            MalformedGoalException, IOException,
             UnknownVarException, NoSolutionException, NoMoreSolutionException {
         final Prolog engine = PlUtils.createEngine();
 
-        final Theory test1 = new Theory(new FileInputStream("src/main/resources/test1.pl"));
+        final Theory test1 = new Theory(new FileInputStream
+                ("src/test/resources/test1.pl"));
         engine.setTheory(test1);
         final List<String> result = PlUtils.getResults(engine, "participates('scene1', X).", "X");
         System.out.println("result: " + result);
@@ -68,12 +70,12 @@ public final class Test1 {
             NoMoreSolutionException, InvalidLibraryException {
 
         guestPostUniquenessViolationDetectionTestLogic(new String[]{
-                "src/main/resources/ontology.pl",
-                "src/main/resources/invalidFile.pl"
+                "src/test/resources/ontology.pl",
+                "src/test/resources/invalidFile.pl"
         }, false);
         guestPostUniquenessViolationDetectionTestLogic(new String[]{
-                "src/main/resources/ontology.pl",
-                "src/main/resources/validFile.pl"
+                "src/test/resources/ontology.pl",
+                "src/test/resources/validFile.pl"
         }, true);
     }
 
@@ -81,7 +83,7 @@ public final class Test1 {
     public void allElementsDifferentSunnyDay() throws InvalidObjectIdException, IOException, InvalidTheoryException,
             MalformedGoalException {
         final Prolog engine = PlUtils.createEngine();
-        PlUtils.loadPrologFiles(engine, new String[] {"src/main/resources/ontology.pl"});
+        PlUtils.loadPrologFiles(engine, new String[] {"src/test/resources/ontology.pl"});
         Assertions.assertThat(engine.solve("allElementsDifferent(['gp1', 'gp1']).").isSuccess()).isFalse();
         Assertions.assertThat(engine.solve("allElementsDifferent(['gp1', 'gp2']).").isSuccess()).isTrue();
     }

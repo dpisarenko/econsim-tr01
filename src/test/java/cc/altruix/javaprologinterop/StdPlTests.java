@@ -47,7 +47,7 @@ public final class StdPlTests {
     public void containsOnlyDefaultScenario() throws InvalidObjectIdException, MalformedGoalException,
             IOException, InvalidTheoryException {
         final Prolog pl = PlUtils.createEngine();
-        PlUtils.loadPrologFiles(pl, new String[] {"src/main/resources/std.pl"});
+        PlUtils.loadPrologFiles(pl, new String[] {"src/test/resources/std.pl"});
         containsOnlyTestLogic(pl, "abc", "abcdefg", true);
         containsOnlyTestLogic(pl, "abcdefg", "abc", false);
     }
