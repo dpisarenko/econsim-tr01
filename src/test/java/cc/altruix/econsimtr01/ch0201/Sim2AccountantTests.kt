@@ -133,7 +133,7 @@ resourceLevel(1, 'list', 'r09-pc4', 40).
 resourceLevel(1, 'list', 'r10-pc5', 50).
 resourceLevel(1, 'list', 'r11-pc6', 60).
 resourceLevel(1, 'list', 'r12-pc7', 70).
-""".replace("\n", nl))
+""")
     }
     @Test
     fun calculateSubscribersCountByNumberOfInteractions() {

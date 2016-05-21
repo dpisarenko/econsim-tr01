@@ -52,7 +52,8 @@ class Simulation1Tests {
                 log,
                 flows,
                 SimParametersProvider(
-                        File("src/test/resources/Simulation1.params.pl").readText(),
+                        File("src/test/resources/Simulation1.params.pl")
+                                .readText(),
                         Collections.emptyList<IAgent>(),
                         Collections.emptyList<PlFlow>(),
                         Collections.emptyList<InitialResourceLevel>(),
@@ -64,15 +65,27 @@ class Simulation1Tests {
         sim.run()
 
         // Verify
-        val expectedRawSimResultsFile = File("src/test/resources/Simulation1Tests.test.pl.expected.txt")
+        val expectedRawSimResultsFile =
+                File("src/test/resources/Simulation1Tests.test.pl.expected.txt")
         val expectedRawSimResults = expectedRawSimResultsFile.readText()
         Assertions.assertThat(log.toString()).isEqualTo(expectedRawSimResults)
 
-        val actualConvertedSimResults = Simulation1TimeSeriesCreator().prologToCsv(expectedRawSimResultsFile)
-        val expectedConvertedSimResults = File("src/test/resources/Simulation1Tests.test.csv.expected.txt").readText()
-        Assertions.assertThat(actualConvertedSimResults).isEqualTo(expectedConvertedSimResults)
+        val actualConvertedSimResults = Simulation1TimeSeriesCreator()
+                .prologToCsv(expectedRawSimResultsFile)
+        val expectedConvertedSimResults =
+                File(
+                        "src/test/resources/Simulation1Tests.test.csv.expected.txt"
+                ).readText()
+        Assertions.assertThat(actualConvertedSimResults)
+                .isEqualTo(expectedConvertedSimResults)
 
-        val seqDiagramTxt = FlowDiagramTextCreator(Collections.emptyList()).createFlowDiagramText(flows)
-        seqDiagramTxt.toSequenceDiagramFile(File("src/test/resources/Simulation1Tests.test.flows.actual.png"))
+        val seqDiagramTxt = FlowDiagramTextCreator(
+                Collections.emptyList()
+        ).createFlowDiagramText(flows)
+        seqDiagramTxt.
+                toSequenceDiagramFile(
+                        File("src/test/resources/Simulation1Tests.test.flows.actual.png"
+                        )
+                )
     }
 }
