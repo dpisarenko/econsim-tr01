@@ -35,4 +35,5 @@ package cc.altruix.econsimtr01.ch03
  */
 interface ICmdLineParametersValidator {
     fun validate(args:Array<String>): ValidationResult
+    var simParamProviders:List<PropertiesFileSimParametersProvider>
 }

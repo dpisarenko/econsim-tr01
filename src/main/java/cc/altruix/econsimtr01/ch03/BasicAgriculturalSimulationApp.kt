@@ -42,7 +42,7 @@ import java.util.*
  * Created by pisarenko on 13.05.2016.
  */
 class BasicAgriculturalSimulationApp(
-        val cmdLineParamValidator:CmdLineParametersValidator =
+        val cmdLineParamValidator:ICmdLineParametersValidator =
             CmdLineParametersValidator(),
         val timeProvider:ITimeProvider = TimeProvider(),
         val targetDir:String = System.getProperty("user.dir")
@@ -108,7 +108,7 @@ class BasicAgriculturalSimulationApp(
             )
 }
 fun main(args : Array<String>) {
-    BasicAgriculturalSimulationApp().run(args, System.out, System.err)
     println("Basic agriculture simulation")
     println("(C) Copyright 2016 Dmitri Pisarenko")
+    BasicAgriculturalSimulationApp().run(args, System.out, System.err)
 }
