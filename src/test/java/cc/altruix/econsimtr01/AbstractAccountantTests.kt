@@ -70,7 +70,8 @@ class AbstractAccountantTests {
         out.writeResourceData()
         // Verify
         Mockito.verify(out).convertToPrologString(txt)
-        logTarget.toString().shouldBe("resource(r11-pc2, \"foo\", \"People\").${System.lineSeparator()}")
+        logTarget.toString().shouldBe("resource(r11-pc2, \"foo\", \"People\")" +
+                ".\n")
     }
     @Test
     fun convertToPrologStringEscapesApostrophes() {

@@ -69,7 +69,7 @@ fun composeHourMinuteFiringFunction(hours:Int, minutes:Int): (DateTime) -> Boole
 }
 
 fun StringBuilder.newLine() {
-    this.append(System.lineSeparator())
+    this.append('\n')
 }
 
 fun Int.toFixedLengthString(len:Int):String {
