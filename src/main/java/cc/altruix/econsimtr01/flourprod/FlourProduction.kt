@@ -30,9 +30,9 @@
 
 package cc.altruix.econsimtr01.flourprod
 
-import cc.altruix.econsimtr01.IAction
-import cc.altruix.econsimtr01.IActionSubscriber
+import cc.altruix.econsimtr01.*
 import cc.altruix.econsimtr01.ch03.PropertiesFileSimParametersProvider
+import cc.altruix.econsimtr01.ch03.Shack
 import org.joda.time.DateTime
 
 /**
@@ -40,14 +40,27 @@ import org.joda.time.DateTime
  * @version $Id$
  * @since 1.0
  */
-class FlourProduction(val simParamProv: PropertiesFileSimParametersProvider) :
+open class FlourProduction(val simParamProv:
+    PropertiesFileSimParametersProvider) :
     IAction {
-    override fun timeToRun(time: DateTime): Boolean {
-        // TODO: Test this
-        // TODO: Implement this
+    val shack = simParamProv.agents.find { it.id() == Shack.ID }
+        as DefaultAgent
+    // TODO: Test this
+    override fun timeToRun(time: DateTime): Boolean =
+        businessDay(time) &&
+        evenHourAndMinute(time) &&
+        wheatInShack(shack)
 
-        throw UnsupportedOperationException()
+    // TODO: Test this
+    open internal fun wheatInShack(shack: DefaultAgent): Boolean {
+        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
+
+    open internal fun evenHourAndMinute(time: DateTime): Boolean =
+        time.evenHourAndMinute(8, 0)
+
+    open internal fun businessDay(time: DateTime): Boolean =
+        time.isBusinessDay()
 
     override fun run(time: DateTime) {
         // TODO: Test this

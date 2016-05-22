@@ -1,0 +1,100 @@
+/*
+ * Copyright 2012-2016 Dmitri Pisarenko
+ *
+ * WWW: http://altruix.cc
+ * E-Mail: dp@altruix.co
+ * Skype: dp118m (voice calls must be scheduled in advance)
+ *
+ * Physical address:
+ *
+ * 4-i Rostovskii pereulok 2/1/20
+ * 119121 Moscow
+ * Russian Federation
+ *
+ * This file is part of econsim-tr01.
+ *
+ * econsim-tr01 is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * econsim-tr01 is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with econsim-tr01.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+
+package cc.altruix.econsimtr01.flourprod
+
+import cc.altruix.econsimtr01.ch03.Shack
+import cc.altruix.econsimtr01.millisToSimulationDateTime
+import org.fest.assertions.Assertions
+import org.junit.Test
+import org.mockito.Mockito
+import java.io.File
+
+/**
+ * @author Dmitri Pisarenko (dp@altruix.co)
+ * @version $Id$
+ * @since 1.0
+ */
+class FlourProductionTests {
+    @Test
+    fun timeToRunWiring() {
+        timeToRunWiringTestLogic(
+            businessDay = false,
+            evenHourAndMinute = false,
+            wheatInSack = false,
+            expectedResult = false
+        )
+        timeToRunWiringTestLogic(
+            businessDay = true,
+            evenHourAndMinute = false,
+            wheatInSack = false,
+            expectedResult = false
+        )
+        timeToRunWiringTestLogic(
+            businessDay = true,
+            evenHourAndMinute = true,
+            wheatInSack = false,
+            expectedResult = false
+        )
+        timeToRunWiringTestLogic(
+            businessDay = true,
+            evenHourAndMinute = true,
+            wheatInSack = true,
+            expectedResult = false
+        )
+        timeToRunWiringTestLogic(
+            businessDay = true,
+            evenHourAndMinute = true,
+            wheatInSack = true,
+            expectedResult = true
+        )
+    }
+    fun timeToRunWiringTestLogic(
+        businessDay:Boolean,
+        evenHourAndMinute:Boolean,
+        wheatInSack:Boolean,
+        expectedResult:Boolean
+    ) {
+        // Prepare
+        val simParamProv =
+            FlourProductionSimulationParametersProvider(File("someFile"))
+        val shack = Shack()
+        simParamProv.agents.add(shack)
+        val out = Mockito.spy(FlourProduction(simParamProv))
+        val time = 0L.millisToSimulationDateTime()
+        Mockito.doReturn(businessDay).`when`(out).businessDay(time)
+        Mockito.doReturn(evenHourAndMinute).`when`(out).evenHourAndMinute(time)
+        Mockito.doReturn(wheatInSack).`when`(out).wheatInShack(shack)
+        // Run method under test
+        val res = out.timeToRun(time)
+        // Verify
+        Assertions.assertThat(res).isEqualTo(expectedResult)
+    }
+}
