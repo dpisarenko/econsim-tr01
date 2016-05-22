@@ -35,5 +35,6 @@ package cc.altruix.econsimtr01.flourprod
  * @version $Id$
  * @since 1.0
  */
-class FlourProductionSimulationApp {
+class FlourProductionSimulationAppTests {
+    // TODO: Write tests for FlourProductionSimulationApp
 }
