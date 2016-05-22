@@ -42,7 +42,7 @@ import java.util.*
 class MaxValueValidator(val max:Double) : IPropertiesFileValueValidator {
     override fun validate(data: Properties, param: String): ValidationResult {
         val value = data[param].toString().toDouble()
-        if (value >= max) {
+        if (value > max) {
             return createIncorrectValidationResult("Max. allowed value of " +
                 "parameter '$param' is $max, but actual value is "+
                 "equal to $value")
