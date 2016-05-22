@@ -48,7 +48,7 @@ class BasicAgriculturalSimulationAppTests {
         // Prepare
         val timeProvider = mockTimeProvider()
         val out = BasicAgriculturalSimulationApp(
-                cmdLineParamValidator = CmdLineParametersValidator(),
+                cmdLineParamValidator = AgrigulturalSimulationCmdLineParametersValidator(),
                 timeProvider = timeProvider,
                 targetDir = "home"
         )

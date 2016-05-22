@@ -41,11 +41,11 @@ import java.io.File
 class CmdLineParametersValidatorTests {
     @Test
     fun validateReturnsFalseOnEmptyArray() {
-        val out = CmdLineParametersValidator()
+        val out = AgrigulturalSimulationCmdLineParametersValidator()
         val res = out.validate(emptyArray())
         Assertions.assertThat(res).isNotNull
         Assertions.assertThat(res.valid).isFalse()
-        Assertions.assertThat(res.message).isEqualTo(CmdLineParametersValidator.USAGE)
+        Assertions.assertThat(res.message).isEqualTo(AgrigulturalSimulationCmdLineParametersValidator.USAGE)
     }
     @Test
     fun validateReturnsFalseIfFileNotReadable() {
@@ -54,7 +54,7 @@ class CmdLineParametersValidatorTests {
         val args = arrayOf(fname1, fname2)
         val file1 = File(fname1)
         val file2 = File(fname2)
-        val out = Mockito.spy(CmdLineParametersValidator())
+        val out = Mockito.spy(AgrigulturalSimulationCmdLineParametersValidator())
         Mockito.doReturn(file1).`when`(out).createFile(fname1)
         Mockito.doReturn(file2).`when`(out).createFile(fname2)
         Mockito.doReturn(true).`when`(out).canRead(file1)
@@ -77,7 +77,7 @@ class CmdLineParametersValidatorTests {
         val args = arrayOf(fname1, fname2)
         val file1 = File(fname1)
         val file2 = File(fname2)
-        val out = Mockito.spy(CmdLineParametersValidator())
+        val out = Mockito.spy(AgrigulturalSimulationCmdLineParametersValidator())
         Mockito.doReturn(file1).`when`(out).createFile(fname1)
         Mockito.doReturn(file2).`when`(out).createFile(fname2)
         Mockito.doReturn(true).`when`(out).canRead(file1)
@@ -111,7 +111,7 @@ class CmdLineParametersValidatorTests {
         val args = arrayOf(fname1, fname2)
         val file1 = File(fname1)
         val file2 = File(fname2)
-        val out = Mockito.spy(CmdLineParametersValidator())
+        val out = Mockito.spy(AgrigulturalSimulationCmdLineParametersValidator())
         Mockito.doReturn(file1).`when`(out).createFile(fname1)
         Mockito.doReturn(file2).`when`(out).createFile(fname2)
         Mockito.doReturn(true).`when`(out).canRead(file1)

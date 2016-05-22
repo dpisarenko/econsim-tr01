@@ -39,10 +39,10 @@ import java.util.*
  * Created by pisarenko on 13.05.2016.
  */
 class BasicAgriculturalSimulationApp(
-        cmdLineParamValidator:ICmdLineParametersValidator =
-            CmdLineParametersValidator(),
-        timeProvider:ITimeProvider = TimeProvider(),
-        targetDir:String = System.getProperty("user.dir")
+    cmdLineParamValidator:ICmdLineParametersValidator =
+            AgrigulturalSimulationCmdLineParametersValidator(),
+    timeProvider:ITimeProvider = TimeProvider(),
+    targetDir:String = System.getProperty("user.dir")
 ) : AbstractSimulationApp<AgriculturalSimulationRowField>(cmdLineParamValidator,
         timeProvider,
         targetDir,

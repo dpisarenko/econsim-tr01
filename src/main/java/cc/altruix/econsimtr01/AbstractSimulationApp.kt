@@ -42,11 +42,11 @@ import java.util.*
  * @since 1.0
  */
 abstract class AbstractSimulationApp<T>(
-        val cmdLineParamValidator: ICmdLineParametersValidator =
-        CmdLineParametersValidator(),
-        val timeProvider:ITimeProvider = TimeProvider(),
-        val targetDir:String = System.getProperty("user.dir"),
-        val csvFilePrefix:String) {
+    val cmdLineParamValidator: ICmdLineParametersValidator =
+        AgrigulturalSimulationCmdLineParametersValidator(),
+    val timeProvider:ITimeProvider = TimeProvider(),
+    val targetDir:String = System.getProperty("user.dir"),
+    val csvFilePrefix:String) {
 
     fun run(args: Array<String>,
             out: PrintStream,
