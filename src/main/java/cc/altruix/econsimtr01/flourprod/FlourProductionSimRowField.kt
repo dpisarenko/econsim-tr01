@@ -40,5 +40,9 @@ import cc.altruix.econsimtr01.ch03.RowField
 enum class FlourProductionSimRowField(override val description:String,
                                       override val unit:String)
 : RowField {
+    SEEDS_IN_SHACK("Seeds in shack", "kg"),
+    FIELD_AREA_WITH_SEEDS("Area with seeds", "Square Meters"),
+    EMPTY_FIELD_AREA("Empty field area", "Square Meters"),
+    FIELD_AREA_WITH_CROP("Field area with crop", "Square Meters"),
     FLOUR_IN_SHACK("Flour in shack", "kg")
 }

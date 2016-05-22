@@ -33,8 +33,11 @@ package cc.altruix.econsimtr01.flourprod
 import cc.altruix.econsimtr01.AbstractAccountant2
 import cc.altruix.econsimtr01.IAgent
 import cc.altruix.econsimtr01.ch0202.SimResRow
+import cc.altruix.econsimtr01.ch03.AgriculturalSimulationAccountant
+import cc.altruix.econsimtr01.ch03.AgriculturalSimulationRowField
 import cc.altruix.econsimtr01.evenHourAndMinute
 import org.joda.time.DateTime
+import java.util.*
 
 /**
  * @author Dmitri Pisarenko (dp@altruix.co)
@@ -44,8 +47,15 @@ import org.joda.time.DateTime
 class FlourProductionSimulationAcountant(
     resultsStorage:
         MutableMap<DateTime, SimResRow<FlourProductionSimRowField>>,
-    scenarioName: String) :
-    AbstractAccountant2<FlourProductionSimRowField>(
+        scenarioName: String,
+        val asacc:AgriculturalSimulationAccountant =
+            AgriculturalSimulationAccountant(
+                resultsStorage =
+                    HashMap<DateTime,
+                        SimResRow<AgriculturalSimulationRowField>>(),
+                scenarioName = ""
+            )
+) : AbstractAccountant2<FlourProductionSimRowField>(
         resultsStorage,
         scenarioName
     ) {
@@ -56,6 +66,23 @@ class FlourProductionSimulationAcountant(
         agents: List<IAgent>,
         target: MutableMap<FlourProductionSimRowField, Double>) {
         // TODO: Implement this
-        throw UnsupportedOperationException()
+        // TODO: Test this
+        target.put(FlourProductionSimRowField.SEEDS_IN_SHACK,
+            asacc.calculateSeedsInShack(agents))
+        target.put(FlourProductionSimRowField.FIELD_AREA_WITH_SEEDS,
+            asacc.calculateFieldAreaWithSeeds(agents))
+        target.put(FlourProductionSimRowField.EMPTY_FIELD_AREA,
+            asacc.calculateEmptyFieldArea(agents))
+        target.put(FlourProductionSimRowField.FIELD_AREA_WITH_CROP,
+            asacc.calculateFieldAreaWithCrop(agents))
+        target.put(FlourProductionSimRowField.FLOUR_IN_SHACK,
+            calculateFieldInShack(agents))
+
+    }
+
+    open internal fun calculateFieldInShack(agents: List<IAgent>): Double {
+        // TODO: Implement this
+        // TODO: Test this
+        return 0.0
     }
 }
