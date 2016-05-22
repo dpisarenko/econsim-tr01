@@ -43,8 +43,9 @@ class FlourProductionSimulationParametersProvider(file: File) :
             NonBlankStringValidator,
             NonZeroPositiveDoubleValueValidator,
             MaxValueValidator(1.0))
-        // TODO: Add flour production validators here
-
+        validators["MillThroughput"] =listOf(ExistenceValidator,
+            NonBlankStringValidator,
+            NonZeroPositiveDoubleValueValidator)
         return validators
     }
 }
