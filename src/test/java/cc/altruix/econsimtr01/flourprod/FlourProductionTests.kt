@@ -105,6 +105,47 @@ class FlourProductionTests {
             expectedNumberOfConversionCalls = 0
         )
     }
+    @Test
+    fun calculateGrainToProcessCorrectlyCalculatesMaxPossibleGrainInput() {
+        // Prepare
+        val simParamProv =
+            FlourProductionSimulationParametersProvider(
+                File("src/test/resources/flourprod/flourprodRye.properties")
+            )
+        simParamProv.initAndValidate()
+        val shack = simParamProv.agents.find { it.id() == Shack.ID }
+            as DefaultAgent
+        shack.remove(AgriculturalSimParametersProvider.RESOURCE_SEEDS.id,
+            shack.amount(AgriculturalSimParametersProvider.RESOURCE_SEEDS.id))
+        Assertions.assertThat(shack.amount(AgriculturalSimParametersProvider
+            .RESOURCE_SEEDS.id)).isZero
+        val out = Mockito.spy(FlourProduction(simParamProv))
+        // Run method under test
+        val res = out.calculateGrainToProcess()
+        // Verify
+        Assertions.assertThat(res).isEqualTo(105.7173 * 8.0)
+    }
+    @Test
+    fun calculateGrainToProcessSelectsTheRightMinimum() {
+        // Prepare
+        val simParamProv =
+            FlourProductionSimulationParametersProvider(
+                File("src/test/resources/flourprod/flourprodRye.properties")
+            )
+        simParamProv.initAndValidate()
+        val shack = simParamProv.agents.find { it.id() == Shack.ID }
+            as DefaultAgent
+        shack.remove(AgriculturalSimParametersProvider.RESOURCE_SEEDS.id,
+            shack.amount(AgriculturalSimParametersProvider.RESOURCE_SEEDS.id))
+        Assertions.assertThat(shack.amount(AgriculturalSimParametersProvider
+            .RESOURCE_SEEDS.id)).isZero
+        shack.put(AgriculturalSimParametersProvider.RESOURCE_SEEDS.id, 10.0)
+        val out = Mockito.spy(FlourProduction(simParamProv))
+        // Run method under test
+        val res = out.calculateGrainToProcess()
+        // Verify
+        Assertions.assertThat(res).isEqualTo(10.0)
+    }
     fun runWiringTestLogic(grainToProcess: Double,
                            expectedNumberOfConversionCalls:Int) {
         // Prepare
