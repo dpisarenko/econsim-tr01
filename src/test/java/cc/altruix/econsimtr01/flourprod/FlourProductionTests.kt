@@ -30,6 +30,7 @@
 
 package cc.altruix.econsimtr01.flourprod
 
+import cc.altruix.econsimtr01.DefaultAgent
 import cc.altruix.econsimtr01.ch03.AgriculturalSimParametersProvider
 import cc.altruix.econsimtr01.ch03.Shack
 import cc.altruix.econsimtr01.millisToSimulationDateTime
@@ -98,14 +99,18 @@ class FlourProductionTests {
         // Prepare
         val simParamProv =
             FlourProductionSimulationParametersProvider(
-                File("src/test/resources/ch03/flourprodRye.properties")
+                File("src/test/resources/flourprod/flourprodRye.properties")
             )
-        val shack = Shack()
+        simParamProv.initAndValidate()
+        val shack = simParamProv.agents.find { it.id() == Shack.ID }
+            as DefaultAgent
+        shack.remove(AgriculturalSimParametersProvider.RESOURCE_SEEDS.id,
+            shack.amount(AgriculturalSimParametersProvider.RESOURCE_SEEDS.id))
+        Assertions.assertThat(shack.amount(AgriculturalSimParametersProvider
+            .RESOURCE_SEEDS.id)).isZero
         shack.put(AgriculturalSimParametersProvider.RESOURCE_SEEDS.id,
             amountInShack)
-        simParamProv.agents.add(shack)
         val out = Mockito.spy(FlourProduction(simParamProv))
-        val time = 0L.millisToSimulationDateTime()
         // Run method under test
         val res = out.wheatInShack(shack)
         // Verify

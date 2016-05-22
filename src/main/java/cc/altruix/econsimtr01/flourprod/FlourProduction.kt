@@ -52,7 +52,6 @@ open class FlourProduction(val simParamProv:
         evenHourAndMinute(time) &&
         wheatInShack(shack)
 
-    // TODO: Test this
     open internal fun wheatInShack(shack: DefaultAgent): Boolean {
         val grainInShack =
             shack.amount(AgriculturalSimParametersProvider.RESOURCE_SEEDS.id)
