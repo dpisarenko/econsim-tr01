@@ -31,6 +31,7 @@
 package cc.altruix.econsimtr01.flourprod
 
 import cc.altruix.econsimtr01.*
+import cc.altruix.econsimtr01.ch03.AgriculturalSimParametersProvider
 import cc.altruix.econsimtr01.ch03.PropertiesFileSimParametersProvider
 import cc.altruix.econsimtr01.ch03.Shack
 import org.joda.time.DateTime
@@ -53,7 +54,11 @@ open class FlourProduction(val simParamProv:
 
     // TODO: Test this
     open internal fun wheatInShack(shack: DefaultAgent): Boolean {
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val grainInShack =
+            shack.amount(AgriculturalSimParametersProvider.RESOURCE_SEEDS.id)
+        val grainInputPerHour = simParamProv.data["MillThroughput"].
+            toString().toDouble()
+        return grainInShack >= grainInputPerHour
     }
 
     open internal fun evenHourAndMinute(time: DateTime): Boolean =

@@ -30,6 +30,7 @@
 
 package cc.altruix.econsimtr01.flourprod
 
+import cc.altruix.econsimtr01.ch03.AgriculturalSimParametersProvider
 import cc.altruix.econsimtr01.ch03.Shack
 import cc.altruix.econsimtr01.millisToSimulationDateTime
 import org.fest.assertions.Assertions
@@ -70,6 +71,47 @@ class FlourProductionTests {
             expectedResult = true
         )
     }
+    @Test
+    fun wheatInShack() {
+        wheatInShackTestLogic(
+            amountInShack = 10.0,
+            expectedResult = false
+        )
+        wheatInShackTestLogic(
+            amountInShack = 105.7172,
+            expectedResult = false
+        )
+        wheatInShackTestLogic(
+            amountInShack = 105.7173,
+            expectedResult = true
+        )
+        wheatInShackTestLogic(
+            amountInShack = 105.7174,
+            expectedResult = true
+        )
+    }
+
+    private fun wheatInShackTestLogic(
+        amountInShack: Double,
+        expectedResult: Boolean
+    ) {
+        // Prepare
+        val simParamProv =
+            FlourProductionSimulationParametersProvider(
+                File("src/test/resources/ch03/flourprodRye.properties")
+            )
+        val shack = Shack()
+        shack.put(AgriculturalSimParametersProvider.RESOURCE_SEEDS.id,
+            amountInShack)
+        simParamProv.agents.add(shack)
+        val out = Mockito.spy(FlourProduction(simParamProv))
+        val time = 0L.millisToSimulationDateTime()
+        // Run method under test
+        val res = out.wheatInShack(shack)
+        // Verify
+        Assertions.assertThat(res).isEqualTo(expectedResult)
+    }
+
     fun timeToRunWiringTestLogic(
         businessDay:Boolean,
         evenHourAndMinute:Boolean,
