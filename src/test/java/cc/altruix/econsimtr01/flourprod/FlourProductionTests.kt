@@ -119,6 +119,7 @@ class FlourProductionTests {
             shack.amount(AgriculturalSimParametersProvider.RESOURCE_SEEDS.id))
         Assertions.assertThat(shack.amount(AgriculturalSimParametersProvider
             .RESOURCE_SEEDS.id)).isZero
+        shack.put(AgriculturalSimParametersProvider.RESOURCE_SEEDS.id, 1000.0)
         val out = Mockito.spy(FlourProduction(simParamProv))
         // Run method under test
         val res = out.calculateGrainToProcess()

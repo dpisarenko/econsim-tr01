@@ -85,7 +85,6 @@ open class FlourProduction(val simParamProv:
     }
 
     open internal fun calculateGrainToProcess(): Double {
-        // TODO: Test this
         val hourlyThroughPut = simParamProv.data["MillThroughput"].toString()
             .toDouble()
         val maxWorkingTimePerHour = simParamProv
