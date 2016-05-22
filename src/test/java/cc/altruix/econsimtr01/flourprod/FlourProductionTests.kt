@@ -67,12 +67,6 @@ class FlourProductionTests {
             businessDay = true,
             evenHourAndMinute = true,
             wheatInSack = true,
-            expectedResult = false
-        )
-        timeToRunWiringTestLogic(
-            businessDay = true,
-            evenHourAndMinute = true,
-            wheatInSack = true,
             expectedResult = true
         )
     }

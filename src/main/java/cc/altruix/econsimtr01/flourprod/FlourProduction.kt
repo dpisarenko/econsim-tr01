@@ -45,7 +45,7 @@ open class FlourProduction(val simParamProv:
     IAction {
     val shack = simParamProv.agents.find { it.id() == Shack.ID }
         as DefaultAgent
-    // TODO: Test this
+
     override fun timeToRun(time: DateTime): Boolean =
         businessDay(time) &&
         evenHourAndMinute(time) &&
