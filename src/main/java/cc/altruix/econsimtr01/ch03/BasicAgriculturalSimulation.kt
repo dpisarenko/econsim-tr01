@@ -46,7 +46,7 @@ class BasicAgriculturalSimulation(val logTarget:StringBuilder,
                                   AgriculturalSimParametersProvider,
                                   val resultsStorage:MutableMap<DateTime,
                                           SimResRow<AgriculturalSimulationRowField>>)
-: DefaultSimulation(simParametersProvider){
+: DefaultSimulation(simParametersProvider) {
     override fun continueCondition(time: DateTime): Boolean = time.year <= 3
 
     override fun createAgents(): List<IAgent> = simParametersProvider.agents

@@ -42,7 +42,7 @@ import org.joda.time.DateTime
  */
 open class AgriculturalSimulationAccountant(resultsStorage: MutableMap<DateTime,
         SimResRow<AgriculturalSimulationRowField>>,
-                                       scenarioName: String) :
+                                            scenarioName: String) :
         AbstractAccountant2<AgriculturalSimulationRowField>(resultsStorage,
                 scenarioName) {
     override fun timeToMeasure(time: DateTime): Boolean =
