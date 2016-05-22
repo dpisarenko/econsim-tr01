@@ -24,7 +24,7 @@ class FlourProductionSimulation(val logTarget:StringBuilder,
     override fun createAgents(): List<IAgent> = simParametersProvider.agents
 
     override fun createSensors(): List<ISensor> =
-        listOf(FlourProductionSimulationAcountant(resultsStorage,
+        listOf(FlourProductionSimulationAccountant(resultsStorage,
             (simParametersProvider as
                 FlourProductionSimulationParametersProvider)
                 .data["SimulationName"].toString()))
