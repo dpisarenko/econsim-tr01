@@ -5,7 +5,6 @@ import cc.altruix.econsimtr01.IAgent
 import cc.altruix.econsimtr01.ISensor
 import cc.altruix.econsimtr01.ResourceFlow
 import cc.altruix.econsimtr01.ch0202.SimResRow
-import cc.altruix.econsimtr01.ch03.AgriculturalSimulationRowField
 import org.joda.time.DateTime
 
 /**
