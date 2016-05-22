@@ -88,7 +88,5 @@ open class FlourProductionSimulationAccountant(
         }
         return shack.amount(FlourProductionSimulationParametersProvider
             .RESOURCE_FLOUR.id)
-        // TODO: Test this
-        return 0.0
     }
 }
