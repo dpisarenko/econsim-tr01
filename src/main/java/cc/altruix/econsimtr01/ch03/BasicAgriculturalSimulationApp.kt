@@ -85,7 +85,7 @@ class BasicAgriculturalSimulationApp(
         scenarioResults.forEach {
             it.run()
         }
-        val targetFileName = composeTargetFileName()
+        val targetFileName = composeTargetFileName("agriculture")
         val simNames = scenarios.map { it.data["SimulationName"].toString() }
                 .toList()
         val timeSeriesCreator = AgriculturalSimulationTimeSeriesCreator(
@@ -95,8 +95,8 @@ class BasicAgriculturalSimulationApp(
         timeSeriesCreator.run()
     }
 
-    internal open fun composeTargetFileName(): String =
-            "$targetDir/agriculture-${timeProvider.now().millis}.csv"
+    internal open fun composeTargetFileName(csvFilePrefix: String): String =
+            "$targetDir/$csvFilePrefix-${timeProvider.now().millis}.csv"
 
     fun createSemanticValidators():List<ISemanticSimulationParametersValidator>
             = listOf(

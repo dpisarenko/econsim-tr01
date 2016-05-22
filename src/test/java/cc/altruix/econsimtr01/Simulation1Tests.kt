@@ -74,7 +74,7 @@ class Simulation1Tests {
                 .prologToCsv(expectedRawSimResultsFile)
         val expectedConvertedSimResults =
                 File(
-                        "src/test/resources/Simulation1Tests.test.csv.expected.txt"
+                    "src/test/resources/Simulation1Tests.test.csv.expected.txt"
                 ).readText()
         Assertions.assertThat(actualConvertedSimResults)
                 .isEqualTo(expectedConvertedSimResults)
@@ -83,9 +83,10 @@ class Simulation1Tests {
                 Collections.emptyList()
         ).createFlowDiagramText(flows)
         seqDiagramTxt.
-                toSequenceDiagramFile(
-                        File("src/test/resources/Simulation1Tests.test.flows.actual.png"
-                        )
-                )
+            toSequenceDiagramFile(
+                File(
+                    "src/test/resources/Simulation1Tests.test.flows.actual.png"
+                    )
+            )
     }
 }
