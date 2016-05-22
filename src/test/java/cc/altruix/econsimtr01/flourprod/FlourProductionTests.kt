@@ -91,7 +91,38 @@ class FlourProductionTests {
             expectedResult = true
         )
     }
-
+    @Test
+    fun runDoesTheTransactionIfEnoughGrainInShack() {
+        runWiringTestLogic(
+            grainToProcess = 10.0,
+            expectedNumberOfConversionCalls = 1
+        )
+    }
+    @Test
+    fun runDoesntDoTheTransactionIfNotEnoughGrainInShack() {
+        runWiringTestLogic(
+            grainToProcess = 0.0,
+            expectedNumberOfConversionCalls = 0
+        )
+    }
+    fun runWiringTestLogic(grainToProcess: Double,
+                           expectedNumberOfConversionCalls:Int) {
+        // Prepare
+        val simParamProv =
+            FlourProductionSimulationParametersProvider(
+                File("src/test/resources/flourprod/flourprodRye.properties")
+            )
+        simParamProv.initAndValidate()
+        val out = Mockito.spy(FlourProduction(simParamProv))
+        Mockito.doReturn(grainToProcess).`when`(out).calculateGrainToProcess()
+        Mockito.doNothing().`when`(out).convertGrainToFlour(grainToProcess)
+        val time = 0L.millisToSimulationDateTime()
+        // Run method under test
+        out.run(time)
+        // Verify
+        Mockito.verify(out, Mockito.times(expectedNumberOfConversionCalls)).
+            convertGrainToFlour(grainToProcess)
+    }
     private fun wheatInShackTestLogic(
         amountInShack: Double,
         expectedResult: Boolean
