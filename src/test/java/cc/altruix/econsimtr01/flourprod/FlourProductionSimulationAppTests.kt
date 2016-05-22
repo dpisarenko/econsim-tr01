@@ -41,7 +41,6 @@ import java.io.File
  * @since 1.0
  */
 class FlourProductionSimulationAppTests {
-    // TODO: Write tests for FlourProductionSimulationApp
     @Test
     fun integrationTest() {
         val actualFileName=
