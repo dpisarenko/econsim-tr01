@@ -41,7 +41,7 @@ import java.util.*
  * @version $Id$
  * @since 1.0
  */
-abstract class AbstractSimulationApp(
+abstract class AbstractSimulationApp<T>(
         val cmdLineParamValidator: ICmdLineParametersValidator =
         CmdLineParametersValidator(),
         val timeProvider:ITimeProvider = TimeProvider(),
@@ -72,29 +72,35 @@ abstract class AbstractSimulationApp(
             return
         }
         val simResults = HashMap<DateTime,
-            SimResRow<AgriculturalSimulationRowField>>()
+            SimResRow<T>>()
         val scenarioResults = scenarios
-            .map { it as AgriculturalSimParametersProvider }
             .map {
-                BasicAgriculturalSimulation(
-                    logTarget = StringBuilder(),
-                    flows = ArrayList<ResourceFlow>(),
-                    simParametersProvider = it,
-                    resultsStorage = simResults
-                )
+                createSimulation(it, simResults)
             }
         scenarioResults.forEach {
             it.run()
         }
-        val targetFileName = composeTargetFileName("agriculture")
+        val targetFileName = composeTargetFileName(csvFilePrefix)
         val simNames = scenarios.map { it.data["SimulationName"].toString() }
             .toList()
-        val timeSeriesCreator = AgriculturalSimulationTimeSeriesCreator(
+        val timeSeriesCreator = createTimeSeriesCreator(
             simResults,
             targetFileName,
             simNames)
         timeSeriesCreator.run()
     }
+
+    abstract fun createSimulation(
+        it: PropertiesFileSimParametersProvider,
+        simResults: HashMap<
+            DateTime,
+            SimResRow<T>>
+    ): ISimulation
+
+    abstract fun createTimeSeriesCreator(
+        simData: Map<DateTime, SimResRow<T>>,
+        targetFileName: String,
+        simNames: List<String>):TimeSeriesCreator<T>
 
     internal open fun composeTargetFileName(csvFilePrefix: String): String =
         "$targetDir/$csvFilePrefix-${timeProvider.now().millis}.csv"

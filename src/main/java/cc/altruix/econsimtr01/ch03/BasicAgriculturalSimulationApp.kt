@@ -30,9 +30,10 @@
 
 package cc.altruix.econsimtr01.ch03
 
-import cc.altruix.econsimtr01.AbstractSimulationApp
-import cc.altruix.econsimtr01.ITimeProvider
-import cc.altruix.econsimtr01.TimeProvider
+import cc.altruix.econsimtr01.*
+import cc.altruix.econsimtr01.ch0202.SimResRow
+import org.joda.time.DateTime
+import java.util.*
 
 /**
  * Created by pisarenko on 13.05.2016.
@@ -42,7 +43,7 @@ class BasicAgriculturalSimulationApp(
             CmdLineParametersValidator(),
         timeProvider:ITimeProvider = TimeProvider(),
         targetDir:String = System.getProperty("user.dir")
-) : AbstractSimulationApp(cmdLineParamValidator,
+) : AbstractSimulationApp<AgriculturalSimulationRowField>(cmdLineParamValidator,
         timeProvider,
         targetDir,
         "agriculture") {
@@ -56,6 +57,29 @@ class BasicAgriculturalSimulationApp(
                     OneDateBeforeOtherValidator("Process2End", "Process3End"),
                     EnoughSeedsAtTheStartValidator()
             )
+    override fun createSimulation(
+        it: PropertiesFileSimParametersProvider,
+        simResults: HashMap<
+            DateTime,
+            SimResRow<AgriculturalSimulationRowField>>
+    ): BasicAgriculturalSimulation {
+        return BasicAgriculturalSimulation(
+            logTarget = StringBuilder(),
+            flows = ArrayList<ResourceFlow>(),
+            simParametersProvider = it as AgriculturalSimParametersProvider,
+            resultsStorage = simResults
+        )
+    }
+
+    override fun createTimeSeriesCreator(
+        simData: Map<DateTime, SimResRow<AgriculturalSimulationRowField>>,
+        targetFileName: String,
+        simNames: List<String>):
+        TimeSeriesCreator<AgriculturalSimulationRowField> =
+        AgriculturalSimulationTimeSeriesCreator(
+            simData,
+            targetFileName,
+            simNames)
 }
 fun main(args : Array<String>) {
     println("Basic agriculture simulation")
