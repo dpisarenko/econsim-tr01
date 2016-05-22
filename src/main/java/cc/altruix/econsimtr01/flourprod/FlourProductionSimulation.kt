@@ -18,7 +18,7 @@ class FlourProductionSimulation(val logTarget:StringBuilder,
                                 simParametersProvider:
                                 FlourProductionSimulationParametersProvider,
                                 val resultsStorage:MutableMap<DateTime,
-                                    SimResRow<AgriculturalSimulationRowField>>)
+                                    SimResRow<FlourProductionSimRowField>>)
 : DefaultSimulation(simParametersProvider){
     override fun continueCondition(time: DateTime): Boolean = time.year <= 3
 
