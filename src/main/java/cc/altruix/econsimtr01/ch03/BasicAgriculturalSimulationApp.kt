@@ -32,12 +32,7 @@ package cc.altruix.econsimtr01.ch03
 
 import cc.altruix.econsimtr01.AbstractSimulationApp
 import cc.altruix.econsimtr01.ITimeProvider
-import cc.altruix.econsimtr01.ResourceFlow
 import cc.altruix.econsimtr01.TimeProvider
-import cc.altruix.econsimtr01.ch0202.SimResRow
-import org.joda.time.DateTime
-import java.io.PrintStream
-import java.util.*
 
 /**
  * Created by pisarenko on 13.05.2016.
@@ -49,56 +44,11 @@ class BasicAgriculturalSimulationApp(
         targetDir:String = System.getProperty("user.dir")
 ) : AbstractSimulationApp(cmdLineParamValidator,
         timeProvider,
-        targetDir) {
-    fun run(args: Array<String>,
-            out: PrintStream,
-            err: PrintStream) {
-        val cmdLineParamValRes = cmdLineParamValidator.validate(args)
-        if (!cmdLineParamValRes.valid) {
-            err.println(cmdLineParamValRes.message)
-            return
-        }
-        val validators = createSemanticValidators()
-        val scenarios = cmdLineParamValidator.simParamProviders
-        val valRes = LinkedList<ValidationResult>()
-        scenarios.forEach { scenario ->
-            validators.map { it.validate(scenario) }.forEach { valRes.add(it) }
-        }
-        val error = valRes.find { it.valid == false }
-        if (error != null) {
-            val allErrors = valRes.filter { it.valid == false }
-                    .map { it.message }
-                    .joinToString(separator = ", ")
-            err.println("One or more scenarios are invalid:")
-            err.println(allErrors)
-            return
-        }
-        val simResults = HashMap<DateTime,
-                SimResRow<AgriculturalSimulationRowField>>()
-        val scenarioResults = scenarios
-                .map { it as AgriculturalSimParametersProvider }
-                .map {
-                    BasicAgriculturalSimulation(
-                        logTarget = StringBuilder(),
-                        flows = ArrayList<ResourceFlow>(),
-                        simParametersProvider = it,
-                        resultsStorage = simResults
-                    )
-                }
-        scenarioResults.forEach {
-            it.run()
-        }
-        val targetFileName = composeTargetFileName("agriculture")
-        val simNames = scenarios.map { it.data["SimulationName"].toString() }
-                .toList()
-        val timeSeriesCreator = AgriculturalSimulationTimeSeriesCreator(
-                simResults,
-                targetFileName,
-                simNames)
-        timeSeriesCreator.run()
-    }
+        targetDir,
+        "agriculture") {
 
-    fun createSemanticValidators():List<ISemanticSimulationParametersValidator>
+    override fun createSemanticValidators()
+    :List<ISemanticSimulationParametersValidator>
             = listOf(
                     EnoughCapacityForPuttingSeedsIntoGround(),
                     EnoughCapacityForHarvesting(),
