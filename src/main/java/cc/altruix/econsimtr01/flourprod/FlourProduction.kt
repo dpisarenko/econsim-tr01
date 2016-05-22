@@ -67,8 +67,24 @@ open class FlourProduction(val simParamProv:
         time.isBusinessDay()
 
     override fun run(time: DateTime) {
+        val hourlyThroughPut = simParamProv.data["MillThroughput"].toString()
+        .toDouble()
+        val maxWorkingTimePerHour = simParamProv
+            .data["MillMaxWorkingTimePerDay"].toString().toDouble()
+        val maxPossibleGrainInput = hourlyThroughPut * maxWorkingTimePerHour
+        val grainInShack = shack.amount(AgriculturalSimParametersProvider
+            .RESOURCE_SEEDS.id)
+        val grainToProcess = Math.min(grainInShack, maxPossibleGrainInput)
+        if (grainToProcess > 0.0) {
+            shack.remove(AgriculturalSimParametersProvider
+                .RESOURCE_SEEDS.id, grainToProcess)
+            val convFactor = simParamProv.data["FlourConversionFactor"]
+                .toString().toDouble()
+            val flourQuantity = grainToProcess * convFactor
+            shack.put(FlourProductionSimulationParametersProvider
+                .RESOURCE_FLOUR.id, flourQuantity)
+        }
         // TODO: Test this
-        // TODO: Implement this
     }
 
     override fun notifySubscribers(time: DateTime) {

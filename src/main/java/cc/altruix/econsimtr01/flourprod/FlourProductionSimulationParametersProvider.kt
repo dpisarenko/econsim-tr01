@@ -27,10 +27,10 @@ class FlourProductionSimulationParametersProvider(file: File) :
             agents.add(Field(this))
             val shack = Shack()
             agents.add(shack)
+            agents.add(Mill(this))
             agents.forEach { it.init() }
             shack.put(AgriculturalSimParametersProvider.RESOURCE_SEEDS.id,
                 data["InitialSeedQuantity"].toString().toDouble())
-            // TODO: Add here the agent mill
         }
 
     }
@@ -46,6 +46,10 @@ class FlourProductionSimulationParametersProvider(file: File) :
         validators["MillThroughput"] =listOf(ExistenceValidator,
             NonBlankStringValidator,
             NonZeroPositiveDoubleValueValidator)
+        validators["MillMaxWorkingTimePerDay"] = listOf(ExistenceValidator,
+            NonBlankStringValidator,
+            NonZeroPositiveDoubleValueValidator,
+            MaxValueValidator(24.0))
         return validators
     }
 }
