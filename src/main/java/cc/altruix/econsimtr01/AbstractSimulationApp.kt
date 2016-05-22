@@ -44,7 +44,7 @@ abstract class AbstractSimulationApp(
         val timeProvider:ITimeProvider = TimeProvider(),
         val targetDir:String = System.getProperty("user.dir")) {
 
-        internal open fun composeTargetFileName(csvFilePrefix: String): String =
-                "$targetDir/$csvFilePrefix-${timeProvider.now().millis}.csv"
+    internal open fun composeTargetFileName(csvFilePrefix: String): String =
+        "$targetDir/$csvFilePrefix-${timeProvider.now().millis}.csv"
 
 }

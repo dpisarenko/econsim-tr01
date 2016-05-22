@@ -30,6 +30,7 @@
 
 package cc.altruix.econsimtr01.ch03
 
+import cc.altruix.econsimtr01.AbstractSimulationApp
 import cc.altruix.econsimtr01.ITimeProvider
 import cc.altruix.econsimtr01.ResourceFlow
 import cc.altruix.econsimtr01.TimeProvider
@@ -42,11 +43,13 @@ import java.util.*
  * Created by pisarenko on 13.05.2016.
  */
 class BasicAgriculturalSimulationApp(
-        val cmdLineParamValidator:ICmdLineParametersValidator =
+        cmdLineParamValidator:ICmdLineParametersValidator =
             CmdLineParametersValidator(),
-        val timeProvider:ITimeProvider = TimeProvider(),
-        val targetDir:String = System.getProperty("user.dir")
-) {
+        timeProvider:ITimeProvider = TimeProvider(),
+        targetDir:String = System.getProperty("user.dir")
+) : AbstractSimulationApp(cmdLineParamValidator,
+        timeProvider,
+        targetDir) {
     fun run(args: Array<String>,
             out: PrintStream,
             err: PrintStream) {
@@ -94,9 +97,6 @@ class BasicAgriculturalSimulationApp(
                 simNames)
         timeSeriesCreator.run()
     }
-
-    internal open fun composeTargetFileName(csvFilePrefix: String): String =
-            "$targetDir/$csvFilePrefix-${timeProvider.now().millis}.csv"
 
     fun createSemanticValidators():List<ISemanticSimulationParametersValidator>
             = listOf(
