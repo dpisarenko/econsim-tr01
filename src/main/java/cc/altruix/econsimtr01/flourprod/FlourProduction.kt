@@ -74,7 +74,6 @@ open class FlourProduction(val simParamProv:
     }
 
     open internal fun convertGrainToFlour(grainToProcess: Double) {
-        // TODO: Test this
         shack.remove(AgriculturalSimParametersProvider
             .RESOURCE_SEEDS.id, grainToProcess)
         val convFactor = simParamProv.data["FlourConversionFactor"]

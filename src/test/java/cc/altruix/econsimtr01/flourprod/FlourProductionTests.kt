@@ -170,7 +170,7 @@ class FlourProductionTests {
             .RESOURCE_SEEDS.id)).isZero
         Assertions.assertThat(shack.amount(
             FlourProductionSimulationParametersProvider.RESOURCE_FLOUR.id))
-            .isEqualTo(0.9)
+            .isEqualTo(90.0)
     }
     fun runWiringTestLogic(grainToProcess: Double,
                            expectedNumberOfConversionCalls:Int) {
