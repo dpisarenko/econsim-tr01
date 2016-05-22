@@ -56,9 +56,13 @@ class MaxValueValidatorTests {
     @Test
     fun validateDetectsValidData() {
         // Prepare
+        val data = Properties()
+        data["param"] = "1.0"
+        val out = MaxValueValidator(1.0)
         // Run method under test
+        val res = out.validate(data, "param")
         // Verify
-
-        // TODO: Implement
+        Assertions.assertThat(res.valid).isTrue()
+        Assertions.assertThat(res.message).isEqualTo("")
     }
 }
