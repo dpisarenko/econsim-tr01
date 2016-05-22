@@ -36,7 +36,7 @@ import org.joda.time.DateTime
 /**
  * Created by pisarenko on 16.05.2016.
  */
-open class Process3(val simParamProv:AgriculturalSimParametersProvider) :
+open class Process3(val simParamProv:PropertiesFileSimParametersProvider) :
 IAction {
     val start = simParamProv.data["Process2End"].toString()
             .parseDayMonthString()

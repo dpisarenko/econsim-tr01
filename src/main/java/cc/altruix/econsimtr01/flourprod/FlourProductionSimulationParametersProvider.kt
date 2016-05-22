@@ -1,8 +1,7 @@
 package cc.altruix.econsimtr01.flourprod
 
 import cc.altruix.econsimtr01.PlResource
-import cc.altruix.econsimtr01.ch03.IPropertiesFileValueValidator
-import cc.altruix.econsimtr01.ch03.PropertiesFileSimParametersProvider
+import cc.altruix.econsimtr01.ch03.*
 import java.io.File
 
 /**
@@ -18,10 +17,27 @@ class FlourProductionSimulationParametersProvider(file: File) :
             name = "Flour",
             unit = "Kilograms"
         )
+    }
+
+    override fun initAndValidate() {
+        super.initAndValidate()
+        if (validity.valid) {
+            agents.add(Farmers(this))
+            agents.add(Field(this))
+            val shack = Shack()
+            agents.add(shack)
+            agents.forEach { it.init() }
+            shack.put(AgriculturalSimParametersProvider.RESOURCE_SEEDS.id,
+                data["InitialSeedQuantity"].toString().toDouble())
+            // TODO: Add here the agent mill
+        }
 
     }
+
     override fun createValidators():
         Map<String, List<IPropertiesFileValueValidator>> {
+
+
         // TODO: Implement this
         throw UnsupportedOperationException()
     }

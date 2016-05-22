@@ -35,7 +35,7 @@ import cc.altruix.econsimtr01.DefaultAgent
 /**
  * Created by pisarenko on 16.05.2016.
  */
-class Farmers(val simParamProv:AgriculturalSimParametersProvider) :
+class Farmers(val simParamProv:PropertiesFileSimParametersProvider) :
         DefaultAgent(ID) {
     companion object {
         val ID = "Farmers"

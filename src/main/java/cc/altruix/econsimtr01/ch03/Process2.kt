@@ -37,7 +37,7 @@ import org.slf4j.LoggerFactory
 /**
  * Created by pisarenko on 16.05.2016.
  */
-class Process2(val simParamProv:AgriculturalSimParametersProvider) : IAction {
+class Process2(val simParamProv:PropertiesFileSimParametersProvider) : IAction {
     val LOGGER = LoggerFactory.getLogger(Process2::class.java)
     val end  = simParamProv.data["Process2End"].toString()
             .parseDayMonthString()
