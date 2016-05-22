@@ -147,6 +147,31 @@ class FlourProductionTests {
         // Verify
         Assertions.assertThat(res).isEqualTo(10.0)
     }
+    @Test
+    fun convertGrainToFlour() {
+        // Prepare
+        val simParamProv =
+            FlourProductionSimulationParametersProvider(
+                File("src/test/resources/flourprod/flourprodRye.properties")
+            )
+        simParamProv.initAndValidate()
+        val shack = simParamProv.agents.find { it.id() == Shack.ID }
+            as DefaultAgent
+        shack.remove(AgriculturalSimParametersProvider.RESOURCE_SEEDS.id,
+            shack.amount(AgriculturalSimParametersProvider.RESOURCE_SEEDS.id))
+        Assertions.assertThat(shack.amount(AgriculturalSimParametersProvider
+            .RESOURCE_SEEDS.id)).isZero
+        shack.put(AgriculturalSimParametersProvider.RESOURCE_SEEDS.id, 100.0)
+        val out = Mockito.spy(FlourProduction(simParamProv))
+        // Run method under test
+        out.convertGrainToFlour(100.0)
+        // Verify
+        Assertions.assertThat(shack.amount(AgriculturalSimParametersProvider
+            .RESOURCE_SEEDS.id)).isZero
+        Assertions.assertThat(shack.amount(
+            FlourProductionSimulationParametersProvider.RESOURCE_FLOUR.id))
+            .isEqualTo(0.9)
+    }
     fun runWiringTestLogic(grainToProcess: Double,
                            expectedNumberOfConversionCalls:Int) {
         // Prepare
