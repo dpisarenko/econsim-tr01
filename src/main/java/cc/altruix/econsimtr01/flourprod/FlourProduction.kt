@@ -66,15 +66,14 @@ open class FlourProduction(val simParamProv:
     open internal fun businessDay(time: DateTime): Boolean =
         time.isBusinessDay()
 
-    override fun run(time: DateTime) {
+    open override fun run(time: DateTime) {
         val grainToProcess = calculateGrainToProcess()
         if (grainToProcess > 0.0) {
             convertGrainToFlour(grainToProcess)
         }
-        // TODO: Test this
     }
 
-    internal fun convertGrainToFlour(grainToProcess: Double) {
+    open internal fun convertGrainToFlour(grainToProcess: Double) {
         // TODO: Test this
         shack.remove(AgriculturalSimParametersProvider
             .RESOURCE_SEEDS.id, grainToProcess)
@@ -85,7 +84,7 @@ open class FlourProduction(val simParamProv:
             .RESOURCE_FLOUR.id, flourQuantity)
     }
 
-    internal fun calculateGrainToProcess(): Double {
+    open internal fun calculateGrainToProcess(): Double {
         // TODO: Test this
         val hourlyThroughPut = simParamProv.data["MillThroughput"].toString()
             .toDouble()
