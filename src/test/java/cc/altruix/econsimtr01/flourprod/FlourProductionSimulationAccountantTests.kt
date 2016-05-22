@@ -33,6 +33,7 @@ package cc.altruix.econsimtr01.flourprod
 import cc.altruix.econsimtr01.IAgent
 import cc.altruix.econsimtr01.ch0202.SimResRow
 import cc.altruix.econsimtr01.ch03.AgriculturalSimulationAccountant
+import cc.altruix.econsimtr01.ch03.Shack
 import cc.altruix.econsimtr01.mock
 import org.fest.assertions.Assertions
 import org.joda.time.DateTime
@@ -86,6 +87,26 @@ class FlourProductionSimulationAccountantTests {
             .FIELD_AREA_WITH_CROP]).isEqualTo(4.0)
         Assertions.assertThat(target[FlourProductionSimRowField
             .FLOUR_IN_SHACK]).isEqualTo(5.0)
-
+    }
+    @Test
+    fun calculateFieldInShack() {
+        // Prepare
+        val asacc = mock<AgriculturalSimulationAccountant>()
+        val out = Mockito.spy(
+            FlourProductionSimulationAccountant(
+                resultsStorage =
+                HashMap<DateTime, SimResRow<FlourProductionSimRowField>>(),
+                scenarioName = "",
+                asacc = asacc
+            )
+        )
+        val shack = Shack()
+        shack.put(FlourProductionSimulationParametersProvider.RESOURCE_FLOUR
+            .id, 12.34)
+        val agents = listOf<IAgent>(shack)
+        // Run method under test
+        val res = out.calculateFieldInShack(agents)
+        // Verify
+        Assertions.assertThat(res).isEqualTo(12.34)
     }
 }
