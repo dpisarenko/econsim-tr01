@@ -36,10 +36,11 @@ class FlourProductionSimulationParametersProvider(file: File) :
 
     override fun createValidators():
         Map<String, List<IPropertiesFileValueValidator>> {
+        val aspp = AgriculturalSimParametersProvider(File("someFile"))
+        val validators = aspp.createValidators()
 
+        // TODO: Add flour production validators here
 
-        // TODO: Implement this
-        throw UnsupportedOperationException()
+        return validators
     }
-    // TODO: Implement this
 }
