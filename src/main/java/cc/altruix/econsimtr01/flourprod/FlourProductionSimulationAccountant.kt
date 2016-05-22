@@ -30,13 +30,13 @@
 
 package cc.altruix.econsimtr01.flourprod
 
-import cc.altruix.econsimtr01.AbstractAccountant2
-import cc.altruix.econsimtr01.IAgent
+import cc.altruix.econsimtr01.*
 import cc.altruix.econsimtr01.ch0202.SimResRow
 import cc.altruix.econsimtr01.ch03.AgriculturalSimulationAccountant
 import cc.altruix.econsimtr01.ch03.AgriculturalSimulationRowField
-import cc.altruix.econsimtr01.evenHourAndMinute
+import cc.altruix.econsimtr01.ch03.Shack
 import org.joda.time.DateTime
+import org.slf4j.LoggerFactory
 import java.util.*
 
 /**
@@ -59,14 +59,15 @@ open class FlourProductionSimulationAccountant(
         resultsStorage,
         scenarioName
     ) {
+    val LOGGER = LoggerFactory.getLogger(
+        FlourProductionSimulationAccountant::class.java
+    )
     override fun timeToMeasure(time: DateTime): Boolean =
         time.evenHourAndMinute(0, 0)
 
     override fun saveRowData(
         agents: List<IAgent>,
         target: MutableMap<FlourProductionSimRowField, Double>) {
-        // TODO: Implement this
-        // TODO: Test this
         target.put(FlourProductionSimRowField.SEEDS_IN_SHACK,
             asacc.calculateSeedsInShack(agents))
         target.put(FlourProductionSimRowField.FIELD_AREA_WITH_SEEDS,
@@ -77,11 +78,16 @@ open class FlourProductionSimulationAccountant(
             asacc.calculateFieldAreaWithCrop(agents))
         target.put(FlourProductionSimRowField.FLOUR_IN_SHACK,
             calculateFieldInShack(agents))
-
     }
 
     open internal fun calculateFieldInShack(agents: List<IAgent>): Double {
-        // TODO: Implement this
+        val shack = findAgent(Shack.ID, agents) as DefaultAgent
+        if (shack == null) {
+            LOGGER.error("Can't find the shack")
+            return 0.0
+        }
+        return shack.amount(FlourProductionSimulationParametersProvider
+            .RESOURCE_FLOUR.id)
         // TODO: Test this
         return 0.0
     }

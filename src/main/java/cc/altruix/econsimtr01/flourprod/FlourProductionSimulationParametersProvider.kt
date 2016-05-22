@@ -1,5 +1,6 @@
 package cc.altruix.econsimtr01.flourprod
 
+import cc.altruix.econsimtr01.PlResource
 import cc.altruix.econsimtr01.ch03.IPropertiesFileValueValidator
 import cc.altruix.econsimtr01.ch03.PropertiesFileSimParametersProvider
 import java.io.File
@@ -11,6 +12,14 @@ import java.io.File
  */
 class FlourProductionSimulationParametersProvider(file: File) :
     PropertiesFileSimParametersProvider(file) {
+    companion object {
+        val RESOURCE_FLOUR = PlResource(
+            id = "R5",
+            name = "Flour",
+            unit = "Kilograms"
+        )
+
+    }
     override fun createValidators():
         Map<String, List<IPropertiesFileValueValidator>> {
         // TODO: Implement this
