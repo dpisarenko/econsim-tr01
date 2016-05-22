@@ -44,7 +44,7 @@ import java.util.*
  * @version $Id$
  * @since 1.0
  */
-class FlourProductionSimulationAccountant(
+open class FlourProductionSimulationAccountant(
     resultsStorage:
         MutableMap<DateTime, SimResRow<FlourProductionSimRowField>>,
         scenarioName: String,
