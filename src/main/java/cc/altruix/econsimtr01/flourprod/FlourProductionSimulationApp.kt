@@ -27,18 +27,13 @@ class FlourProductionSimulationApp(
     override fun createSimulation(
         it: PropertiesFileSimParametersProvider,
         simResults: HashMap<DateTime, SimResRow<FlourProductionSimRowField>>):
-        ISimulation {
-
+        ISimulation =
         FlourProductionSimulation(logTarget = StringBuilder(),
             flows = ArrayList<ResourceFlow>(),
             simParametersProvider =
             it as FlourProductionSimulationParametersProvider,
             resultsStorage = simResults
         )
-        // TODO: Implement this
-        // TODO: Test this
-        throw UnsupportedOperationException()
-    }
 
     override fun createTimeSeriesCreator(
         simData: Map<DateTime, SimResRow<FlourProductionSimRowField>>,
