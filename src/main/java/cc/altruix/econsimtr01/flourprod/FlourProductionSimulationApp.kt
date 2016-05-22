@@ -42,8 +42,6 @@ class FlourProductionSimulationApp(
             simNames = simNames
         )
 
-    // TODO: Implement createSemanticValidators (add flour production
-    // simulation specific semantic validators)
     override fun createSemanticValidators():
         List<ISemanticSimulationParametersValidator> = listOf(
         EnoughCapacityForPuttingSeedsIntoGround(),
