@@ -30,6 +30,12 @@
 
 package cc.altruix.econsimtr01.flourprod
 
+import cc.altruix.econsimtr01.assertFilesEqual
+import cc.altruix.econsimtr01.ch03.BasicAgriculturalSimulationApp
+import cc.altruix.econsimtr01.mockTimeProvider
+import org.junit.Test
+import java.io.File
+
 /**
  * @author Dmitri Pisarenko (dp@altruix.co)
  * @version $Id$
@@ -37,4 +43,29 @@ package cc.altruix.econsimtr01.flourprod
  */
 class FlourProductionSimulationAppTests {
     // TODO: Write tests for FlourProductionSimulationApp
+    @Test
+    fun integrationTest() {
+        val actualFileName=
+            "src/test/resources/flourprod/flourprod-1463541960000.csv"
+        val actualFile = File(actualFileName)
+        if (actualFile.exists()) {
+            actualFile.delete()
+        }
+        val timeProvider = mockTimeProvider()
+        val out = BasicAgriculturalSimulationApp(
+            timeProvider = timeProvider,
+            targetDir =
+            "src/test/resources/flourprod/"
+        )
+        out.run(arrayOf("src/test/resources/flourprod/"+
+            "flourprodRye.properties",
+            "src/test/resources/flourprod/"+
+                "flourprodWheat.properties"),
+            System.out,
+            System.err)
+        assertFilesEqual(actualFile,
+            File("src/test/resources/flourprod/flourprod-1463541960000" +
+                ".expected.csv"))
+    }
+
 }

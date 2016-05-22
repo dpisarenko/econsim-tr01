@@ -92,3 +92,9 @@ fun assertFilesEqual(actualFile:File, expectedFile:File) {
 
 }
 
+fun mockTimeProvider(): ITimeProvider {
+    val timeProvider = mock<ITimeProvider>()
+    Mockito.`when`(timeProvider.now()).thenReturn(DateTime(2016, 5, 18,
+        6, 26))
+    return timeProvider
+}

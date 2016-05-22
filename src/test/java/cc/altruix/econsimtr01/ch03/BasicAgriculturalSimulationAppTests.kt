@@ -30,13 +30,10 @@
 
 package cc.altruix.econsimtr01.ch03
 
-import cc.altruix.econsimtr01.ITimeProvider
 import cc.altruix.econsimtr01.assertFilesEqual
-import cc.altruix.econsimtr01.mock
+import cc.altruix.econsimtr01.mockTimeProvider
 import org.fest.assertions.Assertions
-import org.joda.time.DateTime
 import org.junit.Test
-import org.mockito.Mockito
 import java.io.File
 
 /**
@@ -58,13 +55,6 @@ class BasicAgriculturalSimulationAppTests {
         Assertions.assertThat(res).isEqualToIgnoringCase(
                 "home/agriculture-1463541960000.csv"
         )
-    }
-
-    private fun mockTimeProvider(): ITimeProvider {
-        val timeProvider = mock<ITimeProvider>()
-        Mockito.`when`(timeProvider.now()).thenReturn(DateTime(2016, 5, 18,
-                6, 26))
-        return timeProvider
     }
 
     @Test
