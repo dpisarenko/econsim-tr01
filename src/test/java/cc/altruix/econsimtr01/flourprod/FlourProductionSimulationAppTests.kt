@@ -31,7 +31,6 @@
 package cc.altruix.econsimtr01.flourprod
 
 import cc.altruix.econsimtr01.assertFilesEqual
-import cc.altruix.econsimtr01.ch03.BasicAgriculturalSimulationApp
 import cc.altruix.econsimtr01.mockTimeProvider
 import org.junit.Test
 import java.io.File
@@ -52,7 +51,7 @@ class FlourProductionSimulationAppTests {
             actualFile.delete()
         }
         val timeProvider = mockTimeProvider()
-        val out = BasicAgriculturalSimulationApp(
+        val out = FlourProductionSimulationApp(
             timeProvider = timeProvider,
             targetDir =
             "src/test/resources/flourprod/"
