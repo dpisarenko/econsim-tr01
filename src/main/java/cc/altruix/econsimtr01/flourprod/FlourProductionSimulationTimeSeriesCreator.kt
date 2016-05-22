@@ -28,7 +28,7 @@
  *
  */
 
-package cc.altruix.econsimtr01.ch03
+package cc.altruix.econsimtr01.flourprod
 
 import cc.altruix.econsimtr01.TimeSeriesCreator
 import cc.altruix.econsimtr01.ch0202.SimResRow
@@ -39,15 +39,14 @@ import org.joda.time.DateTime
  * @version $Id$
  * @since 1.0
  */
-class AgriculturalSimulationTimeSeriesCreator(
-    simData: Map<DateTime, SimResRow<AgriculturalSimulationRowField>>,
+class FlourProductionSimulationTimeSeriesCreator(
+    simData: Map<DateTime, SimResRow<FlourProductionSimRowField>>,
     targetFileName: String,
     simNames: List<String>) :
-        TimeSeriesCreator<AgriculturalSimulationRowField>(
-                simData,
-                targetFileName,
-                simNames,
-                AgriculturalSimulationRowField.values(),
-                AgriculturalSimulationRowField.values()) {
-
+    TimeSeriesCreator<FlourProductionSimRowField>(
+        simData,
+        targetFileName,
+        simNames,
+        FlourProductionSimRowField.values(),
+        FlourProductionSimRowField.values()) {
 }

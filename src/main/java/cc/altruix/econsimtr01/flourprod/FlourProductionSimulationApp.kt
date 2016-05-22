@@ -2,10 +2,7 @@ package cc.altruix.econsimtr01.flourprod
 
 import cc.altruix.econsimtr01.*
 import cc.altruix.econsimtr01.ch0202.SimResRow
-import cc.altruix.econsimtr01.ch03.BasicAgriculturalSimulationApp
-import cc.altruix.econsimtr01.ch03.ICmdLineParametersValidator
-import cc.altruix.econsimtr01.ch03.ISemanticSimulationParametersValidator
-import cc.altruix.econsimtr01.ch03.PropertiesFileSimParametersProvider
+import cc.altruix.econsimtr01.ch03.*
 import org.joda.time.DateTime
 import java.util.*
 
@@ -38,23 +35,26 @@ class FlourProductionSimulationApp(
     override fun createTimeSeriesCreator(
         simData: Map<DateTime, SimResRow<FlourProductionSimRowField>>,
         targetFileName: String, simNames: List<String>):
-        TimeSeriesCreator<FlourProductionSimRowField> {
-        // TODO: Implement this
-        // TODO: Test this
-        throw UnsupportedOperationException()
-    }
+        TimeSeriesCreator<FlourProductionSimRowField> =
+        FlourProductionSimulationTimeSeriesCreator(
+            simData = simData,
+            targetFileName = targetFileName,
+            simNames = simNames
+        )
 
+    // TODO: Implement createSemanticValidators (add flour production
+    // simulation specific semantic validators)
     override fun createSemanticValidators():
-        List<ISemanticSimulationParametersValidator> {
-        // TODO: Implement this
-        // TODO: Test this
-        throw UnsupportedOperationException()
-    }
-    // TODO: Implement this
+        List<ISemanticSimulationParametersValidator> = listOf(
+        EnoughCapacityForPuttingSeedsIntoGround(),
+        EnoughCapacityForHarvesting(),
+        OneDateBeforeOtherValidator("Process1Start", "Process1End"),
+        OneDateBeforeOtherValidator("Process2End", "Process3End"),
+        EnoughSeedsAtTheStartValidator()
+    )
 }
 fun main(args : Array<String>) {
-
     println("Flour production simulation")
     println("(C) Copyright 2016 Dmitri Pisarenko")
-    BasicAgriculturalSimulationApp().run(args, System.out, System.err)
+    FlourProductionSimulationApp().run(args, System.out, System.err)
 }
