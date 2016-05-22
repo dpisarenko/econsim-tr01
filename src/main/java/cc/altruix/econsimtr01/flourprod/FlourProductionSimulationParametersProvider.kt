@@ -1,5 +1,6 @@
 package cc.altruix.econsimtr01.flourprod
 
+import cc.altruix.econsimtr01.MaxValueValidator
 import cc.altruix.econsimtr01.PlResource
 import cc.altruix.econsimtr01.ch03.*
 import java.io.File
@@ -38,7 +39,10 @@ class FlourProductionSimulationParametersProvider(file: File) :
         Map<String, List<IPropertiesFileValueValidator>> {
         val aspp = AgriculturalSimParametersProvider(File("someFile"))
         val validators = aspp.createValidators()
-
+        validators["FlourConversionFactor"] =listOf(ExistenceValidator,
+            NonBlankStringValidator,
+            NonZeroPositiveDoubleValueValidator,
+            MaxValueValidator(1.0))
         // TODO: Add flour production validators here
 
         return validators

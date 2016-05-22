@@ -62,7 +62,7 @@ open class AgriculturalSimParametersProvider(file: File) :
         )
     }
     override fun createValidators():
-            Map<String, List<IPropertiesFileValueValidator>> {
+            MutableMap<String, List<IPropertiesFileValueValidator>> {
         val validators = HashMap<String, List<IPropertiesFileValueValidator>>()
         validators["SimulationName"] = listOf(
                 ExistenceValidator,
