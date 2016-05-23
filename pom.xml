@@ -36,7 +36,7 @@
 
     <groupId>cc.altruix</groupId>
     <artifactId>econsim-tr01</artifactId>
-    <version>0.2</version>
+    <version>0.3</version>
 
     <properties>
         <kotlin.version>1.0.2</kotlin.version>
