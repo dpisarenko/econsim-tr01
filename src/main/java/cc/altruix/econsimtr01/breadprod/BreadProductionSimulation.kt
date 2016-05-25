@@ -35,4 +35,8 @@ package cc.altruix.econsimtr01.breadprod
  */
 class BreadProductionSimulation {
     // TODO: Implement this
+    // TODO: Add oven agent
+    // TODO: Add baker agent
+    // TODO: Implement process "Starter production"
+    // TODO: Implement process "Baking bread"
 }
